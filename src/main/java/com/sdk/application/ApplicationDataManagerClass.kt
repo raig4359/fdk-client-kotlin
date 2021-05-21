@@ -582,13 +582,13 @@ class CatalogDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
     return paginator
     }
     
-    fun followById(collectionType: String, collectionId: String): Deferred<Response<FollowPostResponse>>? {
-        return catalogApiList?.followById(collectionType = collectionType, collectionId = collectionId )}
+    fun unfollowById(collectionType: String, collectionId: String): Deferred<Response<FollowPostResponse>>? {
+        return catalogApiList?.unfollowById(collectionType = collectionType, collectionId = collectionId )}
 
     
     
-    fun unfollowById(collectionType: String, collectionId: String): Deferred<Response<FollowPostResponse>>? {
-        return catalogApiList?.unfollowById(collectionType = collectionType, collectionId = collectionId )}
+    fun followById(collectionType: String, collectionId: String): Deferred<Response<FollowPostResponse>>? {
+        return catalogApiList?.followById(collectionType = collectionType, collectionId = collectionId )}
 
     
     
@@ -2479,12 +2479,17 @@ class FeedbackDataManagerClass(val config: ApplicationConfig) : BaseRepository()
 
     
     
-    fun getQuestionAndAnswers(entityType: String, entityId: String, id: String?=null, showAnswer: Boolean?=null, pageId: String?=null, pageSize: Int?=null): Deferred<Response<QNAGetResponse>>? {
-        return feedbackApiList?.getQuestionAndAnswers(entityType = entityType, entityId = entityId, id = id, showAnswer = showAnswer, pageId = pageId, pageSize = pageSize )}
+    fun getQuestionAndAnswers(entityType: String, entityId: String, id: String?=null, userId: String?=null, showAnswer: Boolean?=null, pageId: String?=null, pageSize: Int?=null): Deferred<Response<QNAGetResponse>>? {
+        return feedbackApiList?.getQuestionAndAnswers(entityType = entityType, entityId = entityId, id = id, userId = userId, showAnswer = showAnswer, pageId = pageId, pageSize = pageSize )}
 
     
     
     
+        
+            
+                
+            
+            
         
             
                 
@@ -2520,7 +2525,7 @@ class FeedbackDataManagerClass(val config: ApplicationConfig) : BaseRepository()
     *
     * Summary: Paginator for getQuestionAndAnswers
     **/
-    fun getQuestionAndAnswersPaginator(entityType: String, entityId: String, id: String?=null, showAnswer: Boolean?=null, pageSize: Int?=null) : Paginator<QNAGetResponse>{
+    fun getQuestionAndAnswersPaginator(entityType: String, entityId: String, id: String?=null, userId: String?=null, showAnswer: Boolean?=null, pageSize: Int?=null) : Paginator<QNAGetResponse>{
 
     val paginator = Paginator<QNAGetResponse>()
 
@@ -2531,7 +2536,7 @@ class FeedbackDataManagerClass(val config: ApplicationConfig) : BaseRepository()
                 val pageId = paginator.nextId
                 val pageNo = paginator.pageNo
                 val pageType = "cursor"
-                feedbackApiList?.getQuestionAndAnswers(entityType = entityType, entityId = entityId, id = id, showAnswer = showAnswer, pageId = pageId, pageSize = pageSize)?.safeAwait{ response, error ->
+                feedbackApiList?.getQuestionAndAnswers(entityType = entityType, entityId = entityId, id = id, userId = userId, showAnswer = showAnswer, pageId = pageId, pageSize = pageSize)?.safeAwait{ response, error ->
                     response?.let {
                         val page = response.peekContent()?.page
                         paginator.setPaginator(hasNext=page?.hasNext?:false,nextId=page?.nextId)
