@@ -2,6 +2,7 @@ package com.sdk.application
 
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
+import okhttp3.ResponseBody
 import retrofit2.http.*
 
 interface CatalogApiList {
@@ -19,7 +20,7 @@ interface CatalogApiList {
     : Deferred<Response<ProductSizePriceResponse>>
     
     @GET ("/service/application/catalog/v1.0/products/{slug}/sizes/{size}/pincode/{pincode}/sellers/")
-    fun getProductSellersBySlug(@Path("slug") slug: String, @Path("size") size: String, @Path("pincode") pincode: String, @Query("page_no") pageNo: Int?, @Query("page_size") pageSize: Int?)
+    fun getProductSellersBySlug(@Path("slug") slug: String, @Path("size") size: String, @Path("pincode") pincode: String, @Query("strategy") strategy: String?, @Query("page_no") pageNo: Int?, @Query("page_size") pageSize: Int?)
     : Deferred<Response<ProductSizeSellersResponse>>
     
     @GET ("/service/application/catalog/v1.0/products/compare/")
@@ -158,6 +159,10 @@ interface CartApiList {
     fun getBulkDiscountOffers(@Query("item_id") itemId: Int?, @Query("article_id") articleId: String?, @Query("uid") uid: Int?, @Query("slug") slug: String?)
     : Deferred<Response<BulkPriceResponse>>
     
+    @POST ("/service/application/cart/v1.0/redeem/points/")
+    fun applyRewardPoints(@Query("uid") uid: Int?, @Query("i") i: Boolean?, @Query("b") b: Boolean?,@Body body: RewardPointRequest)
+    : Deferred<Response<CartResponse>>
+    
     @GET ("/service/application/cart/v1.0/address")
     fun getAddresses(@Query("uid") uid: Int?, @Query("mobile_no") mobileNo: String?, @Query("checkout_mode") checkoutMode: String?, @Query("tags") tags: String?, @Query("is_default") isDefault: Boolean?)
     : Deferred<Response<GetAddressesResponse>>
@@ -249,6 +254,14 @@ interface LeadApiList {
 }
 
 interface ThemeApiList {
+    
+    @GET ("/service/application/theme/v1.0/{theme_id}/page")
+    fun getAllPages(@Path("theme_id") themeId: String)
+    : Deferred<Response<AllAvailablePageSchema>>
+    
+    @GET ("/service/application/theme/v1.0/{theme_id}/{page_value}")
+    fun getPage(@Path("theme_id") themeId: String, @Path("page_value") pageValue: String)
+    : Deferred<Response<AvailablePageSchema>>
     
     @GET ("/service/application/theme/v1.0/applied-theme")
     fun getAppliedTheme()
@@ -400,7 +413,7 @@ interface ContentApiList {
     
     @GET ("/service/application/content/v1.0/blogs/{slug}")
     fun getBlog(@Path("slug") slug: String, @Query("root_id") rootId: String?)
-    : Deferred<Response<CustomBlogSchema>>
+    : Deferred<Response<BlogSchema>>
     
     @GET ("/service/application/content/v1.0/blogs/")
     fun getBlogs(@Query("page_no") pageNo: Int?, @Query("page_size") pageSize: Int?)
@@ -587,7 +600,7 @@ interface ConfigurationApiList {
 interface PaymentApiList {
     
     @GET ("/service/application/payment/v1.0/config/aggregators/key")
-    fun getAggregatorsConfig(@Header("x-api-token") xApiToken: String, @Query("refresh") refresh: Boolean?)
+    fun getAggregatorsConfig(@Header("x-api-token") xApiToken: String?, @Query("refresh") refresh: Boolean?)
     : Deferred<Response<AggregatorsConfigDetailResponse>>
     
     @POST ("/service/application/payment/v1.0/card/attach")
@@ -629,6 +642,10 @@ interface PaymentApiList {
     @GET ("/service/application/payment/v1.0/payment/options/pos")
     fun getPosPaymentModeRoutes(@Query("amount") amount: Int, @Query("cart_id") cartId: String, @Query("pincode") pincode: String, @Query("checkout_mode") checkoutMode: String, @Query("refresh") refresh: Boolean?, @Query("assign_card_id") assignCardId: String?, @Query("order_type") orderType: String, @Query("user_details") userDetails: String?)
     : Deferred<Response<PaymentModeRouteResponse>>
+    
+    @GET ("/service/application/payment/v1.0/rupifi/banner")
+    fun getRupifiBannerDetails()
+    : Deferred<Response<RupifiBannerResponse>>
     
     @GET ("/service/application/payment/v1.0/refund/transfer-mode")
     fun getActiveRefundTransferModes()
@@ -807,7 +824,7 @@ interface FeedbackApiList {
     : Deferred<Response<UpdateResponse>>
     
     @GET ("/service/application/feedback/v1.0/review/entity/{entity_type}/entity-id/{entity_id}")
-    fun getReviews(@Path("entity_type") entityType: String, @Path("entity_id") entityId: String, @Query("id") id: String?, @Query("user_id") userId: String?, @Query("media") media: String?, @Query("rating") rating: ArrayList<Double>?, @Query("attribute_rating") attributeRating: ArrayList<String>?, @Query("facets") facets: Boolean?, @Query("sort") sort: String?, @Query("page_id") pageId: String?, @Query("page_size") pageSize: Int?)
+    fun getReviews(@Path("entity_type") entityType: String, @Path("entity_id") entityId: String, @Query("id") id: String?, @Query("user_id") userId: String?, @Query("media") media: String?, @Query("rating") rating: ArrayList<Double>?, @Query("attribute_rating") attributeRating: ArrayList<String>?, @Query("facets") facets: Boolean?, @Query("sort") sort: String?, @Query("active") active: Boolean?, @Query("approve") approve: Boolean?, @Query("page_id") pageId: String?, @Query("page_size") pageSize: Int?)
     : Deferred<Response<ReviewGetResponse>>
     
     @GET ("/service/application/feedback/v1.0/template/")
@@ -877,6 +894,10 @@ interface PosCartApiList {
     @GET ("/service/application/pos/cart/v1.0/bulk-price")
     fun getBulkDiscountOffers(@Query("item_id") itemId: Int?, @Query("article_id") articleId: String?, @Query("uid") uid: Int?, @Query("slug") slug: String?)
     : Deferred<Response<BulkPriceResponse>>
+    
+    @POST ("/service/application/pos/cart/v1.0/redeem/points/")
+    fun applyRewardPoints(@Query("uid") uid: Int?, @Query("i") i: Boolean?, @Query("b") b: Boolean?,@Body body: RewardPointRequest)
+    : Deferred<Response<CartResponse>>
     
     @GET ("/service/application/pos/cart/v1.0/address")
     fun getAddresses(@Query("uid") uid: Int?, @Query("mobile_no") mobileNo: String?, @Query("checkout_mode") checkoutMode: String?, @Query("tags") tags: String?, @Query("is_default") isDefault: Boolean?)

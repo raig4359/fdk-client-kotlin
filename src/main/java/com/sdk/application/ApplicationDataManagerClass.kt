@@ -2,6 +2,7 @@ package com.sdk.application
 
 import com.sdk.common.*
 import kotlinx.coroutines.Deferred
+import okhttp3.ResponseBody
 import okhttp3.Interceptor
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
@@ -47,12 +48,17 @@ class CatalogDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
 
     
     
-    fun getProductSellersBySlug(slug: String, size: String, pincode: String, pageNo: Int?=null, pageSize: Int?=null): Deferred<Response<ProductSizeSellersResponse>>? {
-        return catalogApiList?.getProductSellersBySlug(slug = slug, size = size, pincode = pincode, pageNo = pageNo, pageSize = pageSize )}
+    fun getProductSellersBySlug(slug: String, size: String, pincode: String, strategy: String?=null, pageNo: Int?=null, pageSize: Int?=null): Deferred<Response<ProductSizeSellersResponse>>? {
+        return catalogApiList?.getProductSellersBySlug(slug = slug, size = size, pincode = pincode, strategy = strategy, pageNo = pageNo, pageSize = pageSize )}
 
     
     
     
+        
+            
+                
+            
+            
         
             
                 
@@ -81,7 +87,7 @@ class CatalogDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
     *
     * Summary: Paginator for getProductSellersBySlug
     **/
-    fun getProductSellersBySlugPaginator(slug: String, size: String, pincode: String, pageSize: Int?=null) : Paginator<ProductSizeSellersResponse>{
+    fun getProductSellersBySlugPaginator(slug: String, size: String, pincode: String, strategy: String?=null, pageSize: Int?=null) : Paginator<ProductSizeSellersResponse>{
 
     val paginator = Paginator<ProductSizeSellersResponse>()
 
@@ -92,7 +98,7 @@ class CatalogDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
                 val pageId = paginator.nextId
                 val pageNo = paginator.pageNo
                 val pageType = "number"
-                catalogApiList?.getProductSellersBySlug(slug = slug, size = size, pincode = pincode, pageNo = pageNo, pageSize = pageSize)?.safeAwait{ response, error ->
+                catalogApiList?.getProductSellersBySlug(slug = slug, size = size, pincode = pincode, strategy = strategy, pageNo = pageNo, pageSize = pageSize)?.safeAwait{ response, error ->
                     response?.let {
                         val page = response.peekContent()?.page
                         paginator.setPaginator(hasNext=page?.hasNext?:false,pageNo=if (page?.hasNext == true) ((pageNo ?: 0) + 1) else pageNo)
@@ -742,6 +748,11 @@ class CartDataManagerClass(val config: ApplicationConfig) : BaseRepository() {
 
     
     
+    fun applyRewardPoints(uid: Int?=null, i: Boolean?=null, b: Boolean?=null,body: RewardPointRequest): Deferred<Response<CartResponse>>? {
+        return cartApiList?.applyRewardPoints(uid = uid, i = i, b = b, body = body)}
+
+    
+    
     fun getAddresses(uid: Int?=null, mobileNo: String?=null, checkoutMode: String?=null, tags: String?=null, isDefault: Boolean?=null): Deferred<Response<GetAddressesResponse>>? {
         return cartApiList?.getAddresses(uid = uid, mobileNo = mobileNo, checkoutMode = checkoutMode, tags = tags, isDefault = isDefault )}
 
@@ -900,6 +911,16 @@ class ThemeDataManagerClass(val config: ApplicationConfig) : BaseRepository() {
         )
         return retrofitHttpClient?.initializeRestClient(ThemeApiList::class.java) as? ThemeApiList
     }
+    
+    fun getAllPages(themeId: String): Deferred<Response<AllAvailablePageSchema>>? {
+        return themeApiList?.getAllPages(themeId = themeId )}
+
+    
+    
+    fun getPage(themeId: String, pageValue: String): Deferred<Response<AvailablePageSchema>>? {
+        return themeApiList?.getPage(themeId = themeId, pageValue = pageValue )}
+
+    
     
     fun getAppliedTheme(): Deferred<Response<ThemesSchema>>? {
         return themeApiList?.getAppliedTheme( )}
@@ -1130,7 +1151,7 @@ class ContentDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
 
     
     
-    fun getBlog(slug: String, rootId: String?=null): Deferred<Response<CustomBlogSchema>>? {
+    fun getBlog(slug: String, rootId: String?=null): Deferred<Response<BlogSchema>>? {
         return contentApiList?.getBlog(slug = slug, rootId = rootId )}
 
     
@@ -1695,7 +1716,7 @@ class PaymentDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
         return retrofitHttpClient?.initializeRestClient(PaymentApiList::class.java) as? PaymentApiList
     }
     
-    fun getAggregatorsConfig(xApiToken: String, refresh: Boolean?=null): Deferred<Response<AggregatorsConfigDetailResponse>>? {
+    fun getAggregatorsConfig(xApiToken: String?=null, refresh: Boolean?=null): Deferred<Response<AggregatorsConfigDetailResponse>>? {
         return paymentApiList?.getAggregatorsConfig(xApiToken = xApiToken, refresh = refresh )}
 
     
@@ -1747,6 +1768,11 @@ class PaymentDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
     
     fun getPosPaymentModeRoutes(amount: Int, cartId: String, pincode: String, checkoutMode: String, refresh: Boolean?=null, assignCardId: String?=null, orderType: String, userDetails: String?=null): Deferred<Response<PaymentModeRouteResponse>>? {
         return paymentApiList?.getPosPaymentModeRoutes(amount = amount, cartId = cartId, pincode = pincode, checkoutMode = checkoutMode, refresh = refresh, assignCardId = assignCardId, orderType = orderType, userDetails = userDetails )}
+
+    
+    
+    fun getRupifiBannerDetails(): Deferred<Response<RupifiBannerResponse>>? {
+        return paymentApiList?.getRupifiBannerDetails( )}
 
     
     
@@ -2369,12 +2395,22 @@ class FeedbackDataManagerClass(val config: ApplicationConfig) : BaseRepository()
 
     
     
-    fun getReviews(entityType: String, entityId: String, id: String?=null, userId: String?=null, media: String?=null, rating: ArrayList<Double>?=null, attributeRating: ArrayList<String>?=null, facets: Boolean?=null, sort: String?=null, pageId: String?=null, pageSize: Int?=null): Deferred<Response<ReviewGetResponse>>? {
-        return feedbackApiList?.getReviews(entityType = entityType, entityId = entityId, id = id, userId = userId, media = media, rating = rating, attributeRating = attributeRating, facets = facets, sort = sort, pageId = pageId, pageSize = pageSize )}
+    fun getReviews(entityType: String, entityId: String, id: String?=null, userId: String?=null, media: String?=null, rating: ArrayList<Double>?=null, attributeRating: ArrayList<String>?=null, facets: Boolean?=null, sort: String?=null, active: Boolean?=null, approve: Boolean?=null, pageId: String?=null, pageSize: Int?=null): Deferred<Response<ReviewGetResponse>>? {
+        return feedbackApiList?.getReviews(entityType = entityType, entityId = entityId, id = id, userId = userId, media = media, rating = rating, attributeRating = attributeRating, facets = facets, sort = sort, active = active, approve = approve, pageId = pageId, pageSize = pageSize )}
 
     
     
     
+        
+            
+                
+            
+            
+        
+            
+                
+            
+            
         
             
                 
@@ -2435,7 +2471,7 @@ class FeedbackDataManagerClass(val config: ApplicationConfig) : BaseRepository()
     *
     * Summary: Paginator for getReviews
     **/
-    fun getReviewsPaginator(entityType: String, entityId: String, id: String?=null, userId: String?=null, media: String?=null, rating: ArrayList<Double>?=null, attributeRating: ArrayList<String>?=null, facets: Boolean?=null, sort: String?=null, pageSize: Int?=null) : Paginator<ReviewGetResponse>{
+    fun getReviewsPaginator(entityType: String, entityId: String, id: String?=null, userId: String?=null, media: String?=null, rating: ArrayList<Double>?=null, attributeRating: ArrayList<String>?=null, facets: Boolean?=null, sort: String?=null, active: Boolean?=null, approve: Boolean?=null, pageSize: Int?=null) : Paginator<ReviewGetResponse>{
 
     val paginator = Paginator<ReviewGetResponse>()
 
@@ -2446,7 +2482,7 @@ class FeedbackDataManagerClass(val config: ApplicationConfig) : BaseRepository()
                 val pageId = paginator.nextId
                 val pageNo = paginator.pageNo
                 val pageType = "cursor"
-                feedbackApiList?.getReviews(entityType = entityType, entityId = entityId, id = id, userId = userId, media = media, rating = rating, attributeRating = attributeRating, facets = facets, sort = sort, pageId = pageId, pageSize = pageSize)?.safeAwait{ response, error ->
+                feedbackApiList?.getReviews(entityType = entityType, entityId = entityId, id = id, userId = userId, media = media, rating = rating, attributeRating = attributeRating, facets = facets, sort = sort, active = active, approve = approve, pageId = pageId, pageSize = pageSize)?.safeAwait{ response, error ->
                     response?.let {
                         val page = response.peekContent()?.page
                         paginator.setPaginator(hasNext=page?.hasNext?:false,nextId=page?.nextId)
@@ -2691,6 +2727,11 @@ class PosCartDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
     
     fun getBulkDiscountOffers(itemId: Int?=null, articleId: String?=null, uid: Int?=null, slug: String?=null): Deferred<Response<BulkPriceResponse>>? {
         return posCartApiList?.getBulkDiscountOffers(itemId = itemId, articleId = articleId, uid = uid, slug = slug )}
+
+    
+    
+    fun applyRewardPoints(uid: Int?=null, i: Boolean?=null, b: Boolean?=null,body: RewardPointRequest): Deferred<Response<CartResponse>>? {
+        return posCartApiList?.applyRewardPoints(uid = uid, i = i, b = b, body = body)}
 
     
     

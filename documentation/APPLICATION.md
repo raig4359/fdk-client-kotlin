@@ -67,6 +67,7 @@
     * [applyCoupon](#applycoupon)
     * [removeCoupon](#removecoupon)
     * [getBulkDiscountOffers](#getbulkdiscountoffers)
+    * [applyRewardPoints](#applyrewardpoints)
     * [getAddresses](#getaddresses)
     * [addAddress](#addaddress)
     * [getAddressById](#getaddressbyid)
@@ -96,6 +97,8 @@
 
 * [Theme](#Theme)
   * Methods
+    * [getAllPages](#getallpages)
+    * [getPage](#getpage)
     * [getAppliedTheme](#getappliedtheme)
     * [getThemeForPreview](#getthemeforpreview)
     
@@ -212,6 +215,7 @@
     * [checkAndUpdatePaymentStatus](#checkandupdatepaymentstatus)
     * [getPaymentModeRoutes](#getpaymentmoderoutes)
     * [getPosPaymentModeRoutes](#getpospaymentmoderoutes)
+    * [getRupifiBannerDetails](#getrupifibannerdetails)
     * [getActiveRefundTransferModes](#getactiverefundtransfermodes)
     * [enableOrDisableRefundTransferMode](#enableordisablerefundtransfermode)
     * [getUserBeneficiariesDetail](#getuserbeneficiariesdetail)
@@ -286,6 +290,7 @@
     * [applyCoupon](#applycoupon)
     * [removeCoupon](#removecoupon)
     * [getBulkDiscountOffers](#getbulkdiscountoffers)
+    * [applyRewardPoints](#applyrewardpoints)
     * [getAddresses](#getaddresses)
     * [addAddress](#addaddress)
     * [getAddressById](#getaddressbyid)
@@ -490,7 +495,7 @@ Schema: `ErrorResponse`
 Get the sellers of a product size at a PIN Code
 
 ```kotlin
-catalog.getProductSellersBySlug(slug: slug, size: size, pincode: pincode, pageNo: pageNo, pageSize: pageSize).safeAwait{ response,error->
+catalog.getProductSellersBySlug(slug: slug, size: size, pincode: pincode, strategy: strategy, pageNo: pageNo, pageSize: pageSize).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -507,6 +512,7 @@ catalog.getProductSellersBySlug(slug: slug, size: size, pincode: pincode, pageNo
 | slug | String? | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ |    
 | size | String? | A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes |    
 | pincode | String? | The 6-digit PIN Code of the area near which the selling locations should be searched, e.g. 400059 |    
+| strategy | String? | Sort stores on the basis of strategy. eg, fast-delivery, low-price, optimal. |    
 | pageNo | Int? | The page number to navigate through the given set of results. |    
 | pageSize | Int? | The number of items to retrieve in each page. |  
 
@@ -3331,6 +3337,50 @@ Unhandled api error
 
 
 Schema: `HashMap<String,Any>`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### applyRewardPoints
+Fetch all Items Added to  Cart
+
+```kotlin
+cart.applyRewardPoints(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |  
+| uid | Int? |  |    
+| i | Boolean? |  |    
+| b | Boolean? |  |  
+
+Get all the details of a items added to cart  by uid. If successful, returns a Cart resource in the response body specified in CartResponse
+
+*Success Response:*
+
+
+
+The Cart object. See example below or refer CartResponse for details
+
+
+Schema: `CartResponse`
 
 
 
@@ -6378,6 +6428,161 @@ Default
 ## Theme
 
 
+#### getAllPages
+Get all pages of a theme
+
+```kotlin
+theme.getAllPages(themeId: themeId).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |  
+| themeId | String? | ID of the theme to be retrieved |  
+
+Use this API to retrieve all the available pages of a theme by its ID.
+
+*Success Response:*
+
+
+
+Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSchema` for more details.
+
+
+Schema: `AllAvailablePageSchema`
+
+
+*Examples:*
+
+
+All pages
+```json
+{
+  "$ref": "#/components/examples/AllAvailablePagesExample"
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+Schema: `BlitzkriegApiError`
+
+
+
+
+
+
+
+
+
+
+
+Schema: `BlitzkriegInternalServerError`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPage
+Get page of a theme
+
+```kotlin
+theme.getPage(themeId: themeId, pageValue: pageValue).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |  
+| themeId | String? | ID of the theme to be retrieved |    
+| pageValue | String? | Value of the page to be retrieved |  
+
+Use this API to retrieve a page of a theme.
+
+*Success Response:*
+
+
+
+Success. Returns an object of the pages.  Refer `AvailablePageSchema` for more details.
+
+
+Schema: `AvailablePageSchema`
+
+
+*Examples:*
+
+
+Home page
+```json
+{
+  "$ref": "#/components/examples/AvailablePageExample"
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+Schema: `BlitzkriegApiError`
+
+
+
+
+
+
+
+
+
+
+
+Schema: `BlitzkriegInternalServerError`
+
+
+
+
+
+
+
+
+
+---
+
+
 #### getAppliedTheme
 Get the theme currently applied to an application
 
@@ -9006,10 +9211,10 @@ Use this API to get the details of a blog using its slug. Details include the ti
 
 
 
-Success. Returns a JSON object with blog details. Check the example shown below or refer `CustomBlogSchema` for more details.
+Success. Returns a JSON object with blog details. Check the example shown below or refer `BlogSchema` for more details.
 
 
-Schema: `CustomBlogSchema`
+Schema: `BlogSchema`
 
 
 *Examples:*
@@ -9018,7 +9223,7 @@ Schema: `CustomBlogSchema`
 default
 ```json
 {
-  "$ref": "#/components/examples/CustomBlog"
+  "$ref": "#/components/examples/BlogResponse"
 }
 ```
 
@@ -10632,13 +10837,13 @@ communication.getCommunicationConsent().safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Get communication consent
+Use this API to retrieve the consent provided by the user for receiving communication messages over Email/SMS/WhatsApp.
 
 *Success Response:*
 
 
 
-Success
+Success. Returns all available communication opt-ins along with the consent details. Check the example shown below or refer `CommunicationConsent` for more details.
 
 
 Schema: `CommunicationConsent`
@@ -10684,13 +10889,13 @@ communication.upsertCommunicationConsent(body: body).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Upsert communication consent
+Use this API to update and insert the consent provided by the user for receiving communication messages over Email/SMS/WhatsApp.
 
 *Success Response:*
 
 
 
-Success
+Success. Updates the channels for which user has consented. Check the example shown below or refer `CommunicationConsentRes` for more details.
 
 
 Schema: `CommunicationConsentRes`
@@ -10748,13 +10953,13 @@ communication.upsertAppPushtoken(body: body).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Upsert push token of a user
+Use this API to update and insert the push token of the user.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `PushtokenRes` for more details.
 
 
 Schema: `PushtokenRes`
@@ -11186,7 +11391,7 @@ Schema: `ErrorRes`
 
 
 #### startUpload
-This operation initiates upload and returns storage link which is valid for 30 Minutes. You can use that storage link to make subsequent upload request with file buffer or blob.
+Initiates an upload and returns a storage link that is valid for 30 minutes. You can use the storage link to make subsequent upload request with file buffer or blob.
 
 ```kotlin
 filestorage.startUpload(namespace: namespace, body: body).safeAwait{ response,error->
@@ -11203,33 +11408,33 @@ filestorage.startUpload(namespace: namespace, body: body).safeAwait{ response,er
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| namespace | String? | bucket name |  
+| namespace | String? | Name of the bucket created for storing objects. |  
 
-Uploads an arbitrarily sized buffer or blob.
+Use this API to perform the first step of uploading (i.e. **Start**) an arbitrarily sized buffer or blob.
 
-It has three Major Steps:
+The three major steps are:
 * Start
 * Upload
 * Complete
 
 ### Start
 Initiates the assets upload using `startUpload`.
-It returns the storage link in response.
+It returns a storage link in response.
 
 ### Upload
 Use the storage link to upload a file (Buffer or Blob) to the File Storage.
-Make a `PUT` request on storage link received from `startUpload` api with file (Buffer or Blob) as a request body.
+Make a `PUT` request on storage link received from `startUpload` API with the file (Buffer or Blob) in the request body.
 
 ### Complete
-After successfully upload, call `completeUpload` api to complete the upload process.
-This operation will return the url for the uploaded file.
+After successfully upload, call the `completeUpload` API to finish the upload process.
+This operation will return the URL of the uploaded file.
 
 
 *Success Response:*
 
 
 
-Success
+Success. Next, call the `completeUpload` API and pass the response payload of this API to finish the upload process.
 
 
 Schema: `StartResponse`
@@ -11258,7 +11463,7 @@ Schema: `FailedResponse`
 
 
 #### completeUpload
-This will complete the upload process. After successfully uploading file, you can call this operation to complete the upload process.
+Completes the upload process. After successfully uploading a file, call this API to finish the upload process.
 
 ```kotlin
 filestorage.completeUpload(namespace: namespace, body: body).safeAwait{ response,error->
@@ -11275,26 +11480,26 @@ filestorage.completeUpload(namespace: namespace, body: body).safeAwait{ response
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| namespace | String? | bucket name |  
+| namespace | String? | Name of the bucket created for storing objects. |  
 
-Uploads an arbitrarily sized buffer or blob.
+Use this API to perform the third step of uploading (i.e. **Complete**) an arbitrarily sized buffer or blob.
 
-It has three Major Steps:
+The three major steps are:
 * Start
 * Upload
 * Complete
 
 ### Start
 Initiates the assets upload using `startUpload`.
-It returns the storage link in response.
+It returns a storage link in response.
 
 ### Upload
 Use the storage link to upload a file (Buffer or Blob) to the File Storage.
-Make a `PUT` request on storage link received from `startUpload` api with file (Buffer or Blob) as a request body.
+Make a `PUT` request on storage link received from `startUpload` API with the file (Buffer or Blob) in the request body.
 
 ### Complete
-After successfully upload, call `completeUpload` api to complete the upload process.
-This operation will return the url for the uploaded file.
+After successfully upload, call the `completeUpload` API to finish the upload process.
+This operation will return the URL of the uploaded file.
 
 
 *Success Response:*
@@ -11355,13 +11560,13 @@ configuration.getApplication().safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Get current application details.
+Use this API to get the current application details which includes configurations that indicate the status of the website, domain, ID, tokens, images, etc.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `Application` for more details.
 
 
 Schema: `Application`
@@ -11408,13 +11613,13 @@ configuration.getOwnerInfo().safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Get application information with owner and seller basic details
+Use this API to get the current application details which includes channel name, description, banner, logo, favicon, domain details, etc. This API also retrieves the seller and owner information such as address, email address, and phone number.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ApplicationAboutResponse` for more details.
 
 
 Schema: `ApplicationAboutResponse`
@@ -11449,13 +11654,13 @@ configuration.getBasicDetails().safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Get basic application details like name
+Use this API to retrieve only the basic details of the application which includes channel name, description, banner, logo, favicon, domain details, etc.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ApplicationDetail` for more details.
 
 
 Schema: `ApplicationDetail`
@@ -11490,13 +11695,13 @@ configuration.getIntegrationTokens().safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Get tokens for multiple integrations like Facebook, Googlemaps, Segment, Firebase, etc. Note: token values are encrypted with AES encryption using secret key. Kindly reach to developers for secret key.
+Use this API to retrieve the tokens used while integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map and Facebook. **Note** - Token values are encrypted with AES encryption using a secret key. Kindly reach out to the developers for obtaining the secret key.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `TokenResponse` for more details.
 
 
 Schema: `TokenResponse`
@@ -11513,7 +11718,7 @@ Schema: `TokenResponse`
 
 
 #### getOrderingStores
-Get deployment meta stores
+Get deployment stores
 
 ```kotlin
 configuration.getOrderingStores(pageNo: pageNo, pageSize: pageSize, q: q).safeAwait{ response,error->
@@ -11530,17 +11735,17 @@ configuration.getOrderingStores(pageNo: pageNo, pageSize: pageSize, q: q).safeAw
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| pageNo | Int? | Current page no |    
-| pageSize | Int? | Current request items count |    
-| q | String? | Search ordering store by name or store code |  
+| pageNo | Int? | The page number to navigate through the given set of results. Default value is 1. |    
+| pageSize | Int? | The number of items to retrieve in each page. Default value is 10. |    
+| q | String? | Store code or name of the ordering store. |  
 
-Get deployment meta stores.
+Use this API to retrieve the details of all the deployment stores (the selling locations where the application will be utilized for placing orders).
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `OrderingStores` for more details.
 
 
 Schema: `OrderingStores`
@@ -11587,13 +11792,13 @@ configuration.getFeatures().safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Get features of application
+Use this API to retrieve the configuration of features such as product detail, landing page, options in the login/registration screen, communication opt-in, cart options and many more.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `AppFeatureResponse` for more details.
 
 
 Schema: `AppFeatureResponse`
@@ -11640,13 +11845,13 @@ configuration.getContactInfo().safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Get Application Current Information. This includes information about social links, address and contact information of company/seller/brand of the application.
+Use this API to retrieve information about the social links, address and contact information of the company/seller/brand operating the application.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ApplicationAboutResponse` for more details.
 
 
 Schema: `ApplicationInformation`
@@ -11663,7 +11868,7 @@ Schema: `ApplicationInformation`
 
 
 #### getCurrencies
-Get application enabled currencies
+Get currencies enabled in the application
 
 ```kotlin
 configuration.getCurrencies().safeAwait{ response,error->
@@ -11681,13 +11886,13 @@ configuration.getCurrencies().safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Get currency list for allowed currencies under current application
+Use this API to get a list of currencies allowed in the current application. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
 
 *Success Response:*
 
 
 
-Currencies Success response
+Success. Check the example shown below or refer `CurrenciesResponse` for more details.
 
 
 Schema: `CurrenciesResponse`
@@ -11704,7 +11909,7 @@ Schema: `CurrenciesResponse`
 
 
 #### getCurrencyById
-Get currency by id
+Get currency by its ID
 
 ```kotlin
 configuration.getCurrencyById(id: id).safeAwait{ response,error->
@@ -11721,15 +11926,15 @@ configuration.getCurrencyById(id: id).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? | Currency object id |  
+| id | String? | Object ID assigned to the currency |  
 
-Get currency object with symbol and name information by id.
+Use this API to retrieve a currency using its ID.
 
 *Success Response:*
 
 
 
-Success response
+Success. Check the example shown below or refer `Currency` for more details.
 
 
 Schema: `Currency`
@@ -11764,13 +11969,13 @@ configuration.getLanguages().safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Get list of supported languages under application.
+Use this API to get a list of languages supported in the application.
 
 *Success Response:*
 
 
 
-Success response
+Success. Check the example shown below or refer `LanguageResponse` for more details.
 
 
 Schema: `LanguageResponse`
@@ -11787,7 +11992,7 @@ Schema: `LanguageResponse`
 
 
 #### getOrderingStoreCookie
-Get ordering store signed cookie on selection of ordering store. This will be used by cart service to verify coupon against selected ordering store in cart.
+Get an Ordering Store signed cookie on selection of ordering store.
 
 ```kotlin
 configuration.getOrderingStoreCookie(body: body).safeAwait{ response,error->
@@ -11805,7 +12010,7 @@ configuration.getOrderingStoreCookie(body: body).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Get ordering store signed cookie on selection of ordering store.
+Use this API to get an Ordering Store signed cookie upon selecting an ordering store. This will be used by the cart service to verify a coupon against the selected ordering store in cart.
 
 *Success Response:*
 
@@ -11823,7 +12028,7 @@ Schema: `SuccessMessageResponse`
 
 
 
-Success
+API Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `NotFound`
@@ -11840,7 +12045,7 @@ Schema: `NotFound`
 
 
 #### removeOrderingStoreCookie
-Unset ordering store signed cookie on change of sales channel selection via domain in universal fynd store app.
+Unset the Ordering Store signed cookie.
 
 ```kotlin
 configuration.removeOrderingStoreCookie().safeAwait{ response,error->
@@ -11858,7 +12063,7 @@ configuration.removeOrderingStoreCookie().safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Unset ordering store cookie.
+Use this API to unset the Ordering Store cookie upon changing the sales channel, by its domain URL, in the Universal Fynd Store app.
 
 *Success Response:*
 
@@ -11881,7 +12086,7 @@ Schema: `SuccessMessageResponse`
 
 
 #### getAppStaffs
-Get Staff List.
+Get a list of staff.
 
 ```kotlin
 configuration.getAppStaffs(orderIncent: orderIncent, orderingStore: orderingStore, user: user).safeAwait{ response,error->
@@ -11898,17 +12103,17 @@ configuration.getAppStaffs(orderIncent: orderIncent, orderingStore: orderingStor
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| orderIncent | Boolean? | This is to check which staff members are applicable for order incentives. |    
-| orderingStore | Int? | This is to filter staff members from only selected ordering store. |    
-| user | String? | Get single staff member details using staff user mongo id |  
+| orderIncent | Boolean? | This is a boolean value. Select `true` to retrieve the staff members eligible for getting incentives on orders. |    
+| orderingStore | Int? | ID of the ordering store. Helps in retrieving staff members working at a particular ordering store. |    
+| user | String? | Mongo ID of the staff. Helps in retrieving the details of a particular staff member. |  
 
-Get a staff list based on the user's session token passed in the header.
+Use this API to get a list of staff including the names, employee code, incentive status, assigned ordering stores, and title of each staff added to the application.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `AppStaffResponse` for more details.
 
 
 Schema: `AppStaffResponse`
@@ -11920,7 +12125,7 @@ Schema: `AppStaffResponse`
 
 
 
-Request failed with internal server error.
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `UnhandledError`
@@ -11961,16 +12166,16 @@ payment.getAggregatorsConfig(xApiToken: xApiToken, refresh: refresh).safeAwait{ 
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| xApiToken | String? | api token |    
-| refresh | Boolean? | refresh cache |  
+| xApiToken | String? | Used for basic authentication. |    
+| refresh | Boolean? | This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one. |  
 
-Get payment gateway (key, secrets, merchant, sdk/api detail) to complete payment at front-end.
+Use this API to retrieve the payment gateway key, secrets, merchant, SDK/API details to complete a payment at front-end.
 
 *Success Response:*
 
 
 
-Keys of all payment gateway
+Success. Returns the keys of all payment gateways. Check the example shown below or refer `AggregatorsConfigDetailResponse` for more details.
 
 
 Schema: `AggregatorsConfigDetailResponse`
@@ -11982,7 +12187,7 @@ Schema: `AggregatorsConfigDetailResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -11994,7 +12199,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12029,13 +12234,13 @@ payment.attachCardToCustomer(body: body).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Attach a saved card to customer at payment gateway i.e stripe and refresh card cache.
+Use this API to attach a customer's saved card at the payment gateway, such as Stripe.
 
 *Success Response:*
 
 
 
-List of cards objects
+Success. Check the example shown below or refer `AttachCardsResponse` for more details.
 
 
 Schema: `AttachCardsResponse`
@@ -12047,7 +12252,7 @@ Schema: `AttachCardsResponse`
 
 
 
-Bad request error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `Any`
@@ -12059,7 +12264,7 @@ Schema: `Any`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `Any`
@@ -12076,7 +12281,7 @@ Schema: `Any`
 
 
 #### getActiveCardAggregator
-Fetch active payment gateway for card
+Fetch active payment gateway for card payments
 
 ```kotlin
 payment.getActiveCardAggregator(refresh: refresh).safeAwait{ response,error->
@@ -12095,13 +12300,13 @@ payment.getActiveCardAggregator(refresh: refresh).safeAwait{ response,error->
 | --------- | ----  | --- |  
 | refresh | Boolean? |  |  
 
-Fetch active payment gateway along with customer id for cards payments.
+Use this API to retrieve an active payment aggregator along with the Customer ID. This is applicable for cards payments only.
 
 *Success Response:*
 
 
 
-Object of payment gateway and customer id
+Success. Returns an active payment gateway. Check the example shown below or refer `ActiveCardPaymentGatewayResponse` for more details.
 
 
 Schema: `ActiveCardPaymentGatewayResponse`
@@ -12113,7 +12318,7 @@ Schema: `ActiveCardPaymentGatewayResponse`
 
 
 
-Bad request error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12125,7 +12330,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12142,7 +12347,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### getActiveUserCards
-Fetch the list of saved cards of user.
+Fetch the list of cards saved by the user
 
 ```kotlin
 payment.getActiveUserCards(forceRefresh: forceRefresh).safeAwait{ response,error->
@@ -12161,13 +12366,13 @@ payment.getActiveUserCards(forceRefresh: forceRefresh).safeAwait{ response,error
 | --------- | ----  | --- |  
 | forceRefresh | Boolean? |  |  
 
-Fetch the list of saved cards of user from active payment gateway.
+Use this API to retrieve a list of cards stored by user from an active payment gateway.
 
 *Success Response:*
 
 
 
-List of cards objects
+Success. Returns a list of cards saved by the user. Check the example shown below or refer `ListCardsResponse` for more details.
 
 
 Schema: `ListCardsResponse`
@@ -12179,7 +12384,7 @@ Schema: `ListCardsResponse`
 
 
 
-Bad request error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12191,7 +12396,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12208,7 +12413,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### deleteUserCard
-Delete an user card.
+Delete a card
 
 ```kotlin
 payment.deleteUserCard(body: body).safeAwait{ response,error->
@@ -12226,13 +12431,13 @@ payment.deleteUserCard(body: body).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Delete an added user card on payment gateway and remove from cache.
+Use this API to delete a card added by a user on the payment gateway and clear the cache.
 
 *Success Response:*
 
 
 
-List of cards objects
+Success. Returns a success message if card is deleted.
 
 
 Schema: `DeleteCardsResponse`
@@ -12244,7 +12449,7 @@ Schema: `DeleteCardsResponse`
 
 
 
-Bad request error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12256,7 +12461,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12273,7 +12478,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### verifyCustomerForPayment
-Validate customer for payment.
+Validate customer for payment
 
 ```kotlin
 payment.verifyCustomerForPayment(body: body).safeAwait{ response,error->
@@ -12291,13 +12496,13 @@ payment.verifyCustomerForPayment(body: body).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Validate customer for payment i.e Simpl paylater, Rupifi loan.
+Use this API to check if the customer is eligible to use credit-line facilities such as Simpl Pay Later and Rupifi.
 
 *Success Response:*
 
 
 
-List of cards objects
+Success. Check the example shown below or refer `ValidateCustomerResponse` for more details.
 
 
 Schema: `ValidateCustomerResponse`
@@ -12309,7 +12514,7 @@ Schema: `ValidateCustomerResponse`
 
 
 
-Bad request error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12321,7 +12526,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12356,13 +12561,13 @@ payment.verifyAndChargePayment(body: body).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Verify and charge payment server to server for Simpl & Mswipe.
+Use this API to verify and check the status of a payment transaction (server-to-server) made through aggregators like Simpl and Mswipe.
 
 *Success Response:*
 
 
 
-List of cards objects
+Success. Check the example shown below or refer `ChargeCustomerResponse` for more details.
 
 
 Schema: `ChargeCustomerResponse`
@@ -12374,7 +12579,7 @@ Schema: `ChargeCustomerResponse`
 
 
 
-Bad request error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12386,7 +12591,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12403,7 +12608,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### initialisePayment
-Payment Initialisation server to server for UPI and BharatQR.
+Initialize a payment (server-to-server) for UPI and BharatQR
 
 ```kotlin
 payment.initialisePayment(body: body).safeAwait{ response,error->
@@ -12421,13 +12626,13 @@ payment.initialisePayment(body: body).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Payment Initialisation for UPI & BharatQR code, UPI requests to app and QR code to be displayed on screen.
+PUse this API to inititate payment using UPI, BharatQR, wherein the UPI requests are send to the app and QR code is displayed on the screen.
 
 *Success Response:*
 
 
 
-List of cards objects
+Success. Check the example shown below or refer `PaymentInitializationResponse` for more details.
 
 
 Schema: `PaymentInitializationResponse`
@@ -12439,7 +12644,7 @@ Schema: `PaymentInitializationResponse`
 
 
 
-Bad request error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12451,7 +12656,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12468,7 +12673,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### checkAndUpdatePaymentStatus
-Continous polling to check status of payment on server.
+Performs continuous polling to check status of payment on the server
 
 ```kotlin
 payment.checkAndUpdatePaymentStatus(body: body).safeAwait{ response,error->
@@ -12486,13 +12691,13 @@ payment.checkAndUpdatePaymentStatus(body: body).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Continous polling on interval to check status of payment untill timeout.
+Use this API to perform continuous polling at intervals to check the status of payment until timeout.
 
 *Success Response:*
 
 
 
-List of cards objects
+Success. Returns the status of payment. Check the example shown below or refer `PaymentStatusUpdateResponse` for more details.
 
 
 Schema: `PaymentStatusUpdateResponse`
@@ -12504,7 +12709,7 @@ Schema: `PaymentStatusUpdateResponse`
 
 
 
-Bad request error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12516,7 +12721,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12533,7 +12738,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### getPaymentModeRoutes
-Get All Valid Payment Options
+Get applicable payment options
 
 ```kotlin
 payment.getPaymentModeRoutes(amount: amount, cartId: cartId, pincode: pincode, checkoutMode: checkoutMode, refresh: refresh, assignCardId: assignCardId, userDetails: userDetails).safeAwait{ response,error->
@@ -12550,21 +12755,21 @@ payment.getPaymentModeRoutes(amount: amount, cartId: cartId, pincode: pincode, c
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| amount | Int? | Payment amount |    
-| cartId | String? | Cart id |    
-| pincode | String? | Pincode |    
-| checkoutMode | String? | Checkout mode |    
-| refresh | Boolean? |  |    
-| assignCardId | String? | selected card id |    
-| userDetails | String? | URIencoded json annonymous user |  
+| amount | Int? | Payable amount. |    
+| cartId | String? | Identifier of the cart. |    
+| pincode | String? | The PIN Code of the destination address, e.g. 400059 |    
+| checkoutMode | String? | Option to checkout for self or for others. |    
+| refresh | Boolean? | This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one. |    
+| assignCardId | String? | Token of user's debit or credit card. |    
+| userDetails | String? | URIencoded JSON containing details of an anonymous user. |  
 
-Use this API to get Get All Valid Payment Options for making payment
+Use this API to get all valid payment options for doing a payment.
 
 *Success Response:*
 
 
 
-Success
+Success. Returns all available options for payment. Check the example shown below or refer `PaymentModeRouteResponse` for more details.
 
 
 Schema: `PaymentModeRouteResponse`
@@ -12576,7 +12781,7 @@ Schema: `PaymentModeRouteResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12588,7 +12793,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12605,7 +12810,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### getPosPaymentModeRoutes
-Get All Valid Payment Options for POS
+Get applicable payment options for Point-of-Sale (POS)
 
 ```kotlin
 payment.getPosPaymentModeRoutes(amount: amount, cartId: cartId, pincode: pincode, checkoutMode: checkoutMode, refresh: refresh, assignCardId: assignCardId, orderType: orderType, userDetails: userDetails).safeAwait{ response,error->
@@ -12622,22 +12827,22 @@ payment.getPosPaymentModeRoutes(amount: amount, cartId: cartId, pincode: pincode
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| amount | Int? | Payment amount |    
-| cartId | String? | Cart id |    
-| pincode | String? | Pincode |    
-| checkoutMode | String? | Checkout mode |    
-| refresh | Boolean? |  |    
-| assignCardId | String? | selected card id |    
-| orderType | String? | Order type |    
-| userDetails | String? | URIencoded json annonymous user |  
+| amount | Int? | Payable amount. |    
+| cartId | String? | Identifier of the cart. |    
+| pincode | String? | The PIN Code of the destination address, e.g. 400059 |    
+| checkoutMode | String? | Option to checkout for self or for others. |    
+| refresh | Boolean? | This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one. |    
+| assignCardId | String? | Token of user's debit or credit card. |    
+| orderType | String? | The order type of shipment * HomeDelivery - If the customer wants the order home-delivered * PickAtStore - If the customer wants the handover of an order at the store itself. |    
+| userDetails | String? | URIencoded JSON containing details of an anonymous user. |  
 
-Use this API to get Get All Valid Payment Options for making payment
+Use this API to get all valid payment options for doing a payment in POS.
 
 *Success Response:*
 
 
 
-Success
+Success. Returns all available options for payment. Check the example shown below or refer `PaymentModeRouteResponse` for more details.
 
 
 Schema: `PaymentModeRouteResponse`
@@ -12649,7 +12854,7 @@ Schema: `PaymentModeRouteResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12661,7 +12866,72 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `HttpErrorCodeAndResponse`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getRupifiBannerDetails
+Get CreditLine Offer
+
+```kotlin
+payment.getRupifiBannerDetails().safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |
+
+Get CreditLine Offer if user is tentatively approved by rupifi
+
+*Success Response:*
+
+
+
+Success. Return CreditLine Offer detail. Check the example shown below or refer `RupifiBannerResponseSchema` for more details.
+
+
+Schema: `RupifiBannerResponse`
+
+
+
+
+
+
+
+
+Bad Request. See the error object in the response body to know the exact reason.
+
+
+Schema: `HttpErrorCodeAndResponse`
+
+
+
+
+
+
+
+
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12678,7 +12948,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### getActiveRefundTransferModes
-List Refund Transfer Mode
+Lists the mode of refund
 
 ```kotlin
 payment.getActiveRefundTransferModes().safeAwait{ response,error->
@@ -12696,13 +12966,13 @@ payment.getActiveRefundTransferModes().safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Get all active transfer mode for adding beneficiary details
+Use this API to retrieve eligible refund modes (such as Netbanking) and add the beneficiary details.
 
 *Success Response:*
 
 
 
-Refund Transfer Mode
+Success. Shows the available refund mode to choose, e.g. Netbanking. Check the example shown below or refer `TransferModeResponse` for more details.
 
 
 Schema: `TransferModeResponse`
@@ -12714,7 +12984,7 @@ Schema: `TransferModeResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12731,7 +13001,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### enableOrDisableRefundTransferMode
-Enable/Disable Refund Transfer Mode
+Enable/Disable a mode for transferring a refund
 
 ```kotlin
 payment.enableOrDisableRefundTransferMode(body: body).safeAwait{ response,error->
@@ -12755,7 +13025,7 @@ Activate or Deactivate Transfer Mode to collect Beneficiary Details for Refund
 
 
 
-Update Refund Transfer Mode.
+Success. Shows whether the refund mode was successfully enabled or disabled.
 
 
 Schema: `UpdateRefundTransferModeResponse`
@@ -12767,7 +13037,7 @@ Schema: `UpdateRefundTransferModeResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12784,7 +13054,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### getUserBeneficiariesDetail
-List User Beneficiary
+Lists the beneficiary of a refund
 
 ```kotlin
 payment.getUserBeneficiariesDetail(orderId: orderId).safeAwait{ response,error->
@@ -12801,15 +13071,15 @@ payment.getUserBeneficiariesDetail(orderId: orderId).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| orderId | String? |  |  
+| orderId | String? | A unique number used for identifying and tracking your orders. |  
 
-Get all active  beneficiary details added by the user for refund
+Use this API to get the details of all active beneficiary added by a user for refund.
 
 *Success Response:*
 
 
 
-List User Beneficiary
+Success. Returns the details of the beneficiary getting a refund. Check the example shown below or refer `OrderBeneficiaryResponse` for more details.
 
 
 Schema: `OrderBeneficiaryResponse`
@@ -12821,7 +13091,7 @@ Schema: `OrderBeneficiaryResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `NotFoundResourceError`
@@ -12833,7 +13103,7 @@ Schema: `NotFoundResourceError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12850,7 +13120,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### verifyIfscCode
-Ifsc Code Verification
+Verify IFSC Code
 
 ```kotlin
 payment.verifyIfscCode(ifscCode: ifscCode).safeAwait{ response,error->
@@ -12867,15 +13137,15 @@ payment.verifyIfscCode(ifscCode: ifscCode).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| ifscCode | String? |  |  
+| ifscCode | String? | A 11-digit alphanumeric code that uniquely identifies a bank branch. |  
 
-Get True/False for correct IFSC Code for adding bank details for refund
+Use this API to check whether the 11-digit IFSC code is valid and to fetch the bank details for refund.
 
 *Success Response:*
 
 
 
-Bank details on correct Ifsc Code
+Success. Shows whether the IFSC code is valid, and returns the bank details. Check the example shown below or refer `IfscCodeResponse` for more details.
 
 
 Schema: `IfscCodeResponse`
@@ -12887,7 +13157,7 @@ Schema: `IfscCodeResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `NotFoundResourceError`
@@ -12899,7 +13169,7 @@ Schema: `NotFoundResourceError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ErrorCodeDescription`
@@ -12916,7 +13186,7 @@ Schema: `ErrorCodeDescription`
 
 
 #### getOrderBeneficiariesDetail
-List Order Beneficiary
+Lists the beneficiary of a refund
 
 ```kotlin
 payment.getOrderBeneficiariesDetail(orderId: orderId).safeAwait{ response,error->
@@ -12933,15 +13203,15 @@ payment.getOrderBeneficiariesDetail(orderId: orderId).safeAwait{ response,error-
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| orderId | String? |  |  
+| orderId | String? | A unique number used for identifying and tracking your orders. |  
 
-Get all active  beneficiary details added by the user for refund
+Use this API to get the details of all active beneficiary added by a user for refund.
 
 *Success Response:*
 
 
 
-List Order Beneficiary
+Success. Returns the details of the beneficiary getting a refund. Check the example shown below or refer `OrderBeneficiaryResponse` for more details.
 
 
 Schema: `OrderBeneficiaryResponse`
@@ -12953,7 +13223,7 @@ Schema: `OrderBeneficiaryResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `NotFoundResourceError`
@@ -12965,7 +13235,7 @@ Schema: `NotFoundResourceError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -12982,7 +13252,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### verifyOtpAndAddBeneficiaryForBank
-Save Beneficiary details on otp validation.
+Verify the beneficiary details using OTP
 
 ```kotlin
 payment.verifyOtpAndAddBeneficiaryForBank(body: body).safeAwait{ response,error->
@@ -13000,13 +13270,13 @@ payment.verifyOtpAndAddBeneficiaryForBank(body: body).safeAwait{ response,error-
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Save Beneficiary details on otp validation.
+Use this API to perform an OTP validation before saving the beneficiary details added for a refund.
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `AddBeneficiaryViaOtpVerificationRequest` for more details.
 
 
 Schema: `AddBeneficiaryViaOtpVerificationResponse`
@@ -13018,7 +13288,7 @@ Schema: `AddBeneficiaryViaOtpVerificationResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `WrongOtpError`
@@ -13030,7 +13300,7 @@ Schema: `WrongOtpError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -13065,13 +13335,13 @@ payment.addBeneficiaryDetails(body: body).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Use this API to save bank details for returned/cancelled order to refund amount in his account.
+Use this API to save the bank details for a returned or cancelled order to refund the amount.
 
 *Success Response:*
 
 
 
-Success
+Success. Shows whether the beneficiary details were saved to a returned/cancelled order or not.
 
 
 Schema: `RefundAccountResponse`
@@ -13083,7 +13353,7 @@ Schema: `RefundAccountResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `NotFoundResourceError`
@@ -13095,7 +13365,7 @@ Schema: `NotFoundResourceError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -13112,7 +13382,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### verifyOtpAndAddBeneficiaryForWallet
-Send Otp on Adding wallet beneficiary
+Send OTP on adding a wallet beneficiary
 
 ```kotlin
 payment.verifyOtpAndAddBeneficiaryForWallet(body: body).safeAwait{ response,error->
@@ -13130,13 +13400,13 @@ payment.verifyOtpAndAddBeneficiaryForWallet(body: body).safeAwait{ response,erro
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Send Otp on Adding wallet beneficiary for user mobile verification
+Use this API to send an OTP while adding a wallet beneficiary by mobile no. verification.
 
 *Success Response:*
 
 
 
-WalletOtp
+Success. Sends the OTP to the given mobile number. Check the example shown below or refer `WalletOtpResponse` for more details.
 
 
 Schema: `WalletOtpResponse`
@@ -13148,7 +13418,7 @@ Schema: `WalletOtpResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `NotFoundResourceError`
@@ -13160,7 +13430,7 @@ Schema: `NotFoundResourceError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -13177,7 +13447,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### updateDefaultBeneficiary
-Mark Default Beneficiary For Refund
+Set a default beneficiary for a refund
 
 ```kotlin
 payment.updateDefaultBeneficiary(body: body).safeAwait{ response,error->
@@ -13195,13 +13465,13 @@ payment.updateDefaultBeneficiary(body: body).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Mark Default Beneficiary ot of all Beneficiary Details for Refund
+Use this API to set a default beneficiary for getting a refund.
 
 *Success Response:*
 
 
 
-Set Default Beneficiary Response.
+Success. Check the example shown below or refer `SetDefaultBeneficiaryResponse` for more details.
 
 
 Schema: `SetDefaultBeneficiaryResponse`
@@ -13213,7 +13483,7 @@ Schema: `SetDefaultBeneficiaryResponse`
 
 
 
-Bad Request Error
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `SetDefaultBeneficiaryResponse`
@@ -13225,7 +13495,7 @@ Schema: `SetDefaultBeneficiaryResponse`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `HttpErrorCodeAndResponse`
@@ -13249,7 +13519,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### getOrders
-Get Orders for application based on application Id
+Use this API to retrieve all the orders.
 
 ```kotlin
 order.getOrders(pageNo: pageNo, pageSize: pageSize, fromDate: fromDate, toDate: toDate, orderStatus: orderStatus).safeAwait{ response,error->
@@ -13266,19 +13536,19 @@ order.getOrders(pageNo: pageNo, pageSize: pageSize, fromDate: fromDate, toDate: 
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| pageNo | Int? | Current page number |    
-| pageSize | Int? | Page limit |    
-| fromDate | String? | From Date |    
-| toDate | String? | To Date |    
-| orderStatus | Int? | Order Status |  
+| pageNo | Int? | The page number to navigate through the given set of results. Default value is 1. |    
+| pageSize | Int? | The number of items to retrieve in each page. Default value is 10. |    
+| fromDate | String? | The date from which the orders should be retrieved. |    
+| toDate | String? | The date till which the orders should be retrieved. |    
+| orderStatus | Int? | A filter to retrieve orders by their current status such as _placed_, _delivered_, etc. |  
 
-Get Orders
+Get all orders
 
 *Success Response:*
 
 
 
-Success
+Success. Returns all the orders. Check the example shown below or refer `OrderList` for more details.
 
 
 Schema: `OrderList`
@@ -13290,7 +13560,7 @@ Schema: `OrderList`
 
 
 
-API Error
+API Error. See the error object in the response body to know the exact reason.. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -13302,7 +13572,7 @@ Schema: `ApefaceApiError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -13319,7 +13589,7 @@ Schema: `ApefaceApiError`
 
 
 #### getOrderById
-Get Order by order id for application based on application Id
+Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
 
 ```kotlin
 order.getOrderById(orderId: orderId).safeAwait{ response,error->
@@ -13336,15 +13606,15 @@ order.getOrderById(orderId: orderId).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| orderId | String? | Order Id |  
+| orderId | String? | A unique number used for identifying and tracking your orders. |  
 
-Get Order By Fynd Order Id
+Get details of an order
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `OrderById` for more details.
 
 
 Schema: `OrderById`
@@ -13356,7 +13626,7 @@ Schema: `OrderById`
 
 
 
-API Error
+API Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -13368,7 +13638,7 @@ Schema: `ApefaceApiError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -13385,7 +13655,7 @@ Schema: `ApefaceApiError`
 
 
 #### getShipmentById
-Get Shipment by shipment id and order id for application based on application Id
+Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
 
 ```kotlin
 order.getShipmentById(shipmentId: shipmentId).safeAwait{ response,error->
@@ -13402,15 +13672,15 @@ order.getShipmentById(shipmentId: shipmentId).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| shipmentId | String? | Shipment Id |  
+| shipmentId | String? | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |  
 
-Get Shipment
+Get details of a shipment
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ShipmentById` for more details.
 
 
 Schema: `ShipmentById`
@@ -13422,7 +13692,7 @@ Schema: `ShipmentById`
 
 
 
-API Error
+API Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -13434,7 +13704,7 @@ Schema: `ApefaceApiError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -13451,7 +13721,7 @@ Schema: `ApefaceApiError`
 
 
 #### getShipmentReasons
-Get Shipment reasons by shipment id and order id for application based on application Id
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
 
 ```kotlin
 order.getShipmentReasons(shipmentId: shipmentId).safeAwait{ response,error->
@@ -13468,15 +13738,15 @@ order.getShipmentReasons(shipmentId: shipmentId).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| shipmentId | String? | Shipment Id |  
+| shipmentId | String? | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |  
 
-Get Shipment Reasons
+Get reasons behind full or partial cancellation of a shipment
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ShipmentReasons` for more details.
 
 
 Schema: `ShipmentReasons`
@@ -13488,7 +13758,7 @@ Schema: `ShipmentReasons`
 
 
 
-API Error
+API Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -13500,7 +13770,7 @@ Schema: `ApefaceApiError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -13517,7 +13787,7 @@ Schema: `ApefaceApiError`
 
 
 #### updateShipmentStatus
-Update Shipment status by shipment id and order id for application based on application Id
+Use this API to update the status of a shipment using its shipment ID.
 
 ```kotlin
 order.updateShipmentStatus(shipmentId: shipmentId, body: body).safeAwait{ response,error->
@@ -13534,15 +13804,15 @@ order.updateShipmentStatus(shipmentId: shipmentId, body: body).safeAwait{ respon
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| shipmentId | String? | Shipment Id |  
+| shipmentId | String? | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |  
 
-Update Shipment Status
+Update the shipment status
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ShipmentStatusUpdateBody` for more details.
 
 
 Schema: `ShipmentStatusUpdate`
@@ -13554,7 +13824,7 @@ Schema: `ShipmentStatusUpdate`
 
 
 
-API Error
+API Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -13566,7 +13836,7 @@ Schema: `ApefaceApiError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -13583,7 +13853,7 @@ Schema: `ApefaceApiError`
 
 
 #### trackShipment
-Track Shipment by shipment id and order id for application based on application Id
+Use this API to track a shipment using its shipment ID.
 
 ```kotlin
 order.trackShipment(shipmentId: shipmentId).safeAwait{ response,error->
@@ -13600,15 +13870,15 @@ order.trackShipment(shipmentId: shipmentId).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| shipmentId | String? | Shipment Id |  
+| shipmentId | String? | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |  
 
-Shipment Track
+Track shipment
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `ShipmentTrack` for more details.
 
 
 Schema: `ShipmentTrack`
@@ -13620,7 +13890,7 @@ Schema: `ShipmentTrack`
 
 
 
-API Error
+API Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -13632,7 +13902,7 @@ Schema: `ApefaceApiError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -13649,7 +13919,7 @@ Schema: `ApefaceApiError`
 
 
 #### getPosOrderById
-Get POS Order by order id for application based on application Id
+Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
 
 ```kotlin
 order.getPosOrderById(orderId: orderId).safeAwait{ response,error->
@@ -13666,15 +13936,15 @@ order.getPosOrderById(orderId: orderId).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| orderId | String? | Order Id |  
+| orderId | String? | A unique number used for identifying and tracking your orders. |  
 
-Get Order By Fynd Order Id
+Get POS Order
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `PosOrderById` for more details.
 
 
 Schema: `PosOrderById`
@@ -13686,7 +13956,7 @@ Schema: `PosOrderById`
 
 
 
-API Error
+API Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -13698,7 +13968,7 @@ Schema: `ApefaceApiError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -15087,7 +15357,7 @@ Schema: `FeedbackError`
 Get list of customer reviews
 
 ```kotlin
-feedback.getReviews(entityType: entityType, entityId: entityId, id: id, userId: userId, media: media, rating: rating, attributeRating: attributeRating, facets: facets, sort: sort, pageId: pageId, pageSize: pageSize).safeAwait{ response,error->
+feedback.getReviews(entityType: entityType, entityId: entityId, id: id, userId: userId, media: media, rating: rating, attributeRating: attributeRating, facets: facets, sort: sort, active: active, approve: approve, pageId: pageId, pageSize: pageSize).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -15110,6 +15380,8 @@ feedback.getReviews(entityType: entityType, entityId: entityId, id: id, userId: 
 | attributeRating | ArrayList<String>? | Filter for attribute rating. |    
 | facets | Boolean? | This is a boolean value for enabling metadata (facets). Selecting *true* will enable facets. |    
 | sort | String? | Sort by: default | top | recent |    
+| active | Boolean? | Get the active reviews. |    
+| approve | Boolean? | Get the approved reviews. |    
 | pageId | String? | Pagination page ID to retrieve next set of results. |    
 | pageSize | Int? | The number of items to retrieve in each page. |  
 
@@ -16990,6 +17262,50 @@ Unhandled api error
 
 
 Schema: `HashMap<String,Any>`
+
+
+
+
+
+
+
+
+
+---
+
+
+#### applyRewardPoints
+Fetch all Items Added to  Cart
+
+```kotlin
+poscart.applyRewardPoints(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |  
+| uid | Int? |  |    
+| i | Boolean? |  |    
+| b | Boolean? |  |  
+
+Get all the details of a items added to cart  by uid. If successful, returns a Cart resource in the response body specified in CartResponse
+
+*Success Response:*
+
+
+
+The Cart object. See example below or refer CartResponse for details
+
+
+Schema: `CartResponse`
 
 
 
@@ -19792,7 +20108,7 @@ Cart Merged/Replaced
 
 
 #### getTatProduct
-Get Tat Product
+Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
 
 ```kotlin
 logistic.getTatProduct(body: body).safeAwait{ response,error->
@@ -19810,13 +20126,13 @@ logistic.getTatProduct(body: body).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Get Tat Product
+Get TAT of a product
 
 *Success Response:*
 
 
 
-Success
+Success. Check the example shown below or refer `GetTatProductResponse` for more details.
 
 
 Schema: `GetTatProductResponse`
@@ -19828,7 +20144,7 @@ Schema: `GetTatProductResponse`
 
 
 
-API Error
+API Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -19840,7 +20156,7 @@ Schema: `ApefaceApiError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -19857,7 +20173,7 @@ Schema: `ApefaceApiError`
 
 
 #### getPincodeCity
-Get City from Pincode
+Use this API to retrieve a city by its PIN Code.
 
 ```kotlin
 logistic.getPincodeCity(pincode: pincode).safeAwait{ response,error->
@@ -19874,15 +20190,15 @@ logistic.getPincodeCity(pincode: pincode).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| pincode | String? | Pincode |  
+| pincode | String? | The PIN Code of the area, e.g. 400059 |  
 
-Get City from Pincode
+Get city from PIN Code
 
 *Success Response:*
 
 
 
-Success
+Success. Returns a JSON object containing the city name, state and country identified by its PIN Code. Check the example shown below or refer `GetPincodeCityResponse` for more details.
 
 
 Schema: `GetPincodeCityResponse`
@@ -19894,7 +20210,7 @@ Schema: `GetPincodeCityResponse`
 
 
 
-API Error
+API Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
@@ -19906,7 +20222,7 @@ Schema: `ApefaceApiError`
 
 
 
-Internal Server Error
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `ApefaceApiError`
