@@ -1887,7 +1887,7 @@ Schema: `ErrorResponse`
 
 
 #### getCart
-Fetch all Items Added to  Cart
+Fetch all items added to the cart
 
 ```kotlin
 cart.getCart(uid: uid, i: i, b: b, assignCardId: assignCardId).safeAwait{ response,error->
@@ -1909,13 +1909,13 @@ cart.getCart(uid: uid, i: i, b: b, assignCardId: assignCardId).safeAwait{ respon
 | b | Boolean? |  |    
 | assignCardId | Int? |  |  
 
-Get all the details of a items added to cart  by uid. If successful, returns a Cart resource in the response body specified in CartResponse
+Use this API to get details of all the items added to a cart.
 
 *Success Response:*
 
 
 
-The Cart object. See example below or refer CartResponse for details
+Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -1932,7 +1932,7 @@ Schema: `CartResponse`
 
 
 #### getCartLastModified
-Fetch Last-Modified timestamp
+Fetch last-modified timestamp
 
 ```kotlin
 cart.getCartLastModified(uid: uid).safeAwait{ response,error->
@@ -1951,13 +1951,13 @@ cart.getCartLastModified(uid: uid).safeAwait{ response,error->
 | --------- | ----  | --- |  
 | uid | Int? |  |  
 
-Fetch Last-Modified timestamp in header metadata
+Use this API to fetch Last-Modified timestamp in header metadata.
 
 *Success Response:*
 
 
 
-Fetch Last-Modified Timestamp Response
+Success. Receives last modifed timestamp in the header.
 
 
 
@@ -1968,7 +1968,7 @@ Fetch Last-Modified Timestamp Response
 
 
 #### addItems
-Add Items to Cart
+Add items to cart
 
 ```kotlin
 cart.addItems(i: i, b: b, body: body).safeAwait{ response,error->
@@ -1988,13 +1988,13 @@ cart.addItems(i: i, b: b, body: body).safeAwait{ response,error->
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
-<p>Add Items to cart. See `AddCartRequest` in schema of request body for the list of attributes needed to add items to a cart. On successful request, returns cart response containing details of items, coupons available etc.these attributes will be fetched from the folowing api's</p>
+Use this API to add items to the cart.
 
 *Success Response:*
 
 
 
-Response of the cart object including all item details included in .the cart,coupons etc.
+Success. Returns a cart object as shown below. Refer `AddCartResponse` for more details.
 
 
 Schema: `AddCartResponse`
@@ -2644,7 +2644,7 @@ Sorry, item is out of stock
 
 
 #### updateCart
-Update Items already added to Cart
+Update items in the cart
 
 ```kotlin
 cart.updateCart(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
@@ -2665,13 +2665,13 @@ cart.updateCart(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
-Request object containing attributes like item_quantity and item_size which can be updated .these attributes will be fetched from the folowing api's</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/{slug}/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/{identifier}​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
+Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/{slug}/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/{identifier}​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
 
 *Success Response:*
 
 
 
-Response of the cart object including all item with their updated details included in .the cart,coupons etc..
+Success. Updates and returns a cart object as shown below. Refer `UpdateCartResponse` for more details.
 
 
 Schema: `UpdateCartResponse`
@@ -3050,7 +3050,7 @@ Item updated in the cart
 
 
 #### getItemCount
-Cart item count
+Count items in the cart
 
 ```kotlin
 cart.getItemCount(uid: uid).safeAwait{ response,error->
@@ -3067,15 +3067,15 @@ cart.getItemCount(uid: uid).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| uid | Int? | Cart id |  
+| uid | Int? | The unique identifier of the cart. |  
 
-Get total count of item present in cart
+Use this API to get the total number of items present in cart.
 
 *Success Response:*
 
 
 
-OK
+Success. Returns the total count of items in a user's cart.
 
 
 Schema: `CartItemCountResponse`
@@ -3111,13 +3111,13 @@ cart.getCoupons(uid: uid).safeAwait{ response,error->
 | --------- | ----  | --- |  
 | uid | Int? |  |  
 
-Get all the details of a coupons applicable to cart  by uid. If successful, returns a Coupon resource in the response body specified in GetCouponResponse
+Use this API to get a list of available coupons along with their details.
 
 *Success Response:*
 
 
 
-Returns The Couppon object which has list of all available_coupon applicale for the cart. See example below or refer GetCouponResponse for details
+Success. Returns a coupon object which has a list of all the eligible coupons. Refer `GetCouponResponse` for more details.
 
 
 Schema: `GetCouponResponse`
@@ -3156,14 +3156,13 @@ cart.applyCoupon(i: i, b: b, p: p, uid: uid, body: body).safeAwait{ response,err
 | p | Boolean? |  |    
 | uid | Int? |  |  
 
-<p>Apply Coupons on Items added to cart. On successful request, returns cart response containing details of items ,coupons applied etc.these attributes will be consumed by  api</p> <ul> <li> <font color="monochrome">coupon_code</font></li>
-</ul>
+Use this API to apply coupons on items in the cart.
 
 *Success Response:*
 
 
 
-Response of the Coupon object including all item details included in .the cart,coupons applied etc.
+Success. Returns coupons applied to the cart along with item details and price breakup. Refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -3197,7 +3196,7 @@ cart.removeCoupon(uid: uid).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| uid | Int? | Cart id |  
+| uid | Int? | The unique identifier of the cart |  
 
 Remove Coupon applied on the cart by passing uid in request body.
 
@@ -3205,7 +3204,7 @@ Remove Coupon applied on the cart by passing uid in request body.
 
 
 
-Response of the Coupon object including all item details included in .the cart,coupons removed etc.
+Success. Returns coupons removed from the cart along with item details and price breakup. Refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -3239,18 +3238,18 @@ cart.getBulkDiscountOffers(itemId: itemId, articleId: articleId, uid: uid, slug:
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| itemId | Int? | Item id |    
-| articleId | String? | Article mongo id |    
-| uid | Int? | Item id |    
-| slug | String? | Item unique url from product page |  
+| itemId | Int? | The Item ID of the product |    
+| articleId | String? | Article Mongo ID |    
+| uid | Int? | UID of the product |    
+| slug | String? | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/. |  
 
-List applicable offers along with current, next and best offer for given product. Either one of **uid**, **item_id**, **slug** should be present*
+Use this API to get a list of applicable offers along with current, next and best offer for given product. Either one of **uid**, **item_id**, **slug** should be present*.
 
 *Success Response:*
 
 
 
-Offers found or not found with valid input
+Success. Returns a data object containing the seller details and available offers (if exists) on bulk products. Refer `BulkPriceResponse` for more details.
 
 
 Schema: `BulkPriceResponse`
@@ -3333,7 +3332,7 @@ Offers not found
 
 
 
-Unhandled api error
+Unhandled API error
 
 
 Schema: `HashMap<String,Any>`
@@ -3350,7 +3349,7 @@ Schema: `HashMap<String,Any>`
 
 
 #### applyRewardPoints
-Fetch all Items Added to  Cart
+Fetch rewards points for cart.
 
 ```kotlin
 cart.applyRewardPoints(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
@@ -3371,13 +3370,13 @@ cart.applyRewardPoints(uid: uid, i: i, b: b, body: body).safeAwait{ response,err
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
-Get all the details of a items added to cart  by uid. If successful, returns a Cart resource in the response body specified in CartResponse
+Use this API to get rewards points for cart.
 
 *Success Response:*
 
 
 
-The Cart object. See example below or refer CartResponse for details
+Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -3394,7 +3393,7 @@ Schema: `CartResponse`
 
 
 #### getAddresses
-Fetch Address
+Fetch address
 
 ```kotlin
 cart.getAddresses(uid: uid, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
@@ -3417,13 +3416,13 @@ cart.getAddresses(uid: uid, mobileNo: mobileNo, checkoutMode: checkoutMode, tags
 | tags | String? |  |    
 | isDefault | Boolean? |  |  
 
-Get all the addresses associated with the account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional <ul> <li> <font color="monochrome">uid</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
+Use this API to get all the addresses associated with an account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional <ul> <li> <font color="monochrome">uid</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
 
 *Success Response:*
 
 
 
-Returns The Address object which has list of all address saved for the account. See example below or refer GetAddressesResponse for details
+Success. Returns an Address object containing a list of address saved in the account. Refer `GetAddressesResponse` for more details.
 
 
 Schema: `GetAddressesResponse`
@@ -3440,7 +3439,7 @@ Schema: `GetAddressesResponse`
 
 
 #### addAddress
-Add Address to the account
+Add address to an account
 
 ```kotlin
 cart.addAddress(body: body).safeAwait{ response,error->
@@ -3458,13 +3457,13 @@ cart.addAddress(body: body).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-<p>Add Address to account. See `Address` in schema of request body for the list of attributes needed to add Address to account. On successful request, returns response containing address_id ,is_default_address and success message.
+Use this API to add an address to an account.
 
 *Success Response:*
 
 
 
-Return Address Id on successfull completion of the request.
+Success. Returns the address ID, a flag whether the address is set as default, and a success message. Refer `SaveAddressResponse` for more details.
 
 
 Schema: `SaveAddressResponse`
@@ -3481,7 +3480,7 @@ Schema: `SaveAddressResponse`
 
 
 #### getAddressById
-Fetch Single Address
+Fetch a single address by its ID
 
 ```kotlin
 cart.getAddressById(id: id, uid: uid, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
@@ -3505,13 +3504,13 @@ cart.getAddressById(id: id, uid: uid, mobileNo: mobileNo, checkoutMode: checkout
 | tags | String? |  |    
 | isDefault | Boolean? |  |  
 
-Get a addresses with the given id. If successful, returns a Address resource in the response body specified in `Address`.attibutes listed below are optional <ul> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
+Use this API to get an addresses using its ID. If successful, returns a Address resource in the response body specified in `Address`. Attibutes listed below are optional <ul> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
 
 *Success Response:*
 
 
 
-Returns The Address object which has list of all address saved for the account. See example below or refer Address for details
+Success. Returns an Address object containing a list of address saved in the account. Refer `Address` for more details.
 
 
 Schema: `Address`
@@ -3528,7 +3527,7 @@ Schema: `Address`
 
 
 #### updateAddress
-Update Address alreay added to account
+Update address added to an account
 
 ```kotlin
 cart.updateAddress(id: id, body: body).safeAwait{ response,error->
@@ -3545,15 +3544,15 @@ cart.updateAddress(id: id, body: body).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | Int? | Address id |  
+| id | Int? | ID allotted to the selected address |  
 
-Request object containing attributes mentioned in  <font color="blue">Address </font> can be updated .these attributes are :</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
+Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
 
 *Success Response:*
 
 
 
-Response of the Address object containing address_id and sucess message.
+Success. Returns the address ID and a message indicating a successful address updation.
 
 
 Schema: `UpdateAddressResponse`
@@ -3570,7 +3569,7 @@ Schema: `UpdateAddressResponse`
 
 
 #### removeAddress
-Remove Address Associated to the account
+Remove address associated with an account
 
 ```kotlin
 cart.removeAddress(id: id).safeAwait{ response,error->
@@ -3587,15 +3586,15 @@ cart.removeAddress(id: id).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | Int? | Address id |  
+| id | Int? | ID allotted to the selected address |  
 
-Delete a Address by it's address_id. Returns an object that tells whether the address was deleted successfully
+Use this API to delete an address by its ID. This will returns an object that will indicate whether the address was deleted successfully or not.
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful. See example below or refer DeleteAddressResponse
+Returns a Status object indicating the success or failure of address deletion.
 
 
 Schema: `DeleteAddressResponse`
@@ -3612,7 +3611,7 @@ Schema: `DeleteAddressResponse`
 
 
 #### selectAddress
-Select Address from All Addresses
+Select an address from available addresses
 
 ```kotlin
 cart.selectAddress(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
@@ -3633,13 +3632,13 @@ cart.selectAddress(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
-<p>Select Address from all addresses associated with the account in order to ship the cart items to .that address,otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, returns Cart object response.below are the address attributes which needs to be sent. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
+<p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
 
 *Success Response:*
 
 
 
-Response of the Address object containing Cart Object and success message.  .
+Success. Returns a Cart object as shown below. Refer `CartResponse` for more details.  .
 
 
 Schema: `CartResponse`
@@ -3651,7 +3650,7 @@ Schema: `CartResponse`
 
 
 
-Address or Pincode Error
+Address or PIN code error
 
 
 Schema: `HashMap<String,Any>`
@@ -3692,7 +3691,7 @@ Pincode Not Serviciable
 
 
 #### selectPaymentMode
-Update Cart Payment
+Update cart payment
 
 ```kotlin
 cart.selectPaymentMode(uid: uid, body: body).safeAwait{ response,error->
@@ -3711,13 +3710,13 @@ cart.selectPaymentMode(uid: uid, body: body).safeAwait{ response,error->
 | --------- | ----  | --- |  
 | uid | String? |  |  
 
-Update Cart Payment for Your Account
+Use this API to update cart payment.
 
 *Success Response:*
 
 
 
-Cart response with payment options
+Success. Returns a Cart object as shown below. Refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -3734,7 +3733,7 @@ Schema: `CartResponse`
 
 
 #### validateCouponForPayment
-Get Cart Payment for valid coupon
+Verify the coupon eligibility against the payment mode
 
 ```kotlin
 cart.validateCouponForPayment(uid: uid, addressId: addressId, paymentMode: paymentMode, paymentIdentifier: paymentIdentifier, aggregatorName: aggregatorName, merchantCode: merchantCode).safeAwait{ response,error->
@@ -3758,13 +3757,13 @@ cart.validateCouponForPayment(uid: uid, addressId: addressId, paymentMode: payme
 | aggregatorName | String? |  |    
 | merchantCode | String? |  |  
 
-Validate coupon for selected payment mode
+Use this API to validate a coupon against the payment mode such as NetBanking, Wallet, UPI etc.
 
 *Success Response:*
 
 
 
-Cart Affiliates.
+Success. Returns a success message and the coupon validity. Refer `PaymentCouponValidate` for more details.
 
 
 Schema: `PaymentCouponValidate`
@@ -3798,18 +3797,18 @@ cart.getShipments(p: p, uid: uid, addressId: addressId, areaCode: areaCode).safe
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| p | Boolean? | Get payment options or not |    
-| uid | Int? | Cart id |    
-| addressId | Int? | Address id |    
-| areaCode | String? | Destination pincode. |  
+| p | Boolean? | This is a boolean value. Select `true` for getting a payment option in response. |    
+| uid | Int? | The unique identifier of the cart |    
+| addressId | Int? | ID allotted to the selected address |    
+| areaCode | String? | The PIN Code of the destination address, e.g. 400059 |  
 
-Shipment break up item wise with delivery date. Actual                      delivery will be during given dates only. Items will be                      delivered in group of shipments created.
+Use this API to get shipment details, expected delivery date, items and price breakup of the shipment.
 
 *Success Response:*
 
 
 
-OK
+Success. Returns delivery promise along with shipment details and price breakup. Refer `CartShipmentsResponse` for more details.
 
 
 Schema: `CartShipmentsResponse`
@@ -4461,7 +4460,7 @@ Shipment Generation Failed
 
 
 
-Unhandled api error
+Unhandled API error
 
 
 Schema: `HashMap<String,Any>`
@@ -4478,7 +4477,7 @@ Schema: `HashMap<String,Any>`
 
 
 #### checkoutCart
-Checkout Cart
+Checkout all items in the cart
 
 ```kotlin
 cart.checkoutCart(body: body).safeAwait{ response,error->
@@ -4496,13 +4495,13 @@ cart.checkoutCart(body: body).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Checkout all items in cart to payment and order generation.                         For COD only order will be generated while for other checkout mode                         user will be redirected to payment gateway
+Use this API to checkout all items in the cart for payment and order generation. For COD, order will be directly generated, whereas for other checkout modes, user will be redirected to a payment gateway.
 
 *Success Response:*
 
 
 
-OK
+Success. Returns the status of cart checkout. Refer `CartCheckoutResponse` for more details.
 
 
 Schema: `CartCheckoutResponse`
@@ -4896,7 +4895,7 @@ Successful checkout cod payment
 
 
 #### updateCartMeta
-Update Cart Meta
+Update the cart meta
 
 ```kotlin
 cart.updateCartMeta(uid: uid, body: body).safeAwait{ response,error->
@@ -4913,15 +4912,15 @@ cart.updateCartMeta(uid: uid, body: body).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| uid | Int? | Cart id received in get cart. |  
+| uid | Int? | The unique identifier of the cart |  
 
-Update cart meta like checkout_mode, gstin.
+Use this API to update cart meta like checkout_mode and gstin.
 
 *Success Response:*
 
 
 
-Cart meta updated successfully
+Returns a message indicating the success of cart meta updation as shown below.
 
 
 Schema: `CartMetaResponse`
@@ -4950,7 +4949,7 @@ Schema: `CartMetaMissingResponse`
 
 
 #### getCartShareLink
-Generate Cart sharing link token
+Generate token for sharing the cart
 
 ```kotlin
 cart.getCartShareLink(body: body).safeAwait{ response,error->
@@ -4968,13 +4967,13 @@ cart.getCartShareLink(body: body).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Generates shared cart snapshot and returns shortlink token
+Use this API to generate a shared cart snapshot and return a shortlink token. The link can be shared with other users for getting the same items in their cart.
 
 *Success Response:*
 
 
 
-Token Generated successfully
+Returns a URL to share and a token as shown below.
 
 
 Schema: `GetShareCartLinkResponse`
@@ -5005,7 +5004,7 @@ Token Generated
 
 
 #### getCartSharedItems
-Get shared cart snapshot and cart response
+Get details of a shared cart
 
 ```kotlin
 cart.getCartSharedItems(token: token).safeAwait{ response,error->
@@ -5022,15 +5021,15 @@ cart.getCartSharedItems(token: token).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| token | String? | Shared short link token. |  
+| token | String? | Token of the shared short link |  
 
-Returns shared cart response for sent token with `shared_cart_details`                    containing shared cart details in response.
+Use this API to get the shared cart details as per the token generated using the share-cart API.
 
 *Success Response:*
 
 
 
-Cart for valid token
+Success. Returns a Cart object as per the valid token. Refer `SharedCartResponse` for more details.
 
 
 Schema: `SharedCartResponse`
@@ -5042,7 +5041,7 @@ Schema: `SharedCartResponse`
 
 
 
-No cart found for sent token
+No cart found for the token sent
 
 
 Schema: `SharedCartResponse`
@@ -5059,7 +5058,7 @@ Schema: `SharedCartResponse`
 
 
 #### updateCartWithSharedItems
-Merge or Replace existing cart
+Merge or replace existing cart
 
 ```kotlin
 cart.updateCartWithSharedItems(token: token, action: action).safeAwait{ response,error->
@@ -5076,16 +5075,16 @@ cart.updateCartWithSharedItems(token: token, action: action).safeAwait{ response
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| token | String? | Shared short link token. |    
-| action | String? | Operation to perform on existing cart, whether to merge or replace. |  
+| token | String? | Token of the shared short link |    
+| action | String? | Operation to perform on the existing cart merge or replace. |  
 
-Merge or Replace cart based on `action` parameter with shared cart of `token`
+Use this API to merge the shared cart with existing cart, or replace the existing cart with the shared cart. The `action` parameter is used to indicate the operation Merge or Replace.
 
 *Success Response:*
 
 
 
-Success of Merge or Replace of cart with `shared_cart_details`                    containing shared cart details in response
+Success. Returns a merged or replaced cart as per the valid token. Refer `SharedCartResponse` for more details.
 
 
 Schema: `SharedCartResponse`
@@ -15812,7 +15811,7 @@ Schema: `FeedbackError`
 
 
 #### getCart
-Fetch all Items Added to  Cart
+Fetch all items added to the cart
 
 ```kotlin
 poscart.getCart(uid: uid, i: i, b: b, assignCardId: assignCardId).safeAwait{ response,error->
@@ -15834,13 +15833,13 @@ poscart.getCart(uid: uid, i: i, b: b, assignCardId: assignCardId).safeAwait{ res
 | b | Boolean? |  |    
 | assignCardId | Int? |  |  
 
-Get all the details of a items added to cart  by uid. If successful, returns a Cart resource in the response body specified in CartResponse
+Use this API to get details of all the items added to a cart.
 
 *Success Response:*
 
 
 
-The Cart object. See example below or refer CartResponse for details
+Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -15857,7 +15856,7 @@ Schema: `CartResponse`
 
 
 #### getCartLastModified
-Fetch Last-Modified timestamp
+Fetch last-modified timestamp
 
 ```kotlin
 poscart.getCartLastModified(uid: uid).safeAwait{ response,error->
@@ -15876,13 +15875,13 @@ poscart.getCartLastModified(uid: uid).safeAwait{ response,error->
 | --------- | ----  | --- |  
 | uid | Int? |  |  
 
-Fetch Last-Modified timestamp in header metadata
+Use this API to fetch Last-Modified timestamp in header metadata.
 
 *Success Response:*
 
 
 
-Fetch Last-Modified Timestamp Response
+Success. Receives last modifed timestamp in the header.
 
 
 
@@ -15893,7 +15892,7 @@ Fetch Last-Modified Timestamp Response
 
 
 #### addItems
-Add Items to Cart
+Add items to cart
 
 ```kotlin
 poscart.addItems(i: i, b: b, body: body).safeAwait{ response,error->
@@ -15913,13 +15912,13 @@ poscart.addItems(i: i, b: b, body: body).safeAwait{ response,error->
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
-<p>Add Items to cart. See `AddCartRequest` in schema of request body for the list of attributes needed to add items to a cart. On successful request, returns cart response containing details of items, coupons available etc.these attributes will be fetched from the folowing api's</p>
+Use this API to add items to the cart.
 
 *Success Response:*
 
 
 
-Response of the cart object including all item details included in .the cart,coupons etc.
+Success. Returns a cart object as shown below. Refer `AddCartResponse` for more details.
 
 
 Schema: `AddCartResponse`
@@ -16569,7 +16568,7 @@ Sorry, item is out of stock
 
 
 #### updateCart
-Update Items already added to Cart
+Update items in the cart
 
 ```kotlin
 poscart.updateCart(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
@@ -16590,13 +16589,13 @@ poscart.updateCart(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
-Request object containing attributes like item_quantity and item_size which can be updated .these attributes will be fetched from the folowing api's</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/{slug}/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/{identifier}​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
+Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/{slug}/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/{identifier}​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
 
 *Success Response:*
 
 
 
-Response of the cart object including all item with their updated details included in .the cart,coupons etc..
+Success. Updates and returns a cart object as shown below. Refer `UpdateCartResponse` for more details.
 
 
 Schema: `UpdateCartResponse`
@@ -16975,7 +16974,7 @@ Item updated in the cart
 
 
 #### getItemCount
-Cart item count
+Count items in the cart
 
 ```kotlin
 poscart.getItemCount(uid: uid).safeAwait{ response,error->
@@ -16992,15 +16991,15 @@ poscart.getItemCount(uid: uid).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| uid | Int? | Cart id |  
+| uid | Int? | The unique identifier of the cart. |  
 
-Get total count of item present in cart
+Use this API to get the total number of items present in cart.
 
 *Success Response:*
 
 
 
-OK
+Success. Returns the total count of items in a user's cart.
 
 
 Schema: `CartItemCountResponse`
@@ -17036,13 +17035,13 @@ poscart.getCoupons(uid: uid).safeAwait{ response,error->
 | --------- | ----  | --- |  
 | uid | Int? |  |  
 
-Get all the details of a coupons applicable to cart  by uid. If successful, returns a Coupon resource in the response body specified in GetCouponResponse
+Use this API to get a list of available coupons along with their details.
 
 *Success Response:*
 
 
 
-Returns The Couppon object which has list of all available_coupon applicale for the cart. See example below or refer GetCouponResponse for details
+Success. Returns a coupon object which has a list of all the eligible coupons. Refer `GetCouponResponse` for more details.
 
 
 Schema: `GetCouponResponse`
@@ -17081,14 +17080,13 @@ poscart.applyCoupon(i: i, b: b, p: p, uid: uid, body: body).safeAwait{ response,
 | p | Boolean? |  |    
 | uid | Int? |  |  
 
-<p>Apply Coupons on Items added to cart. On successful request, returns cart response containing details of items ,coupons applied etc.these attributes will be consumed by  api</p> <ul> <li> <font color="monochrome">coupon_code</font></li>
-</ul>
+Use this API to apply coupons on items in the cart.
 
 *Success Response:*
 
 
 
-Response of the Coupon object including all item details included in .the cart,coupons applied etc.
+Success. Returns coupons applied to the cart along with item details and price breakup. Refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -17122,7 +17120,7 @@ poscart.removeCoupon(uid: uid).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| uid | Int? | Cart id |  
+| uid | Int? | The unique identifier of the cart |  
 
 Remove Coupon applied on the cart by passing uid in request body.
 
@@ -17130,7 +17128,7 @@ Remove Coupon applied on the cart by passing uid in request body.
 
 
 
-Response of the Coupon object including all item details included in .the cart,coupons removed etc.
+Success. Returns coupons removed from the cart along with item details and price breakup. Refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -17164,18 +17162,18 @@ poscart.getBulkDiscountOffers(itemId: itemId, articleId: articleId, uid: uid, sl
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| itemId | Int? | Item id |    
-| articleId | String? | Article mongo id |    
-| uid | Int? | Item id |    
-| slug | String? | Item unique url from product page |  
+| itemId | Int? | The Item ID of the product |    
+| articleId | String? | Article Mongo ID |    
+| uid | Int? | UID of the product |    
+| slug | String? | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/. |  
 
-List applicable offers along with current, next and best offer for given product. Either one of **uid**, **item_id**, **slug** should be present*
+Use this API to get a list of applicable offers along with current, next and best offer for given product. Either one of **uid**, **item_id**, **slug** should be present*.
 
 *Success Response:*
 
 
 
-Offers found or not found with valid input
+Success. Returns a data object containing the seller details and available offers (if exists) on bulk products. Refer `BulkPriceResponse` for more details.
 
 
 Schema: `BulkPriceResponse`
@@ -17258,7 +17256,7 @@ Offers not found
 
 
 
-Unhandled api error
+Unhandled API error
 
 
 Schema: `HashMap<String,Any>`
@@ -17275,7 +17273,7 @@ Schema: `HashMap<String,Any>`
 
 
 #### applyRewardPoints
-Fetch all Items Added to  Cart
+Fetch rewards points for cart.
 
 ```kotlin
 poscart.applyRewardPoints(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
@@ -17296,13 +17294,13 @@ poscart.applyRewardPoints(uid: uid, i: i, b: b, body: body).safeAwait{ response,
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
-Get all the details of a items added to cart  by uid. If successful, returns a Cart resource in the response body specified in CartResponse
+Use this API to get rewards points for cart.
 
 *Success Response:*
 
 
 
-The Cart object. See example below or refer CartResponse for details
+Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -17319,7 +17317,7 @@ Schema: `CartResponse`
 
 
 #### getAddresses
-Fetch Address
+Fetch address
 
 ```kotlin
 poscart.getAddresses(uid: uid, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
@@ -17342,13 +17340,13 @@ poscart.getAddresses(uid: uid, mobileNo: mobileNo, checkoutMode: checkoutMode, t
 | tags | String? |  |    
 | isDefault | Boolean? |  |  
 
-Get all the addresses associated with the account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional <ul> <li> <font color="monochrome">uid</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
+Use this API to get all the addresses associated with an account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional <ul> <li> <font color="monochrome">uid</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
 
 *Success Response:*
 
 
 
-Returns The Address object which has list of all address saved for the account. See example below or refer GetAddressesResponse for details
+Success. Returns an Address object containing a list of address saved in the account. Refer `GetAddressesResponse` for more details.
 
 
 Schema: `GetAddressesResponse`
@@ -17365,7 +17363,7 @@ Schema: `GetAddressesResponse`
 
 
 #### addAddress
-Add Address to the account
+Add address to an account
 
 ```kotlin
 poscart.addAddress(body: body).safeAwait{ response,error->
@@ -17383,13 +17381,13 @@ poscart.addAddress(body: body).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-<p>Add Address to account. See `Address` in schema of request body for the list of attributes needed to add Address to account. On successful request, returns response containing address_id ,is_default_address and success message.
+Use this API to add an address to an account.
 
 *Success Response:*
 
 
 
-Return Address Id on successfull completion of the request.
+Success. Returns the address ID, a flag whether the address is set as default, and a success message. Refer `SaveAddressResponse` for more details.
 
 
 Schema: `SaveAddressResponse`
@@ -17406,7 +17404,7 @@ Schema: `SaveAddressResponse`
 
 
 #### getAddressById
-Fetch Single Address
+Fetch a single address by its ID
 
 ```kotlin
 poscart.getAddressById(id: id, uid: uid, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
@@ -17430,13 +17428,13 @@ poscart.getAddressById(id: id, uid: uid, mobileNo: mobileNo, checkoutMode: check
 | tags | String? |  |    
 | isDefault | Boolean? |  |  
 
-Get a addresses with the given id. If successful, returns a Address resource in the response body specified in `Address`.attibutes listed below are optional <ul> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
+Use this API to get an addresses using its ID. If successful, returns a Address resource in the response body specified in `Address`. Attibutes listed below are optional <ul> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
 
 *Success Response:*
 
 
 
-Returns The Address object which has list of all address saved for the account. See example below or refer Address for details
+Success. Returns an Address object containing a list of address saved in the account. Refer `Address` for more details.
 
 
 Schema: `Address`
@@ -17453,7 +17451,7 @@ Schema: `Address`
 
 
 #### updateAddress
-Update Address alreay added to account
+Update address added to an account
 
 ```kotlin
 poscart.updateAddress(id: id, body: body).safeAwait{ response,error->
@@ -17470,15 +17468,15 @@ poscart.updateAddress(id: id, body: body).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | Int? | Address id |  
+| id | Int? | ID allotted to the selected address |  
 
-Request object containing attributes mentioned in  <font color="blue">Address </font> can be updated .these attributes are :</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
+Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
 
 *Success Response:*
 
 
 
-Response of the Address object containing address_id and sucess message.
+Success. Returns the address ID and a message indicating a successful address updation.
 
 
 Schema: `UpdateAddressResponse`
@@ -17495,7 +17493,7 @@ Schema: `UpdateAddressResponse`
 
 
 #### removeAddress
-Remove Address Associated to the account
+Remove address associated with an account
 
 ```kotlin
 poscart.removeAddress(id: id).safeAwait{ response,error->
@@ -17512,15 +17510,15 @@ poscart.removeAddress(id: id).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | Int? | Address id |  
+| id | Int? | ID allotted to the selected address |  
 
-Delete a Address by it's address_id. Returns an object that tells whether the address was deleted successfully
+Use this API to delete an address by its ID. This will returns an object that will indicate whether the address was deleted successfully or not.
 
 *Success Response:*
 
 
 
-Status object. Tells whether the operation was successful. See example below or refer DeleteAddressResponse
+Returns a Status object indicating the success or failure of address deletion.
 
 
 Schema: `DeleteAddressResponse`
@@ -17537,7 +17535,7 @@ Schema: `DeleteAddressResponse`
 
 
 #### selectAddress
-Select Address from All Addresses
+Select an address from available addresses
 
 ```kotlin
 poscart.selectAddress(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
@@ -17558,13 +17556,13 @@ poscart.selectAddress(uid: uid, i: i, b: b, body: body).safeAwait{ response,erro
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
-<p>Select Address from all addresses associated with the account in order to ship the cart items to .that address,otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, returns Cart object response.below are the address attributes which needs to be sent. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
+<p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
 
 *Success Response:*
 
 
 
-Response of the Address object containing Cart Object and success message.  .
+Success. Returns a Cart object as shown below. Refer `CartResponse` for more details.  .
 
 
 Schema: `CartResponse`
@@ -17576,7 +17574,7 @@ Schema: `CartResponse`
 
 
 
-Address or Pincode Error
+Address or PIN code error
 
 
 Schema: `HashMap<String,Any>`
@@ -17617,7 +17615,7 @@ Pincode Not Serviciable
 
 
 #### selectPaymentMode
-Update Cart Payment
+Update cart payment
 
 ```kotlin
 poscart.selectPaymentMode(uid: uid, body: body).safeAwait{ response,error->
@@ -17636,13 +17634,13 @@ poscart.selectPaymentMode(uid: uid, body: body).safeAwait{ response,error->
 | --------- | ----  | --- |  
 | uid | String? |  |  
 
-Update Cart Payment for Your Account
+Use this API to update cart payment.
 
 *Success Response:*
 
 
 
-Cart response with payment options
+Success. Returns a Cart object as shown below. Refer `CartResponse` for more details.
 
 
 Schema: `CartResponse`
@@ -17659,7 +17657,7 @@ Schema: `CartResponse`
 
 
 #### validateCouponForPayment
-Get Cart Payment for valid coupon
+Verify the coupon eligibility against the payment mode
 
 ```kotlin
 poscart.validateCouponForPayment(uid: uid, addressId: addressId, paymentMode: paymentMode, paymentIdentifier: paymentIdentifier, aggregatorName: aggregatorName, merchantCode: merchantCode).safeAwait{ response,error->
@@ -17683,13 +17681,13 @@ poscart.validateCouponForPayment(uid: uid, addressId: addressId, paymentMode: pa
 | aggregatorName | String? |  |    
 | merchantCode | String? |  |  
 
-Validate coupon for selected payment mode
+Use this API to validate a coupon against the payment mode such as NetBanking, Wallet, UPI etc.
 
 *Success Response:*
 
 
 
-Cart Affiliates.
+Success. Returns a success message and the coupon validity. Refer `PaymentCouponValidate` for more details.
 
 
 Schema: `PaymentCouponValidate`
@@ -17725,19 +17723,19 @@ poscart.getShipments(pickAtStoreUid: pickAtStoreUid, orderingStoreId: orderingSt
 | --------- | ----  | --- |  
 | pickAtStoreUid | Int? |  |    
 | orderingStoreId | Int? |  |    
-| p | Boolean? | Get payment options or not |    
-| uid | Int? | Cart id |    
-| addressId | Int? | Address id |    
-| areaCode | String? | Destination pincode. |    
-| orderType | String? | Order type of shipment |  
+| p | Boolean? | This is a boolean value. Select `true` for getting a payment option in response. |    
+| uid | Int? | The unique identifier of the cart |    
+| addressId | Int? | ID allotted to the selected address |    
+| areaCode | String? | The PIN Code of the destination address, e.g. 400059 |    
+| orderType | String? | The order type of shipment * HomeDelivery - If the customer wants the order home-delivered * PickAtStore - If the customer wants the handover of an order at the store itself. |  
 
-Shipment break up item wise with delivery date. Actual                      delivery will be during given dates only. Items will be                      delivered in group of shipments created.
+Use this API to get shipment details, expected delivery date, items and price breakup of the shipment.
 
 *Success Response:*
 
 
 
-OK
+Success. Returns delivery promise along with shipment details and price breakup. Refer `CartShipmentsResponse` for more details.
 
 
 Schema: `CartShipmentsResponse`
@@ -18389,7 +18387,7 @@ Shipment Generation Failed
 
 
 
-Unhandled api error
+Unhandled API error
 
 
 Schema: `HashMap<String,Any>`
@@ -18423,19 +18421,19 @@ poscart.updateShipments(i: i, p: p, uid: uid, addressId: addressId, orderType: o
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| i | Boolean? | Get items or not |    
-| p | Boolean? | Get payment options or not |    
-| uid | Int? | Cart id |    
-| addressId | Int? | Address id |    
-| orderType | String? | Order is hand over or home delivery |  
+| i | Boolean? | This is a boolean value. Select `true` to retrieve all the items added in the cart. |    
+| p | Boolean? | This is a boolean value. Select `true` for getting a payment option in response. |    
+| uid | Int? | The unique identifier of the cart |    
+| addressId | Int? | ID allotted to an address |    
+| orderType | String? | The order type of shipment * HomeDelivery - If the customer wants the order home-delivered * PickAtStore - If the customer wants the handover of an order at the store itself. |  
 
-Shipment break up item wise with delivery date. Actual                      delivery will be during given dates only. Items will be                      delivered in group of shipments created. Update the shipment                      type and quantity as per customer preference for store pick up or home delivery
+Use this API to update the delivery type and quantity as per customer's preference for either store pick-up or home-delivery.
 
 *Success Response:*
 
 
 
-OK
+Success. Returns delivery promise along with shipment details and price breakup. Refer `CartShipmentsResponse` for more details.
 
 
 Schema: `CartShipmentsResponse`
@@ -19088,7 +19086,7 @@ Shipment Generation Failed
 
 
 
-Unhandled api error
+Unhandled API error
 
 
 Schema: `HashMap<String,Any>`
@@ -19105,7 +19103,7 @@ Schema: `HashMap<String,Any>`
 
 
 #### checkoutCart
-Checkout Cart
+Checkout all items in the cart
 
 ```kotlin
 poscart.checkoutCart(uid: uid, body: body).safeAwait{ response,error->
@@ -19124,13 +19122,13 @@ poscart.checkoutCart(uid: uid, body: body).safeAwait{ response,error->
 | --------- | ----  | --- |  
 | uid | Int? |  |  
 
-Checkout all items in cart to payment and order generation.                        For COD only order will be generated while for other checkout mode                        user will be redirected to payment gateway
+Use this API to checkout all items in the cart for payment and order generation. For COD, order will be generated directly, whereas for other checkout modes, user will be redirected to a payment gateway.
 
 *Success Response:*
 
 
 
-OK
+Success. Returns the status of cart checkout. Refer `CartCheckoutResponse` for more details.
 
 
 Schema: `CartCheckoutResponse`
@@ -19524,7 +19522,7 @@ Successful checkout cod payment
 
 
 #### updateCartMeta
-Update Cart Meta
+Update the cart meta
 
 ```kotlin
 poscart.updateCartMeta(uid: uid, body: body).safeAwait{ response,error->
@@ -19541,15 +19539,15 @@ poscart.updateCartMeta(uid: uid, body: body).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| uid | Int? | Cart id received in get cart. |  
+| uid | Int? | The unique identifier of the cart |  
 
-Update cart meta like checkout_mode, gstin.
+Use this API to update cart meta like checkout_mode and gstin.
 
 *Success Response:*
 
 
 
-Cart meta updated successfully
+Returns a message indicating the success of cart meta updation as shown below.
 
 
 Schema: `CartMetaResponse`
@@ -19598,13 +19596,13 @@ poscart.getAvailableDeliveryModes(areaCode: areaCode, uid: uid).safeAwait{ respo
 | areaCode | String? |  |    
 | uid | Int? |  |  
 
-Get available delivery modes for cart and pick up store uid list. From given pick stores list user can pick up delivery. Use this uid to show store address
+Use this API to get the delivery modes (home-delivery/store-pickup) along with a list of pickup stores available for a given cart at a given PIN Code. User can then view the address of a pickup store with the help of /store-address API.
 
 *Success Response:*
 
 
 
-Returns Available delivery modes for cart and pick up available store uid for current cart items
+Success. Returns the available delivery mode available for a given PIN Code, along with the UID of all the eligible pickup stores.
 
 
 Schema: `CartDeliveryModesResponse`
@@ -19640,13 +19638,13 @@ poscart.getStoreAddressByUid(storeUid: storeUid).safeAwait{ response,error->
 | --------- | ----  | --- |  
 | storeUid | Int? |  |  
 
-Get list of stores by providing pick up available store uids.
+Use this API to get the store details by entering the unique identifier of the pickup stores shown in the response of /available-delivery-mode API.
 
 *Success Response:*
 
 
 
-Returns available store information with its address
+Success. Returns available store information with its address as shown below.
 
 
 Schema: `StoreDetailsResponse`
@@ -19663,7 +19661,7 @@ Schema: `StoreDetailsResponse`
 
 
 #### getCartShareLink
-Generate Cart sharing link token
+Generate token for sharing the cart
 
 ```kotlin
 poscart.getCartShareLink(body: body).safeAwait{ response,error->
@@ -19681,13 +19679,13 @@ poscart.getCartShareLink(body: body).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Generates shared cart snapshot and returns shortlink token
+Use this API to generate a shared cart snapshot and return a shortlink token. The link can be shared with other users for getting the same items in their cart.
 
 *Success Response:*
 
 
 
-Token Generated successfully
+Returns a URL to share and a token as shown below.
 
 
 Schema: `GetShareCartLinkResponse`
@@ -19718,7 +19716,7 @@ Token Generated
 
 
 #### getCartSharedItems
-Get shared cart snapshot and cart response
+Get details of a shared cart
 
 ```kotlin
 poscart.getCartSharedItems(token: token).safeAwait{ response,error->
@@ -19735,15 +19733,15 @@ poscart.getCartSharedItems(token: token).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| token | String? | Shared short link token. |  
+| token | String? | Token of the shared short link |  
 
-Returns shared cart response for sent token with `shared_cart_details`                    containing shared cart details in response.
+Use this API to get the shared cart details as per the token generated using the share-cart API.
 
 *Success Response:*
 
 
 
-Cart for valid token
+Success. Returns a Cart object as per the valid token. Refer `SharedCartResponse` for more details.
 
 
 Schema: `SharedCartResponse`
@@ -19755,7 +19753,7 @@ Schema: `SharedCartResponse`
 
 
 
-No cart found for sent token
+No cart found for the token sent
 
 
 Schema: `SharedCartResponse`
@@ -19772,7 +19770,7 @@ Schema: `SharedCartResponse`
 
 
 #### updateCartWithSharedItems
-Merge or Replace existing cart
+Merge or replace existing cart
 
 ```kotlin
 poscart.updateCartWithSharedItems(token: token, action: action).safeAwait{ response,error->
@@ -19789,16 +19787,16 @@ poscart.updateCartWithSharedItems(token: token, action: action).safeAwait{ respo
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| token | String? | Shared short link token. |    
-| action | String? | Operation to perform on existing cart, whether to merge or replace. |  
+| token | String? | Token of the shared short link |    
+| action | String? | Operation to perform on the existing cart merge or replace. |  
 
-Merge or Replace cart based on `action` parameter with shared cart of `token`
+Use this API to merge the shared cart with existing cart, or replace the existing cart with the shared cart. The `action` parameter is used to indicate the operation Merge or Replace.
 
 *Success Response:*
 
 
 
-Success of Merge or Replace of cart with `shared_cart_details`                    containing shared cart details in response
+Success. Returns a merged or replaced cart as per the valid token. Refer `SharedCartResponse` for more details.
 
 
 Schema: `SharedCartResponse`

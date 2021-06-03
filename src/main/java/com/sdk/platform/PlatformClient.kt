@@ -14,6 +14,8 @@ class PlatformClient(val config:PlatformConfig) {
     
     val assignment by lazy { AssignmentDataManagerClass(config)}
     
+    val billing by lazy { BillingDataManagerClass(config)}
+    
     val communication by lazy { CommunicationDataManagerClass(config)}
     
     val payment by lazy { PaymentDataManagerClass(config)}
@@ -61,6 +63,8 @@ class PlatformClient(val config:PlatformConfig) {
     val content by lazy { this@PlatformClient.content.ApplicationClient(applicationId,config)}
     
     val assignment by lazy { this@PlatformClient.assignment.ApplicationClient(applicationId,config)}
+    
+    val billing by lazy { this@PlatformClient.billing.ApplicationClient(applicationId,config)}
     
     val communication by lazy { this@PlatformClient.communication.ApplicationClient(applicationId,config)}
     
