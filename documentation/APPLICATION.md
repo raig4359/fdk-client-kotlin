@@ -3241,9 +3241,9 @@ cart.getBulkDiscountOffers(itemId: itemId, articleId: articleId, uid: uid, slug:
 | itemId | Int? | The Item ID of the product |    
 | articleId | String? | Article Mongo ID |    
 | uid | Int? | UID of the product |    
-| slug | String? | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/. |  
+| slug | String? | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ |  
 
-Use this API to get a list of applicable offers along with current, next and best offer for given product. Either one of **uid**, **item_id**, **slug** should be present*.
+Use this API to get a list of applicable offers along with current, next and best offer for given product. Either one of uid, item_id, slug should be present.
 
 *Success Response:*
 
@@ -17165,9 +17165,9 @@ poscart.getBulkDiscountOffers(itemId: itemId, articleId: articleId, uid: uid, sl
 | itemId | Int? | The Item ID of the product |    
 | articleId | String? | Article Mongo ID |    
 | uid | Int? | UID of the product |    
-| slug | String? | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/. |  
+| slug | String? | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ |  
 
-Use this API to get a list of applicable offers along with current, next and best offer for given product. Either one of **uid**, **item_id**, **slug** should be present*.
+Use this API to get a list of applicable offers along with current, next and best offer for given product. Either one of uid, item_id, slug should be present.
 
 *Success Response:*
 
@@ -17727,7 +17727,7 @@ poscart.getShipments(pickAtStoreUid: pickAtStoreUid, orderingStoreId: orderingSt
 | uid | Int? | The unique identifier of the cart |    
 | addressId | Int? | ID allotted to the selected address |    
 | areaCode | String? | The PIN Code of the destination address, e.g. 400059 |    
-| orderType | String? | The order type of shipment * HomeDelivery - If the customer wants the order home-delivered * PickAtStore - If the customer wants the handover of an order at the store itself. |  
+| orderType | String? | The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. |  
 
 Use this API to get shipment details, expected delivery date, items and price breakup of the shipment.
 
@@ -18425,7 +18425,7 @@ poscart.updateShipments(i: i, p: p, uid: uid, addressId: addressId, orderType: o
 | p | Boolean? | This is a boolean value. Select `true` for getting a payment option in response. |    
 | uid | Int? | The unique identifier of the cart |    
 | addressId | Int? | ID allotted to an address |    
-| orderType | String? | The order type of shipment * HomeDelivery - If the customer wants the order home-delivered * PickAtStore - If the customer wants the handover of an order at the store itself. |  
+| orderType | String? | The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. |  
 
 Use this API to update the delivery type and quantity as per customer's preference for either store pick-up or home-delivery.
 
@@ -19596,7 +19596,7 @@ poscart.getAvailableDeliveryModes(areaCode: areaCode, uid: uid).safeAwait{ respo
 | areaCode | String? |  |    
 | uid | Int? |  |  
 
-Use this API to get the delivery modes (home-delivery/store-pickup) along with a list of pickup stores available for a given cart at a given PIN Code. User can then view the address of a pickup store with the help of /store-address API.
+Use this API to get the delivery modes (home-delivery/store-pickup) along with a list of pickup stores available for a given cart at a given PIN Code. User can then view the address of a pickup store with the help of store-address API.
 
 *Success Response:*
 
@@ -19638,7 +19638,7 @@ poscart.getStoreAddressByUid(storeUid: storeUid).safeAwait{ response,error->
 | --------- | ----  | --- |  
 | storeUid | Int? |  |  
 
-Use this API to get the store details by entering the unique identifier of the pickup stores shown in the response of /available-delivery-mode API.
+Use this API to get the store details by entering the unique identifier of the pickup stores shown in the response of available-delivery-mode API.
 
 *Success Response:*
 
