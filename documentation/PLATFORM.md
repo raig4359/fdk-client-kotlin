@@ -10,6 +10,7 @@
 * [Billing](#Billing) - Handle platform subscription 
 * [Communication](#Communication) - Manages email, sms, push notifications sent to users 
 * [Payment](#Payment) - Collect payment through many payment gateway i.e Stripe, Razorpay, Juspay etc.into Fynd or Self account 
+* [Order](#Order) - Handles Platform websites OMS 
 * [Catalog](#Catalog) - Catalog API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features.  
 * [CompanyProfile](#CompanyProfile) - Company Profile API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features.  
 * [FileStorage](#FileStorage) - File Storage 
@@ -17,7 +18,6 @@
 * [Inventory](#Inventory) -  
 * [Configuration](#Configuration) - Application configuration apis 
 * [Cart](#Cart) - Cart APIs 
-* [Marketplaces](#Marketplaces) - Marketplaces 
 * [Rewards](#Rewards) - Rewards 
 * [Analytics](#Analytics) - Perceptor analytics 
 * [Discount](#Discount) - Discount 
@@ -40,6 +40,8 @@
   * [Lead#editTicket](#leadeditticket)
   * [Lead#createHistory](#leadcreatehistory)
   * [Lead#getTicketHistory](#leadgettickethistory)
+  * [Lead#getFeedbacks](#leadgetfeedbacks)
+  * [Lead#submitFeedback](#leadsubmitfeedback)
   * [Lead#createHistory](#leadcreatehistory)
   * [Lead#getTicketHistory](#leadgettickethistory)
   * [Lead#getCustomForm](#leadgetcustomform)
@@ -52,6 +54,8 @@
   * [Lead#getVideoParticipants](#leadgetvideoparticipants)
   * [Lead#openVideoRoom](#leadopenvideoroom)
   * [Lead#closeVideoRoom](#leadclosevideoroom)
+  * [Lead#getASDF](#leadgetasdf)
+  * [Lead#getASDF](#leadgetasdf)
  
 * [Feedback](#Feedback)
   * [Feedback#getAttributes](#feedbackgetattributes)
@@ -92,6 +96,9 @@
 * [User](#User)
   * [User#getCustomers](#usergetcustomers)
   * [User#searchUsers](#usersearchusers)
+  * [User#createUser](#usercreateuser)
+  * [User#updateUser](#userupdateuser)
+  * [User#createUserSession](#usercreateusersession)
   * [User#getPlatformConfig](#usergetplatformconfig)
   * [User#updatePlatformConfig](#userupdateplatformconfig)
  
@@ -244,38 +251,59 @@
   * [Payment#getUserOrderBeneficiaries](#paymentgetuserorderbeneficiaries)
   * [Payment#getUserBeneficiaries](#paymentgetuserbeneficiaries)
  
+* [Order](#Order)
+  * [Order#shipmentStatusUpdate](#ordershipmentstatusupdate)
+  * [Order#activityStatus](#orderactivitystatus)
+  * [Order#storeProcessShipmentUpdate](#orderstoreprocessshipmentupdate)
+  * [Order#checkRefund](#ordercheckrefund)
+  * [Order#getOrdersByCompanyId](#ordergetordersbycompanyid)
+  * [Order#getOrderDetails](#ordergetorderdetails)
+  * [Order#getPicklistOrdersByCompanyId](#ordergetpicklistordersbycompanyid)
+  * [Order#trackShipmentPlatform](#ordertrackshipmentplatform)
+  * [Order#trackOrder](#ordertrackorder)
+  * [Order#failedOrders](#orderfailedorders)
+  * [Order#reprocessOrder](#orderreprocessorder)
+  * [Order#updateShipment](#orderupdateshipment)
+  * [Order#getPlatformShipmentReasons](#ordergetplatformshipmentreasons)
+  * [Order#getShipmentTrackDetails](#ordergetshipmenttrackdetails)
+  * [Order#getShipmentAddress](#ordergetshipmentaddress)
+  * [Order#updateShipmentAddress](#orderupdateshipmentaddress)
+  * [Order#getPing](#ordergetping)
+  * [Order#voiceCallback](#ordervoicecallback)
+  * [Order#voiceClickToCall](#ordervoiceclicktocall)
+ 
 * [Catalog](#Catalog)
-  * [Catalog#updateSearchKeywords](#catalogupdatesearchkeywords)
   * [Catalog#deleteSearchKeywords](#catalogdeletesearchkeywords)
   * [Catalog#getSearchKeywords](#cataloggetsearchkeywords)
-  * [Catalog#getAllSearchKeyword](#cataloggetallsearchkeyword)
+  * [Catalog#updateSearchKeywords](#catalogupdatesearchkeywords)
   * [Catalog#createCustomKeyword](#catalogcreatecustomkeyword)
-  * [Catalog#updateAutocompleteKeyword](#catalogupdateautocompletekeyword)
+  * [Catalog#getAllSearchKeyword](#cataloggetallsearchkeyword)
   * [Catalog#deleteAutocompleteKeyword](#catalogdeleteautocompletekeyword)
   * [Catalog#getAutocompleteKeywordDetail](#cataloggetautocompletekeyworddetail)
-  * [Catalog#getAutocompleteConfig](#cataloggetautocompleteconfig)
+  * [Catalog#updateAutocompleteKeyword](#catalogupdateautocompletekeyword)
   * [Catalog#createCustomAutocompleteRule](#catalogcreatecustomautocompleterule)
-  * [Catalog#getProductBundle](#cataloggetproductbundle)
+  * [Catalog#getAutocompleteConfig](#cataloggetautocompleteconfig)
   * [Catalog#createProductBundle](#catalogcreateproductbundle)
-  * [Catalog#updateProductBundle](#catalogupdateproductbundle)
+  * [Catalog#getProductBundle](#cataloggetproductbundle)
   * [Catalog#getProductBundleDetail](#cataloggetproductbundledetail)
-  * [Catalog#getSizeGuides](#cataloggetsizeguides)
+  * [Catalog#updateProductBundle](#catalogupdateproductbundle)
   * [Catalog#createSizeGuide](#catalogcreatesizeguide)
-  * [Catalog#updateSizeGuide](#catalogupdatesizeguide)
+  * [Catalog#getSizeGuides](#cataloggetsizeguides)
   * [Catalog#getSizeGuide](#cataloggetsizeguide)
+  * [Catalog#updateSizeGuide](#catalogupdatesizeguide)
   * [Catalog#getCatalogConfiguration](#cataloggetcatalogconfiguration)
-  * [Catalog#getConfigurations](#cataloggetconfigurations)
   * [Catalog#createConfigurationProductListing](#catalogcreateconfigurationproductlisting)
-  * [Catalog#getConfigurationByType](#cataloggetconfigurationbytype)
+  * [Catalog#getConfigurations](#cataloggetconfigurations)
   * [Catalog#createConfigurationByType](#catalogcreateconfigurationbytype)
+  * [Catalog#getConfigurationByType](#cataloggetconfigurationbytype)
   * [Catalog#getQueryFilters](#cataloggetqueryfilters)
-  * [Catalog#getAllCollections](#cataloggetallcollections)
   * [Catalog#createCollection](#catalogcreatecollection)
+  * [Catalog#getAllCollections](#cataloggetallcollections)
   * [Catalog#getCollectionDetail](#cataloggetcollectiondetail)
-  * [Catalog#updateCollection](#catalogupdatecollection)
   * [Catalog#deleteCollection](#catalogdeletecollection)
-  * [Catalog#getCollectionItems](#cataloggetcollectionitems)
+  * [Catalog#updateCollection](#catalogupdatecollection)
   * [Catalog#addCollectionItems](#catalogaddcollectionitems)
+  * [Catalog#getCollectionItems](#cataloggetcollectionitems)
   * [Catalog#getCatalogInsights](#cataloggetcataloginsights)
   * [Catalog#getSellerInsights](#cataloggetsellerinsights)
   * [Catalog#createMarketplaceOptin](#catalogcreatemarketplaceoptin)
@@ -296,39 +324,39 @@
   * [Catalog#listHSNCodes](#cataloglisthsncodes)
   * [Catalog#listProductTemplateExportDetails](#cataloglistproducttemplateexportdetails)
   * [Catalog#listTemplateBrandTypeValues](#cataloglisttemplatebrandtypevalues)
-  * [Catalog#listCategories](#cataloglistcategories)
   * [Catalog#createCategories](#catalogcreatecategories)
-  * [Catalog#updateCategory](#catalogupdatecategory)
+  * [Catalog#listCategories](#cataloglistcategories)
   * [Catalog#getCategoryData](#cataloggetcategorydata)
-  * [Catalog#getProducts](#cataloggetproducts)
+  * [Catalog#updateCategory](#catalogupdatecategory)
   * [Catalog#createProduct](#catalogcreateproduct)
-  * [Catalog#editProduct](#catalogeditproduct)
+  * [Catalog#getProducts](#cataloggetproducts)
   * [Catalog#deleteProduct](#catalogdeleteproduct)
   * [Catalog#getProduct](#cataloggetproduct)
+  * [Catalog#editProduct](#catalogeditproduct)
   * [Catalog#getProductValidation](#cataloggetproductvalidation)
   * [Catalog#getProductSize](#cataloggetproductsize)
-  * [Catalog#getProductBulkUploadHistory](#cataloggetproductbulkuploadhistory)
   * [Catalog#updateProductAssetsInBulk](#catalogupdateproductassetsinbulk)
-  * [Catalog#createProductsInBulk](#catalogcreateproductsinbulk)
+  * [Catalog#getProductBulkUploadHistory](#cataloggetproductbulkuploadhistory)
   * [Catalog#deleteProductBulkJob](#catalogdeleteproductbulkjob)
+  * [Catalog#createProductsInBulk](#catalogcreateproductsinbulk)
   * [Catalog#getCompanyTags](#cataloggetcompanytags)
-  * [Catalog#getProductAssetsInBulk](#cataloggetproductassetsinbulk)
   * [Catalog#createProductAssetsInBulk](#catalogcreateproductassetsinbulk)
+  * [Catalog#getProductAssetsInBulk](#cataloggetproductassetsinbulk)
   * [Catalog#deleteSize](#catalogdeletesize)
-  * [Catalog#getInventory](#cataloggetinventory)
   * [Catalog#addInventory](#catalogaddinventory)
+  * [Catalog#getInventory](#cataloggetinventory)
   * [Catalog#deleteInventory](#catalogdeleteinventory)
-  * [Catalog#getInventoryBulkUploadHistory](#cataloggetinventorybulkuploadhistory)
   * [Catalog#createBulkInventoryJob](#catalogcreatebulkinventoryjob)
-  * [Catalog#createBulkInventory](#catalogcreatebulkinventory)
+  * [Catalog#getInventoryBulkUploadHistory](#cataloggetinventorybulkuploadhistory)
   * [Catalog#deleteBulkInventoryJob](#catalogdeletebulkinventoryjob)
-  * [Catalog#getInventoryExport](#cataloggetinventoryexport)
+  * [Catalog#createBulkInventory](#catalogcreatebulkinventory)
   * [Catalog#createInventoryExportJob](#catalogcreateinventoryexportjob)
+  * [Catalog#getInventoryExport](#cataloggetinventoryexport)
   * [Catalog#exportInventoryConfig](#catalogexportinventoryconfig)
-  * [Catalog#getAllHsnCodes](#cataloggetallhsncodes)
   * [Catalog#createHsnCode](#catalogcreatehsncode)
-  * [Catalog#updateHsnCode](#catalogupdatehsncode)
+  * [Catalog#getAllHsnCodes](#cataloggetallhsncodes)
   * [Catalog#getHsnCode](#cataloggethsncode)
+  * [Catalog#updateHsnCode](#catalogupdatehsncode)
   * [Catalog#bulkHsnCode](#catalogbulkhsncode)
   * [Catalog#getApplicationBrands](#cataloggetapplicationbrands)
   * [Catalog#getDepartments](#cataloggetdepartments)
@@ -433,27 +461,6 @@
   * [Cart#checkCartServiceability](#cartcheckcartserviceability)
   * [Cart#checkoutCartItems](#cartcheckoutcartitems)
   * [Cart#updateCheckoutPaymentStatus](#cartupdatecheckoutpaymentstatus)
- 
-* [Marketplaces](#Marketplaces)
-  * [Marketplaces#getAvailableChannels](#marketplacesgetavailablechannels)
-  * [Marketplaces#getChannels](#marketplacesgetchannels)
-  * [Marketplaces#getChannel](#marketplacesgetchannel)
-  * [Marketplaces#registerMyntraChannel](#marketplacesregistermyntrachannel)
-  * [Marketplaces#updateMyntraChannelCredentials](#marketplacesupdatemyntrachannelcredentials)
-  * [Marketplaces#registerAmazonChannel](#marketplacesregisteramazonchannel)
-  * [Marketplaces#updateAmazonChannelCredentials](#marketplacesupdateamazonchannelcredentials)
-  * [Marketplaces#registerFlipkartChannel](#marketplacesregisterflipkartchannel)
-  * [Marketplaces#updateFlipkartChannelCredentials](#marketplacesupdateflipkartchannelcredentials)
-  * [Marketplaces#registerTatacliqChannel](#marketplacesregistertatacliqchannel)
-  * [Marketplaces#updateTatacliqChannelCredentials](#marketplacesupdatetatacliqchannelcredentials)
-  * [Marketplaces#registerAjioChannel](#marketplacesregisterajiochannel)
-  * [Marketplaces#updateAjioChannelCredentials](#marketplacesupdateajiochannelcredentials)
-  * [Marketplaces#updateChannelInventorySyncConfig](#marketplacesupdatechannelinventorysyncconfig)
-  * [Marketplaces#getChannelLocationConfig](#marketplacesgetchannellocationconfig)
-  * [Marketplaces#updateChannelLocationConfig](#marketplacesupdatechannellocationconfig)
-  * [Marketplaces#getChannelStatus](#marketplacesgetchannelstatus)
-  * [Marketplaces#updateChannelStatus](#marketplacesupdatechannelstatus)
-  * [Marketplaces#triggerChannelInventoryUpdates](#marketplacestriggerchannelinventoryupdates)
  
 * [Rewards](#Rewards)
   * [Rewards#getGiveaways](#rewardsgetgiveaways)
@@ -894,6 +901,90 @@ Success
 
 
 Schema: `TicketHistoryList`
+
+
+
+
+
+
+---
+
+
+#### getFeedbacks
+Gets a list of feedback submitted against that ticket
+
+```kotlin
+lead.getFeedbacks(companyId: companyId, id: id).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company ID for ticket |   
+| id | String? | Ticket ID for which feedbacks are to be fetched |  
+
+
+
+Gets a list of feedback submitted against that ticket
+
+*Success Response*
+
+
+
+Success
+
+
+Schema: `TicketFeedbackList`
+
+
+
+
+
+
+---
+
+
+#### submitFeedback
+Submit a response for feeback form against that ticket
+
+```kotlin
+lead.submitFeedback(companyId: companyId, id: id, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company ID for ticket |   
+| id | String? | Ticket ID for which feedback is to be submitted |  
+
+
+
+Submit a response for feeback form against that ticket
+
+*Success Response*
+
+
+
+Success
+
+
+Schema: `TicketFeedback`
 
 
 
@@ -1405,6 +1496,95 @@ Success
 
 
 Schema: `CloseVideoRoomResponse`
+
+
+
+
+
+
+---
+
+
+#### getASDF
+Get Token to join a specific Video Room using it's unqiue name
+
+```kotlin
+lead.getASDF(companyId: companyId, applicationId: applicationId, inQuery: inQuery, inHeader: inHeader, inPath: inPath).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company ID of the application |   
+| applicationId | String? | Application ID for video room |   
+| inQuery | PriorityEnum? | For adding support for enum |   
+| inHeader | PriorityEnum? | For adding support for enum |   
+| inPath | PriorityEnum? | For adding support for enum |  
+
+
+
+Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
+
+*Success Response*
+
+
+
+Success
+
+
+Schema: `GetTokenForVideoRoomResponse`
+
+
+
+
+
+
+---
+
+
+#### getASDF
+Get Token to join a specific Video Room using it's unqiue name
+
+```kotlin
+lead.getASDF(companyId: companyId, inQuery: inQuery, inHeader: inHeader, inPath: inPath).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company ID of the application |   
+| inQuery | PriorityEnum? | For adding support for enum |   
+| inHeader | PriorityEnum? | For adding support for enum |   
+| inPath | PriorityEnum? | For adding support for enum |  
+
+
+
+Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
+
+*Success Response*
+
+
+
+Success
+
+
+Schema: `GetTokenForVideoRoomResponse`
 
 
 
@@ -3451,6 +3631,187 @@ Schema: `AuthenticationApiError`
 ---
 
 
+#### createUser
+Create user
+
+```kotlin
+user.createUser(companyId: companyId, applicationId: applicationId, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company ID |   
+| applicationId | String? | Application ID |  
+
+
+
+Create user
+
+*Success Response*
+
+
+
+User create
+
+
+Schema: `CreateUserResponseSchema`
+
+
+
+
+
+
+
+
+Schema: `AuthenticationApiError`
+
+
+
+
+
+
+
+
+Schema: `AuthenticationApiError`
+
+
+
+
+
+
+---
+
+
+#### updateUser
+Update user
+
+```kotlin
+user.updateUser(companyId: companyId, applicationId: applicationId, userId: userId, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company ID |   
+| applicationId | String? | Application ID |   
+| userId | String? | User ID |  
+
+
+
+Update user
+
+*Success Response*
+
+
+
+User update
+
+
+Schema: `CreateUserResponseSchema`
+
+
+
+
+
+
+
+
+Schema: `AuthenticationApiError`
+
+
+
+
+
+
+
+
+Schema: `AuthenticationApiError`
+
+
+
+
+
+
+---
+
+
+#### createUserSession
+Create user session
+
+```kotlin
+user.createUserSession(companyId: companyId, applicationId: applicationId, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company ID |   
+| applicationId | String? | Application ID |  
+
+
+
+Create user session
+
+*Success Response*
+
+
+
+Create user session
+
+
+Schema: `CreateUserSessionResponseSchema`
+
+
+
+
+
+
+
+
+Schema: `AuthenticationApiError`
+
+
+
+
+
+
+
+
+Schema: `AuthenticationApiError`
+
+
+
+
+
+
+---
+
+
 #### getPlatformConfig
 Get platform configurations
 
@@ -3580,7 +3941,7 @@ Schema: `AuthenticationApiError`
 
 
 #### getAnnouncementsList
-Get annoucements list
+Get a list of announcements
 
 ```kotlin
 content.getAnnouncementsList(companyId: companyId, applicationId: applicationId, pageNo: pageNo, pageSize: pageSize).safeAwait{ response,error->
@@ -3597,20 +3958,20 @@ content.getAnnouncementsList(companyId: companyId, applicationId: applicationId,
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| pageNo | Int? | Each response will contain **page_no** param, which should be sent back to make pagination work. |   
-| pageSize | Int? | Number of items to retrieve in each page. |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| pageNo | Int? | The page number to navigate through the given set of results. Default value is 1. |   
+| pageSize | Int? | The number of items to retrieve in each page. Default value is 10. |  
 
 
 
-Get list of announcements
+Announcements are useful to highlight a message or information on top of a webpage. Use this API to retrieve a list of announcements.	
 
 *Success Response*
 
 
 
-Success
+Success. Refer `GetAnnouncementListSchema` for more details.
 
 
 Schema: `GetAnnouncementListSchema`
@@ -3619,7 +3980,7 @@ Schema: `GetAnnouncementListSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -3628,7 +3989,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -3642,7 +4003,7 @@ Schema: `APIError`
 
 
 #### createAnnouncement
-Create an annoucement
+Create an announcement
 
 ```kotlin
 content.createAnnouncement(companyId: companyId, applicationId: applicationId, body: body).safeAwait{ response,error->
@@ -3659,18 +4020,18 @@ content.createAnnouncement(companyId: companyId, applicationId: applicationId, b
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |  
 
 
 
-Create an announcement
+Announcements are useful to highlight a message or information on top of a webpage. Use this API to create an announcement.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `CreateAnnouncementSchema` for more details.
 
 
 Schema: `CreateAnnouncementSchema`
@@ -3679,7 +4040,7 @@ Schema: `CreateAnnouncementSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -3688,7 +4049,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -3702,7 +4063,7 @@ Schema: `APIError`
 
 
 #### getAnnouncementById
-Get annoucement by id
+Get announcement by ID
 
 ```kotlin
 content.getAnnouncementById(companyId: companyId, applicationId: applicationId, announcementId: announcementId).safeAwait{ response,error->
@@ -3719,19 +4080,19 @@ content.getAnnouncementById(companyId: companyId, applicationId: applicationId, 
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| announcementId | String? | Announcement ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| announcementId | String? | ID allotted to the announcement. |  
 
 
 
-Get announcement by id
+Use this API to retrieve an announcement and its details such as the target platform and pages on which it's applicable
 
 *Success Response*
 
 
 
-Success
+Success. Refer `AdminAnnouncementSchema` for more details.
 
 
 Schema: `AdminAnnouncementSchema`
@@ -3740,7 +4101,7 @@ Schema: `AdminAnnouncementSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -3749,7 +4110,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -3763,7 +4124,7 @@ Schema: `APIError`
 
 
 #### updateAnnouncement
-Update an annoucement
+Update an announcement
 
 ```kotlin
 content.updateAnnouncement(companyId: companyId, applicationId: applicationId, announcementId: announcementId, body: body).safeAwait{ response,error->
@@ -3780,19 +4141,19 @@ content.updateAnnouncement(companyId: companyId, applicationId: applicationId, a
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| announcementId | String? | Announcement ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| announcementId | String? | ID allotted to the announcement. |  
 
 
 
-Update an announcement
+Use this API to edit an existing announcement and its details such as the target platform and pages on which it's applicable
 
 *Success Response*
 
 
 
-Success
+Success. Refer `CreateAnnouncementSchema` for more details.
 
 
 Schema: `CreateAnnouncementSchema`
@@ -3801,7 +4162,7 @@ Schema: `CreateAnnouncementSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -3810,7 +4171,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -3824,7 +4185,7 @@ Schema: `APIError`
 
 
 #### updateAnnouncementSchedule
-Update schedule or published status of an annoucement
+Update the schedule and the publish status of an announcement
 
 ```kotlin
 content.updateAnnouncementSchedule(companyId: companyId, applicationId: applicationId, announcementId: announcementId, body: body).safeAwait{ response,error->
@@ -3841,19 +4202,19 @@ content.updateAnnouncementSchedule(companyId: companyId, applicationId: applicat
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| announcementId | String? | Announcement ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| announcementId | String? | ID allotted to the announcement. |  
 
 
 
-Update schedule or published status of an announcement
+Use this API to edit the duration, i.e. start date-time and end date-time of an announcement. Moreover, you can enable/disable an announcement using this API.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `CreateAnnouncementSchema` for more details.
 
 
 Schema: `CreateAnnouncementSchema`
@@ -3862,7 +4223,7 @@ Schema: `CreateAnnouncementSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -3871,7 +4232,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -3885,7 +4246,7 @@ Schema: `APIError`
 
 
 #### deleteAnnouncement
-Delete annoucement by id
+Delete announcement by id
 
 ```kotlin
 content.deleteAnnouncement(companyId: companyId, applicationId: applicationId, announcementId: announcementId).safeAwait{ response,error->
@@ -3902,19 +4263,19 @@ content.deleteAnnouncement(companyId: companyId, applicationId: applicationId, a
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| announcementId | String? | Announcement ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| announcementId | String? | ID allotted to the announcement. |  
 
 
 
-Delete announcement by id
+Use this API to delete an existing announcement.
 
 *Success Response*
 
 
 
-Success
+Success.
 
 
 Schema: `CreateAnnouncementSchema`
@@ -3923,7 +4284,7 @@ Schema: `CreateAnnouncementSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -3932,7 +4293,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -3946,7 +4307,7 @@ Schema: `APIError`
 
 
 #### createBlog
-Create blog
+Create a blog
 
 ```kotlin
 content.createBlog(companyId: companyId, applicationId: applicationId, body: body).safeAwait{ response,error->
@@ -3963,18 +4324,18 @@ content.createBlog(companyId: companyId, applicationId: applicationId, body: bod
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| applicationId | String? | Application Id |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |  
 
 
 
-Use this to create a blog.
+Use this API to create a blog.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `BlogSchema` for more details.
 
 
 Schema: `BlogSchema`
@@ -3983,7 +4344,7 @@ Schema: `BlogSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -3992,7 +4353,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4023,20 +4384,20 @@ content.getBlogs(companyId: companyId, applicationId: applicationId, pageNo: pag
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| applicationId | String? | Application Id |   
-| pageNo | Int? | Each response will contain **page_no** param, which should be sent back to make pagination work. |   
-| pageSize | Int? | Number of items to retrieve in each page. |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| pageNo | Int? | The page number to navigate through the given set of results. Default value is 1. |   
+| pageSize | Int? | The number of items to retrieve in each page. Default value is 10. |  
 
 
 
-Use this to get blogs.
+Use this API to get a list of blogs along with their details, such as the title, reading time, publish status, feature image, tags, author, etc.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `BlogGetResponse` for more details.
 
 
 Schema: `BlogGetResponse`
@@ -4045,7 +4406,7 @@ Schema: `BlogGetResponse`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4054,7 +4415,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4068,7 +4429,7 @@ Schema: `APIError`
 
 
 #### updateBlog
-Update blog
+Update a blog
 
 ```kotlin
 content.updateBlog(companyId: companyId, applicationId: applicationId, id: id, body: body).safeAwait{ response,error->
@@ -4085,19 +4446,19 @@ content.updateBlog(companyId: companyId, applicationId: applicationId, id: id, b
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| applicationId | String? | Application Id |   
-| id | String? | Blog Id |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| id | String? | ID allotted to the blog. |  
 
 
 
-Use this to update blog.
+Use this API to update the details of an existing blog which includes title, feature image, content, SEO details, expiry, etc.
 
 *Success Response*
 
 
 
-Success
+Success.
 
 
 Schema: `BlogSchema`
@@ -4106,7 +4467,7 @@ Schema: `BlogSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4115,7 +4476,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4146,19 +4507,19 @@ content.deleteBlog(companyId: companyId, applicationId: applicationId, id: id).s
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| applicationId | String? | Application Id |   
-| id | String? | Blog Id |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| id | String? | ID allotted to the blog. |  
 
 
 
-Use this to delete blogs.
+Use this API to delete a blog.
 
 *Success Response*
 
 
 
-Success
+Success.
 
 
 Schema: `BlogSchema`
@@ -4167,7 +4528,7 @@ Schema: `BlogSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4176,7 +4537,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4190,7 +4551,7 @@ Schema: `APIError`
 
 
 #### getComponentById
-Get components by component Id
+Get components of a blog
 
 ```kotlin
 content.getComponentById(companyId: companyId, applicationId: applicationId, slug: slug).safeAwait{ response,error->
@@ -4207,19 +4568,19 @@ content.getComponentById(companyId: companyId, applicationId: applicationId, slu
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| applicationId | String? | Application Id |   
-| slug | String? | slug of page to be fetched |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| slug | String? | A short, human-readable, URL-friendly identifier of a blog page. You can get slug value of a blog from `getBlogs` API. |  
 
 
 
-The endpoint fetches the component by component Id
+Use this API to retrieve the components of a blog, such as title, slug, feature image, content, schedule, publish status, author, etc.
 
 *Success Response*
 
 
 
-A JSON object with components
+Success. Returns a a JSON object with components. Refer `BlogSchema` for more details.
 
 
 Schema: `BlogSchema`
@@ -4228,7 +4589,7 @@ Schema: `BlogSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4237,7 +4598,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4251,7 +4612,7 @@ Schema: `APIError`
 
 
 #### getFaqCategories
-Get FAQ categories list
+Get a list of FAQ categories
 
 ```kotlin
 content.getFaqCategories(companyId: companyId, applicationId: applicationId).safeAwait{ response,error->
@@ -4268,18 +4629,18 @@ content.getFaqCategories(companyId: companyId, applicationId: applicationId).saf
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |  
 
 
 
-Get list of FAQ categories
+FAQs can be divided into categories. Use this API to get a list of FAQ categories.
 
 *Success Response*
 
 
 
-Get FAQ Categories
+Success. Refer `GetFaqCategoriesSchema` for more details.
 
 
 Schema: `GetFaqCategoriesSchema`
@@ -4288,7 +4649,7 @@ Schema: `GetFaqCategoriesSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4297,7 +4658,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4311,7 +4672,7 @@ Schema: `APIError`
 
 
 #### getFaqCategoryBySlugOrId
-Get FAQ category by slug or id
+Get an FAQ category by slug or id
 
 ```kotlin
 content.getFaqCategoryBySlugOrId(companyId: companyId, applicationId: applicationId, idOrSlug: idOrSlug).safeAwait{ response,error->
@@ -4328,19 +4689,19 @@ content.getFaqCategoryBySlugOrId(companyId: companyId, applicationId: applicatio
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| idOrSlug | String? | Slug or Id of FAQ Category |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| idOrSlug | String? | ID or the slug allotted to an FAQ category. Slug is a short, human-readable, URL-friendly identifier of an object. You can get slug value of an FAQ category from `getFaqCategories` API. |  
 
 
 
-Get FAQ category by slug or id
+FAQs can be divided into categories. Use this API to get an FAQ categories using its slug or ID.
 
 *Success Response*
 
 
 
-Get FAQ Categories
+Success. Refer `GetFaqCategoryBySlugSchema` for more details.
 
 
 Schema: `GetFaqCategoryBySlugSchema`
@@ -4349,7 +4710,7 @@ Schema: `GetFaqCategoryBySlugSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4358,7 +4719,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4372,7 +4733,7 @@ Schema: `APIError`
 
 
 #### createFaqCategory
-Creates a FAQ category
+Create an FAQ category
 
 ```kotlin
 content.createFaqCategory(companyId: companyId, applicationId: applicationId, body: body).safeAwait{ response,error->
@@ -4389,18 +4750,18 @@ content.createFaqCategory(companyId: companyId, applicationId: applicationId, bo
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |  
 
 
 
-Add Faq Category
+FAQs help users to solve an issue or know more about a process. FAQs can be categorized separately, for e.g. some questions can be related to payment, some could be related to purchase, shipping, navigating, etc. Use this API to create an FAQ category.
 
 *Success Response*
 
 
 
-Create a FAQ Category
+Success.
 
 
 Schema: `CreateFaqCategorySchema`
@@ -4409,7 +4770,7 @@ Schema: `CreateFaqCategorySchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4418,7 +4779,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4432,7 +4793,7 @@ Schema: `APIError`
 
 
 #### updateFaqCategory
-Updates a FAQ category
+Update an FAQ category
 
 ```kotlin
 content.updateFaqCategory(companyId: companyId, applicationId: applicationId, id: id, body: body).safeAwait{ response,error->
@@ -4449,19 +4810,19 @@ content.updateFaqCategory(companyId: companyId, applicationId: applicationId, id
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| id | String? | Faq category ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| id | String? | ID allotted to an FAQ category. |  
 
 
 
-Update Faq Category
+Use this API to edit an existing FAQ category.
 
 *Success Response*
 
 
 
-Update a FAQ Category
+Success.
 
 
 Schema: `CreateFaqCategorySchema`
@@ -4470,7 +4831,7 @@ Schema: `CreateFaqCategorySchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4479,7 +4840,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4493,7 +4854,7 @@ Schema: `APIError`
 
 
 #### deleteFaqCategory
-Deletes a FAQ category
+Delete an FAQ category
 
 ```kotlin
 content.deleteFaqCategory(companyId: companyId, applicationId: applicationId, id: id).safeAwait{ response,error->
@@ -4510,19 +4871,19 @@ content.deleteFaqCategory(companyId: companyId, applicationId: applicationId, id
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| id | String? | Faq category ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| id | String? | ID allotted to an FAQ category. |  
 
 
 
-Delete Faq Category
+Use this API to delete an FAQ category.
 
 *Success Response*
 
 
 
-Delete a FAQ Category
+Success.
 
 
 Schema: `FaqSchema`
@@ -4531,7 +4892,7 @@ Schema: `FaqSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4540,7 +4901,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4554,7 +4915,7 @@ Schema: `APIError`
 
 
 #### getFaqsByCategoryIdOrSlug
-Get FAQs of a Faq Category id or slug
+Get question and answers within an FAQ category
 
 ```kotlin
 content.getFaqsByCategoryIdOrSlug(companyId: companyId, applicationId: applicationId, idOrSlug: idOrSlug).safeAwait{ response,error->
@@ -4571,19 +4932,19 @@ content.getFaqsByCategoryIdOrSlug(companyId: companyId, applicationId: applicati
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| idOrSlug | String? | Faq category ID or slug |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| idOrSlug | String? | ID or the slug allotted to an FAQ category. Slug is a short, human-readable, URL-friendly identifier of an object. You can get slug value of an FAQ category from `getFaqCategories` API. |  
 
 
 
-Get FAQs of a Faq Category `id` or `slug`
+Use this API to retrieve all the commonly asked question and answers belonging to an FAQ category.
 
 *Success Response*
 
 
 
-Get FAQs by slug/id of FAQ Category
+Success. Refer `GetFaqSchema` for more details.
 
 
 Schema: `GetFaqSchema`
@@ -4592,7 +4953,7 @@ Schema: `GetFaqSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4601,7 +4962,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4615,7 +4976,7 @@ Schema: `APIError`
 
 
 #### addFaq
-Creates FAQs for category whose `id` is specified
+Create an FAQ
 
 ```kotlin
 content.addFaq(companyId: companyId, applicationId: applicationId, categoryId: categoryId, body: body).safeAwait{ response,error->
@@ -4632,19 +4993,19 @@ content.addFaq(companyId: companyId, applicationId: applicationId, categoryId: c
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| categoryId | String? | Faq category ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| categoryId | String? | ID allotted to an FAQ category. |  
 
 
 
-Creates FAQs for category whose `id` is specified
+FAQs help users to solve an issue or know more about a process. Use this API to create an FAQ for a given FAQ category.
 
 *Success Response*
 
 
 
-Create a FAQ for FAQ Category
+Success.
 
 
 Schema: `CreateFaqResponseSchema`
@@ -4653,7 +5014,7 @@ Schema: `CreateFaqResponseSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4662,7 +5023,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4676,7 +5037,7 @@ Schema: `APIError`
 
 
 #### updateFaq
-Updates FAQ
+Update an FAQ
 
 ```kotlin
 content.updateFaq(companyId: companyId, applicationId: applicationId, categoryId: categoryId, faqId: faqId, body: body).safeAwait{ response,error->
@@ -4693,20 +5054,20 @@ content.updateFaq(companyId: companyId, applicationId: applicationId, categoryId
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| categoryId | String? | Faq category ID |   
-| faqId | String? | Faq ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| categoryId | String? | ID allotted to an FAQ category. |   
+| faqId | String? | ID allotted to an FAQ. |  
 
 
 
-Updates FAQ
+Use this API to edit an existing FAQ.
 
 *Success Response*
 
 
 
-Update FAQ by id
+Success.
 
 
 Schema: `CreateFaqResponseSchema`
@@ -4715,7 +5076,7 @@ Schema: `CreateFaqResponseSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4724,7 +5085,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4738,7 +5099,7 @@ Schema: `APIError`
 
 
 #### deleteFaq
-Delete FAQ
+Delete an FAQ
 
 ```kotlin
 content.deleteFaq(companyId: companyId, applicationId: applicationId, categoryId: categoryId, faqId: faqId).safeAwait{ response,error->
@@ -4755,20 +5116,20 @@ content.deleteFaq(companyId: companyId, applicationId: applicationId, categoryId
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| categoryId | String? | Faq category ID |   
-| faqId | String? | Faq ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| categoryId | String? | ID allotted to an FAQ category. |   
+| faqId | String? | ID allotted to an FAQ. |  
 
 
 
-Delete FAQ
+Use this API to delete an existing FAQ.
 
 *Success Response*
 
 
 
-Delete FAQ by id
+Success.
 
 
 Schema: `CreateFaqResponseSchema`
@@ -4777,7 +5138,7 @@ Schema: `CreateFaqResponseSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4786,7 +5147,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4800,7 +5161,7 @@ Schema: `APIError`
 
 
 #### getFaqByIdOrSlug
-Get frequently asked question
+Get an FAQ
 
 ```kotlin
 content.getFaqByIdOrSlug(companyId: companyId, applicationId: applicationId, idOrSlug: idOrSlug).safeAwait{ response,error->
@@ -4817,19 +5178,19 @@ content.getFaqByIdOrSlug(companyId: companyId, applicationId: applicationId, idO
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| idOrSlug | String? | Slug or Id of FAQ |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| idOrSlug | String? | ID or the slug allotted to an FAQ category. Slug is a short, human-readable, URL-friendly identifier of an object. You can get slug value of an FAQ category from `getFaqCategories` API. |  
 
 
 
-Get frequently asked questions list. These will be helpful for users to using website.
+Use this API to retrieve a specific FAQ. You will get the question and answer of that FAQ.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `CreateFaqResponseSchema` for more details.
 
 
 Schema: `CreateFaqResponseSchema`
@@ -4838,7 +5199,7 @@ Schema: `CreateFaqResponseSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4847,7 +5208,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4861,7 +5222,7 @@ Schema: `APIError`
 
 
 #### getLandingPages
-Get landing-pages
+Get landing pages
 
 ```kotlin
 content.getLandingPages(companyId: companyId, applicationId: applicationId, pageNo: pageNo, pageSize: pageSize).safeAwait{ response,error->
@@ -4878,20 +5239,20 @@ content.getLandingPages(companyId: companyId, applicationId: applicationId, page
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| pageNo | Int? | Each response will contain **page_no** param, which should be sent back to make pagination work. |   
-| pageSize | Int? | Number of items to retrieve in each page. |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| pageNo | Int? | The page number to navigate through the given set of results. Default value is 1. |   
+| pageSize | Int? | The number of items to retrieve in each page. Default value is 10. |  
 
 
 
-Use this to get landing-pages.
+Landing page is the first page that a prospect lands upon while visiting a website. Use this API to fetch a list of landing pages.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `LandingPageGetResponse` for more details.
 
 
 Schema: `LandingPageGetResponse`
@@ -4900,7 +5261,7 @@ Schema: `LandingPageGetResponse`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4909,7 +5270,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4923,7 +5284,7 @@ Schema: `APIError`
 
 
 #### createLandingPage
-Create landing-page
+Create a landing page
 
 ```kotlin
 content.createLandingPage(companyId: companyId, applicationId: applicationId, body: body).safeAwait{ response,error->
@@ -4940,18 +5301,18 @@ content.createLandingPage(companyId: companyId, applicationId: applicationId, bo
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |  
 
 
 
-Use this to create landing-page.
+Landing page is the first page that a prospect lands upon while visiting a website. Use this API to create a landing page.
 
 *Success Response*
 
 
 
-Success
+Success.
 
 
 Schema: `LandingPageSchema`
@@ -4960,7 +5321,7 @@ Schema: `LandingPageSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4969,7 +5330,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -4983,7 +5344,7 @@ Schema: `APIError`
 
 
 #### updateLandingPage
-Update landing-page
+Update a landing page
 
 ```kotlin
 content.updateLandingPage(companyId: companyId, applicationId: applicationId, id: id, body: body).safeAwait{ response,error->
@@ -5000,19 +5361,19 @@ content.updateLandingPage(companyId: companyId, applicationId: applicationId, id
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| id | String? | Landing page ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| id | String? | ID allotted to a landing page. |  
 
 
 
-Use this to update landing-page.
+Use this API to edit the details of an existing landing page.
 
 *Success Response*
 
 
 
-Success
+Success.
 
 
 Schema: `LandingPageSchema`
@@ -5021,7 +5382,7 @@ Schema: `LandingPageSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5030,7 +5391,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5044,7 +5405,7 @@ Schema: `APIError`
 
 
 #### deleteLandingPage
-Delete landing-page
+Delete a landing page
 
 ```kotlin
 content.deleteLandingPage(companyId: companyId, applicationId: applicationId, id: id).safeAwait{ response,error->
@@ -5061,19 +5422,19 @@ content.deleteLandingPage(companyId: companyId, applicationId: applicationId, id
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| id | String? | Landing page ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| id | String? | ID allotted to a landing page. |  
 
 
 
-Use this to delete landing-page.
+Use this API to delete an existing landing page.
 
 *Success Response*
 
 
 
-Success
+Success.
 
 
 Schema: `LandingPageSchema`
@@ -5082,7 +5443,7 @@ Schema: `LandingPageSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5091,7 +5452,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5122,18 +5483,18 @@ content.getLegalInformation(companyId: companyId, applicationId: applicationId).
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |  
 
 
 
-Get legal information of application, which includes policy, Terms and Conditions, and FAQ information of application.
+Use this API to get the legal information of an application, which includes Policy, Terms and Conditions, Shipping Policy and FAQ regarding the application.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `ApplicationLegal` for more details.
 
 
 Schema: `ApplicationLegal`
@@ -5142,7 +5503,7 @@ Schema: `ApplicationLegal`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5151,7 +5512,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5182,18 +5543,18 @@ content.updateLegalInformation(companyId: companyId, applicationId: applicationI
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |  
 
 
 
-Save legal information of application, which includes Policy, Terms and Conditions, and FAQ information of application.
+Use this API to edit, update and save the legal information of an application, which includes Policy, Terms and Conditions, Shipping Policy and FAQ regarding the application.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `ApplicationLegal` for more details.
 
 
 Schema: `ApplicationLegal`
@@ -5202,7 +5563,7 @@ Schema: `ApplicationLegal`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5211,7 +5572,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5242,21 +5603,21 @@ content.getNavigations(companyId: companyId, applicationId: applicationId, devic
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| devicePlatform | String? | Device platform |   
-| pageNo | Int? | Each response will contain **page_no** param, which should be sent back to make pagination work. |   
-| pageSize | Int? | Number of items to retrieve in each page. |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| devicePlatform | String? | Filter navigations by platform. Acceptable values are: web, android, ios, all |   
+| pageNo | Int? | The page number to navigate through the given set of results. Default value is 1. |   
+| pageSize | Int? | The number of items to retrieve in each page. Default value is 10. |  
 
 
 
-Use this to get navigations.
+Use this API to fetch the navigations details which includes the items of the navigation pane. It also shows the orientation, links, sub-navigations, etc.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `NavigationGetResponse` for more details.
 
 
 Schema: `NavigationGetResponse`
@@ -5265,7 +5626,7 @@ Schema: `NavigationGetResponse`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5274,7 +5635,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5288,7 +5649,7 @@ Schema: `APIError`
 
 
 #### createNavigation
-Create navigation
+Create a navigation
 
 ```kotlin
 content.createNavigation(companyId: companyId, applicationId: applicationId, body: body).safeAwait{ response,error->
@@ -5305,18 +5666,18 @@ content.createNavigation(companyId: companyId, applicationId: applicationId, bod
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |  
 
 
 
-Use this to create navigation.
+Navigation is the arrangement of navigational items to ease the accessibility of resources for users on a website. Use this API to create a navigation.
 
 *Success Response*
 
 
 
-Success
+Success.
 
 
 Schema: `NavigationSchema`
@@ -5325,7 +5686,7 @@ Schema: `NavigationSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5334,7 +5695,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5365,18 +5726,18 @@ content.getDefaultNavigations(companyId: companyId, applicationId: applicationId
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |  
 
 
 
-Use this to get default navigations.
+On any website (application), there are navigations that are present by default. Use this API to retrieve those default navigations.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `DefaultNavigationResponse` for more details.
 
 
 Schema: `DefaultNavigationResponse`
@@ -5385,7 +5746,7 @@ Schema: `DefaultNavigationResponse`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5394,7 +5755,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5408,7 +5769,7 @@ Schema: `APIError`
 
 
 #### getNavigationBySlug
-Get navigation by slug
+Get a navigation by slug
 
 ```kotlin
 content.getNavigationBySlug(companyId: companyId, applicationId: applicationId, slug: slug, devicePlatform: devicePlatform).safeAwait{ response,error->
@@ -5425,20 +5786,20 @@ content.getNavigationBySlug(companyId: companyId, applicationId: applicationId, 
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| slug | String? | Slug |   
-| devicePlatform | String? | Device platform |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| slug | String? | A short, human-readable, URL-friendly identifier of a navigation. You can get slug value of a navigation from `getNavigations` API. |   
+| devicePlatform | String? | Filter navigations by platform. Acceptable values are: web, android, ios, all |  
 
 
 
-Use this to get navigation by slug.
+Use this API to retrieve a navigation by its slug.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `NavigationSchema` for more details.
 
 
 Schema: `NavigationSchema`
@@ -5447,7 +5808,7 @@ Schema: `NavigationSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5456,7 +5817,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5470,7 +5831,7 @@ Schema: `APIError`
 
 
 #### updateNavigation
-Update navigation
+Update a navigation
 
 ```kotlin
 content.updateNavigation(companyId: companyId, applicationId: applicationId, id: id, body: body).safeAwait{ response,error->
@@ -5487,19 +5848,19 @@ content.updateNavigation(companyId: companyId, applicationId: applicationId, id:
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| id | String? | Navigation ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| id | String? | ID allotted to the navigation. |  
 
 
 
-Use this to update navigation.
+Use this API to edit the details of an existing navigation.
 
 *Success Response*
 
 
 
-Success
+Success.
 
 
 Schema: `NavigationSchema`
@@ -5508,7 +5869,7 @@ Schema: `NavigationSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5517,7 +5878,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5531,7 +5892,7 @@ Schema: `APIError`
 
 
 #### deleteNavigation
-Delete navigation
+Delete a navigation
 
 ```kotlin
 content.deleteNavigation(companyId: companyId, applicationId: applicationId, id: id).safeAwait{ response,error->
@@ -5548,19 +5909,19 @@ content.deleteNavigation(companyId: companyId, applicationId: applicationId, id:
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| id | String? | Navigation ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| id | String? | ID allotted to the navigation. |  
 
 
 
-Use this to delete navigation.
+Use this API to delete an existing navigation.
 
 *Success Response*
 
 
 
-Success
+Success.
 
 
 Schema: `NavigationSchema`
@@ -5569,7 +5930,7 @@ Schema: `NavigationSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5578,7 +5939,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5609,18 +5970,18 @@ content.getPageMeta(companyId: companyId, applicationId: applicationId).safeAwai
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| applicationId | String? | Application Id |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |  
 
 
 
-Use this to get Page Meta.
+Use this API to get the meta of custom pages (blog, page) and default system pages (e.g. home/brand/category/collection).
 
 *Success Response*
 
 
 
-Success
+Success. Refer `PageMetaSchema` for more details.
 
 
 Schema: `PageMetaSchema`
@@ -5629,7 +5990,7 @@ Schema: `PageMetaSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5638,7 +5999,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5669,18 +6030,18 @@ content.getPageSpec(companyId: companyId, applicationId: applicationId).safeAwai
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |  
 
 
 
-Use this to get page spec.
+Use this API to get the specifications of a page, such as page type, display name, params and query.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `PageSpec` for more details.
 
 
 Schema: `PageSpec`
@@ -5689,7 +6050,7 @@ Schema: `PageSpec`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5698,7 +6059,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5712,7 +6073,7 @@ Schema: `APIError`
 
 
 #### createPage
-Create page
+Create a page
 
 ```kotlin
 content.createPage(companyId: companyId, applicationId: applicationId, body: body).safeAwait{ response,error->
@@ -5729,18 +6090,18 @@ content.createPage(companyId: companyId, applicationId: applicationId, body: bod
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| applicationId | String? | Application Id |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |  
 
 
 
-Use this to create a page.
+Use this API to create a custom page using a title, seo, publish status, feature image, tags, meta, etc.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `PageSchema` for more details.
 
 
 Schema: `PageSchema`
@@ -5749,7 +6110,7 @@ Schema: `PageSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5758,7 +6119,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5772,7 +6133,7 @@ Schema: `APIError`
 
 
 #### getPages
-Get pages
+Get a list of pages
 
 ```kotlin
 content.getPages(companyId: companyId, applicationId: applicationId, pageNo: pageNo, pageSize: pageSize).safeAwait{ response,error->
@@ -5789,20 +6150,20 @@ content.getPages(companyId: companyId, applicationId: applicationId, pageNo: pag
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| applicationId | String? | Application Id |   
-| pageNo | Int? | Each response will contain **page_no** param, which should be sent back to make pagination work. |   
-| pageSize | Int? | Number of items to retrieve in each page. |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| pageNo | Int? | The page number to navigate through the given set of results. Default value is 1. |   
+| pageSize | Int? | The number of items to retrieve in each page. Default value is 10. |  
 
 
 
-Use this to get pages.
+Use this API to retrieve a list of pages.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `PageGetResponse` for more details.
 
 
 Schema: `PageGetResponse`
@@ -5811,7 +6172,7 @@ Schema: `PageGetResponse`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5820,7 +6181,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5834,7 +6195,7 @@ Schema: `APIError`
 
 
 #### createPagePreview
-Create page preview
+Create a page preview
 
 ```kotlin
 content.createPagePreview(companyId: companyId, applicationId: applicationId, body: body).safeAwait{ response,error->
@@ -5851,18 +6212,18 @@ content.createPagePreview(companyId: companyId, applicationId: applicationId, bo
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| applicationId | String? | Application Id |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |  
 
 
 
-Use this to create a page preview.
+Use this API to create a page preview to check the appearance of a custom page.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `PageSchema` for more details.
 
 
 Schema: `PageSchema`
@@ -5871,7 +6232,7 @@ Schema: `PageSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5880,7 +6241,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5894,7 +6255,7 @@ Schema: `APIError`
 
 
 #### updatePagePreview
-Update page
+Change the publish status of a page
 
 ```kotlin
 content.updatePagePreview(companyId: companyId, applicationId: applicationId, slug: slug, body: body).safeAwait{ response,error->
@@ -5911,19 +6272,19 @@ content.updatePagePreview(companyId: companyId, applicationId: applicationId, sl
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| applicationId | String? | Application Id |   
-| slug | String? | Page publish slug |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| slug | String? | A short, human-readable, URL-friendly identifier of a page. You can get slug value of a page from `getPages` API. |  
 
 
 
-Use this to update page.
+Use this API to change the publish status of an existing page. Allows you to publish and unpublish the page.
 
 *Success Response*
 
 
 
-Success
+Success.
 
 
 Schema: `PageSchema`
@@ -5932,7 +6293,7 @@ Schema: `PageSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5941,7 +6302,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -5955,7 +6316,7 @@ Schema: `APIError`
 
 
 #### updatePage
-Update page
+Update a page
 
 ```kotlin
 content.updatePage(companyId: companyId, applicationId: applicationId, id: id, body: body).safeAwait{ response,error->
@@ -5972,19 +6333,19 @@ content.updatePage(companyId: companyId, applicationId: applicationId, id: id, b
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| applicationId | String? | Application Id |   
-| id | String? | Page Id |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| id | String? | ID allotted to the page. |  
 
 
 
-Use this to update page.
+Use this API to edit the details of an existing page, such as its title, seo, publish status, feature image, tags, schedule, etc.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `PageSchema` for more details.
 
 
 Schema: `PageSchema`
@@ -5993,7 +6354,7 @@ Schema: `PageSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6002,7 +6363,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6016,7 +6377,7 @@ Schema: `APIError`
 
 
 #### deletePage
-Delete page
+Delete a page
 
 ```kotlin
 content.deletePage(companyId: companyId, applicationId: applicationId, id: id).safeAwait{ response,error->
@@ -6033,19 +6394,19 @@ content.deletePage(companyId: companyId, applicationId: applicationId, id: id).s
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| applicationId | String? | Application Id |   
-| id | String? | Page Id |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| id | String? | ID allotted to the page. |  
 
 
 
-Use this to delete page.
+Use this API to delete an existing page.
 
 *Success Response*
 
 
 
-Success
+Success.
 
 
 Schema: `PageSchema`
@@ -6054,7 +6415,7 @@ Schema: `PageSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6063,7 +6424,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6094,19 +6455,19 @@ content.getPageBySlug(companyId: companyId, applicationId: applicationId, slug: 
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| applicationId | String? | Application Id |   
-| slug | String? | Slug of page to be fetched |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| slug | String? | A short, human-readable, URL-friendly identifier of a page. You can get slug value of a page from `getPages` API. |  
 
 
 
-The endpoint fetches the component by component Id
+Use this API to retrieve the components of a page, such as its title, seo, publish status, feature image, tags, schedule, etc.
 
 *Success Response*
 
 
 
-A JSON object with page
+Success. Returns a JSON object of components. Refer `PageSchema` for more details.
 
 
 Schema: `PageSchema`
@@ -6115,7 +6476,7 @@ Schema: `PageSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6124,7 +6485,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6138,7 +6499,7 @@ Schema: `APIError`
 
 
 #### getSEOConfiguration
-Get seo of application
+Get SEO configuration of an application
 
 ```kotlin
 content.getSEOConfiguration(companyId: companyId, applicationId: applicationId).safeAwait{ response,error->
@@ -6155,18 +6516,18 @@ content.getSEOConfiguration(companyId: companyId, applicationId: applicationId).
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |  
 
 
 
-Get seo of application
+Use this API to know how the SEO is configured in the application. This includes the sitemap, robot.txt, custom meta tags, etc.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `SeoComponent` for more details.
 
 
 Schema: `SeoComponent`
@@ -6175,7 +6536,7 @@ Schema: `SeoComponent`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6184,7 +6545,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6198,7 +6559,7 @@ Schema: `APIError`
 
 
 #### updateSEOConfiguration
-Update seo of application
+Update SEO of application
 
 ```kotlin
 content.updateSEOConfiguration(companyId: companyId, applicationId: applicationId, body: body).safeAwait{ response,error->
@@ -6215,18 +6576,18 @@ content.updateSEOConfiguration(companyId: companyId, applicationId: applicationI
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |  
 
 
 
-Update seo of application
+Use this API to edit the SEO details of an application. This includes the sitemap, robot.txt, custom meta tags, etc.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `SeoSchema` for more details.
 
 
 Schema: `SeoSchema`
@@ -6235,7 +6596,7 @@ Schema: `SeoSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6244,7 +6605,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6275,21 +6636,21 @@ content.getSlideshows(companyId: companyId, applicationId: applicationId, device
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| devicePlatform | String? | Device platform |   
-| pageNo | Int? | Each response will contain **page_no** param, which should be sent back to make pagination work. |   
-| pageSize | Int? | Number of items to retrieve in each page. |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| devicePlatform | String? | Filter slideshows by platform. Acceptable values are: web, android, ios and all |   
+| pageNo | Int? | The page number to navigate through the given set of results. Default value is 1. |   
+| pageSize | Int? | The number of items to retrieve in each page. Default value is 10. |  
 
 
 
-Use this to get slideshows.
+A slideshow is a group of images, videos or a combination of both that are shown on the website in the form of slides. Use this API to fetch a list of slideshows.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `SlideshowGetResponse` for more details.
 
 
 Schema: `SlideshowGetResponse`
@@ -6298,7 +6659,7 @@ Schema: `SlideshowGetResponse`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6307,7 +6668,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6321,7 +6682,7 @@ Schema: `APIError`
 
 
 #### createSlideshow
-Create slideshow
+Create a slideshow
 
 ```kotlin
 content.createSlideshow(companyId: companyId, applicationId: applicationId, body: body).safeAwait{ response,error->
@@ -6338,18 +6699,18 @@ content.createSlideshow(companyId: companyId, applicationId: applicationId, body
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |  
 
 
 
-Use this to create slideshow.
+A slideshow is a group of images, videos or a combination of both that are shown on the website in the form of slides. Use this API to create a slideshow.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `SlideshowSchema` for more details.
 
 
 Schema: `SlideshowSchema`
@@ -6358,7 +6719,7 @@ Schema: `SlideshowSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6367,7 +6728,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6398,20 +6759,20 @@ content.getSlideshowBySlug(companyId: companyId, applicationId: applicationId, s
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| slug | String? | Slug |   
-| devicePlatform | String? | Device platform |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| slug | String? | A short, human-readable, URL-friendly identifier of a slideshow. You can get slug value of a page from `getSlideshows` API. |   
+| devicePlatform | String? | Filter slideshows by platform. Acceptable values are: web, android, ios and all |  
 
 
 
-Use this to get slideshow by slug.
+Use this API to retrieve the details of a slideshow by its slug.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `SlideshowSchema` for more details.
 
 
 Schema: `SlideshowSchema`
@@ -6420,7 +6781,7 @@ Schema: `SlideshowSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6429,7 +6790,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6443,7 +6804,7 @@ Schema: `APIError`
 
 
 #### updateSlideshow
-Update slideshow
+Update a slideshow
 
 ```kotlin
 content.updateSlideshow(companyId: companyId, applicationId: applicationId, id: id, body: body).safeAwait{ response,error->
@@ -6460,19 +6821,19 @@ content.updateSlideshow(companyId: companyId, applicationId: applicationId, id: 
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| id | String? | Slideshow ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| id | String? | ID allotted to the slideshow. |  
 
 
 
-Use this to update slideshow.
+Use this API to edit the details of an existing slideshow.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `SlideshowSchema` for more details.
 
 
 Schema: `SlideshowSchema`
@@ -6481,7 +6842,7 @@ Schema: `SlideshowSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6490,7 +6851,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6504,7 +6865,7 @@ Schema: `APIError`
 
 
 #### deleteSlideshow
-Delete slideshow
+Delete a slideshow
 
 ```kotlin
 content.deleteSlideshow(companyId: companyId, applicationId: applicationId, id: id).safeAwait{ response,error->
@@ -6521,19 +6882,19 @@ content.deleteSlideshow(companyId: companyId, applicationId: applicationId, id: 
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| id | String? | Slideshow ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform |   
+| applicationId | String? | Numeric ID allotted to an application created within a business account. |   
+| id | String? | ID allotted to the slideshow. |  
 
 
 
-Use this to delete slideshow.
+Use this API to delete an existing slideshow.
 
 *Success Response*
 
 
 
-Success
+Success.
 
 
 Schema: `SlideshowSchema`
@@ -6542,7 +6903,7 @@ Schema: `SlideshowSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6551,7 +6912,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6582,18 +6943,18 @@ content.getSupportInformation(companyId: companyId, applicationId: applicationId
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform. |   
+| applicationId | String? | Alphanumeric ID allotted to an application created within a business account. |  
 
 
 
-Get contact details for customer support. Including emails and phone numbers
+Use this API to get the contact details for customer support, including emails and phone numbers.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `Support` for more details.
 
 
 Schema: `Support`
@@ -6602,7 +6963,7 @@ Schema: `Support`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6611,7 +6972,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6625,7 +6986,7 @@ Schema: `APIError`
 
 
 #### updateSupportInformation
-Update support data of application
+Update the support data of an application
 
 ```kotlin
 content.updateSupportInformation(companyId: companyId, applicationId: applicationId, body: body).safeAwait{ response,error->
@@ -6642,18 +7003,18 @@ content.updateSupportInformation(companyId: companyId, applicationId: applicatio
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform. |   
+| applicationId | String? | Alphanumeric ID allotted to an application created within a business account. |  
 
 
 
-Update support data of application
+Use this API to edit the existing contact details for customer support, including emails and phone numbers.
 
 *Success Response*
 
 
 
-Success
+Success. Refer `Support` for more details.
 
 
 Schema: `Support`
@@ -6662,7 +7023,7 @@ Schema: `Support`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6671,7 +7032,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6685,7 +7046,7 @@ Schema: `APIError`
 
 
 #### updateInjectableTag
-Updates a Tag
+Update a tag
 
 ```kotlin
 content.updateInjectableTag(companyId: companyId, applicationId: applicationId, body: body).safeAwait{ response,error->
@@ -6702,18 +7063,18 @@ content.updateInjectableTag(companyId: companyId, applicationId: applicationId, 
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform. |   
+| applicationId | String? | Alphanumeric ID allotted to an application created within a business account. |  
 
 
 
-Update tag
+Use this API to edit the details of an existing tag. This includes the tag name, tag type (css/js), url and position of the tag.
 
 *Success Response*
 
 
 
-Tags Array
+Success.
 
 
 Schema: `TagsSchema`
@@ -6722,7 +7083,7 @@ Schema: `TagsSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6731,7 +7092,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6745,7 +7106,7 @@ Schema: `APIError`
 
 
 #### deleteAllInjectableTags
-Delete tags for application
+Delete tags in application
 
 ```kotlin
 content.deleteAllInjectableTags(companyId: companyId, applicationId: applicationId).safeAwait{ response,error->
@@ -6762,18 +7123,18 @@ content.deleteAllInjectableTags(companyId: companyId, applicationId: application
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform. |   
+| applicationId | String? | Alphanumeric ID allotted to an application created within a business account. |  
 
 
 
-Delete tags for application
+Use this API to delete all the existing tags at once.
 
 *Success Response*
 
 
 
-Tags Array
+Success.
 
 
 Schema: `TagsSchema`
@@ -6782,7 +7143,7 @@ Schema: `TagsSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6791,7 +7152,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6805,7 +7166,7 @@ Schema: `APIError`
 
 
 #### getInjectableTags
-Get tags for application
+Get all the tags in an application
 
 ```kotlin
 content.getInjectableTags(companyId: companyId, applicationId: applicationId).safeAwait{ response,error->
@@ -6822,18 +7183,18 @@ content.getInjectableTags(companyId: companyId, applicationId: applicationId).sa
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform. |   
+| applicationId | String? | Alphanumeric ID allotted to an application created within a business account. |  
 
 
 
-Get tags for application
+Use this API to get all the CSS and JS injected in the application in the form of tags.
 
 *Success Response*
 
 
 
-Tags Array
+Success. Refer `TagsSchema` for more details.
 
 
 Schema: `TagsSchema`
@@ -6842,7 +7203,7 @@ Schema: `TagsSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6851,7 +7212,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6865,7 +7226,7 @@ Schema: `APIError`
 
 
 #### addInjectableTag
-Adds a Tag
+Add a tag
 
 ```kotlin
 content.addInjectableTag(companyId: companyId, applicationId: applicationId, body: body).safeAwait{ response,error->
@@ -6882,18 +7243,18 @@ content.addInjectableTag(companyId: companyId, applicationId: applicationId, bod
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform. |   
+| applicationId | String? | Alphanumeric ID allotted to an application created within a business account. |  
 
 
 
-Add tag
+CSS and JS can be injected in the application (website) with the help of tags. Use this API to create such tags by entering the tag name, tag type (css/js), url and position of the tag.
 
 *Success Response*
 
 
 
-Tags Array
+Success.
 
 
 Schema: `TagsSchema`
@@ -6902,7 +7263,7 @@ Schema: `TagsSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6911,7 +7272,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6925,7 +7286,7 @@ Schema: `APIError`
 
 
 #### removeInjectableTag
-Removes a Tag
+Remove a tag
 
 ```kotlin
 content.removeInjectableTag(companyId: companyId, applicationId: applicationId, body: body).safeAwait{ response,error->
@@ -6942,18 +7303,18 @@ content.removeInjectableTag(companyId: companyId, applicationId: applicationId, 
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform. |   
+| applicationId | String? | Alphanumeric ID allotted to an application created within a business account. |  
 
 
 
-Remove a particular tag
+Use this API to delete an existing tag.
 
 *Success Response*
 
 
 
-Tags Array
+Success.
 
 
 Schema: `TagsSchema`
@@ -6962,7 +7323,7 @@ Schema: `TagsSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6971,7 +7332,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -6985,7 +7346,7 @@ Schema: `APIError`
 
 
 #### editInjectableTag
-Edits a Tag by Id
+Edit a tag by id
 
 ```kotlin
 content.editInjectableTag(companyId: companyId, applicationId: applicationId, tagId: tagId, body: body).safeAwait{ response,error->
@@ -7002,19 +7363,19 @@ content.editInjectableTag(companyId: companyId, applicationId: applicationId, ta
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company ID |   
-| applicationId | String? | Application ID |   
-| tagId | String? | Tag ID |  
+| companyId | String? | Numeric ID allotted to a business account on Fynd Platform. |   
+| applicationId | String? | Alphanumeric ID allotted to an application created within a business account. |   
+| tagId | String? | ID allotted to the tag. |  
 
 
 
-Edits a particular tag
+Use this API to edit the details of an existing tag by its ID.
 
 *Success Response*
 
 
 
-Tags Array
+Success.
 
 
 Schema: `TagsSchema`
@@ -7023,7 +7384,7 @@ Schema: `TagsSchema`
 
 
 
-Failed
+Bad Request. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -7032,7 +7393,7 @@ Schema: `APIError`
 
 
 
-Failed
+Internal Server Error. See the error object in the response body to know the exact reason.
 
 
 Schema: `APIError`
@@ -11308,14 +11669,14 @@ Schema: `HttpErrorCodeAndResponse`
 ---
 
 
-## Catalog
+## Order
 
 
-#### updateSearchKeywords
-Update Search Keyword
+#### shipmentStatusUpdate
+Update status of Shipment
 
 ```kotlin
-catalog.updateSearchKeywords(companyId: companyId, applicationId: applicationId, id: id, body: body).safeAwait{ response,error->
+order.shipmentStatusUpdate(companyId: companyId, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -11329,31 +11690,38 @@ catalog.updateSearchKeywords(companyId: companyId, applicationId: applicationId,
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | A `company_id` is a unique identifier for a particular seller account. |   
-| applicationId | String? | A `application_id` is a unique identifier for a particular sale channel. |   
-| id | String? | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. |  
+| companyId | String? | Company Id |  
 
 
 
-Update Search Keyword by its id. On successful request, returns the updated collection
+Update Shipment Status
 
 *Success Response*
 
 
 
-The Collection object. See example below or refer `GetSearchWordsDataSchema` for details.
+Success
 
 
-Schema: `GetSearchWordsData`
+Schema: `UpdateShipmentStatusResponse`
 
 
 
 
 
-Bad request. See the error object in the response body for specific reason
+API Error
 
 
-Schema: `ErrorResponse`
+Schema: `ApefaceApiError`
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
 
 
 
@@ -11361,6 +11729,1124 @@ Schema: `ErrorResponse`
 
 
 ---
+
+
+#### activityStatus
+Get Activity Status
+
+```kotlin
+order.activityStatus(companyId: companyId, bagId: bagId).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company Id |   
+| bagId | String? | Bag Id |  
+
+
+
+Get Activity Status
+
+*Success Response*
+
+
+
+Success
+
+
+Schema: `GetActivityStatus`
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+---
+
+
+#### storeProcessShipmentUpdate
+Update Store Process-Shipment
+
+```kotlin
+order.storeProcessShipmentUpdate(companyId: companyId, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company Id |  
+
+
+
+Update Store Process-Shipment
+
+*Success Response*
+
+
+
+Success
+
+
+Schema: `UpdateProcessShipmenstRequestResponse`
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+---
+
+
+#### checkRefund
+Check Refund is available or not
+
+```kotlin
+order.checkRefund(companyId: companyId, shipmentId: shipmentId).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company Id |   
+| shipmentId | String? | Shipment Id |  
+
+
+
+Check Refund is available or not
+
+*Success Response*
+
+
+
+Success
+
+
+Schema: `HashMap<String,Any>`
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+---
+
+
+#### getOrdersByCompanyId
+Get Orders for company based on Company Id
+
+```kotlin
+order.getOrdersByCompanyId(companyId: companyId, pageNo: pageNo, pageSize: pageSize, fromDate: fromDate, toDate: toDate, q: q, stage: stage, salesChannels: salesChannels, orderId: orderId, stores: stores, status: status, shortenUrls: shortenUrls, filterType: filterType).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company Id |   
+| pageNo | String? | Current page number |   
+| pageSize | String? | Page limit |   
+| fromDate | String? | From Date |   
+| toDate | String? | To Date |   
+| q | String? | Keyword for Search |   
+| stage | String? | Specefic Order Stage |   
+| salesChannels | String? | Selected Sales Channel |   
+| orderId | String? | Order Id |   
+| stores | String? | Selected Stores |   
+| status | String? | Status of order |   
+| shortenUrls | Boolean? | Shorten URL option |   
+| filterType | String? | Filters |  
+
+
+
+Get Orders
+
+*Success Response*
+
+
+
+Success
+
+
+Schema: `OrderListing`
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+---
+
+
+#### getOrderDetails
+Get Order Details for company based on Company Id and Order Id
+
+```kotlin
+order.getOrderDetails(companyId: companyId, orderId: orderId, next: next, previous: previous).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company Id |   
+| orderId | String? | Order Id |   
+| next | String? | Next |   
+| previous | String? | Previous |  
+
+
+
+Get Orders
+
+*Success Response*
+
+
+
+Success
+
+
+Schema: `OrderDetails`
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+---
+
+
+#### getPicklistOrdersByCompanyId
+Get Orders for company based on Company Id
+
+```kotlin
+order.getPicklistOrdersByCompanyId(companyId: companyId, pageNo: pageNo, pageSize: pageSize, fromDate: fromDate, toDate: toDate, q: q, stage: stage, salesChannels: salesChannels, orderId: orderId, stores: stores, status: status, shortenUrls: shortenUrls, filterType: filterType).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company Id |   
+| pageNo | String? | Current page number |   
+| pageSize | String? | Page limit |   
+| fromDate | String? | From Date |   
+| toDate | String? | To Date |   
+| q | String? | Keyword for Search |   
+| stage | String? | Specefic Order Stage |   
+| salesChannels | String? | Selected Sales Channel |   
+| orderId | String? | Order Id |   
+| stores | String? | Selected Stores |   
+| status | String? | Status of order |   
+| shortenUrls | Boolean? | Shorten URL option |   
+| filterType | String? | Filters |  
+
+
+
+Get Orders
+
+*Success Response*
+
+
+
+Success
+
+
+Schema: `OrderPicklistListing`
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+---
+
+
+#### trackShipmentPlatform
+Track Shipment by shipment id, for application based on application Id
+
+```kotlin
+order.trackShipmentPlatform(companyId: companyId, applicationId: applicationId, shipmentId: shipmentId).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company Id |   
+| applicationId | String? | Application Id |   
+| shipmentId | String? | Shipment Id |  
+
+
+
+Shipment Track
+
+*Success Response*
+
+
+
+Success
+
+
+Schema: `PlatformShipmentTrack`
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+---
+
+
+#### trackOrder
+Track Order by order id, for application based on application Id
+
+```kotlin
+order.trackOrder(companyId: companyId, applicationId: applicationId, orderId: orderId).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company Id |   
+| applicationId | String? | Application Id |   
+| orderId | String? | Order Id |  
+
+
+
+Order Track
+
+*Success Response*
+
+
+
+Success
+
+
+Schema: `PlatformOrderTrack`
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+---
+
+
+#### failedOrders
+Get all failed orders application wise
+
+```kotlin
+order.failedOrders(companyId: companyId, applicationId: applicationId).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company Id |   
+| applicationId | String? | Application Id |  
+
+
+
+Failed Orders
+
+*Success Response*
+
+
+
+Success
+
+
+Schema: `FailedOrders`
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+---
+
+
+#### reprocessOrder
+Reprocess order by order id
+
+```kotlin
+order.reprocessOrder(companyId: companyId, applicationId: applicationId, orderId: orderId).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company Id |   
+| applicationId | String? | Application Id |   
+| orderId | String? | Order Id |  
+
+
+
+Order Reprocess
+
+*Success Response*
+
+
+
+Success
+
+
+Schema: `UpdateOrderReprocessResponse`
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+---
+
+
+#### updateShipment
+Use this API to update the shipment using its shipment ID.
+
+```kotlin
+order.updateShipment(companyId: companyId, applicationId: applicationId, shipmentId: shipmentId, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company Id |   
+| applicationId | String? | Application Id |   
+| shipmentId | String? | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |  
+
+
+
+Update the shipment
+
+*Success Response*
+
+
+
+Success. Check the example shown below or refer `ShipmentUpdateRequest` for more details.
+
+
+Schema: `ShipmentUpdateResponse`
+
+
+
+
+
+API Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+Internal Server Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+---
+
+
+#### getPlatformShipmentReasons
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+
+```kotlin
+order.getPlatformShipmentReasons(companyId: companyId, applicationId: applicationId).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company Id |   
+| applicationId | String? | Application Id |  
+
+
+
+Get reasons behind full or partial cancellation of a shipment
+
+*Success Response*
+
+
+
+Success. Check the example shown below or refer `ShipmentReasonsResponse` for more details.
+
+
+Schema: `ShipmentReasonsResponse`
+
+
+
+
+
+API Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+Internal Server Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+---
+
+
+#### getShipmentTrackDetails
+Use this API to track a shipment using its shipment ID.
+
+```kotlin
+order.getShipmentTrackDetails(companyId: companyId, applicationId: applicationId, orderId: orderId, shipmentId: shipmentId).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company Id |   
+| applicationId | String? | Application Id |   
+| orderId | String? | ID of the order. |   
+| shipmentId | String? | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |  
+
+
+
+Track shipment
+
+*Success Response*
+
+
+
+Success. Check the example shown below or refer `ShipmentTrackResponse` for more details.
+
+
+Schema: `ShipmentTrackResponse`
+
+
+
+
+
+API Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+Internal Server Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+---
+
+
+#### getShipmentAddress
+Use this API to get address of a shipment using its shipment ID and Address Category.
+
+```kotlin
+order.getShipmentAddress(companyId: companyId, shipmentId: shipmentId, addressCategory: addressCategory).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company Id |   
+| shipmentId | String? | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |   
+| addressCategory | String? | Category of the address it falls into(billing or delivery). |  
+
+
+
+Get Shipment Address
+
+*Success Response*
+
+
+
+Success. Check the example shown below or refer `GetShipmentAddressResponse` for more details.
+
+
+Schema: `GetShipmentAddressResponse`
+
+
+
+
+
+API Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+Internal Server Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+---
+
+
+#### updateShipmentAddress
+Use this API to update address of a shipment using its shipment ID and Address Category.
+
+```kotlin
+order.updateShipmentAddress(companyId: companyId, shipmentId: shipmentId, addressCategory: addressCategory, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company Id |   
+| shipmentId | String? | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |   
+| addressCategory | String? | Category of the address it falls into(billing or delivery). |  
+
+
+
+Update Shipment Address
+
+*Success Response*
+
+
+
+Success. Check the example shown below or refer `UpdateShipmentAddressResponse` for more details.
+
+
+Schema: `UpdateShipmentAddressResponse`
+
+
+
+
+
+API Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+Internal Server Error. See the error object in the response body to know the exact reason.
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+---
+
+
+#### getPing
+Get Ping
+
+```kotlin
+order.getPing(companyId: companyId).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company Id |  
+
+
+
+Get Ping
+
+*Success Response*
+
+
+
+Success
+
+
+Schema: `GetPingResponse`
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+---
+
+
+#### voiceCallback
+Get Voice Callback
+
+```kotlin
+order.voiceCallback(companyId: companyId).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company Id |  
+
+
+
+Voice Callback
+
+*Success Response*
+
+
+
+Success
+
+
+Schema: `GetVoiceCallbackResponse`
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+---
+
+
+#### voiceClickToCall
+Get Voice Click to Call
+
+```kotlin
+order.voiceClickToCall(companyId: companyId, caller: caller, receiver: receiver).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Company Id |   
+| caller | String? | Caller contact number |   
+| receiver | String? | Receiver contact number |  
+
+
+
+Voice Click to Call
+
+*Success Response*
+
+
+
+Success
+
+
+Schema: `GetClickToCallResponse`
+
+
+
+
+
+API Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+Internal Server Error
+
+
+Schema: `ApefaceApiError`
+
+
+
+
+
+
+---
+
+
+
+---
+---
+
+
+## Catalog
 
 
 #### deleteSearchKeywords
@@ -11467,11 +12953,11 @@ Schema: `ErrorResponse`
 ---
 
 
-#### getAllSearchKeyword
-List all Search Custom Keyword Listing
+#### updateSearchKeywords
+Update Search Keyword
 
 ```kotlin
-catalog.getAllSearchKeyword(companyId: companyId, applicationId: applicationId).safeAwait{ response,error->
+catalog.updateSearchKeywords(companyId: companyId, applicationId: applicationId, id: id, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -11486,20 +12972,21 @@ catalog.getAllSearchKeyword(companyId: companyId, applicationId: applicationId).
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
 | companyId | String? | A `company_id` is a unique identifier for a particular seller account. |   
-| applicationId | String? | A `application_id` is a unique identifier for a particular sale channel. |  
+| applicationId | String? | A `application_id` is a unique identifier for a particular sale channel. |   
+| id | String? | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. |  
 
 
 
-Custom Search Keyword allows you to map conditions with keywords to give you the ultimate results
+Update Search Keyword by its id. On successful request, returns the updated collection
 
 *Success Response*
 
 
 
-List of custom search keywords. See example below or refer `GetSearchWordsResponseSchema` for details
+The Collection object. See example below or refer `GetSearchWordsDataSchema` for details.
 
 
-Schema: `GetSearchWordsResponse`
+Schema: `GetSearchWordsData`
 
 
 
@@ -11569,11 +13056,11 @@ Schema: `ErrorResponse`
 ---
 
 
-#### updateAutocompleteKeyword
-Create & Update Autocomplete Keyword
+#### getAllSearchKeyword
+List all Search Custom Keyword Listing
 
 ```kotlin
-catalog.updateAutocompleteKeyword(companyId: companyId, applicationId: applicationId, id: id, body: body).safeAwait{ response,error->
+catalog.getAllSearchKeyword(companyId: companyId, applicationId: applicationId).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -11588,21 +13075,20 @@ catalog.updateAutocompleteKeyword(companyId: companyId, applicationId: applicati
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
 | companyId | String? | A `company_id` is a unique identifier for a particular seller account. |   
-| applicationId | String? | A `application_id` is a unique identifier for a particular sale channel. |   
-| id | String? | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. |  
+| applicationId | String? | A `application_id` is a unique identifier for a particular sale channel. |  
 
 
 
-Update a mapping by it's id. On successful request, returns the updated Keyword mapping
+Custom Search Keyword allows you to map conditions with keywords to give you the ultimate results
 
 *Success Response*
 
 
 
-The Mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details.
+List of custom search keywords. See example below or refer `GetSearchWordsResponseSchema` for details
 
 
-Schema: `GetAutocompleteWordsResponse`
+Schema: `GetSearchWordsResponse`
 
 
 
@@ -11725,11 +13211,11 @@ Schema: `ErrorResponse`
 ---
 
 
-#### getAutocompleteConfig
-List all Autocomplete Keyword Listing
+#### updateAutocompleteKeyword
+Create & Update Autocomplete Keyword
 
 ```kotlin
-catalog.getAutocompleteConfig(companyId: companyId, applicationId: applicationId).safeAwait{ response,error->
+catalog.updateAutocompleteKeyword(companyId: companyId, applicationId: applicationId, id: id, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -11744,17 +13230,18 @@ catalog.getAutocompleteConfig(companyId: companyId, applicationId: applicationId
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
 | companyId | String? | A `company_id` is a unique identifier for a particular seller account. |   
-| applicationId | String? | A `application_id` is a unique identifier for a particular sale channel. |  
+| applicationId | String? | A `application_id` is a unique identifier for a particular sale channel. |   
+| id | String? | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. |  
 
 
 
-Custom Autocomplete Keyword allows you to map conditions with keywords to give you the ultimate results
+Update a mapping by it's id. On successful request, returns the updated Keyword mapping
 
 *Success Response*
 
 
 
-List of custom autocomplete keywords. See example below or refer `GetAutocompleteWordsResponseSchema` for details
+The Mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details.
 
 
 Schema: `GetAutocompleteWordsResponse`
@@ -11827,6 +13314,107 @@ Schema: `ErrorResponse`
 ---
 
 
+#### getAutocompleteConfig
+List all Autocomplete Keyword Listing
+
+```kotlin
+catalog.getAutocompleteConfig(companyId: companyId, applicationId: applicationId).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | A `company_id` is a unique identifier for a particular seller account. |   
+| applicationId | String? | A `application_id` is a unique identifier for a particular sale channel. |  
+
+
+
+Custom Autocomplete Keyword allows you to map conditions with keywords to give you the ultimate results
+
+*Success Response*
+
+
+
+List of custom autocomplete keywords. See example below or refer `GetAutocompleteWordsResponseSchema` for details
+
+
+Schema: `GetAutocompleteWordsResponse`
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+---
+
+
+#### createProductBundle
+Create Product Bundle
+
+```kotlin
+catalog.createProductBundle(companyId: companyId, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | A `company_id` is a unique identifier for a particular seller account. |  
+
+
+
+Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
+
+*Success Response*
+
+
+
+Get bundle with id that is added. See example below or refer `GetProductBundleCreateResponse` for details
+
+
+Schema: `GetProductBundleCreateResponse`
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+---
+
+
 #### getProductBundle
 List all Product Bundles
 
@@ -11878,11 +13466,11 @@ Schema: `ErrorResponse`
 ---
 
 
-#### createProductBundle
-Create Product Bundle
+#### getProductBundleDetail
+Get a particular Product Bundle details
 
 ```kotlin
-catalog.createProductBundle(companyId: companyId, body: body).safeAwait{ response,error->
+catalog.getProductBundleDetail(companyId: companyId, id: id).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -11896,20 +13484,21 @@ catalog.createProductBundle(companyId: companyId, body: body).safeAwait{ respons
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | A `company_id` is a unique identifier for a particular seller account. |  
+| companyId | String? | A `company_id` is a unique identifier for a particular seller account. |   
+| id | String? | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. |  
 
 
 
-Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
+Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
 
 *Success Response*
 
 
 
-Get bundle with id that is added. See example below or refer `GetProductBundleCreateResponse` for details
+The Collection object. See example below or refer `GetProductBundleResponse` for details
 
 
-Schema: `GetProductBundleCreateResponse`
+Schema: `GetProductBundleResponse`
 
 
 
@@ -11979,11 +13568,11 @@ Schema: `ErrorResponse`
 ---
 
 
-#### getProductBundleDetail
-Get a particular Product Bundle details
+#### createSizeGuide
+Create a size guide.
 
 ```kotlin
-catalog.getProductBundleDetail(companyId: companyId, id: id).safeAwait{ response,error->
+catalog.createSizeGuide(companyId: companyId, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -11997,21 +13586,20 @@ catalog.getProductBundleDetail(companyId: companyId, id: id).safeAwait{ response
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | A `company_id` is a unique identifier for a particular seller account. |   
-| id | String? | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. |  
+| companyId | String? | Id of the company inside which the size guide is to be created. |  
 
 
 
-Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
+This API allows to create a size guide associated to a brand.
 
 *Success Response*
 
 
 
-The Collection object. See example below or refer `GetProductBundleResponse` for details
+Returns a success response
 
 
-Schema: `GetProductBundleResponse`
+Schema: `SuccessResponse`
 
 
 
@@ -12085,11 +13673,11 @@ Schema: `ErrorResponse`
 ---
 
 
-#### createSizeGuide
-Create a size guide.
+#### getSizeGuide
+Get a single size guide.
 
 ```kotlin
-catalog.createSizeGuide(companyId: companyId, body: body).safeAwait{ response,error->
+catalog.getSizeGuide(companyId: companyId, id: id).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -12103,20 +13691,21 @@ catalog.createSizeGuide(companyId: companyId, body: body).safeAwait{ response,er
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Id of the company inside which the size guide is to be created. |  
+| companyId | String? | Id of the company associated to size guide. |   
+| id | String? | Id of the size guide to be viewed. |  
 
 
 
-This API allows to create a size guide associated to a brand.
+This API helps to get data associated to a size guide.
 
 *Success Response*
 
 
 
-Returns a success response
+Brand object. See example below or refer `SizeGuideResponseSchema` for details
 
 
-Schema: `SuccessResponse`
+Schema: `SizeGuideResponse`
 
 
 
@@ -12186,57 +13775,6 @@ Schema: `ErrorResponse`
 ---
 
 
-#### getSizeGuide
-Get a single size guide.
-
-```kotlin
-catalog.getSizeGuide(companyId: companyId, id: id).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Id of the company associated to size guide. |   
-| id | String? | Id of the size guide to be viewed. |  
-
-
-
-This API helps to get data associated to a size guide.
-
-*Success Response*
-
-
-
-Brand object. See example below or refer `SizeGuideResponseSchema` for details
-
-
-Schema: `SizeGuideResponse`
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
----
-
-
 #### getCatalogConfiguration
 Get configuration meta  details for catalog for admin panel
 
@@ -12270,6 +13808,57 @@ configuration details for catalog. See example below or refer `GetCatalogConfigu
 
 
 Schema: `GetCatalogConfigurationMetaData`
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+---
+
+
+#### createConfigurationProductListing
+Add configuration for products & listings
+
+```kotlin
+catalog.createConfigurationProductListing(companyId: companyId, applicationId: applicationId, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | A `company_id` is a unique identifier for a particular seller account. |   
+| applicationId | String? | A `application_id` is a unique identifier for a particular sale channel. |  
+
+
+
+Add configuration for products & listing.
+
+*Success Response*
+
+
+
+success flag will tell whether the operation was successful.
+
+
+Schema: `GetAppCatalogConfiguration`
 
 
 
@@ -12339,11 +13928,11 @@ Schema: `ErrorResponse`
 ---
 
 
-#### createConfigurationProductListing
-Add configuration for products & listings
+#### createConfigurationByType
+Add configuration for categories and brands
 
 ```kotlin
-catalog.createConfigurationProductListing(companyId: companyId, applicationId: applicationId, body: body).safeAwait{ response,error->
+catalog.createConfigurationByType(companyId: companyId, applicationId: applicationId, type: type, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -12358,11 +13947,12 @@ catalog.createConfigurationProductListing(companyId: companyId, applicationId: a
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
 | companyId | String? | A `company_id` is a unique identifier for a particular seller account. |   
-| applicationId | String? | A `application_id` is a unique identifier for a particular sale channel. |  
+| applicationId | String? | A `application_id` is a unique identifier for a particular sale channel. |   
+| type | String? | type can be brands, categories etc. |  
 
 
 
-Add configuration for products & listing.
+Add configuration for categories & brands.
 
 *Success Response*
 
@@ -12442,58 +14032,6 @@ Schema: `ErrorResponse`
 ---
 
 
-#### createConfigurationByType
-Add configuration for categories and brands
-
-```kotlin
-catalog.createConfigurationByType(companyId: companyId, applicationId: applicationId, type: type, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | A `company_id` is a unique identifier for a particular seller account. |   
-| applicationId | String? | A `application_id` is a unique identifier for a particular sale channel. |   
-| type | String? | type can be brands, categories etc. |  
-
-
-
-Add configuration for categories & brands.
-
-*Success Response*
-
-
-
-success flag will tell whether the operation was successful.
-
-
-Schema: `GetAppCatalogConfiguration`
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
----
-
-
 #### getQueryFilters
 Get query filters to configure a collection
 
@@ -12545,57 +14083,6 @@ Schema: `ErrorResponse`
 ---
 
 
-#### getAllCollections
-List all the collections
-
-```kotlin
-catalog.getAllCollections(companyId: companyId, applicationId: applicationId).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | A `company_id` is a unique identifier for a particular seller account. |   
-| applicationId | String? | A `application_id` is a unique identifier for a particular sale channel. |  
-
-
-
-A Collection allows you to organize your products into hierarchical groups. For example, a dress might be in the category _Clothing_, the individual product might also be in the collection _Summer_. On successful request, returns all the collections as specified in `CollectionListingSchema`
-
-*Success Response*
-
-
-
-List of collections. See example below or refer `GetCollectionListingResponse` for details
-
-
-Schema: `GetCollectionListingResponse`
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
----
-
-
 #### createCollection
 Add a Collection
 
@@ -12629,6 +14116,57 @@ List of all the collections including the one you added. See example below or re
 
 
 Schema: `CollectionCreateResponse`
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+---
+
+
+#### getAllCollections
+List all the collections
+
+```kotlin
+catalog.getAllCollections(companyId: companyId, applicationId: applicationId).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | A `company_id` is a unique identifier for a particular seller account. |   
+| applicationId | String? | A `application_id` is a unique identifier for a particular sale channel. |  
+
+
+
+A Collection allows you to organize your products into hierarchical groups. For example, a dress might be in the category _Clothing_, the individual product might also be in the collection _Summer_. On successful request, returns all the collections as specified in `CollectionListingSchema`
+
+*Success Response*
+
+
+
+List of collections. See example below or refer `GetCollectionListingResponse` for details
+
+
+Schema: `GetCollectionListingResponse`
 
 
 
@@ -12699,6 +14237,58 @@ Schema: `ErrorResponse`
 ---
 
 
+#### deleteCollection
+Delete a Collection
+
+```kotlin
+catalog.deleteCollection(companyId: companyId, applicationId: applicationId, id: id).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | A `company_id` is a unique identifier for a particular seller account. |   
+| applicationId | String? | A `application_id` is a unique identifier for a particular sale channel. |   
+| id | String? | A `id` is a unique identifier of a collection. |  
+
+
+
+Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+
+*Success Response*
+
+
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+Schema: `DeleteResponse`
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+---
+
+
 #### updateCollection
 Update a collection
 
@@ -12751,11 +14341,11 @@ Schema: `ErrorResponse`
 ---
 
 
-#### deleteCollection
-Delete a Collection
+#### addCollectionItems
+Add items to a collection
 
 ```kotlin
-catalog.deleteCollection(companyId: companyId, applicationId: applicationId, id: id).safeAwait{ response,error->
+catalog.addCollectionItems(companyId: companyId, applicationId: applicationId, id: id, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -12775,16 +14365,16 @@ catalog.deleteCollection(companyId: companyId, applicationId: applicationId, id:
 
 
 
-Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+Adds items to a collection specified by its `id`. See `CollectionItemRequest` for the list of attributes needed to add items to an collection.
 
 *Success Response*
 
 
 
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+Status object. Tells whether the operation was successful.
 
 
-Schema: `DeleteResponse`
+Schema: `UpdatedResponse`
 
 
 
@@ -12840,58 +14430,6 @@ The attached items of an collection. See example below or refer `GetCollectionIt
 
 
 Schema: `GetCollectionItemsResponse`
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
----
-
-
-#### addCollectionItems
-Add items to a collection
-
-```kotlin
-catalog.addCollectionItems(companyId: companyId, applicationId: applicationId, id: id, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | A `company_id` is a unique identifier for a particular seller account. |   
-| applicationId | String? | A `application_id` is a unique identifier for a particular sale channel. |   
-| id | String? | A `id` is a unique identifier of a collection. |  
-
-
-
-Adds items to a collection specified by its `id`. See `CollectionItemRequest` for the list of attributes needed to add items to an collection.
-
-*Success Response*
-
-
-
-Status object. Tells whether the operation was successful.
-
-
-Schema: `UpdatedResponse`
 
 
 
@@ -13937,61 +15475,6 @@ Schema: `PTErrorResponse`
 ---
 
 
-#### listCategories
-Get product categories list
-
-```kotlin
-catalog.listCategories(companyId: companyId, level: level, departments: departments, q: q, pageNo: pageNo, pageSize: pageSize).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | A `company_id` is a unique identifier for a particular seller account. |   
-| level | String? | Get category for multiple levels |   
-| departments | String? | Get category for multiple departments filtered |   
-| q | String? | Get multiple categories filtered by search string |   
-| pageNo | Int? | The page number to navigate through the given set of results |   
-| pageSize | Int? | Number of items to retrieve in each page. Default is 10. |  
-
-
-
-This API gets meta associated to product categories.
-
-*Success Response*
-
-
-
-Category Meta. See example below or refer `CategoryResponse` for details
-
-
-Schema: `CategoryResponse`
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
----
-
-
 #### createCategories
 Create product categories
 
@@ -14042,11 +15525,11 @@ Schema: `ErrorResponse`
 ---
 
 
-#### updateCategory
-Update product categories
+#### listCategories
+Get product categories list
 
 ```kotlin
-catalog.updateCategory(companyId: companyId, uid: uid, body: body).safeAwait{ response,error->
+catalog.listCategories(companyId: companyId, level: level, departments: departments, q: q, pageNo: pageNo, pageSize: pageSize).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -14061,20 +15544,24 @@ catalog.updateCategory(companyId: companyId, uid: uid, body: body).safeAwait{ re
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
 | companyId | String? | A `company_id` is a unique identifier for a particular seller account. |   
-| uid | String? | Category unique id |  
+| level | String? | Get category for multiple levels |   
+| departments | String? | Get category for multiple departments filtered |   
+| q | String? | Get multiple categories filtered by search string |   
+| pageNo | Int? | The page number to navigate through the given set of results |   
+| pageSize | Int? | Number of items to retrieve in each page. Default is 10. |  
 
 
 
-Update a product category using this apu
+This API gets meta associated to product categories.
 
 *Success Response*
 
 
 
-Category Meta. See example below or refer `CategoryUpdateResponse` for details
+Category Meta. See example below or refer `CategoryResponse` for details
 
 
-Schema: `CategoryUpdateResponse`
+Schema: `CategoryResponse`
 
 
 
@@ -14144,11 +15631,11 @@ Schema: `ErrorResponse`
 ---
 
 
-#### getProducts
-Get product list
+#### updateCategory
+Update product categories
 
 ```kotlin
-catalog.getProducts(companyId: companyId, brandIds: brandIds, categoryIds: categoryIds, search: search, pageNo: pageNo, pageSize: pageSize).safeAwait{ response,error->
+catalog.updateCategory(companyId: companyId, uid: uid, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -14162,25 +15649,21 @@ catalog.getProducts(companyId: companyId, brandIds: brandIds, categoryIds: categ
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | Double? | Get list of products filtered by company Id |   
-| brandIds | Double? | Get multiple products filtered by brand Ids |   
-| categoryIds | Double? | Get multiple products filtered by category Ids |   
-| search | String? | Get multiple products filtered by search string |   
-| pageNo | Int? | The page number to navigate through the given set of results |   
-| pageSize | Int? | Number of items to retrieve in each page. Default is 10. |  
+| companyId | String? | A `company_id` is a unique identifier for a particular seller account. |   
+| uid | String? | Category unique id |  
 
 
 
-This API gets meta associated to products.
+Update a product category using this apu
 
 *Success Response*
 
 
 
-Product Meta. See example below for details
+Category Meta. See example below or refer `CategoryUpdateResponse` for details
 
 
-Schema: `ProductListingResponse`
+Schema: `CategoryUpdateResponse`
 
 
 
@@ -14249,11 +15732,11 @@ Schema: `ErrorResponse`
 ---
 
 
-#### editProduct
-Edit a product.
+#### getProducts
+Get product list
 
 ```kotlin
-catalog.editProduct(companyId: companyId, itemId: itemId, body: body).safeAwait{ response,error->
+catalog.getProducts(companyId: companyId, brandIds: brandIds, categoryIds: categoryIds, search: search, pageNo: pageNo, pageSize: pageSize).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -14267,21 +15750,25 @@ catalog.editProduct(companyId: companyId, itemId: itemId, body: body).safeAwait{
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Id of the company associated to product that is to be viewed. |   
-| itemId | Int? | Id of the product to be updated. |  
+| companyId | Double? | Get list of products filtered by company Id |   
+| brandIds | Double? | Get multiple products filtered by brand Ids |   
+| categoryIds | Double? | Get multiple products filtered by category Ids |   
+| search | String? | Get multiple products filtered by search string |   
+| pageNo | Int? | The page number to navigate through the given set of results |   
+| pageSize | Int? | Number of items to retrieve in each page. Default is 10. |  
 
 
 
-This API allows to edit product.
+This API gets meta associated to products.
 
 *Success Response*
 
 
 
-Returns a success response
+Product Meta. See example below for details
 
 
-Schema: `SuccessResponse`
+Schema: `ProductListingResponse`
 
 
 
@@ -14405,6 +15892,57 @@ Schema: `ErrorResponse`
 ---
 
 
+#### editProduct
+Edit a product.
+
+```kotlin
+catalog.editProduct(companyId: companyId, itemId: itemId, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Id of the company associated to product that is to be viewed. |   
+| itemId | Int? | Id of the product to be updated. |  
+
+
+
+This API allows to edit product.
+
+*Success Response*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+---
+
+
 #### getProductValidation
 Validate product/size data
 
@@ -14509,6 +16047,56 @@ Schema: `ErrorResponse`
 ---
 
 
+#### updateProductAssetsInBulk
+Create a Bulk asset upload Job.
+
+```kotlin
+catalog.updateProductAssetsInBulk(companyId: companyId, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | Int? | Company Id in which assets to be uploaded. |  
+
+
+
+This API helps to create a bulk asset upload job.
+
+*Success Response*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+---
+
+
 #### getProductBulkUploadHistory
 Get a list of all bulk product upload jobs.
 
@@ -14561,11 +16149,11 @@ Schema: `ErrorResponse`
 ---
 
 
-#### updateProductAssetsInBulk
-Create a Bulk asset upload Job.
+#### deleteProductBulkJob
+Delete Bulk product job.
 
 ```kotlin
-catalog.updateProductAssetsInBulk(companyId: companyId, body: body).safeAwait{ response,error->
+catalog.deleteProductBulkJob(companyId: companyId, batchId: batchId).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -14579,11 +16167,12 @@ catalog.updateProductAssetsInBulk(companyId: companyId, body: body).safeAwait{ r
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | Int? | Company Id in which assets to be uploaded. |  
+| companyId | String? | Company Id of the company associated to size that is to be deleted. |   
+| batchId | Int? | Batch Id of the bulk product job to be deleted. |  
 
 
 
-This API helps to create a bulk asset upload job.
+This API allows to delete bulk product job associated with company.
 
 *Success Response*
 
@@ -14662,57 +16251,6 @@ Schema: `ErrorResponse`
 ---
 
 
-#### deleteProductBulkJob
-Delete Bulk product job.
-
-```kotlin
-catalog.deleteProductBulkJob(companyId: companyId, batchId: batchId).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id of the company associated to size that is to be deleted. |   
-| batchId | Int? | Batch Id of the bulk product job to be deleted. |  
-
-
-
-This API allows to delete bulk product job associated with company.
-
-*Success Response*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
----
-
-
 #### getCompanyTags
 Get a list of all tags associated with company.
 
@@ -14745,6 +16283,56 @@ Tag List. See example below for details
 
 
 Schema: `ProductTagsViewResponse`
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+---
+
+
+#### createProductAssetsInBulk
+Create a Bulk asset upload Job.
+
+```kotlin
+catalog.createProductAssetsInBulk(companyId: companyId, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | Int? | Company Id in which assets to be uploaded. |  
+
+
+
+This API helps to create a bulk asset upload job.
+
+*Success Response*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -14815,56 +16403,6 @@ Schema: `ErrorResponse`
 ---
 
 
-#### createProductAssetsInBulk
-Create a Bulk asset upload Job.
-
-```kotlin
-catalog.createProductAssetsInBulk(companyId: companyId, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | Int? | Company Id in which assets to be uploaded. |  
-
-
-
-This API helps to create a bulk asset upload job.
-
-*Success Response*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
----
-
-
 #### deleteSize
 Delete a Size associated with product.
 
@@ -14899,6 +16437,58 @@ Returns a success response
 
 
 Schema: `ProductSizeDeleteResponse`
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+---
+
+
+#### addInventory
+Add Inventory for particular size and store.
+
+```kotlin
+catalog.addInventory(companyId: companyId, itemId: itemId, size: size, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | Id of the company associated to product that is to be viewed. |   
+| itemId | Double? | Item code of the product of which size is to be get. |   
+| size | String? | Size in which inventory is to be added. |  
+
+
+
+This API allows add Inventory for particular size and store.
+
+*Success Response*
+
+
+
+Returns a success response
+
+
+Schema: `SuccessResponse`
 
 
 
@@ -14971,58 +16561,6 @@ Schema: `ErrorResponse`
 ---
 
 
-#### addInventory
-Add Inventory for particular size and store.
-
-```kotlin
-catalog.addInventory(companyId: companyId, itemId: itemId, size: size, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Id of the company associated to product that is to be viewed. |   
-| itemId | Double? | Item code of the product of which size is to be get. |   
-| size | String? | Size in which inventory is to be added. |  
-
-
-
-This API allows add Inventory for particular size and store.
-
-*Success Response*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
----
-
-
 #### deleteInventory
 Delete a Inventory.
 
@@ -15057,6 +16595,56 @@ Returns a success response
 
 
 Schema: `InventoryDelete`
+
+
+
+
+
+Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+---
+
+
+#### createBulkInventoryJob
+Create a Bulk Inventory upload Job.
+
+```kotlin
+catalog.createBulkInventoryJob(companyId: companyId, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | Int? | Company Id in which Inventory to be uploaded. |  
+
+
+
+This API helps to create a bulk Inventory upload job.
+
+*Success Response*
+
+
+
+Returns a success response
+
+
+Schema: `CommonResponse`
 
 
 
@@ -15127,11 +16715,11 @@ Schema: `ErrorResponse`
 ---
 
 
-#### createBulkInventoryJob
-Create a Bulk Inventory upload Job.
+#### deleteBulkInventoryJob
+Delete Bulk Inventory job.
 
 ```kotlin
-catalog.createBulkInventoryJob(companyId: companyId, body: body).safeAwait{ response,error->
+catalog.deleteBulkInventoryJob(companyId: companyId).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -15145,11 +16733,11 @@ catalog.createBulkInventoryJob(companyId: companyId, body: body).safeAwait{ resp
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | Int? | Company Id in which Inventory to be uploaded. |  
+| companyId | String? | Company Id of the company of which bulk Inventory job is to be deleted. |  
 
 
 
-This API helps to create a bulk Inventory upload job.
+This API allows to delete bulk Inventory job associated with company.
 
 *Success Response*
 
@@ -15158,7 +16746,7 @@ This API helps to create a bulk Inventory upload job.
 Returns a success response
 
 
-Schema: `CommonResponse`
+Schema: `SuccessResponse`
 
 
 
@@ -15227,11 +16815,11 @@ Schema: `ErrorResponse`
 ---
 
 
-#### deleteBulkInventoryJob
-Delete Bulk Inventory job.
+#### createInventoryExportJob
+Create a Inventory export Job.
 
 ```kotlin
-catalog.deleteBulkInventoryJob(companyId: companyId).safeAwait{ response,error->
+catalog.createInventoryExportJob(companyId: companyId, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -15245,11 +16833,11 @@ catalog.deleteBulkInventoryJob(companyId: companyId).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | Company Id of the company of which bulk Inventory job is to be deleted. |  
+| companyId | Int? | Company Id in which assets to be uploaded. |  
 
 
 
-This API allows to delete bulk Inventory job associated with company.
+This API helps to create a Inventory export job.
 
 *Success Response*
 
@@ -15327,56 +16915,6 @@ Schema: `ErrorResponse`
 ---
 
 
-#### createInventoryExportJob
-Create a Inventory export Job.
-
-```kotlin
-catalog.createInventoryExportJob(companyId: companyId, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | Int? | Company Id in which assets to be uploaded. |  
-
-
-
-This API helps to create a Inventory export job.
-
-*Success Response*
-
-
-
-Returns a success response
-
-
-Schema: `SuccessResponse`
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
----
-
-
 #### exportInventoryConfig
 Get List of different filters for inventory export
 
@@ -15416,6 +16954,56 @@ Schema: `InventoryConfig`
 
 
 Bad request. See the error object in the response body for specific reason
+
+
+Schema: `ErrorResponse`
+
+
+
+
+
+
+---
+
+
+#### createHsnCode
+Create Hsn Code.
+
+```kotlin
+catalog.createHsnCode(companyId: companyId, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- | 
+| companyId | String? | company id |  
+
+
+
+Create Hsn Code.
+
+*Success Response*
+
+
+
+See example below for details
+
+
+Schema: `HsnCode`
+
+
+
+
+
+Bad request.
 
 
 Schema: `ErrorResponse`
@@ -15481,11 +17069,11 @@ Schema: `ErrorResponse`
 ---
 
 
-#### createHsnCode
-Create Hsn Code.
+#### getHsnCode
+Fetch Hsn Code.
 
 ```kotlin
-catalog.createHsnCode(companyId: companyId, body: body).safeAwait{ response,error->
+catalog.getHsnCode(companyId: companyId, id: id).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -15499,17 +17087,18 @@ catalog.createHsnCode(companyId: companyId, body: body).safeAwait{ response,erro
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- | 
-| companyId | String? | company id |  
+| companyId | String? | company id |   
+| id | String? | Unique id |  
 
 
 
-Create Hsn Code.
+Fetch Hsn Code.
 
 *Success Response*
 
 
 
-See example below for details
+See example below details
 
 
 Schema: `HsnCode`
@@ -15561,57 +17150,6 @@ Update Hsn Code.
 
 
 See example below for details
-
-
-Schema: `HsnCode`
-
-
-
-
-
-Bad request.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
----
-
-
-#### getHsnCode
-Fetch Hsn Code.
-
-```kotlin
-catalog.getHsnCode(companyId: companyId, id: id).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | company id |   
-| id | String? | Unique id |  
-
-
-
-Fetch Hsn Code.
-
-*Success Response*
-
-
-
-See example below details
 
 
 Schema: `HsnCode`
@@ -20258,977 +21796,6 @@ Invalid request hash
 
 
 Schema: `HashMap<String,Any>`
-
-
-
-
-
-
----
-
-
-
----
----
-
-
-## Marketplaces
-
-
-#### getAvailableChannels
-Get available marketplace channels
-
-```kotlin
-marketplaces.getAvailableChannels(companyId: companyId).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id |  
-
-
-
-Get available marketplace channels
-
-*Success Response*
-
-
-
-Success
-
-
-Schema: `HashMap<String,Any>`
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
----
-
-
-#### getChannels
-Get all registered marketplace channels for a seller
-
-```kotlin
-marketplaces.getChannels(companyId: companyId).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id |  
-
-
-
-Get all registered marketplace channels for a seller
-
-*Success Response*
-
-
-
-Success
-
-
-Schema: `HashMap<String,Any>`
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
----
-
-
-#### getChannel
-Get registered marketplace channel credential configuration for a seller
-
-```kotlin
-marketplaces.getChannel(companyId: companyId, channel: channel).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| channel | String? | Name of marketplace channel |  
-
-
-
-Get registered marketplace channel credentials configuration for a seller
-
-*Success Response*
-
-
-
-Success
-
-
-Schema: `HashMap<String,Any>`
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
----
-
-
-#### registerMyntraChannel
-Create Myntra marketplace channel for a seller
-
-```kotlin
-marketplaces.registerMyntraChannel(companyId: companyId, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id |  
-
-
-
-Create Myntra marketplace channel for a seller
-
-*Success Response*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
----
-
-
-#### updateMyntraChannelCredentials
-Update Myntra marketplace channel credentials for a seller
-
-```kotlin
-marketplaces.updateMyntraChannelCredentials(companyId: companyId, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id |  
-
-
-
-Update Myntra marketplace channel credentials for a seller
-
-*Success Response*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
----
-
-
-#### registerAmazonChannel
-Create Amazon marketplace channel for a seller
-
-```kotlin
-marketplaces.registerAmazonChannel(companyId: companyId, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id |  
-
-
-
-Create Amazon marketplace channel for a seller
-
-*Success Response*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
----
-
-
-#### updateAmazonChannelCredentials
-Update Amazon marketplace channel credentials for a seller
-
-```kotlin
-marketplaces.updateAmazonChannelCredentials(companyId: companyId, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id |  
-
-
-
-Update Amazon marketplace channel credentials for a seller
-
-*Success Response*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
----
-
-
-#### registerFlipkartChannel
-Create Flipkart / Flipkart Assured marketplace channel for a seller
-
-```kotlin
-marketplaces.registerFlipkartChannel(companyId: companyId, flipkartChannel: flipkartChannel, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| flipkartChannel | String? | Name of marketplace channel |  
-
-
-
-Create Flipkart / Flipkart Assured marketplace channel for a seller
-
-*Success Response*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
----
-
-
-#### updateFlipkartChannelCredentials
-Update Flipkart / Flipkart Assured marketplace channel credentials for a seller
-
-```kotlin
-marketplaces.updateFlipkartChannelCredentials(companyId: companyId, flipkartChannel: flipkartChannel, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| flipkartChannel | String? | Name of marketplace channel |  
-
-
-
-Update Flipkart / Flipkart Assured marketplace channel credentials for a seller
-
-*Success Response*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
----
-
-
-#### registerTatacliqChannel
-Create Tatacliq / Tatacliq Luxury marketplace channel for a seller
-
-```kotlin
-marketplaces.registerTatacliqChannel(companyId: companyId, tatacliqChannel: tatacliqChannel, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| tatacliqChannel | String? | Name of marketplace channel |  
-
-
-
-Create Tatacliq / Tatacliq Luxury marketplace channel for a seller
-
-*Success Response*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
----
-
-
-#### updateTatacliqChannelCredentials
-Update Tatacliq / Tatacliq Luxury Assured marketplace channel credentials for a seller
-
-```kotlin
-marketplaces.updateTatacliqChannelCredentials(companyId: companyId, tatacliqChannel: tatacliqChannel, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| tatacliqChannel | String? | Name of marketplace channel |  
-
-
-
-Update Tatacliq / Tatacliq Luxury marketplace channel credentials for a seller
-
-*Success Response*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
----
-
-
-#### registerAjioChannel
-Create Ajio marketplace channel for a seller
-
-```kotlin
-marketplaces.registerAjioChannel(companyId: companyId, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id |  
-
-
-
-Create Ajio marketplace channel for a seller
-
-*Success Response*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
----
-
-
-#### updateAjioChannelCredentials
-Update Ajio marketplace channel credentials for a seller
-
-```kotlin
-marketplaces.updateAjioChannelCredentials(companyId: companyId, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id |  
-
-
-
-Update Ajio marketplace channel credentials for a seller
-
-*Success Response*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
----
-
-
-#### updateChannelInventorySyncConfig
-Update inventory sync configuration of marketplace channel for a seller
-
-```kotlin
-marketplaces.updateChannelInventorySyncConfig(companyId: companyId, channel: channel, validateCred: validateCred, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| channel | String? | Name of marketplace channel |   
-| validateCred | String? | Validate marketplace cred while saving inventory config |  
-
-
-
-Update inventory sync configuration of marketplace channel for a seller
-
-*Success Response*
-
-
-
-Success
-
-
-Schema: `MkpResp`
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
----
-
-
-#### getChannelLocationConfig
-Get marketplace channel location config for a seller
-
-```kotlin
-marketplaces.getChannelLocationConfig(companyId: companyId, channel: channel).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| channel | String? | Name of marketplace channel |  
-
-
-
-Get marketplace channel location config for a seller
-
-*Success Response*
-
-
-
-Success
-
-
-Schema: `StoreMapping`
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
----
-
-
-#### updateChannelLocationConfig
-update marketplace channel location config for a seller
-
-```kotlin
-marketplaces.updateChannelLocationConfig(companyId: companyId, channel: channel, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| channel | String? | Name of marketplace channel |  
-
-
-
-update marketplace channel location config for a seller
-
-*Success Response*
-
-
-
-Success
-
-
-Schema: `StoreMapping`
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
----
-
-
-#### getChannelStatus
-Get marketplace channel active status for a seller
-
-```kotlin
-marketplaces.getChannelStatus(companyId: companyId, channel: channel).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| channel | String? | Name of marketplace channel |  
-
-
-
-Get marketplace channel active status for a seller
-
-*Success Response*
-
-
-
-Success
-
-
-Schema: `StatusPayload`
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
----
-
-
-#### updateChannelStatus
-Update marketplace channel active status for a seller
-
-```kotlin
-marketplaces.updateChannelStatus(companyId: companyId, channel: channel, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| channel | String? | Name of marketplace channel |  
-
-
-
-Update marketplace channel active status for a seller
-
-*Success Response*
-
-
-
-Success
-
-
-Schema: `StatusResp`
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
----
-
-
-#### triggerChannelInventoryUpdates
-Trigger marketplace channel inventory updates for a seller
-
-```kotlin
-marketplaces.triggerChannelInventoryUpdates(companyId: companyId, channel: channel, updateType: updateType, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- | 
-| companyId | String? | Company Id |   
-| channel | String? | Name of marketplace channel |   
-| updateType | String? | Inventory update type |  
-
-
-
-Trigger marketplace channel inventory updates for a seller
-
-*Success Response*
-
-
-
-Success
-
-
-Schema: `SyncResp`
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
 
 
 

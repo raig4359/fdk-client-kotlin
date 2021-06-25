@@ -93,6 +93,7 @@
     * [submitCustomForm](#submitcustomform)
     * [getParticipantsInsideVideoRoom](#getparticipantsinsidevideoroom)
     * [getTokenForVideoRoom](#gettokenforvideoroom)
+    * [getASDF](#getasdf)
     
 
 * [Theme](#Theme)
@@ -455,7 +456,7 @@ catalog.getProductPriceBySlug(slug: slug, size: size, pincode: pincode, storeId:
 | slug | String? | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ |    
 | size | String? | A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes |    
 | pincode | String? | The PIN Code of the area near which the selling locations should be searched, e.g. 400059 |    
-| storeId | String? | The ID of the store that is selling the product, e.g. 1,2,3. |  
+| storeId | Int? | The ID of the store that is selling the product, e.g. 1,2,3. |  
 
 Prices may vary for different sizes of a product. Use this API to retrieve the price of a product size at all the selling locations near to a PIN Code.
 
@@ -1890,7 +1891,7 @@ Schema: `ErrorResponse`
 Fetch all items added to the cart
 
 ```kotlin
-cart.getCart(uid: uid, i: i, b: b, assignCardId: assignCardId).safeAwait{ response,error->
+cart.getCart(id: id, i: i, b: b, assignCardId: assignCardId).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -1904,7 +1905,7 @@ cart.getCart(uid: uid, i: i, b: b, assignCardId: assignCardId).safeAwait{ respon
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| uid | Int? |  |    
+| id | String? |  |    
 | i | Boolean? |  |    
 | b | Boolean? |  |    
 | assignCardId | Int? |  |  
@@ -1935,7 +1936,7 @@ Schema: `CartResponse`
 Fetch last-modified timestamp
 
 ```kotlin
-cart.getCartLastModified(uid: uid).safeAwait{ response,error->
+cart.getCartLastModified(id: id).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -1949,7 +1950,7 @@ cart.getCartLastModified(uid: uid).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| uid | Int? |  |  
+| id | String? |  |  
 
 Use this API to fetch Last-Modified timestamp in header metadata.
 
@@ -2647,7 +2648,7 @@ Sorry, item is out of stock
 Update items in the cart
 
 ```kotlin
-cart.updateCart(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
+cart.updateCart(id: id, i: i, b: b, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -2661,7 +2662,7 @@ cart.updateCart(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| uid | Int? |  |    
+| id | String? |  |    
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
@@ -3053,7 +3054,7 @@ Item updated in the cart
 Count items in the cart
 
 ```kotlin
-cart.getItemCount(uid: uid).safeAwait{ response,error->
+cart.getItemCount(id: id).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -3067,7 +3068,7 @@ cart.getItemCount(uid: uid).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| uid | Int? | The unique identifier of the cart. |  
+| id | String? | The unique identifier of the cart. |  
 
 Use this API to get the total number of items present in cart.
 
@@ -3349,7 +3350,7 @@ Schema: `HashMap<String,Any>`
 
 
 #### applyRewardPoints
-Fetch rewards points for cart.
+Apply reward points at cart
 
 ```kotlin
 cart.applyRewardPoints(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
@@ -3370,7 +3371,7 @@ cart.applyRewardPoints(uid: uid, i: i, b: b, body: body).safeAwait{ response,err
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
-Use this API to get rewards points for cart.
+Use this API to redeem a fixed no. of reward points by applying it to the cart.
 
 *Success Response:*
 
@@ -3396,7 +3397,7 @@ Schema: `CartResponse`
 Fetch address
 
 ```kotlin
-cart.getAddresses(uid: uid, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
+cart.getAddresses(cartId: cartId, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -3410,7 +3411,7 @@ cart.getAddresses(uid: uid, mobileNo: mobileNo, checkoutMode: checkoutMode, tags
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| uid | Int? |  |    
+| cartId | String? |  |    
 | mobileNo | String? |  |    
 | checkoutMode | String? |  |    
 | tags | String? |  |    
@@ -3483,7 +3484,7 @@ Schema: `SaveAddressResponse`
 Fetch a single address by its ID
 
 ```kotlin
-cart.getAddressById(id: id, uid: uid, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
+cart.getAddressById(id: id, cartId: cartId, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -3497,8 +3498,8 @@ cart.getAddressById(id: id, uid: uid, mobileNo: mobileNo, checkoutMode: checkout
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | Int? |  |    
-| uid | Int? |  |    
+| id | String? |  |    
+| cartId | String? |  |    
 | mobileNo | String? |  |    
 | checkoutMode | String? |  |    
 | tags | String? |  |    
@@ -3614,7 +3615,7 @@ Schema: `DeleteAddressResponse`
 Select an address from available addresses
 
 ```kotlin
-cart.selectAddress(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
+cart.selectAddress(cartId: cartId, i: i, b: b, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -3628,7 +3629,7 @@ cart.selectAddress(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| uid | Int? |  |    
+| cartId | String? |  |    
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
@@ -6384,6 +6385,63 @@ lead.getTokenForVideoRoom(uniqueName: uniqueName).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
 | uniqueName | String? | Unique name of Video Room |  
+
+Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `GetTokenForVideoRoomResponse`
+
+
+*Examples:*
+
+
+Default
+```json
+{
+  "value": {
+    "access_token": "your_token_to_the_room"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getASDF
+Get Token to join a specific Video Room using it's unqiue name
+
+```kotlin
+lead.getASDF(inQuery: inQuery, inHeader: inHeader, inPath: inPath).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |  
+| inQuery | PriorityEnum? | For adding support for enum |    
+| inHeader | PriorityEnum? | For adding support for enum |    
+| inPath | PriorityEnum? | For adding support for enum |  
 
 Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
 
@@ -11700,10 +11758,10 @@ Use this API to retrieve the tokens used while integrating Firebase, MoEngage, S
 
 
 
-Success. Check the example shown below or refer `TokenResponse` for more details.
+Success. Check the example shown below or refer `AppTokenResponse` for more details.
 
 
-Schema: `TokenResponse`
+Schema: `AppTokenResponse`
 
 
 
@@ -12233,7 +12291,7 @@ payment.attachCardToCustomer(body: body).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Use this API to attach a customer's saved card at the payment gateway, such as Stripe.
+Use this API to attach a customer's saved card at the payment gateway, such as Stripe, Juspay.
 
 *Success Response:*
 
@@ -13518,7 +13576,7 @@ Schema: `HttpErrorCodeAndResponse`
 
 
 #### getOrders
-Use this API to retrieve all the orders.
+Get all orders
 
 ```kotlin
 order.getOrders(pageNo: pageNo, pageSize: pageSize, fromDate: fromDate, toDate: toDate, orderStatus: orderStatus).safeAwait{ response,error->
@@ -13541,7 +13599,7 @@ order.getOrders(pageNo: pageNo, pageSize: pageSize, fromDate: fromDate, toDate: 
 | toDate | String? | The date till which the orders should be retrieved. |    
 | orderStatus | Int? | A filter to retrieve orders by their current status such as _placed_, _delivered_, etc. |  
 
-Get all orders
+Use this API to retrieve all the orders.
 
 *Success Response:*
 
@@ -13588,7 +13646,7 @@ Schema: `ApefaceApiError`
 
 
 #### getOrderById
-Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
+Get details of an order
 
 ```kotlin
 order.getOrderById(orderId: orderId).safeAwait{ response,error->
@@ -13607,7 +13665,7 @@ order.getOrderById(orderId: orderId).safeAwait{ response,error->
 | --------- | ----  | --- |  
 | orderId | String? | A unique number used for identifying and tracking your orders. |  
 
-Get details of an order
+Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
 
 *Success Response:*
 
@@ -13654,7 +13712,7 @@ Schema: `ApefaceApiError`
 
 
 #### getShipmentById
-Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
+Get details of a shipment
 
 ```kotlin
 order.getShipmentById(shipmentId: shipmentId).safeAwait{ response,error->
@@ -13673,7 +13731,7 @@ order.getShipmentById(shipmentId: shipmentId).safeAwait{ response,error->
 | --------- | ----  | --- |  
 | shipmentId | String? | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |  
 
-Get details of a shipment
+Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
 
 *Success Response:*
 
@@ -13720,7 +13778,7 @@ Schema: `ApefaceApiError`
 
 
 #### getShipmentReasons
-Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+Get reasons behind full or partial cancellation of a shipment
 
 ```kotlin
 order.getShipmentReasons(shipmentId: shipmentId).safeAwait{ response,error->
@@ -13739,7 +13797,7 @@ order.getShipmentReasons(shipmentId: shipmentId).safeAwait{ response,error->
 | --------- | ----  | --- |  
 | shipmentId | String? | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |  
 
-Get reasons behind full or partial cancellation of a shipment
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
 
 *Success Response:*
 
@@ -13786,7 +13844,7 @@ Schema: `ApefaceApiError`
 
 
 #### updateShipmentStatus
-Use this API to update the status of a shipment using its shipment ID.
+Update the shipment status
 
 ```kotlin
 order.updateShipmentStatus(shipmentId: shipmentId, body: body).safeAwait{ response,error->
@@ -13805,7 +13863,7 @@ order.updateShipmentStatus(shipmentId: shipmentId, body: body).safeAwait{ respon
 | --------- | ----  | --- |  
 | shipmentId | String? | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |  
 
-Update the shipment status
+Use this API to update the status of a shipment using its shipment ID.
 
 *Success Response:*
 
@@ -13852,7 +13910,7 @@ Schema: `ApefaceApiError`
 
 
 #### trackShipment
-Use this API to track a shipment using its shipment ID.
+Track shipment
 
 ```kotlin
 order.trackShipment(shipmentId: shipmentId).safeAwait{ response,error->
@@ -13871,7 +13929,7 @@ order.trackShipment(shipmentId: shipmentId).safeAwait{ response,error->
 | --------- | ----  | --- |  
 | shipmentId | String? | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |  
 
-Track shipment
+Use this API to track a shipment using its shipment ID.
 
 *Success Response:*
 
@@ -13918,7 +13976,7 @@ Schema: `ApefaceApiError`
 
 
 #### getPosOrderById
-Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
+Get POS Order
 
 ```kotlin
 order.getPosOrderById(orderId: orderId).safeAwait{ response,error->
@@ -13937,7 +13995,7 @@ order.getPosOrderById(orderId: orderId).safeAwait{ response,error->
 | --------- | ----  | --- |  
 | orderId | String? | A unique number used for identifying and tracking your orders. |  
 
-Get POS Order
+Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
 
 *Success Response:*
 
@@ -15134,7 +15192,7 @@ Schema: `FeedbackError`
 Get Media
 
 ```kotlin
-feedback.getMedias(entityType: entityType, entityId: entityId, id: id, pageId: pageId, pageSize: pageSize).safeAwait{ response,error->
+feedback.getMedias(entityType: entityType, entityId: entityId, id: id, type: type, pageId: pageId, pageSize: pageSize).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -15151,6 +15209,7 @@ feedback.getMedias(entityType: entityType, entityId: entityId, id: id, pageId: p
 | entityType | String? | Type of entity, e.g. question or product. |    
 | entityId | String? | ID of the eligible entity as specified in the entity type(question ID/product ID). |    
 | id | String? | ID of the media. |    
+| type | String? | Media type. |    
 | pageId | String? | Pagination page ID to retrieve next set of results. |    
 | pageSize | Int? | The number of items to retrieve in each page. |  
 
@@ -15814,7 +15873,7 @@ Schema: `FeedbackError`
 Fetch all items added to the cart
 
 ```kotlin
-poscart.getCart(uid: uid, i: i, b: b, assignCardId: assignCardId).safeAwait{ response,error->
+poscart.getCart(id: id, i: i, b: b, assignCardId: assignCardId).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -15828,7 +15887,7 @@ poscart.getCart(uid: uid, i: i, b: b, assignCardId: assignCardId).safeAwait{ res
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| uid | Int? |  |    
+| id | String? |  |    
 | i | Boolean? |  |    
 | b | Boolean? |  |    
 | assignCardId | Int? |  |  
@@ -15859,7 +15918,7 @@ Schema: `CartResponse`
 Fetch last-modified timestamp
 
 ```kotlin
-poscart.getCartLastModified(uid: uid).safeAwait{ response,error->
+poscart.getCartLastModified(id: id).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -15873,7 +15932,7 @@ poscart.getCartLastModified(uid: uid).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| uid | Int? |  |  
+| id | String? |  |  
 
 Use this API to fetch Last-Modified timestamp in header metadata.
 
@@ -16571,7 +16630,7 @@ Sorry, item is out of stock
 Update items in the cart
 
 ```kotlin
-poscart.updateCart(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
+poscart.updateCart(id: id, i: i, b: b, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -16585,7 +16644,7 @@ poscart.updateCart(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| uid | Int? |  |    
+| id | String? |  |    
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
@@ -16977,7 +17036,7 @@ Item updated in the cart
 Count items in the cart
 
 ```kotlin
-poscart.getItemCount(uid: uid).safeAwait{ response,error->
+poscart.getItemCount(id: id).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -16991,7 +17050,7 @@ poscart.getItemCount(uid: uid).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| uid | Int? | The unique identifier of the cart. |  
+| id | String? | The unique identifier of the cart. |  
 
 Use this API to get the total number of items present in cart.
 
@@ -17273,7 +17332,7 @@ Schema: `HashMap<String,Any>`
 
 
 #### applyRewardPoints
-Fetch rewards points for cart.
+Apply reward points at cart
 
 ```kotlin
 poscart.applyRewardPoints(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
@@ -17294,7 +17353,7 @@ poscart.applyRewardPoints(uid: uid, i: i, b: b, body: body).safeAwait{ response,
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
-Use this API to get rewards points for cart.
+Use this API to redeem a fixed no. of reward points by applying it to the cart.
 
 *Success Response:*
 
@@ -17320,7 +17379,7 @@ Schema: `CartResponse`
 Fetch address
 
 ```kotlin
-poscart.getAddresses(uid: uid, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
+poscart.getAddresses(cartId: cartId, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -17334,7 +17393,7 @@ poscart.getAddresses(uid: uid, mobileNo: mobileNo, checkoutMode: checkoutMode, t
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| uid | Int? |  |    
+| cartId | String? |  |    
 | mobileNo | String? |  |    
 | checkoutMode | String? |  |    
 | tags | String? |  |    
@@ -17407,7 +17466,7 @@ Schema: `SaveAddressResponse`
 Fetch a single address by its ID
 
 ```kotlin
-poscart.getAddressById(id: id, uid: uid, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
+poscart.getAddressById(id: id, cartId: cartId, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -17421,8 +17480,8 @@ poscart.getAddressById(id: id, uid: uid, mobileNo: mobileNo, checkoutMode: check
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | Int? |  |    
-| uid | Int? |  |    
+| id | String? |  |    
+| cartId | String? |  |    
 | mobileNo | String? |  |    
 | checkoutMode | String? |  |    
 | tags | String? |  |    
@@ -17538,7 +17597,7 @@ Schema: `DeleteAddressResponse`
 Select an address from available addresses
 
 ```kotlin
-poscart.selectAddress(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
+poscart.selectAddress(cartId: cartId, i: i, b: b, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -17552,7 +17611,7 @@ poscart.selectAddress(uid: uid, i: i, b: b, body: body).safeAwait{ response,erro
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| uid | Int? |  |    
+| cartId | String? |  |    
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
@@ -20106,7 +20165,7 @@ Cart Merged/Replaced
 
 
 #### getTatProduct
-Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
+Get TAT of a product
 
 ```kotlin
 logistic.getTatProduct(body: body).safeAwait{ response,error->
@@ -20124,7 +20183,7 @@ logistic.getTatProduct(body: body).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |
 
-Get TAT of a product
+Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
 
 *Success Response:*
 
@@ -20171,7 +20230,7 @@ Schema: `ApefaceApiError`
 
 
 #### getPincodeCity
-Use this API to retrieve a city by its PIN Code.
+Get city from PIN Code
 
 ```kotlin
 logistic.getPincodeCity(pincode: pincode).safeAwait{ response,error->
@@ -20190,7 +20249,7 @@ logistic.getPincodeCity(pincode: pincode).safeAwait{ response,error->
 | --------- | ----  | --- |  
 | pincode | String? | The PIN Code of the area, e.g. 400059 |  
 
-Get city from PIN Code
+Use this API to retrieve a city by its PIN Code.
 
 *Success Response:*
 
