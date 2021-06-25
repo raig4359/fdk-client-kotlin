@@ -154,7 +154,7 @@ interface CartApiList {
     
     @GET ("/service/application/cart/v1.0/detail")
     fun getCart(@Query("id") id: String?, @Query("i") i: Boolean?, @Query("b") b: Boolean?, @Query("assign_card_id") assignCardId: Int?)
-    : Deferred<Response<CartResponse>>
+    : Deferred<Response<CartRequestResponse>>
     
     
     @HEAD ("/service/application/cart/v1.0/detail")
@@ -164,12 +164,12 @@ interface CartApiList {
     
     @POST ("/service/application/cart/v1.0/detail")
     fun addItems(@Query("i") i: Boolean?, @Query("b") b: Boolean?, @Body body: AddCartRequest)
-    : Deferred<Response<AddCartResponse>>
+    : Deferred<Response<AddRequestCartResponse>>
     
     
     @PUT ("/service/application/cart/v1.0/detail")
     fun updateCart(@Query("id") id: String?, @Query("i") i: Boolean?, @Query("b") b: Boolean?, @Body body: UpdateCartRequest)
-    : Deferred<Response<UpdateCartResponse>>
+    : Deferred<Response<UpdateRequestCartResponse>>
     
     
     @GET ("/service/application/cart/v1.0/basic")
@@ -184,12 +184,12 @@ interface CartApiList {
     
     @POST ("/service/application/cart/v1.0/coupon")
     fun applyCoupon(@Query("i") i: Boolean?, @Query("b") b: Boolean?, @Query("p") p: Boolean?, @Query("uid") uid: Int?, @Body body: ApplyCouponRequest)
-    : Deferred<Response<CartResponse>>
+    : Deferred<Response<CartRequestResponse>>
     
     
     @DELETE ("/service/application/cart/v1.0/coupon")
     fun removeCoupon(@Query("uid") uid: Int?)
-    : Deferred<Response<CartResponse>>
+    : Deferred<Response<CartRequestResponse>>
     
     
     @GET ("/service/application/cart/v1.0/bulk-price")
@@ -199,7 +199,7 @@ interface CartApiList {
     
     @POST ("/service/application/cart/v1.0/redeem/points/")
     fun applyRewardPoints(@Query("uid") uid: Int?, @Query("i") i: Boolean?, @Query("b") b: Boolean?, @Body body: RewardPointRequest)
-    : Deferred<Response<CartResponse>>
+    : Deferred<Response<CartRequestResponse>>
     
     
     @GET ("/service/application/cart/v1.0/address")
@@ -229,12 +229,12 @@ interface CartApiList {
     
     @POST ("/service/application/cart/v1.0/select-address")
     fun selectAddress(@Query("cart_id") cartId: String?, @Query("i") i: Boolean?, @Query("b") b: Boolean?, @Body body: SelectCartAddressRequest)
-    : Deferred<Response<CartResponse>>
+    : Deferred<Response<CartRequestResponse>>
     
     
     @PUT ("/service/application/cart/v1.0/payment")
     fun selectPaymentMode(@Query("uid") uid: String?, @Body body: UpdateCartPaymentRequest)
-    : Deferred<Response<CartResponse>>
+    : Deferred<Response<CartRequestResponse>>
     
     
     @GET ("/service/application/cart/v1.0/payment/validate/")
@@ -1066,7 +1066,7 @@ interface PosCartApiList {
     
     @GET ("/service/application/pos/cart/v1.0/detail")
     fun getCart(@Query("id") id: String?, @Query("i") i: Boolean?, @Query("b") b: Boolean?, @Query("assign_card_id") assignCardId: Int?)
-    : Deferred<Response<CartResponse>>
+    : Deferred<Response<CartRequestResponse>>
     
     
     @HEAD ("/service/application/pos/cart/v1.0/detail")
@@ -1076,12 +1076,12 @@ interface PosCartApiList {
     
     @POST ("/service/application/pos/cart/v1.0/detail")
     fun addItems(@Query("i") i: Boolean?, @Query("b") b: Boolean?, @Body body: AddCartRequest)
-    : Deferred<Response<AddCartResponse>>
+    : Deferred<Response<AddRequestCartResponse>>
     
     
     @PUT ("/service/application/pos/cart/v1.0/detail")
     fun updateCart(@Query("id") id: String?, @Query("i") i: Boolean?, @Query("b") b: Boolean?, @Body body: UpdateCartRequest)
-    : Deferred<Response<UpdateCartResponse>>
+    : Deferred<Response<UpdateRequestCartResponse>>
     
     
     @GET ("/service/application/pos/cart/v1.0/basic")
@@ -1096,12 +1096,12 @@ interface PosCartApiList {
     
     @POST ("/service/application/pos/cart/v1.0/coupon")
     fun applyCoupon(@Query("i") i: Boolean?, @Query("b") b: Boolean?, @Query("p") p: Boolean?, @Query("uid") uid: Int?, @Body body: ApplyCouponRequest)
-    : Deferred<Response<CartResponse>>
+    : Deferred<Response<CartRequestResponse>>
     
     
     @DELETE ("/service/application/pos/cart/v1.0/coupon")
     fun removeCoupon(@Query("uid") uid: Int?)
-    : Deferred<Response<CartResponse>>
+    : Deferred<Response<CartRequestResponse>>
     
     
     @GET ("/service/application/pos/cart/v1.0/bulk-price")
@@ -1111,7 +1111,7 @@ interface PosCartApiList {
     
     @POST ("/service/application/pos/cart/v1.0/redeem/points/")
     fun applyRewardPoints(@Query("uid") uid: Int?, @Query("i") i: Boolean?, @Query("b") b: Boolean?, @Body body: RewardPointRequest)
-    : Deferred<Response<CartResponse>>
+    : Deferred<Response<CartRequestResponse>>
     
     
     @GET ("/service/application/pos/cart/v1.0/address")
@@ -1141,12 +1141,12 @@ interface PosCartApiList {
     
     @POST ("/service/application/pos/cart/v1.0/select-address")
     fun selectAddress(@Query("cart_id") cartId: String?, @Query("i") i: Boolean?, @Query("b") b: Boolean?, @Body body: SelectCartAddressRequest)
-    : Deferred<Response<CartResponse>>
+    : Deferred<Response<CartRequestResponse>>
     
     
     @PUT ("/service/application/pos/cart/v1.0/payment")
     fun selectPaymentMode(@Query("uid") uid: String?, @Body body: UpdateCartPaymentRequest)
-    : Deferred<Response<CartResponse>>
+    : Deferred<Response<CartRequestResponse>>
     
     
     @GET ("/service/application/pos/cart/v1.0/payment/validate/")
