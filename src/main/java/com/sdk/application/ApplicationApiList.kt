@@ -104,7 +104,7 @@ interface CatalogApiList {
     
     
     @GET ("/service/application/catalog/v1.0/collections/")
-    fun getCollections(@Query("page_no") pageNo: Int?, @Query("page_size") pageSize: Int?)
+    fun getCollections(@Query("page_no") pageNo: Int?, @Query("page_size") pageSize: Int?, @Query("tag") tag: String?)
     : Deferred<Response<GetCollectionListingResponse>>
     
     
@@ -308,11 +308,6 @@ interface LeadApiList {
     
     @GET ("/service/application/lead/v1.0/video/room/{unique_name}/token")
     fun getTokenForVideoRoom(@Path("unique_name") uniqueName: String)
-    : Deferred<Response<GetTokenForVideoRoomResponse>>
-    
-    
-    @GET ("/service/application/lead/asdf/{in_path}/asdf")
-    fun getASDF(@Header("in_header") inHeader: PriorityEnum?, @Path("in_path") inPath: PriorityEnum, @Query("in_query") inQuery: PriorityEnum?)
     : Deferred<Response<GetTokenForVideoRoomResponse>>
     
 }
@@ -930,12 +925,12 @@ interface RewardsApiList {
 interface FeedbackApiList {
     
     
-    @POST ("/service/application/feedback/v1.0/abuse")
+    @POST ("/service/application/feedback/v1.0/abuse/")
     fun createAbuseReport(@Body body: ReportAbuseRequest)
     : Deferred<Response<InsertResponse>>
     
     
-    @PUT ("/service/application/feedback/v1.0/abuse")
+    @PUT ("/service/application/feedback/v1.0/abuse/")
     fun updateAbuseReport(@Body body: UpdateAbuseStatusRequest)
     : Deferred<Response<UpdateResponse>>
     
@@ -945,12 +940,12 @@ interface FeedbackApiList {
     : Deferred<Response<ReportAbuseGetResponse>>
     
     
-    @GET ("/service/application/feedback/v1.0/attributes")
+    @GET ("/service/application/feedback/v1.0/attributes/")
     fun getAttributes(@Query("page_no") pageNo: Int?, @Query("page_size") pageSize: Int?)
     : Deferred<Response<AttributeResponse>>
     
     
-    @POST ("/service/application/feedback/v1.0/attributes")
+    @POST ("/service/application/feedback/v1.0/attributes/")
     fun createAttribute(@Body body: SaveAttributeRequest)
     : Deferred<Response<InsertResponse>>
     
@@ -965,12 +960,12 @@ interface FeedbackApiList {
     : Deferred<Response<UpdateResponse>>
     
     
-    @POST ("/service/application/feedback/v1.0/comment")
+    @POST ("/service/application/feedback/v1.0/comment/")
     fun createComment(@Body body: CommentRequest)
     : Deferred<Response<InsertResponse>>
     
     
-    @PUT ("/service/application/feedback/v1.0/comment")
+    @PUT ("/service/application/feedback/v1.0/comment/")
     fun updateComment(@Body body: UpdateCommentRequest)
     : Deferred<Response<UpdateResponse>>
     

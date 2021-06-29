@@ -410,8 +410,8 @@ class CatalogDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
 
     
     
-    fun getCollections(pageNo: Int?=null, pageSize: Int?=null): Deferred<Response<GetCollectionListingResponse>>? {
-        return catalogApiList?.getCollections(pageNo = pageNo, pageSize = pageSize)}
+    fun getCollections(pageNo: Int?=null, pageSize: Int?=null, tag: String?=null): Deferred<Response<GetCollectionListingResponse>>? {
+        return catalogApiList?.getCollections(pageNo = pageNo, pageSize = pageSize, tag = tag)}
 
     
     
@@ -425,11 +425,16 @@ class CatalogDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
             
             
         
+            
+                
+            
+            
+        
     /**
     *
     * Summary: Paginator for getCollections
     **/
-    fun getCollectionsPaginator(pageSize: Int?=null) : Paginator<GetCollectionListingResponse>{
+    fun getCollectionsPaginator(pageSize: Int?=null, tag: String?=null) : Paginator<GetCollectionListingResponse>{
 
     val paginator = Paginator<GetCollectionListingResponse>()
 
@@ -440,7 +445,7 @@ class CatalogDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
                 val pageId = paginator.nextId
                 val pageNo = paginator.pageNo
                 val pageType = "number"
-                catalogApiList?.getCollections(pageNo = pageNo, pageSize = pageSize)?.safeAwait{ response, error ->
+                catalogApiList?.getCollections(pageNo = pageNo, pageSize = pageSize, tag = tag)?.safeAwait{ response, error ->
                     response?.let {
                         val page = response.peekContent()?.page
                         paginator.setPaginator(hasNext=page?.hasNext?:false,pageNo=if (page?.hasNext == true) ((pageNo ?: 0) + 1) else pageNo)
@@ -882,11 +887,6 @@ class LeadDataManagerClass(val config: ApplicationConfig) : BaseRepository() {
     
     fun getTokenForVideoRoom(uniqueName: String): Deferred<Response<GetTokenForVideoRoomResponse>>? {
         return leadApiList?.getTokenForVideoRoom(uniqueName = uniqueName)}
-
-    
-    
-    fun getASDF(inQuery: PriorityEnum?=null, inHeader: PriorityEnum?=null, inPath: PriorityEnum): Deferred<Response<GetTokenForVideoRoomResponse>>? {
-        return leadApiList?.getASDF(inQuery = inQuery, inHeader = inHeader, inPath = inPath)}
 
     
     

@@ -93,7 +93,6 @@
     * [submitCustomForm](#submitcustomform)
     * [getParticipantsInsideVideoRoom](#getparticipantsinsidevideoroom)
     * [getTokenForVideoRoom](#gettokenforvideoroom)
-    * [getASDF](#getasdf)
     
 
 * [Theme](#Theme)
@@ -1382,7 +1381,7 @@ Schema: `ErrorResponse`
 List all the collections
 
 ```kotlin
-catalog.getCollections(pageNo: pageNo, pageSize: pageSize).safeAwait{ response,error->
+catalog.getCollections(pageNo: pageNo, pageSize: pageSize, tag: tag).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -1397,7 +1396,8 @@ catalog.getCollections(pageNo: pageNo, pageSize: pageSize).safeAwait{ response,e
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
 | pageNo | Int? | The page number to navigate through the given set of results. |    
-| pageSize | Int? | The number of items to retrieve in each page. |  
+| pageSize | Int? | The number of items to retrieve in each page. |    
+| tag | String? | List of tags  to filter collections |  
 
 Collections are a great way to organize your products and can improve the ability for customers to find items quickly and efficiently.
 
@@ -6385,63 +6385,6 @@ lead.getTokenForVideoRoom(uniqueName: uniqueName).safeAwait{ response,error->
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
 | uniqueName | String? | Unique name of Video Room |  
-
-Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
-
-*Success Response:*
-
-
-
-Success
-
-
-Schema: `GetTokenForVideoRoomResponse`
-
-
-*Examples:*
-
-
-Default
-```json
-{
-  "value": {
-    "access_token": "your_token_to_the_room"
-  }
-}
-```
-
-
-
-
-
-
-
-
-
----
-
-
-#### getASDF
-Get Token to join a specific Video Room using it's unqiue name
-
-```kotlin
-lead.getASDF(inQuery: inQuery, inHeader: inHeader, inPath: inPath).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-| Argument  |  Type  | Description |
-| --------- | ----  | --- |  
-| inQuery | PriorityEnum? | For adding support for enum |    
-| inHeader | PriorityEnum? | For adding support for enum |    
-| inPath | PriorityEnum? | For adding support for enum |  
 
 Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
 
