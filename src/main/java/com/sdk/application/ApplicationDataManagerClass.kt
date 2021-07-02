@@ -410,7 +410,7 @@ class CatalogDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
 
     
     
-    fun getCollections(pageNo: Int?=null, pageSize: Int?=null, tag: String?=null): Deferred<Response<GetCollectionListingResponse>>? {
+    fun getCollections(pageNo: Int?=null, pageSize: Int?=null, tag: ArrayList<String>?=null): Deferred<Response<GetCollectionListingResponse>>? {
         return catalogApiList?.getCollections(pageNo = pageNo, pageSize = pageSize, tag = tag)}
 
     
@@ -434,7 +434,7 @@ class CatalogDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
     *
     * Summary: Paginator for getCollections
     **/
-    fun getCollectionsPaginator(pageSize: Int?=null, tag: String?=null) : Paginator<GetCollectionListingResponse>{
+    fun getCollectionsPaginator(pageSize: Int?=null, tag: ArrayList<String>?=null) : Paginator<GetCollectionListingResponse>{
 
     val paginator = Paginator<GetCollectionListingResponse>()
 
@@ -708,7 +708,7 @@ class CartDataManagerClass(val config: ApplicationConfig) : BaseRepository() {
         return retrofitHttpClient?.initializeRestClient(CartApiList::class.java) as? CartApiList
     }
     
-    fun getCart(id: String?=null, i: Boolean?=null, b: Boolean?=null, assignCardId: Int?=null): Deferred<Response<CartRequestResponse>>? {
+    fun getCart(id: String?=null, i: Boolean?=null, b: Boolean?=null, assignCardId: Int?=null): Deferred<Response<CartDetailResponse>>? {
         return cartApiList?.getCart(id = id, i = i, b = b, assignCardId = assignCardId)}
 
     
@@ -718,12 +718,12 @@ class CartDataManagerClass(val config: ApplicationConfig) : BaseRepository() {
 
     
     
-    fun addItems(i: Boolean?=null, b: Boolean?=null, body: AddCartRequest): Deferred<Response<AddRequestCartResponse>>? {
+    fun addItems(i: Boolean?=null, b: Boolean?=null, body: AddCartRequest): Deferred<Response<AddCartDetailResponse>>? {
         return cartApiList?.addItems(i = i, b = b, body = body)}
 
     
     
-    fun updateCart(id: String?=null, i: Boolean?=null, b: Boolean?=null, body: UpdateCartRequest): Deferred<Response<UpdateRequestCartResponse>>? {
+    fun updateCart(id: String?=null, i: Boolean?=null, b: Boolean?=null, body: UpdateCartRequest): Deferred<Response<UpdateCartDetailResponse>>? {
         return cartApiList?.updateCart(id = id, i = i, b = b, body = body)}
 
     
@@ -733,18 +733,18 @@ class CartDataManagerClass(val config: ApplicationConfig) : BaseRepository() {
 
     
     
-    fun getCoupons(uid: Int?=null): Deferred<Response<GetCouponResponse>>? {
-        return cartApiList?.getCoupons(uid = uid)}
+    fun getCoupons(id: String?=null): Deferred<Response<GetCouponResponse>>? {
+        return cartApiList?.getCoupons(id = id)}
 
     
     
-    fun applyCoupon(i: Boolean?=null, b: Boolean?=null, p: Boolean?=null, uid: Int?=null, body: ApplyCouponRequest): Deferred<Response<CartRequestResponse>>? {
-        return cartApiList?.applyCoupon(i = i, b = b, p = p, uid = uid, body = body)}
+    fun applyCoupon(i: Boolean?=null, b: Boolean?=null, p: Boolean?=null, id: String?=null, body: ApplyCouponRequest): Deferred<Response<CartDetailResponse>>? {
+        return cartApiList?.applyCoupon(i = i, b = b, p = p, id = id, body = body)}
 
     
     
-    fun removeCoupon(uid: Int?=null): Deferred<Response<CartRequestResponse>>? {
-        return cartApiList?.removeCoupon(uid = uid)}
+    fun removeCoupon(id: String?=null): Deferred<Response<CartDetailResponse>>? {
+        return cartApiList?.removeCoupon(id = id)}
 
     
     
@@ -753,8 +753,8 @@ class CartDataManagerClass(val config: ApplicationConfig) : BaseRepository() {
 
     
     
-    fun applyRewardPoints(uid: Int?=null, i: Boolean?=null, b: Boolean?=null, body: RewardPointRequest): Deferred<Response<CartRequestResponse>>? {
-        return cartApiList?.applyRewardPoints(uid = uid, i = i, b = b, body = body)}
+    fun applyRewardPoints(id: String?=null, i: Boolean?=null, b: Boolean?=null, body: RewardPointRequest): Deferred<Response<CartDetailResponse>>? {
+        return cartApiList?.applyRewardPoints(id = id, i = i, b = b, body = body)}
 
     
     
@@ -773,43 +773,43 @@ class CartDataManagerClass(val config: ApplicationConfig) : BaseRepository() {
 
     
     
-    fun updateAddress(id: Int, body: Address): Deferred<Response<UpdateAddressResponse>>? {
+    fun updateAddress(id: String, body: Address): Deferred<Response<UpdateAddressResponse>>? {
         return cartApiList?.updateAddress(id = id, body = body)}
 
     
     
-    fun removeAddress(id: Int): Deferred<Response<DeleteAddressResponse>>? {
+    fun removeAddress(id: String): Deferred<Response<DeleteAddressResponse>>? {
         return cartApiList?.removeAddress(id = id)}
 
     
     
-    fun selectAddress(cartId: String?=null, i: Boolean?=null, b: Boolean?=null, body: SelectCartAddressRequest): Deferred<Response<CartRequestResponse>>? {
+    fun selectAddress(cartId: String?=null, i: Boolean?=null, b: Boolean?=null, body: SelectCartAddressRequest): Deferred<Response<CartDetailResponse>>? {
         return cartApiList?.selectAddress(cartId = cartId, i = i, b = b, body = body)}
 
     
     
-    fun selectPaymentMode(uid: String?=null, body: UpdateCartPaymentRequest): Deferred<Response<CartRequestResponse>>? {
-        return cartApiList?.selectPaymentMode(uid = uid, body = body)}
+    fun selectPaymentMode(id: String?=null, body: UpdateCartPaymentRequest): Deferred<Response<CartDetailResponse>>? {
+        return cartApiList?.selectPaymentMode(id = id, body = body)}
 
     
     
-    fun validateCouponForPayment(uid: String?=null, addressId: String?=null, paymentMode: String?=null, paymentIdentifier: String?=null, aggregatorName: String?=null, merchantCode: String?=null): Deferred<Response<PaymentCouponValidate>>? {
-        return cartApiList?.validateCouponForPayment(uid = uid, addressId = addressId, paymentMode = paymentMode, paymentIdentifier = paymentIdentifier, aggregatorName = aggregatorName, merchantCode = merchantCode)}
+    fun validateCouponForPayment(id: String?=null, addressId: String?=null, paymentMode: String?=null, paymentIdentifier: String?=null, aggregatorName: String?=null, merchantCode: String?=null): Deferred<Response<PaymentCouponValidate>>? {
+        return cartApiList?.validateCouponForPayment(id = id, addressId = addressId, paymentMode = paymentMode, paymentIdentifier = paymentIdentifier, aggregatorName = aggregatorName, merchantCode = merchantCode)}
 
     
     
-    fun getShipments(p: Boolean?=null, uid: Int?=null, addressId: Int?=null, areaCode: String?=null): Deferred<Response<CartShipmentsResponse>>? {
-        return cartApiList?.getShipments(p = p, uid = uid, addressId = addressId, areaCode = areaCode)}
+    fun getShipments(p: Boolean?=null, id: String?=null, addressId: String?=null, areaCode: String?=null): Deferred<Response<CartShipmentsResponse>>? {
+        return cartApiList?.getShipments(p = p, id = id, addressId = addressId, areaCode = areaCode)}
 
     
     
-    fun checkoutCart(body: CartCheckoutRequest): Deferred<Response<CartCheckoutResponse>>? {
+    fun checkoutCart(body: CartCheckoutDetailRequest): Deferred<Response<CartCheckoutResponse>>? {
         return cartApiList?.checkoutCart(body = body)}
 
     
     
-    fun updateCartMeta(uid: Int?=null, body: CartMetaRequest): Deferred<Response<CartMetaResponse>>? {
-        return cartApiList?.updateCartMeta(uid = uid, body = body)}
+    fun updateCartMeta(id: String?=null, body: CartMetaRequest): Deferred<Response<CartMetaResponse>>? {
+        return cartApiList?.updateCartMeta(id = id, body = body)}
 
     
     
@@ -2695,7 +2695,7 @@ class PosCartDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
         return retrofitHttpClient?.initializeRestClient(PosCartApiList::class.java) as? PosCartApiList
     }
     
-    fun getCart(id: String?=null, i: Boolean?=null, b: Boolean?=null, assignCardId: Int?=null): Deferred<Response<CartRequestResponse>>? {
+    fun getCart(id: String?=null, i: Boolean?=null, b: Boolean?=null, assignCardId: Int?=null): Deferred<Response<CartDetailResponse>>? {
         return posCartApiList?.getCart(id = id, i = i, b = b, assignCardId = assignCardId)}
 
     
@@ -2705,12 +2705,12 @@ class PosCartDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
 
     
     
-    fun addItems(i: Boolean?=null, b: Boolean?=null, body: AddCartRequest): Deferred<Response<AddRequestCartResponse>>? {
+    fun addItems(i: Boolean?=null, b: Boolean?=null, body: AddCartRequest): Deferred<Response<AddCartDetailResponse>>? {
         return posCartApiList?.addItems(i = i, b = b, body = body)}
 
     
     
-    fun updateCart(id: String?=null, i: Boolean?=null, b: Boolean?=null, body: UpdateCartRequest): Deferred<Response<UpdateRequestCartResponse>>? {
+    fun updateCart(id: String?=null, i: Boolean?=null, b: Boolean?=null, body: UpdateCartRequest): Deferred<Response<UpdateCartDetailResponse>>? {
         return posCartApiList?.updateCart(id = id, i = i, b = b, body = body)}
 
     
@@ -2720,18 +2720,18 @@ class PosCartDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
 
     
     
-    fun getCoupons(uid: Int?=null): Deferred<Response<GetCouponResponse>>? {
-        return posCartApiList?.getCoupons(uid = uid)}
+    fun getCoupons(id: String?=null): Deferred<Response<GetCouponResponse>>? {
+        return posCartApiList?.getCoupons(id = id)}
 
     
     
-    fun applyCoupon(i: Boolean?=null, b: Boolean?=null, p: Boolean?=null, uid: Int?=null, body: ApplyCouponRequest): Deferred<Response<CartRequestResponse>>? {
-        return posCartApiList?.applyCoupon(i = i, b = b, p = p, uid = uid, body = body)}
+    fun applyCoupon(i: Boolean?=null, b: Boolean?=null, p: Boolean?=null, id: String?=null, body: ApplyCouponRequest): Deferred<Response<CartDetailResponse>>? {
+        return posCartApiList?.applyCoupon(i = i, b = b, p = p, id = id, body = body)}
 
     
     
-    fun removeCoupon(uid: Int?=null): Deferred<Response<CartRequestResponse>>? {
-        return posCartApiList?.removeCoupon(uid = uid)}
+    fun removeCoupon(id: String?=null): Deferred<Response<CartDetailResponse>>? {
+        return posCartApiList?.removeCoupon(id = id)}
 
     
     
@@ -2740,8 +2740,8 @@ class PosCartDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
 
     
     
-    fun applyRewardPoints(uid: Int?=null, i: Boolean?=null, b: Boolean?=null, body: RewardPointRequest): Deferred<Response<CartRequestResponse>>? {
-        return posCartApiList?.applyRewardPoints(uid = uid, i = i, b = b, body = body)}
+    fun applyRewardPoints(id: String?=null, i: Boolean?=null, b: Boolean?=null, body: RewardPointRequest): Deferred<Response<CartDetailResponse>>? {
+        return posCartApiList?.applyRewardPoints(id = id, i = i, b = b, body = body)}
 
     
     
@@ -2760,53 +2760,53 @@ class PosCartDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
 
     
     
-    fun updateAddress(id: Int, body: Address): Deferred<Response<UpdateAddressResponse>>? {
+    fun updateAddress(id: String, body: Address): Deferred<Response<UpdateAddressResponse>>? {
         return posCartApiList?.updateAddress(id = id, body = body)}
 
     
     
-    fun removeAddress(id: Int): Deferred<Response<DeleteAddressResponse>>? {
+    fun removeAddress(id: String): Deferred<Response<DeleteAddressResponse>>? {
         return posCartApiList?.removeAddress(id = id)}
 
     
     
-    fun selectAddress(cartId: String?=null, i: Boolean?=null, b: Boolean?=null, body: SelectCartAddressRequest): Deferred<Response<CartRequestResponse>>? {
+    fun selectAddress(cartId: String?=null, i: Boolean?=null, b: Boolean?=null, body: SelectCartAddressRequest): Deferred<Response<CartDetailResponse>>? {
         return posCartApiList?.selectAddress(cartId = cartId, i = i, b = b, body = body)}
 
     
     
-    fun selectPaymentMode(uid: String?=null, body: UpdateCartPaymentRequest): Deferred<Response<CartRequestResponse>>? {
-        return posCartApiList?.selectPaymentMode(uid = uid, body = body)}
+    fun selectPaymentMode(id: String?=null, body: UpdateCartPaymentRequest): Deferred<Response<CartDetailResponse>>? {
+        return posCartApiList?.selectPaymentMode(id = id, body = body)}
 
     
     
-    fun validateCouponForPayment(uid: String?=null, addressId: String?=null, paymentMode: String?=null, paymentIdentifier: String?=null, aggregatorName: String?=null, merchantCode: String?=null): Deferred<Response<PaymentCouponValidate>>? {
-        return posCartApiList?.validateCouponForPayment(uid = uid, addressId = addressId, paymentMode = paymentMode, paymentIdentifier = paymentIdentifier, aggregatorName = aggregatorName, merchantCode = merchantCode)}
+    fun validateCouponForPayment(id: String?=null, addressId: String?=null, paymentMode: String?=null, paymentIdentifier: String?=null, aggregatorName: String?=null, merchantCode: String?=null): Deferred<Response<PaymentCouponValidate>>? {
+        return posCartApiList?.validateCouponForPayment(id = id, addressId = addressId, paymentMode = paymentMode, paymentIdentifier = paymentIdentifier, aggregatorName = aggregatorName, merchantCode = merchantCode)}
 
     
     
-    fun getShipments(pickAtStoreUid: Int?=null, orderingStoreId: Int?=null, p: Boolean?=null, uid: Int?=null, addressId: Int?=null, areaCode: String?=null, orderType: String?=null): Deferred<Response<CartShipmentsResponse>>? {
-        return posCartApiList?.getShipments(pickAtStoreUid = pickAtStoreUid, orderingStoreId = orderingStoreId, p = p, uid = uid, addressId = addressId, areaCode = areaCode, orderType = orderType)}
+    fun getShipments(pickAtStoreUid: Int?=null, orderingStoreId: Int?=null, p: Boolean?=null, id: String?=null, addressId: String?=null, areaCode: String?=null, orderType: String?=null): Deferred<Response<CartShipmentsResponse>>? {
+        return posCartApiList?.getShipments(pickAtStoreUid = pickAtStoreUid, orderingStoreId = orderingStoreId, p = p, id = id, addressId = addressId, areaCode = areaCode, orderType = orderType)}
 
     
     
-    fun updateShipments(i: Boolean?=null, p: Boolean?=null, uid: Int?=null, addressId: Int?=null, orderType: String?=null, body: UpdateCartShipmentRequest): Deferred<Response<CartShipmentsResponse>>? {
-        return posCartApiList?.updateShipments(i = i, p = p, uid = uid, addressId = addressId, orderType = orderType, body = body)}
+    fun updateShipments(i: Boolean?=null, p: Boolean?=null, id: String?=null, addressId: String?=null, orderType: String?=null, body: UpdateCartShipmentRequest): Deferred<Response<CartShipmentsResponse>>? {
+        return posCartApiList?.updateShipments(i = i, p = p, id = id, addressId = addressId, orderType = orderType, body = body)}
 
     
     
-    fun checkoutCart(uid: Int?=null, body: CartPosCheckoutRequest): Deferred<Response<CartCheckoutResponse>>? {
-        return posCartApiList?.checkoutCart(uid = uid, body = body)}
+    fun checkoutCart(id: String?=null, body: CartPosCheckoutDetailRequest): Deferred<Response<CartCheckoutResponse>>? {
+        return posCartApiList?.checkoutCart(id = id, body = body)}
 
     
     
-    fun updateCartMeta(uid: Int?=null, body: CartMetaRequest): Deferred<Response<CartMetaResponse>>? {
-        return posCartApiList?.updateCartMeta(uid = uid, body = body)}
+    fun updateCartMeta(id: String?=null, body: CartMetaRequest): Deferred<Response<CartMetaResponse>>? {
+        return posCartApiList?.updateCartMeta(id = id, body = body)}
 
     
     
-    fun getAvailableDeliveryModes(areaCode: String, uid: Int?=null): Deferred<Response<CartDeliveryModesResponse>>? {
-        return posCartApiList?.getAvailableDeliveryModes(areaCode = areaCode, uid = uid)}
+    fun getAvailableDeliveryModes(areaCode: String, id: String?=null): Deferred<Response<CartDeliveryModesResponse>>? {
+        return posCartApiList?.getAvailableDeliveryModes(areaCode = areaCode, id = id)}
 
     
     
