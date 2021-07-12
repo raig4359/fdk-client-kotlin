@@ -14976,7 +14976,7 @@ Schema: `FeedbackError`
 Delete Media
 
 ```kotlin
-feedback.deleteMedia().safeAwait{ response,error->
+feedback.deleteMedia(ids: ids).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -14989,7 +14989,8 @@ feedback.deleteMedia().safeAwait{ response,error->
 ```
 
 | Argument  |  Type  | Description |
-| --------- | ----  | --- |
+| --------- | ----  | --- |  
+| ids | ArrayList<String>? | List of media ID |  
 
 Use this API to delete media for an entity ID.
 

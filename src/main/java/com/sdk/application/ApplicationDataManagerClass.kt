@@ -2245,8 +2245,8 @@ class FeedbackDataManagerClass(val config: ApplicationConfig) : BaseRepository()
 
     
     
-    fun deleteMedia(): Deferred<Response<UpdateResponse>>? {
-        return feedbackApiList?.deleteMedia()}
+    fun deleteMedia(ids: ArrayList<String>): Deferred<Response<UpdateResponse>>? {
+        return feedbackApiList?.deleteMedia(ids = ids)}
 
     
     

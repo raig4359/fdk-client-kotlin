@@ -981,7 +981,7 @@ interface FeedbackApiList {
     
     
     @DELETE ("/service/application/feedback/v1.0/media/")
-    fun deleteMedia()
+    fun deleteMedia(@Query("ids") ids: ArrayList<String>)
     : Deferred<Response<UpdateResponse>>
     
     
