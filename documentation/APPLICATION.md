@@ -3,6 +3,7 @@
 
 * [Catalog](#Catalog) - Catalog API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features.  
 * [Cart](#Cart) - Cart APIs 
+* [Common](#Common) - Application configuration apis 
 * [Lead](#Lead) - Handles communication between Staff and Users 
 * [Theme](#Theme) - Responsible for themes 
 * [User](#User) - Authentication Service 
@@ -82,6 +83,11 @@
     * [getCartShareLink](#getcartsharelink)
     * [getCartSharedItems](#getcartshareditems)
     * [updateCartWithSharedItems](#updatecartwithshareditems)
+    
+
+* [Common](#Common)
+  * Methods
+    * [getLocations](#getlocations)
     
 
 * [Lead](#Lead)
@@ -363,18 +369,6 @@ Schema: `ProductDetail`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -410,18 +404,6 @@ Success. Returns a ProductSize object. Check the example shown below or refer `P
 
 
 Schema: `ProductSizes`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -467,18 +449,6 @@ Success. Returns a ProductSizePrice object. Check the example shown below or ref
 
 
 Schema: `ProductSizePriceResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -534,18 +504,6 @@ Schema: `ProductSizeSellersResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -580,18 +538,6 @@ Success. Returns an array of objects containing the attributes for comparision. 
 
 
 Schema: `ProductsComparisonResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -642,18 +588,6 @@ Schema: `ProductCompareResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -688,18 +622,6 @@ Success. Returns an array of objects containing the attributes for comparision. 
 
 
 Schema: `ProductFrequentlyComparedSimilarResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -751,18 +673,6 @@ Schema: `SimilarProductByTypeResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -797,18 +707,6 @@ Success. Returns all variants of a product. Check the example shown below or ref
 
 
 Schema: `ProductVariantsResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -863,18 +761,6 @@ Schema: `ProductStockStatusResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -911,18 +797,6 @@ Success. Returns the status of the product stock.Check the example shown below o
 
 
 Schema: `ProductStockPolling`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -980,18 +854,6 @@ Schema: `ProductListingResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1028,18 +890,6 @@ Success. Returns a paginated list of brands. Check the example shown below or re
 
 
 Schema: `BrandListingResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -1090,18 +940,6 @@ Schema: `BrandDetailResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1144,18 +982,6 @@ Schema: `CategoryListingResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1190,18 +1016,6 @@ Success. Returns metadata of a category. Check the example shown below or refer 
 
 
 Schema: `CategoryMetaResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -1254,18 +1068,6 @@ Schema: `HomeListingResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1299,18 +1101,6 @@ List of Departments. See example below or refer `DepartmentResponse` for details
 
 
 Schema: `DepartmentResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -1361,18 +1151,6 @@ Schema: `AutoCompleteResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1409,18 +1187,6 @@ Success. Returns a list of collections. Check the example shown below or refer `
 
 
 Schema: `GetCollectionListingResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -1476,18 +1242,6 @@ Schema: `ProductListingResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1522,18 +1276,6 @@ Success. Returns a Collection object. Check the example shown below or refer `Co
 
 
 Schema: `CollectionDetailResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -1586,18 +1328,6 @@ Schema: `GetFollowListingResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1633,18 +1363,6 @@ Success. Returns a response object. Check the example shown below or refer `Foll
 
 
 Schema: `FollowPostResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -1696,18 +1414,6 @@ Schema: `FollowPostResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1751,18 +1457,6 @@ Schema: `FollowerCountResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1797,18 +1491,6 @@ Success. Returns the IDs of all the Products, Brands and Collections which were 
 
 
 Schema: `FollowIdsResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
 
 
 
@@ -1864,18 +1546,6 @@ Schema: `StoreListingResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1891,7 +1561,7 @@ Schema: `ErrorResponse`
 Fetch all items added to the cart
 
 ```kotlin
-cart.getCart(id: id, i: i, b: b, assignCardId: assignCardId).safeAwait{ response,error->
+cart.getCart(uid: uid, i: i, b: b, assignCardId: assignCardId).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -1905,7 +1575,7 @@ cart.getCart(id: id, i: i, b: b, assignCardId: assignCardId).safeAwait{ response
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? |  |    
+| uid | Int? |  |    
 | i | Boolean? |  |    
 | b | Boolean? |  |    
 | assignCardId | Int? |  |  
@@ -1919,7 +1589,7 @@ Use this API to get details of all the items added to a cart.
 Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
 
 
-Schema: `CartDetailResponse`
+Schema: `CartResponse`
 
 
 
@@ -1936,7 +1606,7 @@ Schema: `CartDetailResponse`
 Fetch last-modified timestamp
 
 ```kotlin
-cart.getCartLastModified(id: id).safeAwait{ response,error->
+cart.getCartLastModified(uid: uid).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -1950,7 +1620,7 @@ cart.getCartLastModified(id: id).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? |  |  
+| uid | Int? |  |  
 
 Use this API to fetch Last-Modified timestamp in header metadata.
 
@@ -1995,10 +1665,10 @@ Use this API to add items to the cart.
 
 
 
-Success. Returns a cart object as shown below. Refer `AddRequestCartResponse` for more details.
+Success. Returns a cart object as shown below. Refer `AddCartResponse` for more details.
 
 
-Schema: `AddCartDetailResponse`
+Schema: `AddCartResponse`
 
 
 *Examples:*
@@ -2648,7 +2318,7 @@ Sorry, item is out of stock
 Update items in the cart
 
 ```kotlin
-cart.updateCart(id: id, i: i, b: b, body: body).safeAwait{ response,error->
+cart.updateCart(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -2662,7 +2332,7 @@ cart.updateCart(id: id, i: i, b: b, body: body).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? |  |    
+| uid | Int? |  |    
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
@@ -2672,10 +2342,10 @@ Use this API to update items added to the cart with the help of a request object
 
 
 
-Success. Updates and returns a cart object as shown below. Refer `UpdateRequestCartResponse` for more details.
+Success. Updates and returns a cart object as shown below. Refer `UpdateCartResponse` for more details.
 
 
-Schema: `UpdateCartDetailResponse`
+Schema: `UpdateCartResponse`
 
 
 *Examples:*
@@ -3054,7 +2724,7 @@ Item updated in the cart
 Count items in the cart
 
 ```kotlin
-cart.getItemCount(id: id).safeAwait{ response,error->
+cart.getItemCount(uid: uid).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -3068,7 +2738,7 @@ cart.getItemCount(id: id).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? | The unique identifier of the cart. |  
+| uid | Int? | The unique identifier of the cart. |  
 
 Use this API to get the total number of items present in cart.
 
@@ -3096,7 +2766,7 @@ Schema: `CartItemCountResponse`
 Fetch Coupon
 
 ```kotlin
-cart.getCoupons(id: id).safeAwait{ response,error->
+cart.getCoupons(uid: uid).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -3110,7 +2780,7 @@ cart.getCoupons(id: id).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? |  |  
+| uid | Int? |  |  
 
 Use this API to get a list of available coupons along with their details.
 
@@ -3138,7 +2808,7 @@ Schema: `GetCouponResponse`
 Apply Coupon
 
 ```kotlin
-cart.applyCoupon(i: i, b: b, p: p, id: id, body: body).safeAwait{ response,error->
+cart.applyCoupon(i: i, b: b, p: p, uid: uid, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -3155,23 +2825,11 @@ cart.applyCoupon(i: i, b: b, p: p, id: id, body: body).safeAwait{ response,error
 | i | Boolean? |  |    
 | b | Boolean? |  |    
 | p | Boolean? |  |    
-| id | String? |  |  
+| uid | Int? |  |  
 
 Use this API to apply coupons on items in the cart.
 
 *Success Response:*
-
-
-
-Success. Returns coupons applied to the cart along with item details and price breakup. Refer `CartResponse` for more details.
-
-
-Schema: `CartDetailResponse`
-
-
-
-
-
 
 
 
@@ -3183,7 +2841,7 @@ Schema: `CartDetailResponse`
 Remove Coupon Applied
 
 ```kotlin
-cart.removeCoupon(id: id).safeAwait{ response,error->
+cart.removeCoupon(uid: uid).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -3197,7 +2855,7 @@ cart.removeCoupon(id: id).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? | The unique identifier of the cart |  
+| uid | Int? | The unique identifier of the cart |  
 
 Remove Coupon applied on the cart by passing uid in request body.
 
@@ -3208,7 +2866,7 @@ Remove Coupon applied on the cart by passing uid in request body.
 Success. Returns coupons removed from the cart along with item details and price breakup. Refer `CartResponse` for more details.
 
 
-Schema: `CartDetailResponse`
+Schema: `CartResponse`
 
 
 
@@ -3333,18 +2991,6 @@ Offers not found
 
 
 
-Unhandled API error
-
-
-Schema: `HashMap<String,Any>`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -3353,7 +2999,7 @@ Schema: `HashMap<String,Any>`
 Apply reward points at cart
 
 ```kotlin
-cart.applyRewardPoints(id: id, i: i, b: b, body: body).safeAwait{ response,error->
+cart.applyRewardPoints(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -3367,7 +3013,7 @@ cart.applyRewardPoints(id: id, i: i, b: b, body: body).safeAwait{ response,error
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? |  |    
+| uid | Int? |  |    
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
@@ -3380,7 +3026,7 @@ Use this API to redeem a fixed no. of reward points by applying it to the cart.
 Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
 
 
-Schema: `CartDetailResponse`
+Schema: `CartResponse`
 
 
 
@@ -3397,7 +3043,7 @@ Schema: `CartDetailResponse`
 Fetch address
 
 ```kotlin
-cart.getAddresses(cartId: cartId, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
+cart.getAddresses(uid: uid, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -3411,7 +3057,7 @@ cart.getAddresses(cartId: cartId, mobileNo: mobileNo, checkoutMode: checkoutMode
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| cartId | String? |  |    
+| uid | Int? |  |    
 | mobileNo | String? |  |    
 | checkoutMode | String? |  |    
 | tags | String? |  |    
@@ -3484,7 +3130,7 @@ Schema: `SaveAddressResponse`
 Fetch a single address by its ID
 
 ```kotlin
-cart.getAddressById(id: id, cartId: cartId, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
+cart.getAddressById(id: id, uid: uid, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -3498,8 +3144,8 @@ cart.getAddressById(id: id, cartId: cartId, mobileNo: mobileNo, checkoutMode: ch
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? |  |    
-| cartId | String? |  |    
+| id | Int? |  |    
+| uid | Int? |  |    
 | mobileNo | String? |  |    
 | checkoutMode | String? |  |    
 | tags | String? |  |    
@@ -3545,23 +3191,11 @@ cart.updateAddress(id: id, body: body).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? | ID allotted to the selected address |  
+| id | Int? | ID allotted to the selected address |  
 
 Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
 
 *Success Response:*
-
-
-
-Success. Returns the address ID and a message indicating a successful address updation.
-
-
-Schema: `UpdateAddressResponse`
-
-
-
-
-
 
 
 
@@ -3587,23 +3221,11 @@ cart.removeAddress(id: id).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? | ID allotted to the selected address |  
+| id | Int? | ID allotted to the selected address |  
 
 Use this API to delete an address by its ID. This will returns an object that will indicate whether the address was deleted successfully or not.
 
 *Success Response:*
-
-
-
-Returns a Status object indicating the success or failure of address deletion.
-
-
-Schema: `DeleteAddressResponse`
-
-
-
-
-
 
 
 
@@ -3615,7 +3237,7 @@ Schema: `DeleteAddressResponse`
 Select an address from available addresses
 
 ```kotlin
-cart.selectAddress(cartId: cartId, i: i, b: b, body: body).safeAwait{ response,error->
+cart.selectAddress(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -3629,61 +3251,13 @@ cart.selectAddress(cartId: cartId, i: i, b: b, body: body).safeAwait{ response,e
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| cartId | String? |  |    
+| uid | Int? |  |    
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
 <p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
 
 *Success Response:*
-
-
-
-Success. Returns a Cart object as shown below. Refer `CartResponse` for more details.  .
-
-
-Schema: `CartDetailResponse`
-
-
-
-
-
-
-
-
-Address or PIN code error
-
-
-Schema: `HashMap<String,Any>`
-
-
-*Examples:*
-
-
-Address Not Found
-```json
-{
-  "value": {
-    "status": "ERROR",
-    "message": "ADDRESS_NOT_FOUND"
-  }
-}
-```
-
-Pincode Not Serviciable
-```json
-{
-  "value": {
-    "status": "ERROR",
-    "message": "PINCODE_NOT_SERVICIABLE"
-  }
-}
-```
-
-
-
-
-
 
 
 
@@ -3695,7 +3269,7 @@ Pincode Not Serviciable
 Update cart payment
 
 ```kotlin
-cart.selectPaymentMode(id: id, body: body).safeAwait{ response,error->
+cart.selectPaymentMode(uid: uid, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -3709,7 +3283,7 @@ cart.selectPaymentMode(id: id, body: body).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? |  |  
+| uid | String? |  |  
 
 Use this API to update cart payment.
 
@@ -3720,7 +3294,7 @@ Use this API to update cart payment.
 Success. Returns a Cart object as shown below. Refer `CartResponse` for more details.
 
 
-Schema: `CartDetailResponse`
+Schema: `CartResponse`
 
 
 
@@ -3737,7 +3311,7 @@ Schema: `CartDetailResponse`
 Verify the coupon eligibility against the payment mode
 
 ```kotlin
-cart.validateCouponForPayment(id: id, addressId: addressId, paymentMode: paymentMode, paymentIdentifier: paymentIdentifier, aggregatorName: aggregatorName, merchantCode: merchantCode).safeAwait{ response,error->
+cart.validateCouponForPayment(uid: uid, addressId: addressId, paymentMode: paymentMode, paymentIdentifier: paymentIdentifier, aggregatorName: aggregatorName, merchantCode: merchantCode).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -3751,7 +3325,7 @@ cart.validateCouponForPayment(id: id, addressId: addressId, paymentMode: payment
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? |  |    
+| uid | String? |  |    
 | addressId | String? |  |    
 | paymentMode | String? |  |    
 | paymentIdentifier | String? |  |    
@@ -3784,7 +3358,7 @@ Schema: `PaymentCouponValidate`
 Get delivery date and options before checkout
 
 ```kotlin
-cart.getShipments(p: p, id: id, addressId: addressId, areaCode: areaCode).safeAwait{ response,error->
+cart.getShipments(p: p, uid: uid, addressId: addressId, areaCode: areaCode).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -3799,8 +3373,8 @@ cart.getShipments(p: p, id: id, addressId: addressId, areaCode: areaCode).safeAw
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
 | p | Boolean? | This is a boolean value. Select `true` for getting a payment option in response. |    
-| id | String? | The unique identifier of the cart |    
-| addressId | String? | ID allotted to the selected address |    
+| uid | Int? | The unique identifier of the cart |    
+| addressId | Int? | ID allotted to the selected address |    
 | areaCode | String? | The PIN Code of the destination address, e.g. 400059 |  
 
 Use this API to get shipment details, expected delivery date, items and price breakup of the shipment.
@@ -4461,18 +4035,6 @@ Shipment Generation Failed
 
 
 
-Unhandled API error
-
-
-Schema: `HashMap<String,Any>`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -4899,7 +4461,7 @@ Successful checkout cod payment
 Update the cart meta
 
 ```kotlin
-cart.updateCartMeta(id: id, body: body).safeAwait{ response,error->
+cart.updateCartMeta(uid: uid, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -4913,7 +4475,7 @@ cart.updateCartMeta(id: id, body: body).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? | The unique identifier of the cart |  
+| uid | Int? | The unique identifier of the cart |  
 
 Use this API to update cart meta like checkout_mode and gstin.
 
@@ -4925,18 +4487,6 @@ Returns a message indicating the success of cart meta updation as shown below.
 
 
 Schema: `CartMetaResponse`
-
-
-
-
-
-
-
-
-Missing required Field
-
-
-Schema: `CartMetaMissingResponse`
 
 
 
@@ -5031,18 +4581,6 @@ Use this API to get the shared cart details as per the token generated using the
 
 
 Success. Returns a Cart object as per the valid token. Refer `SharedCartResponse` for more details.
-
-
-Schema: `SharedCartResponse`
-
-
-
-
-
-
-
-
-No cart found for the token sent
 
 
 Schema: `SharedCartResponse`
@@ -5375,6 +4913,56 @@ Cart Merged/Replaced
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+---
+
+
+
+---
+
+
+## Common
+
+
+#### getLocations
+Get countries, states, cities
+
+```kotlin
+common.getLocations(locationType: locationType, id: id).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+| Argument  |  Type  | Description |
+| --------- | ----  | --- |  
+| locationType | String? | Provide location type to query on |    
+| id | String? | Field is optional when location_type is country. If querying for state, provide id of country. If querying for city, provide id of state. |  
+
+
+
+*Success Response:*
+
+
+
+Success
+
+
+Schema: `Locations`
 
 
 
@@ -6478,30 +6066,6 @@ All pages
 
 
 
-
-
-Schema: `BlitzkriegApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `BlitzkriegInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -6547,30 +6111,6 @@ Home page
   "$ref": "#/components/examples/AvailablePageExample"
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-Schema: `BlitzkriegApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `BlitzkriegInternalServerError`
 
 
 
@@ -6632,30 +6172,6 @@ Applied Theme
 
 
 
-
-
-Schema: `BlitzkriegApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `BlitzkriegInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -6700,30 +6216,6 @@ Preview Theme
   "$ref": "#/components/examples/Themes"
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-Schema: `BlitzkriegApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `BlitzkriegInternalServerError`
 
 
 
@@ -6792,30 +6284,6 @@ Success
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -6859,30 +6327,6 @@ Success
   "$ref": "#/components/examples/AuthSuccess"
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -6944,30 +6388,6 @@ Success
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -7011,30 +6431,6 @@ Success
   "$ref": "#/components/examples/AuthSuccess"
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -7097,30 +6493,6 @@ Success
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -7173,30 +6545,6 @@ Success
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -7230,30 +6578,6 @@ Success. Check the example shown below or refer `ResetPasswordSuccess` for more 
 
 
 Schema: `ResetPasswordSuccess`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -7315,30 +6639,6 @@ Success
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -7371,30 +6671,6 @@ Success. Check the example shown below or refer `ResetPasswordSuccess` for more 
 
 
 Schema: `ResetPasswordSuccess`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -7456,42 +6732,6 @@ Success
 
 
 
-
-
-Schema: `HashMap<String,Any>`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -7525,30 +6765,6 @@ Success. Check the example shown below or refer `RegisterFormSuccess` for more d
 
 
 Schema: `RegisterFormSuccess`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -7599,30 +6815,6 @@ Schema: `VerifyEmailSuccess`
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -7655,30 +6847,6 @@ Success. Check the example shown below or refer `VerifyEmailSuccess` for more de
 
 
 Schema: `VerifyEmailSuccess`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -7729,30 +6897,6 @@ Schema: `HasPasswordSuccess`
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -7785,30 +6929,6 @@ Success. Returns a success message. Refer `VerifyEmailSuccess` for more details.
 
 
 Schema: `VerifyEmailSuccess`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
 
 
 
@@ -7859,30 +6979,6 @@ Schema: `LogoutSuccess`
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -7916,30 +7012,6 @@ Success. Returns a JSON object as shown below. Refer `OtpSuccess` for more detai
 
 
 Schema: `OtpSuccess`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -8002,30 +7074,6 @@ default
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -8059,30 +7107,6 @@ Success. Returns a JSON object as shown below. Refer `EmailOtpSuccess` for more 
 
 
 Schema: `EmailOtpSuccess`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -8145,30 +7169,6 @@ default
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -8221,30 +7221,6 @@ default
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -8277,30 +7253,6 @@ Success. Returns a JSON object containing an array of sessions. Refer `SessionLi
 
 
 Schema: `SessionListSuccess`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -8343,30 +7295,6 @@ Success. Returns a JSON object containing the all the platform configurations. R
 
 
 Schema: `PlatformSchema`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -8429,30 +7357,6 @@ default
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -8497,30 +7401,6 @@ default
   "$ref": "#/components/examples/VerifyMobileOTP"
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -8588,30 +7468,6 @@ default
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -8655,30 +7511,6 @@ default
   "$ref": "#/components/examples/UserExampleObject"
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -8741,30 +7573,6 @@ default
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -8809,30 +7617,6 @@ default
   "$ref": "#/components/examples/VerifyEmailOTP"
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -8899,30 +7683,6 @@ default
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -8975,30 +7735,6 @@ default
 
 
 
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -9032,30 +7768,6 @@ Request body must contain an email ID. Refer `EditEmailRequestSchema` for more d
 
 
 Schema: `SendEmailVerifyLinkSuccess`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationApiError`
-
-
-
-
-
-
-
-
-
-
-
-Schema: `AuthenticationInternalServerError`
 
 
 
@@ -9134,52 +7846,6 @@ No Announcement enabled
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -9224,52 +7890,6 @@ default
 ```json
 {
   "$ref": "#/components/examples/BlogResponse"
-}
-```
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
 }
 ```
 
@@ -9334,52 +7954,6 @@ default
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -9432,52 +8006,6 @@ default
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -9511,52 +8039,6 @@ Success. Returns a JSON object with categories of FAQ. Check the example shown b
 
 
 Schema: `GetFaqCategoriesSchema`
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
 
 
 
@@ -9607,52 +8089,6 @@ Schema: `FaqSchema`
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -9695,52 +8131,6 @@ Schema: `GetFaqCategoryBySlugSchema`
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -9775,52 +8165,6 @@ Success. Returns a categorized list of question and answers using its slug. Chec
 
 
 Schema: `GetFaqSchema`
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
 
 
 
@@ -9881,52 +8225,6 @@ default
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -9969,52 +8267,6 @@ Success
 ```json
 {
   "$ref": "#/components/examples/Legal"
-}
-```
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
 }
 ```
 
@@ -10079,52 +8331,6 @@ default
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -10169,52 +8375,6 @@ default
 ```json
 {
   "$ref": "#/components/examples/PageResponse"
-}
-```
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
 }
 ```
 
@@ -10279,52 +8439,6 @@ default
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -10367,52 +8481,6 @@ Success
 ```json
 {
   "$ref": "#/components/examples/Seo"
-}
-```
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
 }
 ```
 
@@ -10477,52 +8545,6 @@ default
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -10566,52 +8588,6 @@ default
 ```json
 {
   "$ref": "#/components/examples/SlideshowResponse"
-}
-```
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
 }
 ```
 
@@ -10674,52 +8650,6 @@ default
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
 
 ---
 
@@ -10753,52 +8683,6 @@ Success. Returns a JSON object containing all the tags injected in the applicati
 
 
 Schema: `TagsSchema`
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/4XXAPIError"
-}
-```
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `APIError`
-
-
-*Examples:*
-
-
-default
-```json
-{
-  "$ref": "#/components/examples/5XXAPIError"
-}
-```
 
 
 
@@ -10918,18 +8802,6 @@ default
 
 
 
-Bad request
-
-
-Schema: `BadRequest`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -10988,18 +8860,6 @@ reset
   "$ref": "#/components/examples/PushtokenResponseReset"
 }
 ```
-
-
-
-
-
-
-
-
-Bad request
-
-
-Schema: `BadRequest`
 
 
 
@@ -11098,18 +8958,6 @@ Schema: `QRCodeResp`
 
 
 
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -11144,18 +8992,6 @@ Success. Check the example shown below or refer `QRCodeResp` for more details.
 
 
 Schema: `QRCodeResp`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
 
 
 
@@ -11206,18 +9042,6 @@ Schema: `QRCodeResp`
 
 
 
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -11251,18 +9075,6 @@ Success. Check the example shown below or refer `ShortLinkRes` for more details.
 
 
 Schema: `ShortLinkRes`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
 
 
 
@@ -11313,18 +9125,6 @@ Schema: `ShortLinkRes`
 
 
 
-Error
-
-
-Schema: `ErrorRes`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -11359,18 +9159,6 @@ Success. Check the example shown below or refer `ShortLinkRes` for more details.
 
 
 Schema: `ShortLinkRes`
-
-
-
-
-
-
-
-
-Error
-
-
-Schema: `ErrorRes`
 
 
 
@@ -11446,18 +9234,6 @@ Schema: `StartResponse`
 
 
 
-Failed
-
-
-Schema: `FailedResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -11518,18 +9294,6 @@ Schema: `CompleteResponse`
 
 
 
-Failed
-
-
-Schema: `FailedResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -11570,18 +9334,6 @@ Success. Check the example shown below or refer `Application` for more details.
 
 
 Schema: `Application`
-
-
-
-
-
-
-
-
-Not found
-
-
-Schema: `NotFound`
 
 
 
@@ -11757,18 +9509,6 @@ Schema: `OrderingStores`
 
 
 
-Not found
-
-
-Schema: `NotFound`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -11802,18 +9542,6 @@ Success. Check the example shown below or refer `AppFeatureResponse` for more de
 
 
 Schema: `AppFeatureResponse`
-
-
-
-
-
-
-
-
-Not found
-
-
-Schema: `NotFound`
 
 
 
@@ -12028,18 +9756,6 @@ Schema: `SuccessMessageResponse`
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `NotFound`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -12125,18 +9841,6 @@ Schema: `AppStaffResponse`
 
 
 
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `UnhandledError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -12187,30 +9891,6 @@ Schema: `AggregatorsConfigDetailResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -12244,30 +9924,6 @@ Success. Check the example shown below or refer `AttachCardsResponse` for more d
 
 
 Schema: `AttachCardsResponse`
-
-
-
-
-
-
-
-
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `Any`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `Any`
 
 
 
@@ -12318,30 +9974,6 @@ Schema: `ActiveCardPaymentGatewayResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -12376,30 +10008,6 @@ Success. Returns a list of cards saved by the user. Check the example shown belo
 
 
 Schema: `ListCardsResponse`
-
-
-
-
-
-
-
-
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
 
 
 
@@ -12449,30 +10057,6 @@ Schema: `DeleteCardsResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -12506,30 +10090,6 @@ Success. Check the example shown below or refer `ValidateCustomerResponse` for m
 
 
 Schema: `ValidateCustomerResponse`
-
-
-
-
-
-
-
-
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
 
 
 
@@ -12579,30 +10139,6 @@ Schema: `ChargeCustomerResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -12636,30 +10172,6 @@ Success. Check the example shown below or refer `PaymentInitializationResponse` 
 
 
 Schema: `PaymentInitializationResponse`
-
-
-
-
-
-
-
-
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
 
 
 
@@ -12709,30 +10221,6 @@ Schema: `PaymentStatusUpdateResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -12773,30 +10261,6 @@ Success. Returns all available options for payment. Check the example shown belo
 
 
 Schema: `PaymentModeRouteResponse`
-
-
-
-
-
-
-
-
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
 
 
 
@@ -12854,30 +10318,6 @@ Schema: `PaymentModeRouteResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -12911,30 +10351,6 @@ Success. Return CreditLine Offer detail. Check the example shown below or refer 
 
 
 Schema: `RupifiBannerResponse`
-
-
-
-
-
-
-
-
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
 
 
 
@@ -12984,18 +10400,6 @@ Schema: `TransferModeResponse`
 
 
 
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -13029,18 +10433,6 @@ Success. Shows whether the refund mode was successfully enabled or disabled.
 
 
 Schema: `UpdateRefundTransferModeResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
 
 
 
@@ -13091,30 +10483,6 @@ Schema: `OrderBeneficiaryResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `NotFoundResourceError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -13149,30 +10517,6 @@ Success. Shows whether the IFSC code is valid, and returns the bank details. Che
 
 
 Schema: `IfscCodeResponse`
-
-
-
-
-
-
-
-
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `NotFoundResourceError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ErrorCodeDescription`
 
 
 
@@ -13223,30 +10567,6 @@ Schema: `OrderBeneficiaryResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `NotFoundResourceError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -13280,30 +10600,6 @@ Success. Check the example shown below or refer `AddBeneficiaryViaOtpVerificatio
 
 
 Schema: `AddBeneficiaryViaOtpVerificationResponse`
-
-
-
-
-
-
-
-
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `WrongOtpError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
 
 
 
@@ -13353,30 +10649,6 @@ Schema: `RefundAccountResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `NotFoundResourceError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -13418,30 +10690,6 @@ Schema: `WalletOtpResponse`
 
 
 
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `NotFoundResourceError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -13475,30 +10723,6 @@ Success. Check the example shown below or refer `SetDefaultBeneficiaryResponse` 
 
 
 Schema: `SetDefaultBeneficiaryResponse`
-
-
-
-
-
-
-
-
-Bad Request. See the error object in the response body to know the exact reason.
-
-
-Schema: `SetDefaultBeneficiaryResponse`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `HttpErrorCodeAndResponse`
 
 
 
@@ -13560,30 +10784,6 @@ Schema: `OrderList`
 
 
 
-API Error. See the error object in the response body to know the exact reason.. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -13618,30 +10818,6 @@ Success. Check the example shown below or refer `OrderById` for more details.
 
 
 Schema: `OrderById`
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
 
 
 
@@ -13692,30 +10868,6 @@ Schema: `ShipmentById`
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -13750,30 +10902,6 @@ Success. Check the example shown below or refer `ShipmentReasons` for more detai
 
 
 Schema: `ShipmentReasons`
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
 
 
 
@@ -13824,30 +10952,6 @@ Schema: `ShipmentStatusUpdate`
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -13890,30 +10994,6 @@ Schema: `ShipmentTrack`
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -13948,30 +11028,6 @@ Success. Check the example shown below or refer `PosOrderById` for more details.
 
 
 Schema: `PosOrderById`
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
 
 
 
@@ -14028,18 +11084,6 @@ Schema: `CatalogueOrderResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `Error`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14074,18 +11118,6 @@ Success. Check example below or refer `Offer` for more details.
 
 
 Schema: `Offer`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `Error`
 
 
 
@@ -14135,18 +11167,6 @@ Schema: `OrderDiscountResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `Error`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14180,18 +11200,6 @@ Success. Check example below or refer `PointsResponse` for more details.
 
 
 Schema: `PointsResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `Error`
 
 
 
@@ -14243,18 +11251,6 @@ Schema: `PointsHistoryResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `Error`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14296,18 +11292,6 @@ Schema: `ReferralDetailsResponse`
 
 
 
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `Error`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14341,18 +11325,6 @@ Success. Check example below or refer `RedeemReferralCodeResponse` for more deta
 
 
 Schema: `RedeemReferralCodeResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body to know the exact reason.
-
-
-Schema: `Error`
 
 
 
@@ -14409,18 +11381,6 @@ Schema: `InsertResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14454,18 +11414,6 @@ Success.
 
 
 Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -14520,18 +11468,6 @@ Schema: `ReportAbuseGetResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14575,18 +11511,6 @@ Schema: `AttributeResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14620,18 +11544,6 @@ Success. Returns an attribute ID.
 
 
 Schema: `InsertResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -14682,18 +11594,6 @@ Schema: `Attribute`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14728,18 +11628,6 @@ Success.
 
 
 Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -14789,18 +11677,6 @@ Schema: `InsertResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14834,18 +11710,6 @@ Success.
 
 
 Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -14901,18 +11765,6 @@ Schema: `CommentGetResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -14948,18 +11800,6 @@ Success. Returns a Product object. Check the example shown below or refer `Check
 
 
 Schema: `CheckEligibilityResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -15010,18 +11850,6 @@ Schema: `UpdateResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -15063,18 +11891,6 @@ Schema: `InsertResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -15108,18 +11924,6 @@ Success.
 
 
 Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -15175,18 +11979,6 @@ Schema: `MediaGetResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -15225,18 +12017,6 @@ Success. Check the example shown below or refer `ReviewMetricGetResponse` for mo
 
 
 Schema: `ReviewMetricGetResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -15286,18 +12066,6 @@ Schema: `UpdateResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -15331,18 +12099,6 @@ Success.
 
 
 Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -15405,18 +12161,6 @@ Schema: `ReviewGetResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -15453,18 +12197,6 @@ Success. Check the example shown below or refer `TemplateGetResponse` for more d
 
 
 Schema: `TemplateGetResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -15514,18 +12246,6 @@ Schema: `InsertResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -15559,18 +12279,6 @@ Success.
 
 
 Schema: `UpdateResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -15627,18 +12335,6 @@ Schema: `QNAGetResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -15676,18 +12372,6 @@ Success. Check the example shown below or refer `VoteResponse` for more details.
 
 
 Schema: `VoteResponse`
-
-
-
-
-
-
-
-
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
 
 
 
@@ -15737,18 +12421,6 @@ Schema: `InsertResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -15790,18 +12462,6 @@ Schema: `UpdateResponse`
 
 
 
-Bad request. See the error object in the response body for specific reason.
-
-
-Schema: `FeedbackError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -15817,7 +12477,7 @@ Schema: `FeedbackError`
 Fetch all items added to the cart
 
 ```kotlin
-poscart.getCart(id: id, i: i, b: b, assignCardId: assignCardId).safeAwait{ response,error->
+poscart.getCart(uid: uid, i: i, b: b, assignCardId: assignCardId).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -15831,7 +12491,7 @@ poscart.getCart(id: id, i: i, b: b, assignCardId: assignCardId).safeAwait{ respo
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? |  |    
+| uid | Int? |  |    
 | i | Boolean? |  |    
 | b | Boolean? |  |    
 | assignCardId | Int? |  |  
@@ -15845,7 +12505,7 @@ Use this API to get details of all the items added to a cart.
 Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
 
 
-Schema: `CartDetailResponse`
+Schema: `CartResponse`
 
 
 
@@ -15862,7 +12522,7 @@ Schema: `CartDetailResponse`
 Fetch last-modified timestamp
 
 ```kotlin
-poscart.getCartLastModified(id: id).safeAwait{ response,error->
+poscart.getCartLastModified(uid: uid).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -15876,7 +12536,7 @@ poscart.getCartLastModified(id: id).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? |  |  
+| uid | Int? |  |  
 
 Use this API to fetch Last-Modified timestamp in header metadata.
 
@@ -15921,10 +12581,10 @@ Use this API to add items to the cart.
 
 
 
-Success. Returns a cart object as shown below. Refer `AddRequestCartResponse` for more details.
+Success. Returns a cart object as shown below. Refer `AddCartResponse` for more details.
 
 
-Schema: `AddCartDetailResponse`
+Schema: `AddCartResponse`
 
 
 *Examples:*
@@ -16574,7 +13234,7 @@ Sorry, item is out of stock
 Update items in the cart
 
 ```kotlin
-poscart.updateCart(id: id, i: i, b: b, body: body).safeAwait{ response,error->
+poscart.updateCart(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -16588,7 +13248,7 @@ poscart.updateCart(id: id, i: i, b: b, body: body).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? |  |    
+| uid | Int? |  |    
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
@@ -16598,10 +13258,10 @@ Use this API to update items added to the cart with the help of a request object
 
 
 
-Success. Updates and returns a cart object as shown below. Refer `UpdateRequestCartResponse` for more details.
+Success. Updates and returns a cart object as shown below. Refer `UpdateCartResponse` for more details.
 
 
-Schema: `UpdateCartDetailResponse`
+Schema: `UpdateCartResponse`
 
 
 *Examples:*
@@ -16980,7 +13640,7 @@ Item updated in the cart
 Count items in the cart
 
 ```kotlin
-poscart.getItemCount(id: id).safeAwait{ response,error->
+poscart.getItemCount(uid: uid).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -16994,7 +13654,7 @@ poscart.getItemCount(id: id).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? | The unique identifier of the cart. |  
+| uid | Int? | The unique identifier of the cart. |  
 
 Use this API to get the total number of items present in cart.
 
@@ -17022,7 +13682,7 @@ Schema: `CartItemCountResponse`
 Fetch Coupon
 
 ```kotlin
-poscart.getCoupons(id: id).safeAwait{ response,error->
+poscart.getCoupons(uid: uid).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -17036,7 +13696,7 @@ poscart.getCoupons(id: id).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? |  |  
+| uid | Int? |  |  
 
 Use this API to get a list of available coupons along with their details.
 
@@ -17064,7 +13724,7 @@ Schema: `GetCouponResponse`
 Apply Coupon
 
 ```kotlin
-poscart.applyCoupon(i: i, b: b, p: p, id: id, body: body).safeAwait{ response,error->
+poscart.applyCoupon(i: i, b: b, p: p, uid: uid, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -17081,23 +13741,11 @@ poscart.applyCoupon(i: i, b: b, p: p, id: id, body: body).safeAwait{ response,er
 | i | Boolean? |  |    
 | b | Boolean? |  |    
 | p | Boolean? |  |    
-| id | String? |  |  
+| uid | Int? |  |  
 
 Use this API to apply coupons on items in the cart.
 
 *Success Response:*
-
-
-
-Success. Returns coupons applied to the cart along with item details and price breakup. Refer `CartResponse` for more details.
-
-
-Schema: `CartDetailResponse`
-
-
-
-
-
 
 
 
@@ -17109,7 +13757,7 @@ Schema: `CartDetailResponse`
 Remove Coupon Applied
 
 ```kotlin
-poscart.removeCoupon(id: id).safeAwait{ response,error->
+poscart.removeCoupon(uid: uid).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -17123,7 +13771,7 @@ poscart.removeCoupon(id: id).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? | The unique identifier of the cart |  
+| uid | Int? | The unique identifier of the cart |  
 
 Remove Coupon applied on the cart by passing uid in request body.
 
@@ -17134,7 +13782,7 @@ Remove Coupon applied on the cart by passing uid in request body.
 Success. Returns coupons removed from the cart along with item details and price breakup. Refer `CartResponse` for more details.
 
 
-Schema: `CartDetailResponse`
+Schema: `CartResponse`
 
 
 
@@ -17259,18 +13907,6 @@ Offers not found
 
 
 
-Unhandled API error
-
-
-Schema: `HashMap<String,Any>`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -17279,7 +13915,7 @@ Schema: `HashMap<String,Any>`
 Apply reward points at cart
 
 ```kotlin
-poscart.applyRewardPoints(id: id, i: i, b: b, body: body).safeAwait{ response,error->
+poscart.applyRewardPoints(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -17293,7 +13929,7 @@ poscart.applyRewardPoints(id: id, i: i, b: b, body: body).safeAwait{ response,er
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? |  |    
+| uid | Int? |  |    
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
@@ -17306,7 +13942,7 @@ Use this API to redeem a fixed no. of reward points by applying it to the cart.
 Success. Returns a Cart object. Check the example shown below or refer `CartResponse` for more details.
 
 
-Schema: `CartDetailResponse`
+Schema: `CartResponse`
 
 
 
@@ -17323,7 +13959,7 @@ Schema: `CartDetailResponse`
 Fetch address
 
 ```kotlin
-poscart.getAddresses(cartId: cartId, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
+poscart.getAddresses(uid: uid, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -17337,7 +13973,7 @@ poscart.getAddresses(cartId: cartId, mobileNo: mobileNo, checkoutMode: checkoutM
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| cartId | String? |  |    
+| uid | Int? |  |    
 | mobileNo | String? |  |    
 | checkoutMode | String? |  |    
 | tags | String? |  |    
@@ -17410,7 +14046,7 @@ Schema: `SaveAddressResponse`
 Fetch a single address by its ID
 
 ```kotlin
-poscart.getAddressById(id: id, cartId: cartId, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
+poscart.getAddressById(id: id, uid: uid, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -17424,8 +14060,8 @@ poscart.getAddressById(id: id, cartId: cartId, mobileNo: mobileNo, checkoutMode:
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? |  |    
-| cartId | String? |  |    
+| id | Int? |  |    
+| uid | Int? |  |    
 | mobileNo | String? |  |    
 | checkoutMode | String? |  |    
 | tags | String? |  |    
@@ -17471,23 +14107,11 @@ poscart.updateAddress(id: id, body: body).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? | ID allotted to the selected address |  
+| id | Int? | ID allotted to the selected address |  
 
 Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
 
 *Success Response:*
-
-
-
-Success. Returns the address ID and a message indicating a successful address updation.
-
-
-Schema: `UpdateAddressResponse`
-
-
-
-
-
 
 
 
@@ -17513,23 +14137,11 @@ poscart.removeAddress(id: id).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? | ID allotted to the selected address |  
+| id | Int? | ID allotted to the selected address |  
 
 Use this API to delete an address by its ID. This will returns an object that will indicate whether the address was deleted successfully or not.
 
 *Success Response:*
-
-
-
-Returns a Status object indicating the success or failure of address deletion.
-
-
-Schema: `DeleteAddressResponse`
-
-
-
-
-
 
 
 
@@ -17541,7 +14153,7 @@ Schema: `DeleteAddressResponse`
 Select an address from available addresses
 
 ```kotlin
-poscart.selectAddress(cartId: cartId, i: i, b: b, body: body).safeAwait{ response,error->
+poscart.selectAddress(uid: uid, i: i, b: b, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -17555,61 +14167,13 @@ poscart.selectAddress(cartId: cartId, i: i, b: b, body: body).safeAwait{ respons
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| cartId | String? |  |    
+| uid | Int? |  |    
 | i | Boolean? |  |    
 | b | Boolean? |  |  
 
 <p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
 
 *Success Response:*
-
-
-
-Success. Returns a Cart object as shown below. Refer `CartResponse` for more details.  .
-
-
-Schema: `CartDetailResponse`
-
-
-
-
-
-
-
-
-Address or PIN code error
-
-
-Schema: `HashMap<String,Any>`
-
-
-*Examples:*
-
-
-Address Not Found
-```json
-{
-  "value": {
-    "status": "ERROR",
-    "message": "ADDRESS_NOT_FOUND"
-  }
-}
-```
-
-Pincode Not Serviciable
-```json
-{
-  "value": {
-    "status": "ERROR",
-    "message": "PINCODE_NOT_SERVICIABLE"
-  }
-}
-```
-
-
-
-
-
 
 
 
@@ -17621,7 +14185,7 @@ Pincode Not Serviciable
 Update cart payment
 
 ```kotlin
-poscart.selectPaymentMode(id: id, body: body).safeAwait{ response,error->
+poscart.selectPaymentMode(uid: uid, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -17635,7 +14199,7 @@ poscart.selectPaymentMode(id: id, body: body).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? |  |  
+| uid | String? |  |  
 
 Use this API to update cart payment.
 
@@ -17646,7 +14210,7 @@ Use this API to update cart payment.
 Success. Returns a Cart object as shown below. Refer `CartResponse` for more details.
 
 
-Schema: `CartDetailResponse`
+Schema: `CartResponse`
 
 
 
@@ -17663,7 +14227,7 @@ Schema: `CartDetailResponse`
 Verify the coupon eligibility against the payment mode
 
 ```kotlin
-poscart.validateCouponForPayment(id: id, addressId: addressId, paymentMode: paymentMode, paymentIdentifier: paymentIdentifier, aggregatorName: aggregatorName, merchantCode: merchantCode).safeAwait{ response,error->
+poscart.validateCouponForPayment(uid: uid, addressId: addressId, paymentMode: paymentMode, paymentIdentifier: paymentIdentifier, aggregatorName: aggregatorName, merchantCode: merchantCode).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -17677,7 +14241,7 @@ poscart.validateCouponForPayment(id: id, addressId: addressId, paymentMode: paym
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? |  |    
+| uid | String? |  |    
 | addressId | String? |  |    
 | paymentMode | String? |  |    
 | paymentIdentifier | String? |  |    
@@ -17710,7 +14274,7 @@ Schema: `PaymentCouponValidate`
 Get delivery date and options before checkout
 
 ```kotlin
-poscart.getShipments(pickAtStoreUid: pickAtStoreUid, orderingStoreId: orderingStoreId, p: p, id: id, addressId: addressId, areaCode: areaCode, orderType: orderType).safeAwait{ response,error->
+poscart.getShipments(pickAtStoreUid: pickAtStoreUid, orderingStoreId: orderingStoreId, p: p, uid: uid, addressId: addressId, areaCode: areaCode, orderType: orderType).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -17727,8 +14291,8 @@ poscart.getShipments(pickAtStoreUid: pickAtStoreUid, orderingStoreId: orderingSt
 | pickAtStoreUid | Int? |  |    
 | orderingStoreId | Int? |  |    
 | p | Boolean? | This is a boolean value. Select `true` for getting a payment option in response. |    
-| id | String? | The unique identifier of the cart |    
-| addressId | String? | ID allotted to the selected address |    
+| uid | Int? | The unique identifier of the cart |    
+| addressId | Int? | ID allotted to the selected address |    
 | areaCode | String? | The PIN Code of the destination address, e.g. 400059 |    
 | orderType | String? | The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. |  
 
@@ -18390,18 +14954,6 @@ Shipment Generation Failed
 
 
 
-Unhandled API error
-
-
-Schema: `HashMap<String,Any>`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -18410,7 +14962,7 @@ Schema: `HashMap<String,Any>`
 Update shipment delivery type and quantity before checkout
 
 ```kotlin
-poscart.updateShipments(i: i, p: p, id: id, addressId: addressId, orderType: orderType, body: body).safeAwait{ response,error->
+poscart.updateShipments(i: i, p: p, uid: uid, addressId: addressId, orderType: orderType, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -18426,8 +14978,8 @@ poscart.updateShipments(i: i, p: p, id: id, addressId: addressId, orderType: ord
 | --------- | ----  | --- |  
 | i | Boolean? | This is a boolean value. Select `true` to retrieve all the items added in the cart. |    
 | p | Boolean? | This is a boolean value. Select `true` for getting a payment option in response. |    
-| id | String? | The unique identifier of the cart |    
-| addressId | String? | ID allotted to an address |    
+| uid | Int? | The unique identifier of the cart |    
+| addressId | Int? | ID allotted to an address |    
 | orderType | String? | The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. |  
 
 Use this API to update the delivery type and quantity as per customer's preference for either store pick-up or home-delivery.
@@ -19089,18 +15641,6 @@ Shipment Generation Failed
 
 
 
-Unhandled API error
-
-
-Schema: `HashMap<String,Any>`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -19109,7 +15649,7 @@ Schema: `HashMap<String,Any>`
 Checkout all items in the cart
 
 ```kotlin
-poscart.checkoutCart(id: id, body: body).safeAwait{ response,error->
+poscart.checkoutCart(uid: uid, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -19123,7 +15663,7 @@ poscart.checkoutCart(id: id, body: body).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? |  |  
+| uid | Int? |  |  
 
 Use this API to checkout all items in the cart for payment and order generation. For COD, order will be generated directly, whereas for other checkout modes, user will be redirected to a payment gateway.
 
@@ -19528,7 +16068,7 @@ Successful checkout cod payment
 Update the cart meta
 
 ```kotlin
-poscart.updateCartMeta(id: id, body: body).safeAwait{ response,error->
+poscart.updateCartMeta(uid: uid, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -19542,7 +16082,7 @@ poscart.updateCartMeta(id: id, body: body).safeAwait{ response,error->
 
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
-| id | String? | The unique identifier of the cart |  
+| uid | Int? | The unique identifier of the cart |  
 
 Use this API to update cart meta like checkout_mode and gstin.
 
@@ -19562,18 +16102,6 @@ Schema: `CartMetaResponse`
 
 
 
-Missing required Field
-
-
-Schema: `CartMetaMissingResponse`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -19582,7 +16110,7 @@ Schema: `CartMetaMissingResponse`
 Get available delivery modes for cart
 
 ```kotlin
-poscart.getAvailableDeliveryModes(areaCode: areaCode, id: id).safeAwait{ response,error->
+poscart.getAvailableDeliveryModes(areaCode: areaCode, uid: uid).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -19597,7 +16125,7 @@ poscart.getAvailableDeliveryModes(areaCode: areaCode, id: id).safeAwait{ respons
 | Argument  |  Type  | Description |
 | --------- | ----  | --- |  
 | areaCode | String? |  |    
-| id | String? |  |  
+| uid | Int? |  |  
 
 Use this API to get the delivery modes (home-delivery/store-pickup) along with a list of pickup stores available for a given cart at a given PIN Code. User can then view the address of a pickup store with the help of store-address API.
 
@@ -19745,18 +16273,6 @@ Use this API to get the shared cart details as per the token generated using the
 
 
 Success. Returns a Cart object as per the valid token. Refer `SharedCartResponse` for more details.
-
-
-Schema: `SharedCartResponse`
-
-
-
-
-
-
-
-
-No cart found for the token sent
 
 
 Schema: `SharedCartResponse`
@@ -20145,30 +16661,6 @@ Schema: `GetTatProductResponse`
 
 
 
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
 
 ---
 
@@ -20203,30 +16695,6 @@ Success. Returns a JSON object containing the city name, state and country ident
 
 
 Schema: `GetPincodeCityResponse`
-
-
-
-
-
-
-
-
-API Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
-
-
-
-
-
-
-
-
-Internal Server Error. See the error object in the response body to know the exact reason.
-
-
-Schema: `ApefaceApiError`
 
 
 
