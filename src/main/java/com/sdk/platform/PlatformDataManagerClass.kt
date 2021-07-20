@@ -4888,12 +4888,12 @@ class CatalogDataManagerClass(val config: PlatformConfig) : BaseRepository() {
     }
     
     
-    suspend fun getProducts(brandIds: ArrayList<Double>?=null, categoryIds: ArrayList<Double>?=null, departmentIds: ArrayList<Double>?=null, q: String?=null, pageNo: Int?=null, pageSize: Int?=null)
+    suspend fun getProducts(brandIds: ArrayList<Double>?=null, categoryIds: ArrayList<Double>?=null, departmentIds: ArrayList<Double>?=null, itemIds: ArrayList<Double>?=null, itemCode: ArrayList<Double>?=null, q: String?=null, pageNo: Int?=null, pageSize: Int?=null)
     : Deferred<Response<ProductListingResponse>>? {
         
         return if (config.oauthClient.isAccessTokenValid()) {
             catalogApiList?.getProducts(
-        companyId = config.companyId, brandIds = brandIds, categoryIds = categoryIds, departmentIds = departmentIds, q = q, pageNo = pageNo, pageSize = pageSize )
+        companyId = config.companyId, brandIds = brandIds, categoryIds = categoryIds, departmentIds = departmentIds, itemIds = itemIds, itemCode = itemCode, q = q, pageNo = pageNo, pageSize = pageSize )
         } else {
             null
         } 
@@ -5871,6 +5871,18 @@ class CompanyProfileDataManagerClass(val config: PlatformConfig) : BaseRepositor
     }
     
     
+    suspend fun createCompanyBrandMapping(body: CompanyBrandPostRequestSerializer)
+    : Deferred<Response<SuccessResponse>>? {
+        
+        return if (config.oauthClient.isAccessTokenValid()) {
+            companyProfileApiList?.createCompanyBrandMapping(
+        companyId = config.companyId, body = body)
+        } else {
+            null
+        } 
+    }
+    
+    
     suspend fun getBrands(pageNo: Int?=null, pageSize: Int?=null)
     : Deferred<Response<CompanyBrandListSerializer>>? {
         
@@ -5883,11 +5895,11 @@ class CompanyProfileDataManagerClass(val config: PlatformConfig) : BaseRepositor
     }
     
     
-    suspend fun createCompanyBrandMapping(body: CompanyBrandPostRequestSerializer)
+    suspend fun createLocation(body: LocationSerializer)
     : Deferred<Response<SuccessResponse>>? {
         
         return if (config.oauthClient.isAccessTokenValid()) {
-            companyProfileApiList?.createCompanyBrandMapping(
+            companyProfileApiList?.createLocation(
         companyId = config.companyId, body = body)
         } else {
             null
@@ -5901,18 +5913,6 @@ class CompanyProfileDataManagerClass(val config: PlatformConfig) : BaseRepositor
         return if (config.oauthClient.isAccessTokenValid()) {
             companyProfileApiList?.getLocations(
         companyId = config.companyId, storeType = storeType, q = q, stage = stage, pageNo = pageNo, pageSize = pageSize )
-        } else {
-            null
-        } 
-    }
-    
-    
-    suspend fun createLocation(body: LocationSerializer)
-    : Deferred<Response<SuccessResponse>>? {
-        
-        return if (config.oauthClient.isAccessTokenValid()) {
-            companyProfileApiList?.createLocation(
-        companyId = config.companyId, body = body)
         } else {
             null
         } 
@@ -8099,18 +8099,6 @@ class WebhookDataManagerClass(val config: PlatformConfig) : BaseRepository() {
     }
     
     
-    suspend fun getSubscribersByCompanyAndEventId(pageNo: Int?=null, pageSize: Int?=null, eventId: String)
-    : Deferred<Response<SubscriberConfigList>>? {
-        
-        return if (config.oauthClient.isAccessTokenValid()) {
-            webhookApiList?.getSubscribersByCompanyAndEventId(
-        pageNo = pageNo, pageSize = pageSize, companyId = config.companyId, eventId = eventId )
-        } else {
-            null
-        } 
-    }
-    
-    
     suspend fun registerSubscriberToEvent(body: SubscriberConfig)
     : Deferred<Response<SubscriberConfig>>? {
         
@@ -8137,7 +8125,6 @@ class WebhookDataManagerClass(val config: PlatformConfig) : BaseRepository() {
 
 inner class ApplicationClient(val applicationId:String,val config: PlatformConfig){
 
-    
     
     
     
