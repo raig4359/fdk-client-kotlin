@@ -613,13 +613,18 @@ class CatalogDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
 
     
     
-    fun getStores(pageNo: Int?=null, pageSize: Int?=null, q: String?=null, range: Int?=null, latitude: Double?=null, longitude: Double?=null): Deferred<Response<StoreListingResponse>>? {
-        return catalogApiList?.getStores(pageNo = pageNo, pageSize = pageSize, q = q, range = range, latitude = latitude, longitude = longitude)}
+    fun getStores(pageNo: Int?=null, pageSize: Int?=null, q: String?=null, city: String?=null, range: Int?=null, latitude: Double?=null, longitude: Double?=null): Deferred<Response<StoreListingResponse>>? {
+        return catalogApiList?.getStores(pageNo = pageNo, pageSize = pageSize, q = q, city = city, range = range, latitude = latitude, longitude = longitude)}
 
     
     
     
         
+            
+            
+        
+            
+                
             
             
         
@@ -652,7 +657,7 @@ class CatalogDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
     *
     * Summary: Paginator for getStores
     **/
-    fun getStoresPaginator(pageSize: Int?=null, q: String?=null, range: Int?=null, latitude: Double?=null, longitude: Double?=null) : Paginator<StoreListingResponse>{
+    fun getStoresPaginator(pageSize: Int?=null, q: String?=null, city: String?=null, range: Int?=null, latitude: Double?=null, longitude: Double?=null) : Paginator<StoreListingResponse>{
 
     val paginator = Paginator<StoreListingResponse>()
 
@@ -663,7 +668,7 @@ class CatalogDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
                 val pageId = paginator.nextId
                 val pageNo = paginator.pageNo
                 val pageType = "number"
-                catalogApiList?.getStores(pageNo = pageNo, pageSize = pageSize, q = q, range = range, latitude = latitude, longitude = longitude)?.safeAwait{ response, error ->
+                catalogApiList?.getStores(pageNo = pageNo, pageSize = pageSize, q = q, city = city, range = range, latitude = latitude, longitude = longitude)?.safeAwait{ response, error ->
                     response?.let {
                         val page = response.peekContent()?.page
                         paginator.setPaginator(hasNext=page?.hasNext?:false,pageNo=if (page?.hasNext == true) ((pageNo ?: 0) + 1) else pageNo)
@@ -738,7 +743,7 @@ class CartDataManagerClass(val config: ApplicationConfig) : BaseRepository() {
 
     
     
-    fun applyCoupon(i: Boolean?=null, b: Boolean?=null, p: Boolean?=null, id: String?=null, body: ApplyCouponRequest): Deferred<Response<Any>>? {
+    fun applyCoupon(i: Boolean?=null, b: Boolean?=null, p: Boolean?=null, id: String?=null, body: ApplyCouponRequest): Deferred<Response<CartDetailResponse>>? {
         return cartApiList?.applyCoupon(i = i, b = b, p = p, id = id, body = body)}
 
     
@@ -773,17 +778,17 @@ class CartDataManagerClass(val config: ApplicationConfig) : BaseRepository() {
 
     
     
-    fun updateAddress(id: String, body: Address): Deferred<Response<Any>>? {
+    fun updateAddress(id: String, body: Address): Deferred<Response<UpdateAddressResponse>>? {
         return cartApiList?.updateAddress(id = id, body = body)}
 
     
     
-    fun removeAddress(id: String): Deferred<Response<Any>>? {
+    fun removeAddress(id: String): Deferred<Response<DeleteAddressResponse>>? {
         return cartApiList?.removeAddress(id = id)}
 
     
     
-    fun selectAddress(cartId: String?=null, i: Boolean?=null, b: Boolean?=null, body: SelectCartAddressRequest): Deferred<Response<Any>>? {
+    fun selectAddress(cartId: String?=null, i: Boolean?=null, b: Boolean?=null, body: SelectCartAddressRequest): Deferred<Response<CartDetailResponse>>? {
         return cartApiList?.selectAddress(cartId = cartId, i = i, b = b, body = body)}
 
     
@@ -996,23 +1001,23 @@ class UserDataManagerClass(val config: ApplicationConfig) : BaseRepository() {
         return retrofitHttpClient?.initializeRestClient(UserApiList::class.java) as? UserApiList
     }
     
-    fun loginWithFacebook(body: OAuthRequestSchema): Deferred<Response<AuthSuccess>>? {
-        return userApiList?.loginWithFacebook(body = body)}
+    fun loginWithFacebook(platform: String?=null, body: OAuthRequestSchema): Deferred<Response<AuthSuccess>>? {
+        return userApiList?.loginWithFacebook(platform = platform, body = body)}
 
     
     
-    fun loginWithGoogle(body: OAuthRequestSchema): Deferred<Response<AuthSuccess>>? {
-        return userApiList?.loginWithGoogle(body = body)}
+    fun loginWithGoogle(platform: String?=null, body: OAuthRequestSchema): Deferred<Response<AuthSuccess>>? {
+        return userApiList?.loginWithGoogle(platform = platform, body = body)}
 
     
     
-    fun loginWithGoogleAndroid(body: OAuthRequestSchema): Deferred<Response<AuthSuccess>>? {
-        return userApiList?.loginWithGoogleAndroid(body = body)}
+    fun loginWithGoogleAndroid(platform: String?=null, body: OAuthRequestSchema): Deferred<Response<AuthSuccess>>? {
+        return userApiList?.loginWithGoogleAndroid(platform = platform, body = body)}
 
     
     
-    fun loginWithGoogleIOS(body: OAuthRequestSchema): Deferred<Response<AuthSuccess>>? {
-        return userApiList?.loginWithGoogleIOS(body = body)}
+    fun loginWithGoogleIOS(platform: String?=null, body: OAuthRequestSchema): Deferred<Response<AuthSuccess>>? {
+        return userApiList?.loginWithGoogleIOS(platform = platform, body = body)}
 
     
     
@@ -2757,7 +2762,7 @@ class PosCartDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
 
     
     
-    fun applyCoupon(i: Boolean?=null, b: Boolean?=null, p: Boolean?=null, id: String?=null, body: ApplyCouponRequest): Deferred<Response<Any>>? {
+    fun applyCoupon(i: Boolean?=null, b: Boolean?=null, p: Boolean?=null, id: String?=null, body: ApplyCouponRequest): Deferred<Response<CartDetailResponse>>? {
         return posCartApiList?.applyCoupon(i = i, b = b, p = p, id = id, body = body)}
 
     
@@ -2792,17 +2797,17 @@ class PosCartDataManagerClass(val config: ApplicationConfig) : BaseRepository() 
 
     
     
-    fun updateAddress(id: String, body: Address): Deferred<Response<Any>>? {
+    fun updateAddress(id: String, body: Address): Deferred<Response<UpdateAddressResponse>>? {
         return posCartApiList?.updateAddress(id = id, body = body)}
 
     
     
-    fun removeAddress(id: String): Deferred<Response<Any>>? {
+    fun removeAddress(id: String): Deferred<Response<DeleteAddressResponse>>? {
         return posCartApiList?.removeAddress(id = id)}
 
     
     
-    fun selectAddress(cartId: String?=null, i: Boolean?=null, b: Boolean?=null, body: SelectCartAddressRequest): Deferred<Response<Any>>? {
+    fun selectAddress(cartId: String?=null, i: Boolean?=null, b: Boolean?=null, body: SelectCartAddressRequest): Deferred<Response<CartDetailResponse>>? {
         return posCartApiList?.selectAddress(cartId = cartId, i = i, b = b, body = body)}
 
     
