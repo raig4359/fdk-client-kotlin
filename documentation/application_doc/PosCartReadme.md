@@ -2,45 +2,49 @@
 
 
 
-## Lead Methods
-Handles communication between Administrator <-> Staff and Staff <-> Users
-* [getTickets](#gettickets)
-* [createTicket](#createticket)
-* [getTickets](#gettickets)
-* [getTicket](#getticket)
-* [editTicket](#editticket)
-* [getTicket](#getticket)
-* [editTicket](#editticket)
-* [createHistory](#createhistory)
-* [getTicketHistory](#gettickethistory)
-* [getFeedbacks](#getfeedbacks)
-* [submitFeedback](#submitfeedback)
-* [createHistory](#createhistory)
-* [getTicketHistory](#gettickethistory)
-* [getCustomForm](#getcustomform)
-* [editCustomForm](#editcustomform)
-* [getCustomForms](#getcustomforms)
-* [createCustomForm](#createcustomform)
-* [getTokenForVideoRoom](#gettokenforvideoroom)
-* [getTokenForVideoRoom](#gettokenforvideoroom)
-* [getVideoParticipants](#getvideoparticipants)
-* [getVideoParticipants](#getvideoparticipants)
-* [openVideoRoom](#openvideoroom)
-* [closeVideoRoom](#closevideoroom)
+## PosCart Methods
+Cart APIs
+* [getCart](#getcart)
+* [getCartLastModified](#getcartlastmodified)
+* [addItems](#additems)
+* [updateCart](#updatecart)
+* [getItemCount](#getitemcount)
+* [getCoupons](#getcoupons)
+* [applyCoupon](#applycoupon)
+* [removeCoupon](#removecoupon)
+* [getBulkDiscountOffers](#getbulkdiscountoffers)
+* [applyRewardPoints](#applyrewardpoints)
+* [getAddresses](#getaddresses)
+* [addAddress](#addaddress)
+* [getAddressById](#getaddressbyid)
+* [updateAddress](#updateaddress)
+* [removeAddress](#removeaddress)
+* [selectAddress](#selectaddress)
+* [selectPaymentMode](#selectpaymentmode)
+* [validateCouponForPayment](#validatecouponforpayment)
+* [getShipments](#getshipments)
+* [updateShipments](#updateshipments)
+* [checkoutCart](#checkoutcart)
+* [updateCartMeta](#updatecartmeta)
+* [getAvailableDeliveryModes](#getavailabledeliverymodes)
+* [getStoreAddressByUid](#getstoreaddressbyuid)
+* [getCartShareLink](#getcartsharelink)
+* [getCartSharedItems](#getcartshareditems)
+* [updateCartWithSharedItems](#updatecartwithshareditems)
 
----
+
 
 ## Methods with example and description
 
 
-#### getTickets
-Gets the list of company level tickets and/or ticket filters depending on query params
+#### getCart
+Fetch all items added to the cart
 
 
 
 
 ```kotlin
-client.lead.getTickets(items: items, filters: filters, q: q, status: status, priority: priority, category: category, pageNo: pageNo, pageSize: pageSize).safeAwait{ response,error->
+poscart.getCart(id: id, i: i, b: b, assignCardId: assignCardId).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -56,28 +60,291 @@ client.lead.getTickets(items: items, filters: filters, q: q, status: status, pri
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID for which the data will be returned |   
-| items | Boolean? | no | Decides that the reponse will contain the list of tickets |   
-| filters | Boolean? | no | Decides that the reponse will contain the ticket filters |   
-| q | String? | no | Search through ticket titles and description |   
-| status | String? | no | Filter tickets on status |   
-| priority | Any? | no | Filter tickets on priority |   
-| category | String? | no | Filter tickets on category |   
-| pageNo | Int? | no | The page number to navigate through the given set of results. |   
-| pageSize | Int? | no | Number of items to retrieve in each page. Default is 12. |  
+| id | String? | no |  |   
+| i | Boolean? | no |  |   
+| b | Boolean? | no |  |   
+| assignCardId | Int? | no |  |  
 
 
 
-Gets the list of company level tickets and/or ticket filters
+Use this API to get details of all the items added to a cart.
 
 *Returned Response*
 
 
 
 
-[TicketList](#TicketList)
+[CartDetailResponse](#CartDetailResponse)
 
-Success
+Success. Returns a Cart object. Check the example shown below or refer `CartDetailResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "bulk_offer": {},
+      "discount": "67% OFF",
+      "article": {
+        "type": "article",
+        "uid": "604_902_SSTC60401_636BLUE_1",
+        "size": "1",
+        "seller": {
+          "uid": 604,
+          "name": "SHRI SHANTINATH TRADING COMPANY"
+        },
+        "store": {
+          "uid": 4579,
+          "name": "Gandhi Nagar"
+        },
+        "quantity": 108,
+        "price": {
+          "base": {
+            "marked": 2999,
+            "effective": 999,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "marked": 2999,
+            "effective": 999,
+            "currency_code": "INR"
+          }
+        }
+      },
+      "coupon_message": "",
+      "key": "707569_1",
+      "availability": {
+        "sizes": [
+          "1",
+          "8",
+          "7",
+          "2",
+          "9",
+          "5",
+          "3",
+          "6"
+        ],
+        "other_store_quantity": 107,
+        "out_of_stock": false,
+        "deliverable": true,
+        "is_valid": true
+      },
+      "product": {
+        "type": "product",
+        "uid": 707569,
+        "name": "Blue and Gold Printed Ethnic Set",
+        "slug": "aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a",
+        "brand": {
+          "uid": 902,
+          "name": ""
+        },
+        "categories": [
+          {
+            "uid": 525,
+            "name": ""
+          }
+        ],
+        "images": [
+          {
+            "aspect_ratio": "16:25",
+            "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/902_636BLUE/1_1540301094877.jpg",
+            "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/902_636BLUE/1_1540301094877.jpg"
+          }
+        ],
+        "action": {
+          "type": "product",
+          "url": "https://api.addsale.com/v1/products/aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a/",
+          "query": {
+            "product_slug": [
+              "aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a"
+            ]
+          }
+        }
+      },
+      "price": {
+        "base": {
+          "add_on": 999,
+          "marked": 2999,
+          "effective": 999,
+          "selling": 999,
+          "currency_code": "INR"
+        },
+        "converted": {
+          "add_on": 999,
+          "marked": 2999,
+          "effective": 999,
+          "selling": 999,
+          "currency_code": "INR"
+        }
+      },
+      "message": "",
+      "quantity": 1
+    }
+  ],
+  "cart_id": 54,
+  "uid": "54",
+  "breakup_values": {
+    "raw": {
+      "cod_charge": 0,
+      "convenience_fee": 0,
+      "coupon": 0,
+      "delivery_charge": 0,
+      "discount": -2000,
+      "fynd_cash": 0,
+      "gst_charges": 47.57,
+      "mrp_total": 2999,
+      "subtotal": 999,
+      "total": 999,
+      "vog": 951.43,
+      "you_saved": 0
+    },
+    "coupon": {
+      "type": "cash",
+      "code": "",
+      "uid": null,
+      "value": 0,
+      "is_applied": false,
+      "message": "Sorry! Invalid Coupon"
+    },
+    "display": [
+      {
+        "display": "MRP Total",
+        "key": "mrp_total",
+        "value": 2999,
+        "currency_code": "INR"
+      },
+      {
+        "display": "Discount",
+        "key": "discount",
+        "value": -2000,
+        "currency_code": "INR"
+      },
+      {
+        "display": "Subtotal",
+        "key": "subtotal",
+        "value": 999,
+        "currency_code": "INR"
+      },
+      {
+        "display": "Total",
+        "key": "total",
+        "value": 999,
+        "currency_code": "INR"
+      }
+    ],
+    "loyalty_points": {
+      "total": 0,
+      "applicable": 0,
+      "is_applied": false,
+      "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+    }
+  },
+  "delivery_charge_info": "",
+  "coupon_text": "View all offers",
+  "gstin": null,
+  "checkout_mode": "self",
+  "restrict_checkout": false,
+  "is_valid": true,
+  "last_modified": "Tue, 03 Sep 2019 05:35:59 GMT"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCartLastModified
+Fetch last-modified timestamp
+
+
+
+
+```kotlin
+poscart.getCartLastModified(id: id).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String? | no |  |  
+
+
+
+Use this API to fetch Last-Modified timestamp in header metadata.
+
+*Returned Response*
+
+
+
+
+
+
+
+
+---
+
+
+#### addItems
+Add items to cart
+
+
+
+
+```kotlin
+poscart.addItems(i: i, b: b, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| i | Boolean? | no |  |   
+| b | Boolean? | no |  |  
+| body | [AddCartRequest](#AddCartRequest) | yes | Request body |
+
+
+Use this API to add items to the cart.
+
+*Returned Response*
+
+
+
+
+[AddCartDetailResponse](#AddCartDetailResponse)
+
+Success. Returns a cart object as shown below. Refer `AddCartDetailResponse` for more details.
 
 
 
@@ -87,1080 +354,1222 @@ Success
 
 
 <details>
-<summary><i>&nbsp; Without items</i></summary>
+<summary><i>&nbsp; Product has been added to your cart</i></summary>
 
 ```json
 {
   "value": {
-    "filters": {
-      "statuses": [
-        {
-          "display": "Pending",
-          "color": "#eae22b",
-          "key": "pending"
-        },
-        {
-          "display": "In Progress",
-          "color": "#ffa951",
-          "key": "in_progress"
-        },
-        {
-          "display": "Resolved",
-          "color": "#20c3a6",
-          "key": "resolved"
-        },
-        {
-          "display": "Closed",
-          "color": "#41434c",
-          "key": "closed"
-        }
-      ],
-      "priorities": [
-        {
-          "display": "Low",
-          "color": "#fed766",
-          "key": "low"
-        },
-        {
-          "display": "Medium",
-          "color": "#f37736",
-          "key": "medium"
-        },
-        {
-          "display": "High",
-          "color": "#fe4a49",
-          "key": "high"
-        }
-      ],
-      "assignees": [],
-      "categories": [
-        {
-          "form": {
-            "login_required": false,
-            "should_notify": false,
-            "inputs": [
-              {
-                "type": "email",
-                "showRegexInput": false,
-                "enum": [],
-                "regex": "\\S+@\\S+\\.\\S+",
-                "display": "email",
-                "required": true,
-                "key": "email"
-              }
-            ],
-            "available_assignees": [],
-            "_id": "602e900a2042255c03cadaf0",
-            "title": "service-test-satyen",
-            "description": "testing form from service",
-            "slug": "service-test-satyen",
-            "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
-            "application_id": "000000000000000000000001",
-            "created_on": {
-              "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-              "platform": "web",
-              "meta": {
-                "browser": {
-                  "name": "Chrome",
-                  "version": "88.0.4324.150"
-                },
-                "os": {
-                  "name": "macOS",
-                  "version": "11.2.0"
-                },
-                "platform": {
-                  "type": "desktop",
-                  "vendor": "Apple"
-                },
-                "engine": {
-                  "name": "Blink"
-                }
-              }
-            },
-            "created_by": "5f8147abbd1a0a870f61f1a6",
-            "createdAt": "2021-02-18T16:04:26.495Z",
-            "updatedAt": "2021-02-18T16:04:26.495Z",
-            "__v": 0
+    "message": "Product has been added to your cart",
+    "success": true,
+    "cart": {
+      "breakup_values": {
+        "display": [
+          {
+            "display": "MRP Total",
+            "key": "mrp_total",
+            "value": 17486,
+            "currency_code": "INR"
           },
-          "key": "service-test-satyen",
-          "display": "service-test-satyen"
-        }
-      ]
-    }
-  }
-}
-```
-</details>
-
-<details>
-<summary><i>&nbsp; With items</i></summary>
-
-```json
-{
-  "value": {
-    "docs": [
-      {
-        "_id": "602d2652ce284d0b008d5c97",
-        "status": {
-          "display": "Pending",
-          "color": "#eae22b",
-          "key": "pending"
-        },
-        "priority": {
-          "display": "Medium",
-          "color": "#f37736",
-          "key": "medium"
-        },
-        "assigned_to": {
-          "agent_id": "5e79e721768c6bf54b783146",
-          "gender": "male",
-          "accountType": "user",
-          "active": true,
-          "profilePicUrl": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
-          "hasOldPasswordHash": false,
-          "_id": "5e79e721768c6bf54b783146",
-          "emails": [
-            {
-              "active": true,
-              "primary": true,
-              "verified": true,
-              "email": "nikhilmshchs@gmail.com"
-            },
-            {
-              "active": true,
-              "primary": false,
-              "verified": true,
-              "email": "nikhilmanapure@gofynd.com"
-            },
-            {
-              "active": true,
-              "primary": false,
-              "verified": true,
-              "email": "nikhilmanapure@fynd.com"
-            },
-            {
-              "active": true,
-              "primary": false,
-              "verified": true,
-              "email": "nikhilmanapure@uniket.store"
-            }
-          ],
-          "phoneNumbers": [
-            {
-              "active": true,
-              "primary": true,
-              "verified": true,
-              "countryCode": 91,
-              "phone": "9890425946"
-            }
-          ],
-          "firstName": "Nikhil",
-          "lastName": "Manapure",
-          "username": "nikhilmanapure_gofynd_com_29298",
-          "createdAt": "2020-03-24T10:55:29.298Z",
-          "updatedAt": "2020-05-12T07:46:41.816Z",
-          "uid": "5567",
-          "__v": 2
-        },
-        "tags": [
-          "asdf444"
-        ],
-        "context": {
-          "application_id": "000000000000000000000001",
-          "company_id": "1"
-        },
-        "created_on": {
-          "user_agent": "Fynd Platform/0.0.1 (com.fynd.platform; build:3; iOS 14.2.0) Alamofire/5.0.2",
-          "platform": "web",
-          "meta": {
-            "browser": {
-              "name": "Fynd Platform",
-              "version": "0.0.1"
-            }
+          {
+            "display": "Discount",
+            "key": "discount",
+            "value": -3540,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Subtotal",
+            "key": "subtotal",
+            "value": 13946,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Total",
+            "key": "total",
+            "value": 13946,
+            "currency_code": "INR"
           }
+        ],
+        "raw": {
+          "cod_charge": 0,
+          "convenience_fee": 0,
+          "coupon": 0,
+          "delivery_charge": 0,
+          "discount": -3540,
+          "fynd_cash": 0,
+          "gst_charges": 1529.96,
+          "mrp_total": 17486,
+          "subtotal": 13946,
+          "total": 13946,
+          "vog": 12416.04,
+          "you_saved": 0
         },
-        "source": "sales_channel",
-        "content": {
-          "title": "asdf444 Response",
-          "description": "",
-          "attachments": []
+        "loyalty_points": {
+          "total": 0,
+          "applicable": 0,
+          "is_applied": false,
+          "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
         },
-        "response_id": "602d2652ce284dee3c8d5c96",
-        "category": {
-          "form": {
-            "login_required": false,
-            "should_notify": true,
-            "inputs": [
-              {
-                "type": "text",
-                "showRegexInput": false,
-                "enum": [],
-                "display": "asdf",
-                "key": "asdf"
+        "coupon": {
+          "type": "cash",
+          "code": "",
+          "uid": null,
+          "value": 0,
+          "is_applied": false,
+          "message": "Sorry! Invalid Coupon"
+        }
+      },
+      "items": [
+        {
+          "key": "751083_10",
+          "article": {
+            "type": "article",
+            "uid": "612_9_SE61201_19100302_10",
+            "size": "10",
+            "seller": {
+              "uid": 612,
+              "name": "SSR ENTERPRISE"
+            },
+            "store": {
+              "uid": 4431,
+              "name": "Motilal Nagar 1, Goregaon"
+            },
+            "quantity": 4,
+            "price": {
+              "base": {
+                "marked": 3999,
+                "effective": 2399,
+                "currency_code": "INR"
               },
+              "converted": {
+                "marked": 3999,
+                "effective": 2399,
+                "currency_code": "INR"
+              }
+            }
+          },
+          "price": {
+            "base": {
+              "add_on": 4798,
+              "marked": 7998,
+              "effective": 4798,
+              "selling": 4798,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "add_on": 4798,
+              "marked": 7998,
+              "effective": 4798,
+              "selling": 4798,
+              "currency_code": "INR"
+            }
+          },
+          "availability": {
+            "sizes": [
+              "10"
+            ],
+            "other_store_quantity": 2,
+            "out_of_stock": false,
+            "deliverable": true,
+            "is_valid": true
+          },
+          "product": {
+            "type": "product",
+            "uid": 751083,
+            "name": "Carson 2",
+            "slug": "puma-carson-2-751083-6ad98d",
+            "brand": {
+              "uid": 9,
+              "name": "Puma"
+            },
+            "categories": [
               {
-                "type": "mobile",
-                "showRegexInput": false,
-                "enum": [],
-                "display": "mob num",
-                "regex": "[0-9]{10}$",
-                "key": "mob-num"
+                "uid": 165,
+                "name": "Outdoor Sports Shoes"
               }
             ],
-            "available_assignees": [
-              "5e79e721768c6bf54b783146"
-            ],
-            "_id": "60124e4a4d2bc363625e1bf4",
-            "title": "asdf444",
-            "description": "adf",
-            "slug": "asdf444",
-            "application_id": "000000000000000000000001",
-            "created_on": {
-              "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
-              "platform": "web",
-              "meta": {
-                "browser": {
-                  "name": "Chrome",
-                  "version": "88.0.4324.96"
-                },
-                "os": {
-                  "name": "macOS",
-                  "version": "10.15.7",
-                  "versionName": "Catalina"
-                },
-                "platform": {
-                  "type": "desktop",
-                  "vendor": "Apple"
-                },
-                "engine": {
-                  "name": "Blink"
-                }
-              }
-            },
-            "created_by": "5e79e721768c6bf54b783146",
-            "createdAt": "2021-01-28T05:40:26.271Z",
-            "updatedAt": "2021-02-18T16:02:32.086Z",
-            "__v": 0,
-            "poll_for_assignment": {
-              "duration": 20,
-              "message": "We are looking for executive to connect you",
-              "success_message": "Executive found",
-              "failure_message": "All our executives are busy at the moment, We have accepted your request and someone will connect with you soon!"
-            }
-          },
-          "key": "asdf444",
-          "display": "asdf444"
-        },
-        "ticket_id": "472",
-        "createdAt": "2021-02-17T14:21:06.774Z",
-        "updatedAt": "2021-02-17T14:21:06.774Z",
-        "__v": 0,
-        "id": "602d2652ce284d0b008d5c97"
-      }
-    ],
-    "total": 472,
-    "limit": 10,
-    "page": 1,
-    "pages": 48,
-    "filters": {
-      "statuses": [
-        {
-          "display": "Pending",
-          "color": "#eae22b",
-          "key": "pending"
-        },
-        {
-          "display": "In Progress",
-          "color": "#ffa951",
-          "key": "in_progress"
-        },
-        {
-          "display": "Resolved",
-          "color": "#20c3a6",
-          "key": "resolved"
-        },
-        {
-          "display": "Closed",
-          "color": "#41434c",
-          "key": "closed"
-        }
-      ],
-      "priorities": [
-        {
-          "display": "Low",
-          "color": "#fed766",
-          "key": "low"
-        },
-        {
-          "display": "Medium",
-          "color": "#f37736",
-          "key": "medium"
-        },
-        {
-          "display": "High",
-          "color": "#fe4a49",
-          "key": "high"
-        }
-      ],
-      "assignees": [],
-      "categories": [
-        {
-          "form": {
-            "login_required": false,
-            "should_notify": false,
-            "inputs": [
+            "images": [
               {
-                "type": "email",
-                "showRegexInput": false,
-                "enum": [],
-                "regex": "\\S+@\\S+\\.\\S+",
-                "display": "email",
-                "required": true,
-                "key": "email"
+                "aspect_ratio": "16:25",
+                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/9_19100302/1_1542807042296.jpg",
+                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/9_19100302/1_1542807042296.jpg"
               }
             ],
-            "available_assignees": [],
-            "_id": "602e900a2042255c03cadaf0",
-            "title": "service-test-satyen",
-            "description": "testing form from service",
-            "slug": "service-test-satyen",
-            "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
-            "application_id": "000000000000000000000001",
-            "created_on": {
-              "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-              "platform": "web",
-              "meta": {
-                "browser": {
-                  "name": "Chrome",
-                  "version": "88.0.4324.150"
-                },
-                "os": {
-                  "name": "macOS",
-                  "version": "11.2.0"
-                },
-                "platform": {
-                  "type": "desktop",
-                  "vendor": "Apple"
-                },
-                "engine": {
-                  "name": "Blink"
-                }
+            "action": {
+              "type": "product",
+              "url": "https://api.addsale.com/platform/content/v1/products/puma-carson-2-751083-6ad98d/",
+              "query": {
+                "product_slug": [
+                  "puma-carson-2-751083-6ad98d"
+                ]
               }
-            },
-            "created_by": "5f8147abbd1a0a870f61f1a6",
-            "createdAt": "2021-02-18T16:04:26.495Z",
-            "updatedAt": "2021-02-18T16:04:26.495Z",
-            "__v": 0
-          },
-          "key": "service-test-satyen",
-          "display": "service-test-satyen"
-        }
-      ]
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### createTicket
-Creates a company level ticket
-
-
-
-
-```kotlin
-client.lead.createTicket(body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID for which the data will be returned |  
-| body | [AddTicketPayload](#AddTicketPayload) | yes | Request body |
-
-
-Creates a company level ticket
-
-*Returned Response*
-
-
-
-
-[Ticket](#Ticket)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "context": {
-      "company_id": "884"
-    },
-    "content": {
-      "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
-      "attachments": []
-    },
-    "status": {
-      "display": "In Progress",
-      "color": "#ffa951",
-      "key": "in_progress"
-    },
-    "priority": {
-      "display": "Medium",
-      "color": "#f37736",
-      "key": "medium"
-    },
-    "assigned_to": {
-      "agent_id": "5d1363adf599d850df93175e",
-      "gender": "male",
-      "accountType": "user",
-      "active": true,
-      "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
-      "hasOldPasswordHash": false,
-      "_id": "5d1363adf599d850df93175e",
-      "phoneNumbers": [
-        {
-          "active": true,
-          "primary": true,
-          "verified": true,
-          "countryCode": 91,
-          "phone": "9890425946"
-        }
-      ],
-      "firstName": "Nikhil",
-      "lastName": "Manapure",
-      "emails": [
-        {
-          "active": true,
-          "primary": true,
-          "verified": true,
-          "email": "nikhilmshchs@gmail.com"
-        }
-      ],
-      "username": "nikhilmshchs_gmail_com_38425_20500281",
-      "createdAt": "2019-01-01T17:22:38.528Z",
-      "updatedAt": "2021-01-22T10:02:42.258Z",
-      "uid": "20500281",
-      "__v": 56
-    },
-    "tags": [
-      "some-title"
-    ],
-    "_id": "6012f38557751ee8fc162cf7",
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "88.0.4324.96"
-        },
-        "os": {
-          "name": "macOS",
-          "version": "10.15.7",
-          "versionName": "Catalina"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
-        }
-      }
-    },
-    "source": "sales_channel",
-    "created_by": {
-      "id": "5d1363adf599d850df93175e",
-      "user": {
-        "gender": "male",
-        "accountType": "user",
-        "active": true,
-        "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
-        "hasOldPasswordHash": false,
-        "_id": "5d1363adf599d850df93175e",
-        "phoneNumbers": [
-          {
-            "active": true,
-            "primary": true,
-            "verified": true,
-            "countryCode": 91,
-            "phone": "9890425946"
-          }
-        ],
-        "firstName": "Nikhil",
-        "lastName": "Manapure",
-        "emails": [
-          {
-            "active": true,
-            "primary": true,
-            "verified": true,
-            "email": "nikhilmshchs@gmail.com"
-          }
-        ],
-        "username": "nikhilmshchs_gmail_com_38425_20500281",
-        "createdAt": "2019-01-01T17:22:38.528Z",
-        "updatedAt": "2021-01-22T10:02:42.258Z",
-        "uid": "20500281",
-        "__v": 56
-      }
-    },
-    "response_id": "6012f38457751e0fb8162cf6",
-    "category": {
-      "form": {
-        "login_required": false,
-        "should_notify": false,
-        "inputs": [
-          {
-            "required": false,
-            "type": "text",
-            "enum": [],
-            "display": "Single lineeee",
-            "key": "single-lineeee",
-            "showRegexInput": false
-          },
-          {
-            "required": false,
-            "type": "email",
-            "enum": [],
-            "display": "Email",
-            "regex": "\\S+@\\S+\\.\\S+",
-            "key": "email",
-            "showRegexInput": true
-          },
-          {
-            "required": false,
-            "type": "text",
-            "enum": [],
-            "display": "dfsdf",
-            "key": "dfsdf",
-            "showRegexInput": false
-          }
-        ],
-        "available_assignees": [
-          "5b9b98150df588546aaea6d2",
-          "5c45d78395d7504f76c2cb37"
-        ],
-        "_id": "5fd72db3dc250f8decfc61b2",
-        "title": "SOme title",
-        "description": "SOme big description",
-        "slug": "some-title",
-        "application_id": "000000000000000000000003",
-        "created_on": {
-          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-          "platform": "web",
-          "meta": {
-            "browser": {
-              "name": "Chrome",
-              "version": "87.0.4280.88"
-            },
-            "os": {
-              "name": "macOS",
-              "version": "10.15.6",
-              "versionName": "Catalina"
-            },
-            "platform": {
-              "type": "desktop",
-              "vendor": "Apple"
-            },
-            "engine": {
-              "name": "Blink"
             }
-          }
-        },
-        "created_by": "5d1363adf599d850df93175e",
-        "createdAt": "2020-12-14T09:17:39.953Z",
-        "updatedAt": "2021-01-28T18:48:07.717Z",
-        "__v": 0
-      },
-      "key": "some-title",
-      "display": "SOme title"
-    },
-    "ticket_id": "43",
-    "createdAt": "2021-01-28T17:25:25.013Z",
-    "updatedAt": "2021-01-28T17:25:33.396Z",
-    "__v": 0,
-    "video_room_id": "6012f38557751ee8fc162cf7"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### getTickets
-Gets the list of Application level Tickets and/or ticket filters depending on query params
-
-
-
-
-```kotlin
-client.application("<APPLICATION_ID>").lead.getTickets(items: items, filters: filters, q: q, status: status, priority: priority, category: category).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID of the application |   
-| applicationId | String | yes | Application ID for which the data will be returned |   
-| items | Boolean? | no | Decides that the reponse will contain the list of tickets |   
-| filters | Boolean? | no | Decides that the reponse will contain the ticket filters |   
-| q | String? | no | Search through ticket titles and description |   
-| status | String? | no | Filter tickets on status |   
-| priority | Any? | no | Filter tickets on priority |   
-| category | String? | no | Filter tickets on category |  
-
-
-
-Gets the list of Application level Tickets and/or ticket filters
-
-*Returned Response*
-
-
-
-
-[TicketList](#TicketList)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Without items</i></summary>
-
-```json
-{
-  "value": {
-    "filters": {
-      "statuses": [
-        {
-          "display": "Pending",
-          "color": "#eae22b",
-          "key": "pending"
-        },
-        {
-          "display": "In Progress",
-          "color": "#ffa951",
-          "key": "in_progress"
-        },
-        {
-          "display": "Resolved",
-          "color": "#20c3a6",
-          "key": "resolved"
-        },
-        {
-          "display": "Closed",
-          "color": "#41434c",
-          "key": "closed"
-        }
-      ],
-      "priorities": [
-        {
-          "display": "Low",
-          "color": "#fed766",
-          "key": "low"
-        },
-        {
-          "display": "Medium",
-          "color": "#f37736",
-          "key": "medium"
-        },
-        {
-          "display": "High",
-          "color": "#fe4a49",
-          "key": "high"
-        }
-      ],
-      "assignees": [],
-      "categories": [
-        {
-          "form": {
-            "login_required": false,
-            "should_notify": false,
-            "inputs": [
-              {
-                "type": "email",
-                "showRegexInput": false,
-                "enum": [],
-                "regex": "\\S+@\\S+\\.\\S+",
-                "display": "email",
-                "required": true,
-                "key": "email"
-              }
-            ],
-            "available_assignees": [],
-            "_id": "602e900a2042255c03cadaf0",
-            "title": "service-test-satyen",
-            "description": "testing form from service",
-            "slug": "service-test-satyen",
-            "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
-            "application_id": "000000000000000000000001",
-            "created_on": {
-              "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-              "platform": "web",
-              "meta": {
-                "browser": {
-                  "name": "Chrome",
-                  "version": "88.0.4324.150"
-                },
-                "os": {
-                  "name": "macOS",
-                  "version": "11.2.0"
-                },
-                "platform": {
-                  "type": "desktop",
-                  "vendor": "Apple"
-                },
-                "engine": {
-                  "name": "Blink"
-                }
-              }
-            },
-            "created_by": "5f8147abbd1a0a870f61f1a6",
-            "createdAt": "2021-02-18T16:04:26.495Z",
-            "updatedAt": "2021-02-18T16:04:26.495Z",
-            "__v": 0
           },
-          "key": "service-test-satyen",
-          "display": "service-test-satyen"
-        }
-      ]
-    }
-  }
-}
-```
-</details>
-
-<details>
-<summary><i>&nbsp; With items</i></summary>
-
-```json
-{
-  "value": {
-    "docs": [
-      {
-        "_id": "602d2652ce284d0b008d5c97",
-        "status": {
-          "display": "Pending",
-          "color": "#eae22b",
-          "key": "pending"
+          "coupon_message": "",
+          "quantity": 2,
+          "message": "",
+          "bulk_offer": {},
+          "discount": "41% OFF"
         },
-        "priority": {
-          "display": "Medium",
-          "color": "#f37736",
-          "key": "medium"
-        },
-        "assigned_to": {
-          "agent_id": "5e79e721768c6bf54b783146",
-          "gender": "male",
-          "accountType": "user",
-          "active": true,
-          "profilePicUrl": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
-          "hasOldPasswordHash": false,
-          "_id": "5e79e721768c6bf54b783146",
-          "emails": [
-            {
-              "active": true,
-              "primary": true,
-              "verified": true,
-              "email": "nikhilmshchs@gmail.com"
+        {
+          "key": "246228_S",
+          "article": {
+            "type": "article",
+            "uid": "46_235_TM62_M11029ONDSXNS_S",
+            "size": "S",
+            "seller": {
+              "uid": 46,
+              "name": "RELIANCE BRANDS LIMITED"
             },
-            {
-              "active": true,
-              "primary": false,
-              "verified": true,
-              "email": "nikhilmanapure@gofynd.com"
+            "store": {
+              "uid": 4550,
+              "name": "VR Mall"
             },
-            {
-              "active": true,
-              "primary": false,
-              "verified": true,
-              "email": "nikhilmanapure@fynd.com"
-            },
-            {
-              "active": true,
-              "primary": false,
-              "verified": true,
-              "email": "nikhilmanapure@uniket.store"
-            }
-          ],
-          "phoneNumbers": [
-            {
-              "active": true,
-              "primary": true,
-              "verified": true,
-              "countryCode": 91,
-              "phone": "9890425946"
-            }
-          ],
-          "firstName": "Nikhil",
-          "lastName": "Manapure",
-          "username": "nikhilmanapure_gofynd_com_29298",
-          "createdAt": "2020-03-24T10:55:29.298Z",
-          "updatedAt": "2020-05-12T07:46:41.816Z",
-          "uid": "5567",
-          "__v": 2
-        },
-        "tags": [
-          "asdf444"
-        ],
-        "context": {
-          "application_id": "000000000000000000000001",
-          "company_id": "1"
-        },
-        "created_on": {
-          "user_agent": "Fynd Platform/0.0.1 (com.fynd.platform; build:3; iOS 14.2.0) Alamofire/5.0.2",
-          "platform": "web",
-          "meta": {
-            "browser": {
-              "name": "Fynd Platform",
-              "version": "0.0.1"
-            }
-          }
-        },
-        "source": "sales_channel",
-        "content": {
-          "title": "asdf444 Response",
-          "description": "",
-          "attachments": []
-        },
-        "response_id": "602d2652ce284dee3c8d5c96",
-        "category": {
-          "form": {
-            "login_required": false,
-            "should_notify": true,
-            "inputs": [
-              {
-                "type": "text",
-                "showRegexInput": false,
-                "enum": [],
-                "display": "asdf",
-                "key": "asdf"
+            "quantity": 1,
+            "price": {
+              "base": {
+                "marked": 4490,
+                "effective": 4490,
+                "currency_code": "INR"
               },
-              {
-                "type": "mobile",
-                "showRegexInput": false,
-                "enum": [],
-                "display": "mob num",
-                "regex": "[0-9]{10}$",
-                "key": "mob-num"
+              "converted": {
+                "marked": 4490,
+                "effective": 4490,
+                "currency_code": "INR"
               }
-            ],
-            "available_assignees": [
-              "5e79e721768c6bf54b783146"
-            ],
-            "_id": "60124e4a4d2bc363625e1bf4",
-            "title": "asdf444",
-            "description": "adf",
-            "slug": "asdf444",
-            "application_id": "000000000000000000000001",
-            "created_on": {
-              "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
-              "platform": "web",
-              "meta": {
-                "browser": {
-                  "name": "Chrome",
-                  "version": "88.0.4324.96"
-                },
-                "os": {
-                  "name": "macOS",
-                  "version": "10.15.7",
-                  "versionName": "Catalina"
-                },
-                "platform": {
-                  "type": "desktop",
-                  "vendor": "Apple"
-                },
-                "engine": {
-                  "name": "Blink"
-                }
-              }
-            },
-            "created_by": "5e79e721768c6bf54b783146",
-            "createdAt": "2021-01-28T05:40:26.271Z",
-            "updatedAt": "2021-02-18T16:02:32.086Z",
-            "__v": 0,
-            "poll_for_assignment": {
-              "duration": 20,
-              "message": "We are looking for executive to connect you",
-              "success_message": "Executive found",
-              "failure_message": "All our executives are busy at the moment, We have accepted your request and someone will connect with you soon!"
             }
           },
-          "key": "asdf444",
-          "display": "asdf444"
-        },
-        "ticket_id": "472",
-        "createdAt": "2021-02-17T14:21:06.774Z",
-        "updatedAt": "2021-02-17T14:21:06.774Z",
-        "__v": 0,
-        "id": "602d2652ce284d0b008d5c97"
-      }
-    ],
-    "total": 472,
-    "limit": 10,
-    "page": 1,
-    "pages": 48,
-    "filters": {
-      "statuses": [
-        {
-          "display": "Pending",
-          "color": "#eae22b",
-          "key": "pending"
-        },
-        {
-          "display": "In Progress",
-          "color": "#ffa951",
-          "key": "in_progress"
-        },
-        {
-          "display": "Resolved",
-          "color": "#20c3a6",
-          "key": "resolved"
-        },
-        {
-          "display": "Closed",
-          "color": "#41434c",
-          "key": "closed"
-        }
-      ],
-      "priorities": [
-        {
-          "display": "Low",
-          "color": "#fed766",
-          "key": "low"
-        },
-        {
-          "display": "Medium",
-          "color": "#f37736",
-          "key": "medium"
-        },
-        {
-          "display": "High",
-          "color": "#fe4a49",
-          "key": "high"
-        }
-      ],
-      "assignees": [],
-      "categories": [
-        {
-          "form": {
-            "login_required": false,
-            "should_notify": false,
-            "inputs": [
+          "price": {
+            "base": {
+              "add_on": 4490,
+              "marked": 4490,
+              "effective": 4490,
+              "selling": 4490,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "add_on": 4490,
+              "marked": 4490,
+              "effective": 4490,
+              "selling": 4490,
+              "currency_code": "INR"
+            }
+          },
+          "availability": {
+            "sizes": [
+              "L",
+              "M",
+              "S",
+              "XL",
+              "XXL"
+            ],
+            "other_store_quantity": 0,
+            "out_of_stock": false,
+            "deliverable": true,
+            "is_valid": true
+          },
+          "product": {
+            "type": "product",
+            "uid": 246228,
+            "name": "Blue Solid T-Shirt",
+            "slug": "superdry-blue-solid-t-shirt-2",
+            "brand": {
+              "uid": 235,
+              "name": "Superdry"
+            },
+            "categories": [
               {
-                "type": "email",
-                "showRegexInput": false,
-                "enum": [],
-                "regex": "\\S+@\\S+\\.\\S+",
-                "display": "email",
-                "required": true,
-                "key": "email"
+                "uid": 192,
+                "name": "T-Shirts"
               }
             ],
-            "available_assignees": [],
-            "_id": "602e900a2042255c03cadaf0",
-            "title": "service-test-satyen",
-            "description": "testing form from service",
-            "slug": "service-test-satyen",
-            "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
-            "application_id": "000000000000000000000001",
-            "created_on": {
-              "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-              "platform": "web",
-              "meta": {
-                "browser": {
-                  "name": "Chrome",
-                  "version": "88.0.4324.150"
-                },
-                "os": {
-                  "name": "macOS",
-                  "version": "11.2.0"
-                },
-                "platform": {
-                  "type": "desktop",
-                  "vendor": "Apple"
-                },
-                "engine": {
-                  "name": "Blink"
-                }
+            "images": [
+              {
+                "aspect_ratio": "16:25",
+                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/235_M11029ONDSXNS/1.jpg",
+                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/235_M11029ONDSXNS/1.jpg"
               }
-            },
-            "created_by": "5f8147abbd1a0a870f61f1a6",
-            "createdAt": "2021-02-18T16:04:26.495Z",
-            "updatedAt": "2021-02-18T16:04:26.495Z",
-            "__v": 0
+            ],
+            "action": {
+              "type": "product",
+              "url": "https://api.addsale.com/platform/content/v1/products/superdry-blue-solid-t-shirt-2/",
+              "query": {
+                "product_slug": [
+                  "superdry-blue-solid-t-shirt-2"
+                ]
+              }
+            }
           },
-          "key": "service-test-satyen",
-          "display": "service-test-satyen"
+          "coupon_message": "",
+          "quantity": 1,
+          "message": "",
+          "bulk_offer": {},
+          "discount": ""
+        },
+        {
+          "key": "443175_S",
+          "article": {
+            "type": "article",
+            "uid": "162_207_1271_LJ03LBLUDN88_S",
+            "size": "S",
+            "seller": {
+              "uid": 162,
+              "name": "GO FASHION INDIA PRIVATE LIMITED"
+            },
+            "store": {
+              "uid": 5784,
+              "name": "Vega City mall"
+            },
+            "quantity": 3,
+            "price": {
+              "base": {
+                "marked": 1599,
+                "effective": 1599,
+                "currency_code": "INR"
+              },
+              "converted": {
+                "marked": 1599,
+                "effective": 1599,
+                "currency_code": "INR"
+              }
+            }
+          },
+          "price": {
+            "base": {
+              "add_on": 1599,
+              "marked": 1599,
+              "effective": 1599,
+              "selling": 1599,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "add_on": 1599,
+              "marked": 1599,
+              "effective": 1599,
+              "selling": 1599,
+              "currency_code": "INR"
+            }
+          },
+          "availability": {
+            "sizes": [
+              "XL",
+              "M",
+              "L",
+              "S"
+            ],
+            "other_store_quantity": 8,
+            "out_of_stock": false,
+            "deliverable": true,
+            "is_valid": true
+          },
+          "product": {
+            "type": "product",
+            "uid": 443175,
+            "name": "Light Blue Denim Jeggings",
+            "slug": "go-colors-light-blue-denim-jeggings-443175-3c688c",
+            "brand": {
+              "uid": 207,
+              "name": "Go Colors"
+            },
+            "categories": [
+              {
+                "uid": 267,
+                "name": "Jeggings"
+              }
+            ],
+            "images": [
+              {
+                "aspect_ratio": "16:25",
+                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/207_LJ03LBLUDN88/1_1512382513548.jpg",
+                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/207_LJ03LBLUDN88/1_1512382513548.jpg"
+              }
+            ],
+            "action": {
+              "type": "product",
+              "url": "https://api.addsale.com/platform/content/v1/products/go-colors-light-blue-denim-jeggings-443175-3c688c/",
+              "query": {
+                "product_slug": [
+                  "go-colors-light-blue-denim-jeggings-443175-3c688c"
+                ]
+              }
+            }
+          },
+          "coupon_message": "",
+          "quantity": 1,
+          "message": "",
+          "bulk_offer": {},
+          "discount": ""
+        },
+        {
+          "key": "778937_OS",
+          "article": {
+            "type": "article",
+            "uid": "686_963_IC68601_PWUPC01977_OS",
+            "size": "OS",
+            "seller": {
+              "uid": 686,
+              "name": "INDUS CORPORATION"
+            },
+            "store": {
+              "uid": 5059,
+              "name": "Vidyaranyapura Main Road"
+            },
+            "quantity": 3,
+            "price": {
+              "base": {
+                "marked": 3399,
+                "effective": 3059,
+                "currency_code": "INR"
+              },
+              "converted": {
+                "marked": 3399,
+                "effective": 3059,
+                "currency_code": "INR"
+              }
+            }
+          },
+          "price": {
+            "base": {
+              "add_on": 3059,
+              "marked": 3399,
+              "effective": 3059,
+              "selling": 3059,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "add_on": 3059,
+              "marked": 3399,
+              "effective": 3059,
+              "selling": 3059,
+              "currency_code": "INR"
+            }
+          },
+          "availability": {
+            "sizes": [
+              "OS"
+            ],
+            "other_store_quantity": 2,
+            "out_of_stock": false,
+            "deliverable": true,
+            "is_valid": true
+          },
+          "product": {
+            "type": "product",
+            "uid": 778937,
+            "name": "Colourful Carnival Bouncer",
+            "slug": "fisher-price-colourful-carnival-bouncer-778937-fafa1f",
+            "brand": {
+              "uid": 963,
+              "name": "Fisher-Price"
+            },
+            "categories": [
+              {
+                "uid": 576,
+                "name": "Cradles"
+              }
+            ],
+            "images": [
+              {
+                "aspect_ratio": "16:25",
+                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/963_PWUPC01977/1_1545308400588.jpg",
+                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/963_PWUPC01977/1_1545308400588.jpg"
+              }
+            ],
+            "action": {
+              "type": "product",
+              "url": "https://api.addsale.com/platform/content/v1/products/fisher-price-colourful-carnival-bouncer-778937-fafa1f/",
+              "query": {
+                "product_slug": [
+                  "fisher-price-colourful-carnival-bouncer-778937-fafa1f"
+                ]
+              }
+            }
+          },
+          "coupon_message": "",
+          "quantity": 1,
+          "message": "",
+          "bulk_offer": {},
+          "discount": "11% OFF"
         }
-      ]
+      ],
+      "delivery_charge_info": "",
+      "coupon_text": "View all offers",
+      "cart_id": 7927,
+      "uid": "7927",
+      "gstin": null,
+      "checkout_mode": "self",
+      "last_modified": "Tue, 03 Sep 2019 06:00:43 GMT",
+      "restrict_checkout": false,
+      "is_valid": true
+    },
+    "result": {}
+  }
+}
+```
+</details>
+
+<details>
+<summary><i>&nbsp; Sorry, item is out of stock</i></summary>
+
+```json
+{
+  "value": {
+    "message": "Sorry, item is out of stock",
+    "success": false,
+    "cart": {
+      "breakup_values": {
+        "raw": {
+          "cod_charge": 0,
+          "convenience_fee": 0,
+          "coupon": 0,
+          "delivery_charge": 0,
+          "discount": -202000,
+          "fynd_cash": 0,
+          "gst_charges": 4804.71,
+          "mrp_total": 302899,
+          "subtotal": 100899,
+          "total": 100899,
+          "vog": 96094.29,
+          "you_saved": 0
+        },
+        "coupon": {
+          "type": "cash",
+          "code": "",
+          "uid": null,
+          "value": 0,
+          "is_applied": false,
+          "message": "Sorry! Invalid Coupon"
+        },
+        "display": [
+          {
+            "display": "MRP Total",
+            "key": "mrp_total",
+            "value": 302899,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Discount",
+            "key": "discount",
+            "value": -202000,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Subtotal",
+            "key": "subtotal",
+            "value": 100899,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Total",
+            "key": "total",
+            "value": 100899,
+            "currency_code": "INR"
+          }
+        ],
+        "loyalty_points": {
+          "total": 0,
+          "applicable": 0,
+          "is_applied": false,
+          "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+        }
+      },
+      "items": [
+        {
+          "bulk_offer": {},
+          "discount": "67% OFF",
+          "article": {
+            "type": "article",
+            "uid": "604_902_SSTC60401_636BLUE_1",
+            "size": "1",
+            "seller": {
+              "uid": 604,
+              "name": "SHRI SHANTINATH TRADING COMPANY"
+            },
+            "store": {
+              "uid": 4579,
+              "name": "Gandhi Nagar"
+            },
+            "quantity": 108,
+            "price": {
+              "base": {
+                "marked": 2999,
+                "effective": 999,
+                "currency_code": "INR"
+              },
+              "converted": {
+                "marked": 2999,
+                "effective": 999,
+                "currency_code": "INR"
+              }
+            }
+          },
+          "coupon_message": "",
+          "key": "707569_1",
+          "availability": {
+            "sizes": [
+              "1",
+              "8",
+              "7",
+              "2",
+              "9",
+              "5",
+              "3",
+              "6"
+            ],
+            "other_store_quantity": 7,
+            "out_of_stock": false,
+            "deliverable": true,
+            "is_valid": true
+          },
+          "product": {
+            "type": "product",
+            "uid": 707569,
+            "name": "Blue and Gold Printed Ethnic Set",
+            "slug": "aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a",
+            "brand": {
+              "uid": 902,
+              "name": ""
+            },
+            "categories": [
+              {
+                "uid": 525,
+                "name": ""
+              }
+            ],
+            "images": [
+              {
+                "aspect_ratio": "16:25",
+                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/902_636BLUE/1_1540301094877.jpg",
+                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/902_636BLUE/1_1540301094877.jpg"
+              }
+            ],
+            "action": {
+              "type": "product",
+              "url": "https://api.addsale.com/v1/products/aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a/",
+              "query": {
+                "product_slug": [
+                  "aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a"
+                ]
+              }
+            }
+          },
+          "price": {
+            "base": {
+              "add_on": 100899,
+              "marked": 302899,
+              "effective": 100899,
+              "selling": 100899,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "add_on": 100899,
+              "marked": 302899,
+              "effective": 100899,
+              "selling": 100899,
+              "currency_code": "INR"
+            }
+          },
+          "message": "",
+          "quantity": 101
+        }
+      ],
+      "delivery_charge_info": "",
+      "coupon_text": "View all offers",
+      "cart_id": 54,
+      "uid": "54",
+      "gstin": null,
+      "checkout_mode": "self",
+      "restrict_checkout": false,
+      "is_valid": false,
+      "last_modified": "Tue, 03 Sep 2019 09:55:40 GMT"
+    },
+    "result": {}
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateCart
+Update items in the cart
+
+
+
+
+```kotlin
+poscart.updateCart(id: id, i: i, b: b, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String? | no |  |   
+| i | Boolean? | no |  |   
+| b | Boolean? | no |  |  
+| body | [UpdateCartRequest](#UpdateCartRequest) | yes | Request body |
+
+
+Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/{slug}/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/{identifier}​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
+
+*Returned Response*
+
+
+
+
+[UpdateCartDetailResponse](#UpdateCartDetailResponse)
+
+Success. Updates and returns a cart object as shown below. Refer `UpdateCartDetailResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Nothing updated</i></summary>
+
+```json
+{
+  "value": {
+    "cart": {
+      "breakup_values": {
+        "raw": {
+          "cod_charge": 0,
+          "convenience_fee": 0,
+          "coupon": 0,
+          "delivery_charge": 0,
+          "discount": -202000,
+          "fynd_cash": 0,
+          "gst_charges": 4804.71,
+          "mrp_total": 302899,
+          "subtotal": 100899,
+          "total": 100899,
+          "vog": 96094.29,
+          "you_saved": 0
+        },
+        "coupon": {
+          "type": "cash",
+          "code": "",
+          "uid": null,
+          "value": 0,
+          "is_applied": false,
+          "message": "Sorry! Invalid Coupon"
+        },
+        "display": [
+          {
+            "display": "MRP Total",
+            "key": "mrp_total",
+            "value": 302899,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Discount",
+            "key": "discount",
+            "value": -202000,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Subtotal",
+            "key": "subtotal",
+            "value": 100899,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Total",
+            "key": "total",
+            "value": 100899,
+            "currency_code": "INR"
+          }
+        ],
+        "loyalty_points": {
+          "total": 0,
+          "applicable": 0,
+          "is_applied": false,
+          "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+        }
+      },
+      "items": [
+        {
+          "bulk_offer": {},
+          "discount": "67% OFF",
+          "article": {
+            "type": "article",
+            "uid": "604_902_SSTC60401_636BLUE_1",
+            "size": "1",
+            "seller": {
+              "uid": 604,
+              "name": "SHRI SHANTINATH TRADING COMPANY"
+            },
+            "store": {
+              "uid": 4579,
+              "name": "Gandhi Nagar"
+            },
+            "quantity": 108,
+            "price": {
+              "base": {
+                "marked": 2999,
+                "effective": 999,
+                "currency_code": "INR"
+              },
+              "converted": {
+                "marked": 2999,
+                "effective": 999,
+                "currency_code": "INR"
+              }
+            }
+          },
+          "coupon_message": "",
+          "key": "707569_1",
+          "availability": {
+            "sizes": [
+              "1",
+              "8",
+              "7",
+              "2",
+              "9",
+              "5",
+              "3",
+              "6"
+            ],
+            "other_store_quantity": 7,
+            "out_of_stock": false,
+            "deliverable": true,
+            "is_valid": true
+          },
+          "product": {
+            "type": "product",
+            "uid": 707569,
+            "name": "Blue and Gold Printed Ethnic Set",
+            "slug": "aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a",
+            "brand": {
+              "uid": 902,
+              "name": ""
+            },
+            "categories": [
+              {
+                "uid": 525,
+                "name": ""
+              }
+            ],
+            "images": [
+              {
+                "aspect_ratio": "16:25",
+                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/902_636BLUE/1_1540301094877.jpg",
+                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/902_636BLUE/1_1540301094877.jpg"
+              }
+            ],
+            "action": {
+              "type": "product",
+              "url": "https://api.addsale.com/v1/products/aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a/",
+              "query": {
+                "product_slug": [
+                  "aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a"
+                ]
+              }
+            }
+          },
+          "price": {
+            "base": {
+              "add_on": 100899,
+              "marked": 302899,
+              "effective": 100899,
+              "selling": 100899,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "add_on": 100899,
+              "marked": 302899,
+              "effective": 100899,
+              "selling": 100899,
+              "currency_code": "INR"
+            }
+          },
+          "message": "",
+          "quantity": 101
+        }
+      ],
+      "delivery_charge_info": "",
+      "coupon_text": "View all offers",
+      "cart_id": 54,
+      "uid": "54",
+      "gstin": null,
+      "checkout_mode": "self",
+      "restrict_checkout": false,
+      "is_valid": true,
+      "last_modified": "Tue, 03 Sep 2019 10:19:20 GMT"
+    },
+    "result": {
+      "707569_90": {
+        "success": true,
+        "message": "Nothing updated"
+      }
+    },
+    "message": "Nothing updated",
+    "success": true
+  }
+}
+```
+</details>
+
+<details>
+<summary><i>&nbsp; Item updated in the cart</i></summary>
+
+```json
+{
+  "value": {
+    "cart": {
+      "breakup_values": {
+        "coupon": {
+          "type": "cash",
+          "code": "",
+          "uid": null,
+          "value": 0,
+          "is_applied": false,
+          "message": "Sorry! Invalid Coupon"
+        },
+        "loyalty_points": {
+          "total": 0,
+          "applicable": 0,
+          "is_applied": false,
+          "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+        },
+        "raw": {
+          "cod_charge": 0,
+          "convenience_fee": 0,
+          "coupon": 0,
+          "delivery_charge": 0,
+          "discount": 0,
+          "fynd_cash": 0,
+          "gst_charges": 838.83,
+          "mrp_total": 5499,
+          "subtotal": 5499,
+          "total": 5499,
+          "vog": 4660.17,
+          "you_saved": 0
+        },
+        "display": [
+          {
+            "display": "MRP Total",
+            "key": "mrp_total",
+            "value": 5499,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Subtotal",
+            "key": "subtotal",
+            "value": 5499,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Total",
+            "key": "total",
+            "value": 5499,
+            "currency_code": "INR"
+          }
+        ]
+      },
+      "items": [
+        {
+          "key": "437414_7",
+          "message": "",
+          "bulk_offer": {},
+          "price": {
+            "base": {
+              "add_on": 5499,
+              "marked": 5499,
+              "effective": 5499,
+              "selling": 5499,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "add_on": 5499,
+              "marked": 5499,
+              "effective": 5499,
+              "selling": 5499,
+              "currency_code": "INR"
+            }
+          },
+          "quantity": 1,
+          "discount": "",
+          "product": {
+            "type": "product",
+            "uid": 437414,
+            "name": "Suede Classic",
+            "slug": "puma-suede-classic-437414-6e6bbf",
+            "brand": {
+              "uid": 9,
+              "name": "Puma"
+            },
+            "categories": [
+              {
+                "uid": 165,
+                "name": "Outdoor Sports Shoes"
+              }
+            ],
+            "images": [
+              {
+                "aspect_ratio": "16:25",
+                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/9_35656851/1_1511171811830.jpg",
+                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/9_35656851/1_1511171811830.jpg"
+              }
+            ],
+            "action": {
+              "type": "product",
+              "url": "https://api.addsale.com/platform/content/v1/products/puma-suede-classic-437414-6e6bbf/",
+              "query": {
+                "product_slug": [
+                  "puma-suede-classic-437414-6e6bbf"
+                ]
+              }
+            }
+          },
+          "article": {
+            "type": "article",
+            "uid": "507_9_96099_35656851_7",
+            "size": "7",
+            "seller": {
+              "uid": 507,
+              "name": "PUMA SPORTS INDIA PVT LTD"
+            },
+            "store": {
+              "uid": 3632,
+              "name": "Colaba Causway"
+            },
+            "quantity": 5,
+            "price": {
+              "base": {
+                "marked": 5499,
+                "effective": 5499,
+                "currency_code": "INR"
+              },
+              "converted": {
+                "marked": 5499,
+                "effective": 5499,
+                "currency_code": "INR"
+              }
+            }
+          },
+          "coupon_message": "",
+          "availability": {
+            "sizes": [
+              "10",
+              "11",
+              "6",
+              "9",
+              "7",
+              "8"
+            ],
+            "other_store_quantity": 22,
+            "out_of_stock": false,
+            "deliverable": true,
+            "is_valid": true
+          }
+        }
+      ],
+      "delivery_charge_info": "",
+      "coupon_text": "View all offers",
+      "cart_id": 12426,
+      "uid": "12426",
+      "gstin": null,
+      "checkout_mode": "self",
+      "last_modified": "Thu, 22 Aug 2019 04:51:42 GMT",
+      "restrict_checkout": false,
+      "is_valid": true
+    },
+    "result": {
+      "437414_7": {
+        "success": true,
+        "message": "Item updated in the bag"
+      }
+    },
+    "message": "Item updated in the bag",
+    "success": true
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getItemCount
+Count items in the cart
+
+
+
+
+```kotlin
+poscart.getItemCount(id: id).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String? | no | The unique identifier of the cart. |  
+
+
+
+Use this API to get the total number of items present in cart.
+
+*Returned Response*
+
+
+
+
+[CartItemCountResponse](#CartItemCountResponse)
+
+Success. Returns the total count of items in a user's cart.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "user_cart_items_count": 0
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCoupons
+Fetch Coupon
+
+
+
+
+```kotlin
+poscart.getCoupons(id: id).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String? | no |  |  
+
+
+
+Use this API to get a list of available coupons along with their details.
+
+*Returned Response*
+
+
+
+
+[GetCouponResponse](#GetCouponResponse)
+
+Success. Returns a coupon object which has a list of all the eligible coupons. Refer `GetCouponResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "available_coupon_list": [
+    {
+      "coupon_value": 500,
+      "minimum_cart_value": 0,
+      "coupon_code": "RAJA500",
+      "title": "RAJA500 | Fynd coupon",
+      "sub_title": "NA",
+      "message": "TEST500",
+      "max_discount_value": 500,
+      "uid": 17921,
+      "is_applicable": true,
+      "is_applied": false,
+      "expires_on": "28 Aug, 19"
+    },
+    {
+      "coupon_value": 2250,
+      "minimum_cart_value": 0,
+      "coupon_code": "PRISMC22250111",
+      "title": "celio 2 time coupn to kalim hsp",
+      "sub_title": "celio 2 time coupn to kalim hsp",
+      "message": "celio 2 time coupn to kalim hsp",
+      "max_discount_value": 2250,
+      "uid": 17743,
+      "is_applicable": true,
+      "is_applied": false,
+      "expires_on": "24 Jan, 20"
     }
+  ],
+  "page": {
+    "current": 1,
+    "total": 0,
+    "has_previous": false,
+    "has_next": false,
+    "total_item_count": 0
   }
 }
 ```
-</details>
-
 </details>
 
 
@@ -1174,14 +1583,14 @@ Success
 ---
 
 
-#### getTicket
-Retreives ticket details of a company level ticket with ticket ID
+#### applyCoupon
+Apply Coupon
 
 
 
 
 ```kotlin
-client.lead.getTicket(id: id).safeAwait{ response,error->
+poscart.applyCoupon(i: i, b: b, p: p, id: id, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -1197,1320 +1606,569 @@ client.lead.getTicket(id: id).safeAwait{ response,error->
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID for which the data will be returned |   
-| id | String | yes | Tiket ID of the ticket to be fetched |  
+| i | Boolean? | no |  |   
+| b | Boolean? | no |  |   
+| p | Boolean? | no |  |   
+| id | String? | no |  |  
+| body | [ApplyCouponRequest](#ApplyCouponRequest) | yes | Request body |
 
 
-
-Retreives ticket details of a company level ticket
-
-*Returned Response*
-
-
-
-
-[Ticket](#Ticket)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "context": {
-      "company_id": "1"
-    },
-    "content": {
-      "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
-      "attachments": []
-    },
-    "status": {
-      "display": "In Progress",
-      "color": "#ffa951",
-      "key": "in_progress"
-    },
-    "priority": {
-      "display": "Medium",
-      "color": "#f37736",
-      "key": "medium"
-    },
-    "assigned_to": {
-      "agent_id": "5d1363adf599d850df93175e",
-      "gender": "male",
-      "accountType": "user",
-      "active": true,
-      "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
-      "hasOldPasswordHash": false,
-      "_id": "5d1363adf599d850df93175e",
-      "phoneNumbers": [
-        {
-          "active": true,
-          "primary": true,
-          "verified": true,
-          "countryCode": 91,
-          "phone": "9890425946"
-        }
-      ],
-      "firstName": "Nikhil",
-      "lastName": "Manapure",
-      "emails": [
-        {
-          "active": true,
-          "primary": true,
-          "verified": true,
-          "email": "nikhilmshchs@gmail.com"
-        }
-      ],
-      "username": "nikhilmshchs_gmail_com_38425_20500281",
-      "createdAt": "2019-01-01T17:22:38.528Z",
-      "updatedAt": "2021-01-22T10:02:42.258Z",
-      "uid": "20500281",
-      "__v": 56
-    },
-    "tags": [
-      "some-title"
-    ],
-    "_id": "6012f38557751ee8fc162cf7",
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "88.0.4324.96"
-        },
-        "os": {
-          "name": "macOS",
-          "version": "10.15.7",
-          "versionName": "Catalina"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
-        }
-      }
-    },
-    "source": "sales_channel",
-    "created_by": {
-      "id": "5d1363adf599d850df93175e",
-      "user": {
-        "gender": "male",
-        "accountType": "user",
-        "active": true,
-        "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
-        "hasOldPasswordHash": false,
-        "_id": "5d1363adf599d850df93175e",
-        "phoneNumbers": [
-          {
-            "active": true,
-            "primary": true,
-            "verified": true,
-            "countryCode": 91,
-            "phone": "9890425946"
-          }
-        ],
-        "firstName": "Nikhil",
-        "lastName": "Manapure",
-        "emails": [
-          {
-            "active": true,
-            "primary": true,
-            "verified": true,
-            "email": "nikhilmshchs@gmail.com"
-          }
-        ],
-        "username": "nikhilmshchs_gmail_com_38425_20500281",
-        "createdAt": "2019-01-01T17:22:38.528Z",
-        "updatedAt": "2021-01-22T10:02:42.258Z",
-        "uid": "20500281",
-        "__v": 56
-      }
-    },
-    "response_id": "6012f38457751e0fb8162cf6",
-    "category": {
-      "form": {
-        "login_required": false,
-        "should_notify": false,
-        "inputs": [
-          {
-            "required": false,
-            "type": "text",
-            "enum": [],
-            "display": "Single lineeee",
-            "key": "single-lineeee",
-            "showRegexInput": false
-          },
-          {
-            "required": false,
-            "type": "email",
-            "enum": [],
-            "display": "Email",
-            "regex": "\\S+@\\S+\\.\\S+",
-            "key": "email",
-            "showRegexInput": true
-          },
-          {
-            "required": false,
-            "type": "text",
-            "enum": [],
-            "display": "dfsdf",
-            "key": "dfsdf",
-            "showRegexInput": false
-          }
-        ],
-        "available_assignees": [
-          "5b9b98150df588546aaea6d2",
-          "5c45d78395d7504f76c2cb37"
-        ],
-        "_id": "5fd72db3dc250f8decfc61b2",
-        "title": "SOme title",
-        "description": "SOme big description",
-        "slug": "some-title",
-        "application_id": "000000000000000000000003",
-        "created_on": {
-          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-          "platform": "web",
-          "meta": {
-            "browser": {
-              "name": "Chrome",
-              "version": "87.0.4280.88"
-            },
-            "os": {
-              "name": "macOS",
-              "version": "10.15.6",
-              "versionName": "Catalina"
-            },
-            "platform": {
-              "type": "desktop",
-              "vendor": "Apple"
-            },
-            "engine": {
-              "name": "Blink"
-            }
-          }
-        },
-        "created_by": "5d1363adf599d850df93175e",
-        "createdAt": "2020-12-14T09:17:39.953Z",
-        "updatedAt": "2021-01-28T18:48:07.717Z",
-        "__v": 0
-      },
-      "key": "some-title",
-      "display": "SOme title"
-    },
-    "ticket_id": "43",
-    "createdAt": "2021-01-28T17:25:25.013Z",
-    "updatedAt": "2021-01-28T17:25:33.396Z",
-    "__v": 0,
-    "video_room_id": "6012f38557751ee8fc162cf7"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### editTicket
-Edits ticket details of a company level ticket
-
-
-
-
-```kotlin
-client.lead.editTicket(id: id, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID for ticket |   
-| id | String | yes | Ticket ID of ticket to be edited |  
-| body | [EditTicketPayload](#EditTicketPayload) | yes | Request body |
-
-
-Edits ticket details of a company level ticket such as status, priority, category, tags, attachments, assigne & ticket content changes
+Use this API to apply coupons on items in the cart.
 
 *Returned Response*
 
 
 
 
-[Ticket](#Ticket)
+[CartDetailResponse](#CartDetailResponse)
 
-Success
-
-
+Success. Returns coupons applied to the cart along with item details and price breakup. Refer `CartDetailResponse` for more details.
 
 
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
 
 
 <details>
-<summary><i>&nbsp; Default</i></summary>
+<summary><i>&nbsp; Example:</i></summary>
 
 ```json
 {
-  "value": {
-    "context": {
-      "company_id": "1"
+  "breakup_values": {
+    "raw": {
+      "cod_charge": 0,
+      "convenience_fee": 0,
+      "coupon": -2250,
+      "delivery_charge": 0,
+      "discount": -7240.2163,
+      "fynd_cash": 0,
+      "gst_charges": 2139.08,
+      "mrp_total": 26983,
+      "subtotal": 19742.7837,
+      "total": 17492.7837,
+      "vog": 15353.7,
+      "you_saved": 0
     },
-    "content": {
-      "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
-      "attachments": []
+    "coupon": {
+      "type": "cash",
+      "code": "PRISMC22250111",
+      "uid": 17743,
+      "value": 2250,
+      "is_applied": true,
+      "message": "coupn applied"
     },
-    "status": {
-      "display": "In Progress",
-      "color": "#ffa951",
-      "key": "in_progress"
+    "loyalty_points": {
+      "total": 0,
+      "applicable": 0,
+      "is_applied": false,
+      "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
     },
-    "priority": {
-      "display": "Medium",
-      "color": "#f37736",
-      "key": "medium"
-    },
-    "assigned_to": {
-      "agent_id": "5d1363adf599d850df93175e",
-      "gender": "male",
-      "accountType": "user",
-      "active": true,
-      "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
-      "hasOldPasswordHash": false,
-      "_id": "5d1363adf599d850df93175e",
-      "phoneNumbers": [
-        {
-          "active": true,
-          "primary": true,
-          "verified": true,
-          "countryCode": 91,
-          "phone": "9890425946"
-        }
-      ],
-      "firstName": "Nikhil",
-      "lastName": "Manapure",
-      "emails": [
-        {
-          "active": true,
-          "primary": true,
-          "verified": true,
-          "email": "nikhilmshchs@gmail.com"
-        }
-      ],
-      "username": "nikhilmshchs_gmail_com_38425_20500281",
-      "createdAt": "2019-01-01T17:22:38.528Z",
-      "updatedAt": "2021-01-22T10:02:42.258Z",
-      "uid": "20500281",
-      "__v": 56
-    },
-    "tags": [
-      "some-title"
-    ],
-    "_id": "6012f38557751ee8fc162cf7",
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "88.0.4324.96"
-        },
-        "os": {
-          "name": "macOS",
-          "version": "10.15.7",
-          "versionName": "Catalina"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
-        }
-      }
-    },
-    "source": "sales_channel",
-    "created_by": {
-      "id": "5d1363adf599d850df93175e",
-      "user": {
-        "gender": "male",
-        "accountType": "user",
-        "active": true,
-        "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
-        "hasOldPasswordHash": false,
-        "_id": "5d1363adf599d850df93175e",
-        "phoneNumbers": [
-          {
-            "active": true,
-            "primary": true,
-            "verified": true,
-            "countryCode": 91,
-            "phone": "9890425946"
-          }
-        ],
-        "firstName": "Nikhil",
-        "lastName": "Manapure",
-        "emails": [
-          {
-            "active": true,
-            "primary": true,
-            "verified": true,
-            "email": "nikhilmshchs@gmail.com"
-          }
-        ],
-        "username": "nikhilmshchs_gmail_com_38425_20500281",
-        "createdAt": "2019-01-01T17:22:38.528Z",
-        "updatedAt": "2021-01-22T10:02:42.258Z",
-        "uid": "20500281",
-        "__v": 56
-      }
-    },
-    "response_id": "6012f38457751e0fb8162cf6",
-    "category": {
-      "form": {
-        "login_required": false,
-        "should_notify": false,
-        "inputs": [
-          {
-            "required": false,
-            "type": "text",
-            "enum": [],
-            "display": "Single lineeee",
-            "key": "single-lineeee",
-            "showRegexInput": false
-          },
-          {
-            "required": false,
-            "type": "email",
-            "enum": [],
-            "display": "Email",
-            "regex": "\\S+@\\S+\\.\\S+",
-            "key": "email",
-            "showRegexInput": true
-          },
-          {
-            "required": false,
-            "type": "text",
-            "enum": [],
-            "display": "dfsdf",
-            "key": "dfsdf",
-            "showRegexInput": false
-          }
-        ],
-        "available_assignees": [
-          "5b9b98150df588546aaea6d2",
-          "5c45d78395d7504f76c2cb37"
-        ],
-        "_id": "5fd72db3dc250f8decfc61b2",
-        "title": "SOme title",
-        "description": "SOme big description",
-        "slug": "some-title",
-        "application_id": "000000000000000000000003",
-        "created_on": {
-          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-          "platform": "web",
-          "meta": {
-            "browser": {
-              "name": "Chrome",
-              "version": "87.0.4280.88"
-            },
-            "os": {
-              "name": "macOS",
-              "version": "10.15.6",
-              "versionName": "Catalina"
-            },
-            "platform": {
-              "type": "desktop",
-              "vendor": "Apple"
-            },
-            "engine": {
-              "name": "Blink"
-            }
-          }
-        },
-        "created_by": "5d1363adf599d850df93175e",
-        "createdAt": "2020-12-14T09:17:39.953Z",
-        "updatedAt": "2021-01-28T18:48:07.717Z",
-        "__v": 0
-      },
-      "key": "some-title",
-      "display": "SOme title"
-    },
-    "ticket_id": "43",
-    "createdAt": "2021-01-28T17:25:25.013Z",
-    "updatedAt": "2021-01-28T17:25:33.396Z",
-    "__v": 0,
-    "video_room_id": "6012f38557751ee8fc162cf7"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### getTicket
-Retreives ticket details of a application level ticket
-
-
-
-
-```kotlin
-client.application("<APPLICATION_ID>").lead.getTicket(id: id).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID of the application |   
-| applicationId | String | yes | Application ID for which the data will be returned |   
-| id | String | yes | Tiket ID of the ticket to be fetched |  
-
-
-
-Retreives ticket details of a application level ticket with ticket ID
-
-*Returned Response*
-
-
-
-
-[Ticket](#Ticket)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "context": {
-      "application_id": "000000000000000000000003",
-      "company_id": "884"
-    },
-    "content": {
-      "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
-      "attachments": []
-    },
-    "status": {
-      "display": "In Progress",
-      "color": "#ffa951",
-      "key": "in_progress"
-    },
-    "priority": {
-      "display": "Medium",
-      "color": "#f37736",
-      "key": "medium"
-    },
-    "assigned_to": {
-      "agent_id": "5d1363adf599d850df93175e",
-      "gender": "male",
-      "accountType": "user",
-      "active": true,
-      "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
-      "hasOldPasswordHash": false,
-      "_id": "5d1363adf599d850df93175e",
-      "phoneNumbers": [
-        {
-          "active": true,
-          "primary": true,
-          "verified": true,
-          "countryCode": 91,
-          "phone": "9890425946"
-        }
-      ],
-      "firstName": "Nikhil",
-      "lastName": "Manapure",
-      "emails": [
-        {
-          "active": true,
-          "primary": true,
-          "verified": true,
-          "email": "nikhilmshchs@gmail.com"
-        }
-      ],
-      "username": "nikhilmshchs_gmail_com_38425_20500281",
-      "createdAt": "2019-01-01T17:22:38.528Z",
-      "updatedAt": "2021-01-22T10:02:42.258Z",
-      "uid": "20500281",
-      "__v": 56
-    },
-    "tags": [
-      "some-title"
-    ],
-    "_id": "6012f38557751ee8fc162cf7",
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "88.0.4324.96"
-        },
-        "os": {
-          "name": "macOS",
-          "version": "10.15.7",
-          "versionName": "Catalina"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
-        }
-      }
-    },
-    "source": "sales_channel",
-    "created_by": {
-      "id": "5d1363adf599d850df93175e",
-      "user": {
-        "gender": "male",
-        "accountType": "user",
-        "active": true,
-        "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
-        "hasOldPasswordHash": false,
-        "_id": "5d1363adf599d850df93175e",
-        "phoneNumbers": [
-          {
-            "active": true,
-            "primary": true,
-            "verified": true,
-            "countryCode": 91,
-            "phone": "9890425946"
-          }
-        ],
-        "firstName": "Nikhil",
-        "lastName": "Manapure",
-        "emails": [
-          {
-            "active": true,
-            "primary": true,
-            "verified": true,
-            "email": "nikhilmshchs@gmail.com"
-          }
-        ],
-        "username": "nikhilmshchs_gmail_com_38425_20500281",
-        "createdAt": "2019-01-01T17:22:38.528Z",
-        "updatedAt": "2021-01-22T10:02:42.258Z",
-        "uid": "20500281",
-        "__v": 56
-      }
-    },
-    "response_id": "6012f38457751e0fb8162cf6",
-    "category": {
-      "form": {
-        "login_required": false,
-        "should_notify": false,
-        "inputs": [
-          {
-            "required": false,
-            "type": "text",
-            "enum": [],
-            "display": "Single lineeee",
-            "key": "single-lineeee",
-            "showRegexInput": false
-          },
-          {
-            "required": false,
-            "type": "email",
-            "enum": [],
-            "display": "Email",
-            "regex": "\\S+@\\S+\\.\\S+",
-            "key": "email",
-            "showRegexInput": true
-          },
-          {
-            "required": false,
-            "type": "text",
-            "enum": [],
-            "display": "dfsdf",
-            "key": "dfsdf",
-            "showRegexInput": false
-          }
-        ],
-        "available_assignees": [
-          "5b9b98150df588546aaea6d2",
-          "5c45d78395d7504f76c2cb37"
-        ],
-        "_id": "5fd72db3dc250f8decfc61b2",
-        "title": "SOme title",
-        "description": "SOme big description",
-        "slug": "some-title",
-        "application_id": "000000000000000000000003",
-        "created_on": {
-          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-          "platform": "web",
-          "meta": {
-            "browser": {
-              "name": "Chrome",
-              "version": "87.0.4280.88"
-            },
-            "os": {
-              "name": "macOS",
-              "version": "10.15.6",
-              "versionName": "Catalina"
-            },
-            "platform": {
-              "type": "desktop",
-              "vendor": "Apple"
-            },
-            "engine": {
-              "name": "Blink"
-            }
-          }
-        },
-        "created_by": "5d1363adf599d850df93175e",
-        "createdAt": "2020-12-14T09:17:39.953Z",
-        "updatedAt": "2021-01-28T18:48:07.717Z",
-        "__v": 0
-      },
-      "key": "some-title",
-      "display": "SOme title"
-    },
-    "ticket_id": "43",
-    "createdAt": "2021-01-28T17:25:25.013Z",
-    "updatedAt": "2021-01-28T17:25:33.396Z",
-    "__v": 0,
-    "video_room_id": "6012f38557751ee8fc162cf7"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### editTicket
-Edits ticket details of a application level ticket
-
-
-
-
-```kotlin
-client.application("<APPLICATION_ID>").lead.editTicket(id: id, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID of the application |   
-| applicationId | String | yes | Application ID for ticket |   
-| id | String | yes | Ticket ID of ticket to be edited |  
-| body | [EditTicketPayload](#EditTicketPayload) | yes | Request body |
-
-
-Edits ticket details of a application level ticket such as status, priority, category, tags, attachments, assigne & ticket content changes
-
-*Returned Response*
-
-
-
-
-[Ticket](#Ticket)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "context": {
-      "application_id": "000000000000000000000003",
-      "company_id": "884"
-    },
-    "content": {
-      "title": "SOme title Response",
-      "description": "<b>Single lineeee</b>: asdf<br><b>Email</b>: asdf@asdf.com<br><b>dfsdf</b>: asdf<br>",
-      "attachments": []
-    },
-    "status": {
-      "display": "In Progress",
-      "color": "#ffa951",
-      "key": "in_progress"
-    },
-    "priority": {
-      "display": "Medium",
-      "color": "#f37736",
-      "key": "medium"
-    },
-    "assigned_to": {
-      "agent_id": "5d1363adf599d850df93175e",
-      "gender": "male",
-      "accountType": "user",
-      "active": true,
-      "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
-      "hasOldPasswordHash": false,
-      "_id": "5d1363adf599d850df93175e",
-      "phoneNumbers": [
-        {
-          "active": true,
-          "primary": true,
-          "verified": true,
-          "countryCode": 91,
-          "phone": "9890425946"
-        }
-      ],
-      "firstName": "Nikhil",
-      "lastName": "Manapure",
-      "emails": [
-        {
-          "active": true,
-          "primary": true,
-          "verified": true,
-          "email": "nikhilmshchs@gmail.com"
-        }
-      ],
-      "username": "nikhilmshchs_gmail_com_38425_20500281",
-      "createdAt": "2019-01-01T17:22:38.528Z",
-      "updatedAt": "2021-01-22T10:02:42.258Z",
-      "uid": "20500281",
-      "__v": 56
-    },
-    "tags": [
-      "some-title"
-    ],
-    "_id": "6012f38557751ee8fc162cf7",
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "88.0.4324.96"
-        },
-        "os": {
-          "name": "macOS",
-          "version": "10.15.7",
-          "versionName": "Catalina"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
-        }
-      }
-    },
-    "source": "sales_channel",
-    "created_by": {
-      "id": "5d1363adf599d850df93175e",
-      "user": {
-        "gender": "male",
-        "accountType": "user",
-        "active": true,
-        "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
-        "hasOldPasswordHash": false,
-        "_id": "5d1363adf599d850df93175e",
-        "phoneNumbers": [
-          {
-            "active": true,
-            "primary": true,
-            "verified": true,
-            "countryCode": 91,
-            "phone": "9890425946"
-          }
-        ],
-        "firstName": "Nikhil",
-        "lastName": "Manapure",
-        "emails": [
-          {
-            "active": true,
-            "primary": true,
-            "verified": true,
-            "email": "nikhilmshchs@gmail.com"
-          }
-        ],
-        "username": "nikhilmshchs_gmail_com_38425_20500281",
-        "createdAt": "2019-01-01T17:22:38.528Z",
-        "updatedAt": "2021-01-22T10:02:42.258Z",
-        "uid": "20500281",
-        "__v": 56
-      }
-    },
-    "response_id": "6012f38457751e0fb8162cf6",
-    "category": {
-      "form": {
-        "login_required": false,
-        "should_notify": false,
-        "inputs": [
-          {
-            "required": false,
-            "type": "text",
-            "enum": [],
-            "display": "Single lineeee",
-            "key": "single-lineeee",
-            "showRegexInput": false
-          },
-          {
-            "required": false,
-            "type": "email",
-            "enum": [],
-            "display": "Email",
-            "regex": "\\S+@\\S+\\.\\S+",
-            "key": "email",
-            "showRegexInput": true
-          },
-          {
-            "required": false,
-            "type": "text",
-            "enum": [],
-            "display": "dfsdf",
-            "key": "dfsdf",
-            "showRegexInput": false
-          }
-        ],
-        "available_assignees": [
-          "5b9b98150df588546aaea6d2",
-          "5c45d78395d7504f76c2cb37"
-        ],
-        "_id": "5fd72db3dc250f8decfc61b2",
-        "title": "SOme title",
-        "description": "SOme big description",
-        "slug": "some-title",
-        "application_id": "000000000000000000000003",
-        "created_on": {
-          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-          "platform": "web",
-          "meta": {
-            "browser": {
-              "name": "Chrome",
-              "version": "87.0.4280.88"
-            },
-            "os": {
-              "name": "macOS",
-              "version": "10.15.6",
-              "versionName": "Catalina"
-            },
-            "platform": {
-              "type": "desktop",
-              "vendor": "Apple"
-            },
-            "engine": {
-              "name": "Blink"
-            }
-          }
-        },
-        "created_by": "5d1363adf599d850df93175e",
-        "createdAt": "2020-12-14T09:17:39.953Z",
-        "updatedAt": "2021-01-28T18:48:07.717Z",
-        "__v": 0
-      },
-      "key": "some-title",
-      "display": "SOme title"
-    },
-    "ticket_id": "43",
-    "createdAt": "2021-01-28T17:25:25.013Z",
-    "updatedAt": "2021-01-28T17:25:33.396Z",
-    "__v": 0,
-    "video_room_id": "6012f38557751ee8fc162cf7"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### createHistory
-Create history for specific company level ticket
-
-
-
-
-```kotlin
-client.lead.createHistory(id: id, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID for ticket |   
-| id | String | yes | Ticket ID for which history is created |  
-| body | [TicketHistoryPayload](#TicketHistoryPayload) | yes | Request body |
-
-
-Create history for specific company level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
-
-*Returned Response*
-
-
-
-
-[TicketHistory](#TicketHistory)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "601a9d52c26687d086c499ef",
-    "ticket_id": "43",
-    "type": "comment",
-    "value": {
-      "text": "d",
-      "media": []
-    },
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "88.0.4324.96"
-        },
-        "os": {
-          "name": "macOS",
-          "version": "10.15.7",
-          "versionName": "Catalina"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
-        }
-      }
-    },
-    "created_by": "5d1363adf599d850df93175e",
-    "createdAt": "2021-02-03T12:55:46.808Z",
-    "updatedAt": "2021-02-03T12:55:46.808Z",
-    "__v": 0
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### getTicketHistory
-Gets history list for specific company level ticket
-
-
-
-
-```kotlin
-client.lead.getTicketHistory(id: id).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID for ticket |   
-| id | String | yes | Ticket ID for which history is to be fetched |  
-
-
-
-Gets history list for specific company level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
-
-*Returned Response*
-
-
-
-
-[TicketHistoryList](#TicketHistoryList)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "docs": [
+    "display": [
       {
-        "_id": "602e5384204225eed5cadae7",
-        "ticket_id": "41",
-        "type": "comment",
-        "value": {
-          "text": "hello service",
-          "media": []
-        },
-        "created_on": {
-          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-          "platform": "web",
-          "meta": {
-            "browser": {
-              "name": "Chrome",
-              "version": "88.0.4324.150"
-            },
-            "os": {
-              "name": "macOS",
-              "version": "11.2.0"
-            },
-            "platform": {
-              "type": "desktop",
-              "vendor": "Apple"
-            },
-            "engine": {
-              "name": "Blink"
-            }
-          }
-        },
-        "created_by": {
-          "gender": "male",
-          "accountType": "user",
-          "active": true,
-          "profilePicUrl": "https://hdn-1.fynd.com/company/884/applications/000000000000000000000001/theme/pictures/free/original/default-profile_nxhzui.png",
-          "hasOldPasswordHash": false,
-          "_id": "5f8147abbd1a0a870f61f1a6",
-          "phoneNumbers": [
-            {
-              "active": true,
-              "primary": true,
-              "verified": true,
-              "phone": "8412805281",
-              "countryCode": 91
-            }
-          ],
-          "firstName": "Satyen",
-          "lastName": "Maurya",
-          "emails": [
-            {
-              "active": true,
-              "primary": true,
-              "verified": true,
-              "email": "satyenmaurya95@gmail.com"
-            }
-          ],
-          "username": "satyenmaurya95_gmail_com_11118",
-          "createdAt": "2020-10-10T05:33:31.119Z",
-          "updatedAt": "2020-10-10T05:33:31.119Z",
-          "uid": "5678",
-          "__v": 0
-        },
-        "createdAt": "2021-02-18T11:46:12.522Z",
-        "updatedAt": "2021-02-18T11:46:12.522Z",
-        "__v": 0,
-        "id": "602e5384204225eed5cadae7"
+        "display": "MRP Total",
+        "key": "mrp_total",
+        "value": 26983,
+        "currency_code": "INR"
       },
       {
-        "_id": "60372aa78a046d4d79c46e15",
-        "ticket_id": "41",
-        "type": "diff",
-        "value": {
-          "status": [
-            "pending",
-            "in_progress"
-          ]
-        },
-        "created_by": {
-          "gender": "male",
-          "accountType": "user",
-          "active": true,
-          "profilePicUrl": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
-          "hasOldPasswordHash": false,
-          "_id": "5e79e721768c6bf54b783146",
-          "emails": [
-            {
-              "active": true,
-              "primary": true,
-              "verified": true,
-              "email": "nikhilmshchs@gmail.com"
-            },
-            {
-              "active": true,
-              "primary": false,
-              "verified": true,
-              "email": "nikhilmanapure@gofynd.com"
-            },
-            {
-              "active": true,
-              "primary": false,
-              "verified": true,
-              "email": "nikhilmanapure@fynd.com"
-            },
-            {
-              "active": true,
-              "primary": false,
-              "verified": true,
-              "email": "nikhilmanapure@uniket.store"
-            }
-          ],
-          "phoneNumbers": [
-            {
-              "active": true,
-              "primary": true,
-              "verified": true,
-              "countryCode": 91,
-              "phone": "9890425946"
-            }
-          ],
-          "firstName": "Nikhil",
-          "lastName": "Manapure",
-          "username": "nikhilmanapure_gofynd_com_29298",
-          "createdAt": "2020-03-24T10:55:29.298Z",
-          "updatedAt": "2020-05-12T07:46:41.816Z",
-          "uid": "5567",
-          "__v": 2
-        },
-        "createdAt": "2021-02-25T04:42:15.225Z",
-        "updatedAt": "2021-02-25T04:42:15.225Z",
-        "__v": 0,
-        "id": "60372aa78a046d4d79c46e15"
+        "display": "Discount",
+        "key": "discount",
+        "value": -7240,
+        "currency_code": "INR"
+      },
+      {
+        "display": "Subtotal",
+        "key": "subtotal",
+        "value": 19743,
+        "currency_code": "INR"
+      },
+      {
+        "display": "Coupon",
+        "key": "coupon",
+        "value": -2250,
+        "currency_code": "INR"
+      },
+      {
+        "display": "Total",
+        "key": "total",
+        "value": 17493,
+        "currency_code": "INR"
       }
-    ],
-    "total": 2,
-    "limit": 100,
-    "page": 1,
-    "pages": 1
-  }
+    ]
+  },
+  "items": [
+    {
+      "availability": {
+        "sizes": [
+          "10"
+        ],
+        "other_store_quantity": 0,
+        "out_of_stock": false,
+        "deliverable": true,
+        "is_valid": true
+      },
+      "product": {
+        "type": "product",
+        "uid": 751083,
+        "name": "Carson 2",
+        "slug": "puma-carson-2-751083-6ad98d",
+        "brand": {
+          "uid": 9,
+          "name": "Puma"
+        },
+        "categories": [
+          {
+            "uid": 165,
+            "name": "Outdoor Sports Shoes"
+          }
+        ],
+        "images": [
+          {
+            "aspect_ratio": "16:25",
+            "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/9_19100302/1_1542807042296.jpg",
+            "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/9_19100302/1_1542807042296.jpg"
+          }
+        ],
+        "action": {
+          "type": "product",
+          "url": "https://api.addsale.com/platform/content/v1/products/puma-carson-2-751083-6ad98d/",
+          "query": {
+            "product_slug": [
+              "puma-carson-2-751083-6ad98d"
+            ]
+          }
+        }
+      },
+      "quantity": 4,
+      "discount": "41% OFF",
+      "price": {
+        "base": {
+          "add_on": 9596,
+          "marked": 15996,
+          "effective": 9596,
+          "selling": 9596,
+          "currency_code": "INR"
+        },
+        "converted": {
+          "add_on": 9596,
+          "marked": 15996,
+          "effective": 9596,
+          "selling": 9596,
+          "currency_code": "INR"
+        }
+      },
+      "message": "",
+      "bulk_offer": {},
+      "key": "751083_10",
+      "coupon_message": "",
+      "article": {
+        "type": "article",
+        "uid": "612_9_SE61201_19100302_10",
+        "size": "10",
+        "seller": {
+          "uid": 612,
+          "name": "SSR ENTERPRISE"
+        },
+        "store": {
+          "uid": 4431,
+          "name": "Motilal Nagar 1, Goregaon"
+        },
+        "quantity": 4,
+        "price": {
+          "base": {
+            "marked": 3999,
+            "effective": 2399,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "marked": 3999,
+            "effective": 2399,
+            "currency_code": "INR"
+          }
+        }
+      }
+    },
+    {
+      "availability": {
+        "sizes": [
+          "L",
+          "M",
+          "S",
+          "XL",
+          "XXL"
+        ],
+        "other_store_quantity": 0,
+        "out_of_stock": false,
+        "deliverable": true,
+        "is_valid": true
+      },
+      "product": {
+        "type": "product",
+        "uid": 246228,
+        "name": "Blue Solid T-Shirt",
+        "slug": "superdry-blue-solid-t-shirt-2",
+        "brand": {
+          "uid": 235,
+          "name": "Superdry"
+        },
+        "categories": [
+          {
+            "uid": 192,
+            "name": "T-Shirts"
+          }
+        ],
+        "images": [
+          {
+            "aspect_ratio": "16:25",
+            "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/235_M11029ONDSXNS/1.jpg",
+            "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/235_M11029ONDSXNS/1.jpg"
+          }
+        ],
+        "action": {
+          "type": "product",
+          "url": "https://api.addsale.com/platform/content/v1/products/superdry-blue-solid-t-shirt-2/",
+          "query": {
+            "product_slug": [
+              "superdry-blue-solid-t-shirt-2"
+            ]
+          }
+        }
+      },
+      "quantity": 1,
+      "discount": "",
+      "price": {
+        "base": {
+          "add_on": 4490,
+          "marked": 4490,
+          "effective": 4490,
+          "selling": 4490,
+          "currency_code": "INR"
+        },
+        "converted": {
+          "add_on": 4490,
+          "marked": 4490,
+          "effective": 4490,
+          "selling": 4490,
+          "currency_code": "INR"
+        }
+      },
+      "message": "",
+      "bulk_offer": {},
+      "key": "246228_S",
+      "coupon_message": "",
+      "article": {
+        "type": "article",
+        "uid": "46_235_TM62_M11029ONDSXNS_S",
+        "size": "S",
+        "seller": {
+          "uid": 46,
+          "name": "RELIANCE BRANDS LIMITED"
+        },
+        "store": {
+          "uid": 4550,
+          "name": "VR Mall"
+        },
+        "quantity": 1,
+        "price": {
+          "base": {
+            "marked": 4490,
+            "effective": 4490,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "marked": 4490,
+            "effective": 4490,
+            "currency_code": "INR"
+          }
+        }
+      }
+    },
+    {
+      "availability": {
+        "sizes": [
+          "XL",
+          "M",
+          "L",
+          "S"
+        ],
+        "other_store_quantity": 8,
+        "out_of_stock": false,
+        "deliverable": true,
+        "is_valid": true
+      },
+      "product": {
+        "type": "product",
+        "uid": 443175,
+        "name": "Light Blue Denim Jeggings",
+        "slug": "go-colors-light-blue-denim-jeggings-443175-3c688c",
+        "brand": {
+          "uid": 207,
+          "name": "Go Colors"
+        },
+        "categories": [
+          {
+            "uid": 267,
+            "name": "Jeggings"
+          }
+        ],
+        "images": [
+          {
+            "aspect_ratio": "16:25",
+            "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/207_LJ03LBLUDN88/1_1512382513548.jpg",
+            "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/207_LJ03LBLUDN88/1_1512382513548.jpg"
+          }
+        ],
+        "action": {
+          "type": "product",
+          "url": "https://api.addsale.com/platform/content/v1/products/go-colors-light-blue-denim-jeggings-443175-3c688c/",
+          "query": {
+            "product_slug": [
+              "go-colors-light-blue-denim-jeggings-443175-3c688c"
+            ]
+          }
+        }
+      },
+      "quantity": 1,
+      "discount": "",
+      "price": {
+        "base": {
+          "add_on": 1599,
+          "marked": 1599,
+          "effective": 1599,
+          "selling": 1599,
+          "currency_code": "INR"
+        },
+        "converted": {
+          "add_on": 1599,
+          "marked": 1599,
+          "effective": 1599,
+          "selling": 1599,
+          "currency_code": "INR"
+        }
+      },
+      "message": "",
+      "bulk_offer": {},
+      "key": "443175_S",
+      "coupon_message": "",
+      "article": {
+        "type": "article",
+        "uid": "162_207_1271_LJ03LBLUDN88_S",
+        "size": "S",
+        "seller": {
+          "uid": 162,
+          "name": "GO FASHION INDIA PRIVATE LIMITED"
+        },
+        "store": {
+          "uid": 5784,
+          "name": "Vega City mall"
+        },
+        "quantity": 3,
+        "price": {
+          "base": {
+            "marked": 1599,
+            "effective": 1599,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "marked": 1599,
+            "effective": 1599,
+            "currency_code": "INR"
+          }
+        }
+      }
+    },
+    {
+      "availability": {
+        "sizes": [
+          "OS"
+        ],
+        "other_store_quantity": 12,
+        "out_of_stock": false,
+        "deliverable": true,
+        "is_valid": true
+      },
+      "product": {
+        "type": "product",
+        "uid": 842716,
+        "name": "Blue Backpack",
+        "slug": "istorm-blue-backpack-842716-951b5a",
+        "brand": {
+          "uid": 1177,
+          "name": "iStorm"
+        },
+        "categories": [
+          {
+            "uid": 198,
+            "name": "Backpacks"
+          }
+        ],
+        "images": [
+          {
+            "aspect_ratio": "16:25",
+            "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/1177_IS483/1_1551353288247.jpg",
+            "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/1177_IS483/1_1551353288247.jpg"
+          }
+        ],
+        "action": {
+          "type": "product",
+          "url": "https://api.addsale.com/platform/content/v1/products/istorm-blue-backpack-842716-951b5a/",
+          "query": {
+            "product_slug": [
+              "istorm-blue-backpack-842716-951b5a"
+            ]
+          }
+        }
+      },
+      "quantity": 1,
+      "discount": "34% OFF",
+      "price": {
+        "base": {
+          "add_on": 998.7837,
+          "marked": 1499,
+          "effective": 998.7837,
+          "selling": 998.7837,
+          "currency_code": "INR"
+        },
+        "converted": {
+          "add_on": 998.7837,
+          "marked": 1499,
+          "effective": 998.7837,
+          "selling": 998.7837,
+          "currency_code": "INR"
+        }
+      },
+      "message": "",
+      "bulk_offer": {},
+      "key": "842716_OS",
+      "coupon_message": "",
+      "article": {
+        "type": "article",
+        "uid": "638_1177_CRSL63802_IS483_OS",
+        "size": "OS",
+        "seller": {
+          "uid": 638,
+          "name": "COUNFREEDISE RETAIL SERVICES LTD"
+        },
+        "store": {
+          "uid": 4630,
+          "name": "Bhiwandi"
+        },
+        "quantity": 4,
+        "price": {
+          "base": {
+            "marked": 1499,
+            "effective": 998.7837,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "marked": 1499,
+            "effective": 998.7837,
+            "currency_code": "INR"
+          }
+        }
+      }
+    },
+    {
+      "availability": {
+        "sizes": [
+          "OS"
+        ],
+        "other_store_quantity": 2,
+        "out_of_stock": false,
+        "deliverable": true,
+        "is_valid": true
+      },
+      "product": {
+        "type": "product",
+        "uid": 778937,
+        "name": "Colourful Carnival Bouncer",
+        "slug": "fisher-price-colourful-carnival-bouncer-778937-fafa1f",
+        "brand": {
+          "uid": 963,
+          "name": "Fisher-Price"
+        },
+        "categories": [
+          {
+            "uid": 576,
+            "name": "Cradles"
+          }
+        ],
+        "images": [
+          {
+            "aspect_ratio": "16:25",
+            "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/963_PWUPC01977/1_1545308400588.jpg",
+            "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/963_PWUPC01977/1_1545308400588.jpg"
+          }
+        ],
+        "action": {
+          "type": "product",
+          "url": "https://api.addsale.com/platform/content/v1/products/fisher-price-colourful-carnival-bouncer-778937-fafa1f/",
+          "query": {
+            "product_slug": [
+              "fisher-price-colourful-carnival-bouncer-778937-fafa1f"
+            ]
+          }
+        }
+      },
+      "quantity": 1,
+      "discount": "11% OFF",
+      "price": {
+        "base": {
+          "add_on": 3059,
+          "marked": 3399,
+          "effective": 3059,
+          "selling": 3059,
+          "currency_code": "INR"
+        },
+        "converted": {
+          "add_on": 3059,
+          "marked": 3399,
+          "effective": 3059,
+          "selling": 3059,
+          "currency_code": "INR"
+        }
+      },
+      "message": "",
+      "bulk_offer": {},
+      "key": "778937_OS",
+      "coupon_message": "",
+      "article": {
+        "type": "article",
+        "uid": "686_963_IC68601_PWUPC01977_OS",
+        "size": "OS",
+        "seller": {
+          "uid": 686,
+          "name": "INDUS CORPORATION"
+        },
+        "store": {
+          "uid": 5059,
+          "name": "Vidyaranyapura Main Road"
+        },
+        "quantity": 3,
+        "price": {
+          "base": {
+            "marked": 3399,
+            "effective": 3059,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "marked": 3399,
+            "effective": 3059,
+            "currency_code": "INR"
+          }
+        }
+      }
+    }
+  ],
+  "delivery_charge_info": "",
+  "coupon_text": "View all offers",
+  "cart_id": 7927,
+  "uid": "7927",
+  "gstin": null,
+  "checkout_mode": "self",
+  "last_modified": "Wed, 04 Sep 2019 04:52:21 GMT",
+  "restrict_checkout": false,
+  "is_valid": true
 }
 ```
-</details>
-
 </details>
 
 
@@ -2524,14 +2182,14 @@ Success
 ---
 
 
-#### getFeedbacks
-Gets a list of feedback submitted against that ticket
+#### removeCoupon
+Remove Coupon Applied
 
 
 
 
 ```kotlin
-client.lead.getFeedbacks(id: id).safeAwait{ response,error->
+poscart.removeCoupon(id: id).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -2547,21 +2205,240 @@ client.lead.getFeedbacks(id: id).safeAwait{ response,error->
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID for ticket |   
-| id | String | yes | Ticket ID for which feedbacks are to be fetched |  
+| id | String? | no | The unique identifier of the cart |  
 
 
 
-Gets a list of feedback submitted against that ticket
+Remove Coupon applied on the cart by passing uid in request body.
 
 *Returned Response*
 
 
 
 
-[TicketFeedbackList](#TicketFeedbackList)
+[CartDetailResponse](#CartDetailResponse)
 
-Success
+Success. Returns coupons removed from the cart along with item details and price breakup. Refer `CartDetailResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "breakup_values": {
+    "raw": {
+      "cod_charge": 0,
+      "convenience_fee": 0,
+      "coupon": 0,
+      "delivery_charge": 0,
+      "discount": 0,
+      "fynd_cash": 0,
+      "gst_charges": 342.75,
+      "mrp_total": 3199,
+      "subtotal": 3199,
+      "total": 3199,
+      "vog": 2856.25,
+      "you_saved": 0
+    },
+    "coupon": {
+      "type": "cash",
+      "code": "prismc22250111",
+      "uid": 17743,
+      "value": 0,
+      "is_applied": false,
+      "message": "Coupon successfully removed"
+    },
+    "display": [
+      {
+        "display": "MRP Total",
+        "key": "mrp_total",
+        "value": 3199,
+        "currency_code": "INR"
+      },
+      {
+        "display": "Subtotal",
+        "key": "subtotal",
+        "value": 3199,
+        "currency_code": "INR"
+      },
+      {
+        "display": "Total",
+        "key": "total",
+        "value": 3199,
+        "currency_code": "INR"
+      }
+    ],
+    "loyalty_points": {
+      "total": 0,
+      "applicable": 0,
+      "is_applied": false,
+      "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+    }
+  },
+  "items": [
+    {
+      "message": "",
+      "availability": {
+        "sizes": [
+          "M",
+          "S",
+          "L",
+          "XXL",
+          "XL"
+        ],
+        "other_store_quantity": 10,
+        "out_of_stock": false,
+        "deliverable": true,
+        "is_valid": true
+      },
+      "bulk_offer": {},
+      "key": "857596_S",
+      "quantity": 1,
+      "price": {
+        "base": {
+          "add_on": 3199,
+          "marked": 3199,
+          "effective": 3199,
+          "selling": 3199,
+          "currency_code": "INR"
+        },
+        "converted": {
+          "add_on": 3199,
+          "marked": 3199,
+          "effective": 3199,
+          "selling": 3199,
+          "currency_code": "INR"
+        }
+      },
+      "discount": "",
+      "coupon_message": "",
+      "product": {
+        "type": "product",
+        "uid": 857596,
+        "name": "Pink Solid Hoodie",
+        "slug": "883-police-pink-solid-hoodie-857596-111bdc",
+        "brand": {
+          "uid": 610,
+          "name": "883 Police"
+        },
+        "categories": [
+          {
+            "uid": 144,
+            "name": "Hoodies"
+          }
+        ],
+        "images": [
+          {
+            "aspect_ratio": "16:25",
+            "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/610_LETTER19APINK/1_1553062658148.jpg",
+            "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/610_LETTER19APINK/1_1553062658148.jpg"
+          }
+        ],
+        "action": {
+          "type": "product",
+          "url": "https://api.addsale.com/platform/content/v1/products/883-police-pink-solid-hoodie-857596-111bdc/",
+          "query": {
+            "product_slug": [
+              "883-police-pink-solid-hoodie-857596-111bdc"
+            ]
+          }
+        }
+      },
+      "article": {
+        "type": "article",
+        "uid": "381_610_IGPL01_LETTER19APINK_S",
+        "size": "S",
+        "seller": {
+          "uid": 381,
+          "name": "INTERSOURCE GARMENTS PVT LTD"
+        },
+        "store": {
+          "uid": 3009,
+          "name": "Kormangala"
+        },
+        "quantity": 11,
+        "price": {
+          "base": {
+            "marked": 3199,
+            "effective": 3199,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "marked": 3199,
+            "effective": 3199,
+            "currency_code": "INR"
+          }
+        }
+      }
+    }
+  ],
+  "delivery_charge_info": "",
+  "coupon_text": "View all offers",
+  "cart_id": 7477,
+  "uid": "7477",
+  "gstin": null,
+  "checkout_mode": "self",
+  "last_modified": "Thu, 22 Aug 2019 10:55:05 GMT",
+  "restrict_checkout": false,
+  "is_valid": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getBulkDiscountOffers
+Get discount offers based on quantity
+
+
+
+
+```kotlin
+poscart.getBulkDiscountOffers(itemId: itemId, articleId: articleId, uid: uid, slug: slug).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| itemId | Int? | no | The Item ID of the product |   
+| articleId | String? | no | Article Mongo ID |   
+| uid | Int? | no | UID of the product |   
+| slug | String? | no | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ |  
+
+
+
+Use this API to get a list of applicable offers along with current, next and best offer for given product. Either one of uid, item_id, slug should be present.
+
+*Returned Response*
+
+
+
+
+[BulkPriceResponse](#BulkPriceResponse)
+
+Success. Returns a data object containing the seller details and available offers (if exists) on bulk products. Refer `BulkPriceResponse` for more details.
 
 
 
@@ -2571,29 +2448,59 @@ Success
 
 
 <details>
-<summary><i>&nbsp; Default</i></summary>
+<summary><i>&nbsp; Offers found</i></summary>
 
 ```json
 {
   "value": {
-    "items": [
+    "data": [
       {
-        "_id": "60c255bf00ecabfad19e9601",
-        "company_id": "1",
-        "ticket_id": "6095812876d2bf17143cb3b3",
-        "user": {
-          "_id": "5f8147abbd1a0a870f61f1a6",
-          "authenticated": true,
-          "user_id": "5f8147abbd1a0a870f61f1a6"
+        "seller": {
+          "uid": 248,
+          "name": "MANYAVAR CREATIONS PRIVATE LIMITED"
         },
-        "category": "customers",
-        "response": {
-          "audio": 2,
-          "video": 6
-        },
-        "createdAt": "2021-06-10T18:11:11.349Z",
-        "updatedAt": "2021-06-10T18:11:11.349Z",
-        "__v": 0
+        "offers": [
+          {
+            "quantity": 1,
+            "auto_applied": true,
+            "margin": 10,
+            "type": "bundle",
+            "price": {
+              "marked": 3999,
+              "effective": 3999,
+              "bulk_effective": 3599.1,
+              "currency_code": "INR"
+            },
+            "total": 3599.1
+          },
+          {
+            "quantity": 3,
+            "auto_applied": true,
+            "margin": 20,
+            "type": "bundle",
+            "price": {
+              "marked": 3999,
+              "effective": 3999,
+              "bulk_effective": 3199.2,
+              "currency_code": "INR"
+            },
+            "total": 9597.6
+          },
+          {
+            "quantity": 9,
+            "auto_applied": true,
+            "margin": 30,
+            "type": "bundle",
+            "price": {
+              "marked": 3999,
+              "effective": 3999,
+              "bulk_effective": 3443.4444444444,
+              "currency_code": "INR"
+            },
+            "total": 30991,
+            "best": true
+          }
+        ]
       }
     ]
   }
@@ -2601,87 +2508,13 @@ Success
 ```
 </details>
 
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### submitFeedback
-Submit a response for feeback form against that ticket
-
-
-
-
-```kotlin
-client.lead.submitFeedback(id: id, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID for ticket |   
-| id | String | yes | Ticket ID for which feedback is to be submitted |  
-| body | [TicketFeedbackPayload](#TicketFeedbackPayload) | yes | Request body |
-
-
-Submit a response for feeback form against that ticket
-
-*Returned Response*
-
-
-
-
-[TicketFeedback](#TicketFeedback)
-
-Success
-
-
-
-
 <details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
+<summary><i>&nbsp; Offers not found</i></summary>
 
 ```json
 {
   "value": {
-    "_id": "60c255bf00ecabfad19e9601",
-    "company_id": "1",
-    "ticket_id": "6095812876d2bf17143cb3b3",
-    "user": {
-      "_id": "5f8147abbd1a0a870f61f1a6",
-      "authenticated": true,
-      "user_id": "5f8147abbd1a0a870f61f1a6"
-    },
-    "category": "customers",
-    "response": {
-      "audio": 2,
-      "video": 6
-    },
-    "createdAt": "2021-06-10T18:11:11.349Z",
-    "updatedAt": "2021-06-10T18:11:11.349Z",
-    "__v": 0
+    "data": []
   }
 }
 ```
@@ -2700,14 +2533,14 @@ Success
 ---
 
 
-#### createHistory
-Create history for specific application level ticket
+#### applyRewardPoints
+Apply reward points at cart
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").lead.createHistory(id: id, body: body).safeAwait{ response,error->
+poscart.applyRewardPoints(id: id, i: i, b: b, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -2723,845 +2556,3766 @@ client.application("<APPLICATION_ID>").lead.createHistory(id: id, body: body).sa
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID of the application |   
-| applicationId | String | yes | Application ID for ticket |   
-| id | String | yes | Ticket ID for which history is created |  
-| body | [TicketHistoryPayload](#TicketHistoryPayload) | yes | Request body |
+| id | String? | no |  |   
+| i | Boolean? | no |  |   
+| b | Boolean? | no |  |  
+| body | [RewardPointRequest](#RewardPointRequest) | yes | Request body |
 
 
-Create history for specific application level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
-
-*Returned Response*
-
-
-
-
-[TicketHistory](#TicketHistory)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "601a9d52c26687d086c499ef",
-    "ticket_id": "41",
-    "type": "comment",
-    "value": {
-      "text": "d",
-      "media": []
-    },
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "88.0.4324.96"
-        },
-        "os": {
-          "name": "macOS",
-          "version": "10.15.7",
-          "versionName": "Catalina"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
-        }
-      }
-    },
-    "created_by": "5d1363adf599d850df93175e",
-    "createdAt": "2021-02-03T12:55:46.808Z",
-    "updatedAt": "2021-02-03T12:55:46.808Z",
-    "__v": 0
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### getTicketHistory
-Gets history list for specific application level ticket
-
-
-
-
-```kotlin
-client.application("<APPLICATION_ID>").lead.getTicketHistory(id: id).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID of application |   
-| applicationId | String | yes | Application ID for ticket |   
-| id | String | yes | Ticket ID for which history is to be fetched |  
-
-
-
-Gets history list for specific application level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
+Use this API to redeem a fixed no. of reward points by applying it to the cart.
 
 *Returned Response*
 
 
 
 
-[TicketHistoryList](#TicketHistoryList)
+[CartDetailResponse](#CartDetailResponse)
 
-Success
-
-
+Success. Returns a Cart object. Check the example shown below or refer `CartDetailResponse` for more details.
 
 
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
 
 
 <details>
-<summary><i>&nbsp; Default</i></summary>
+<summary><i>&nbsp; Example:</i></summary>
 
 ```json
 {
-  "value": {
-    "docs": [
-      {
-        "_id": "602e5384204225eed5cadae7",
-        "ticket_id": "41",
-        "type": "comment",
-        "value": {
-          "text": "hello service",
-          "media": []
+  "items": [
+    {
+      "bulk_offer": {},
+      "discount": "67% OFF",
+      "article": {
+        "type": "article",
+        "uid": "604_902_SSTC60401_636BLUE_1",
+        "size": "1",
+        "seller": {
+          "uid": 604,
+          "name": "SHRI SHANTINATH TRADING COMPANY"
         },
-        "created_on": {
-          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-          "platform": "web",
-          "meta": {
-            "browser": {
-              "name": "Chrome",
-              "version": "88.0.4324.150"
-            },
-            "os": {
-              "name": "macOS",
-              "version": "11.2.0"
-            },
-            "platform": {
-              "type": "desktop",
-              "vendor": "Apple"
-            },
-            "engine": {
-              "name": "Blink"
-            }
+        "store": {
+          "uid": 4579,
+          "name": "Gandhi Nagar"
+        },
+        "quantity": 108,
+        "price": {
+          "base": {
+            "marked": 2999,
+            "effective": 999,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "marked": 2999,
+            "effective": 999,
+            "currency_code": "INR"
           }
+        }
+      },
+      "coupon_message": "",
+      "key": "707569_1",
+      "availability": {
+        "sizes": [
+          "1",
+          "8",
+          "7",
+          "2",
+          "9",
+          "5",
+          "3",
+          "6"
+        ],
+        "other_store_quantity": 107,
+        "out_of_stock": false,
+        "deliverable": true,
+        "is_valid": true
+      },
+      "product": {
+        "type": "product",
+        "uid": 707569,
+        "name": "Blue and Gold Printed Ethnic Set",
+        "slug": "aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a",
+        "brand": {
+          "uid": 902,
+          "name": ""
         },
-        "created_by": {
-          "gender": "male",
-          "accountType": "user",
-          "active": true,
-          "profilePicUrl": "https://hdn-1.fynd.com/company/884/applications/000000000000000000000001/theme/pictures/free/original/default-profile_nxhzui.png",
-          "hasOldPasswordHash": false,
-          "_id": "5f8147abbd1a0a870f61f1a6",
-          "phoneNumbers": [
-            {
-              "active": true,
-              "primary": true,
-              "verified": true,
-              "phone": "8412805281",
-              "countryCode": 91
-            }
-          ],
-          "firstName": "Satyen",
-          "lastName": "Maurya",
-          "emails": [
-            {
-              "active": true,
-              "primary": true,
-              "verified": true,
-              "email": "satyenmaurya95@gmail.com"
-            }
-          ],
-          "username": "satyenmaurya95_gmail_com_11118",
-          "createdAt": "2020-10-10T05:33:31.119Z",
-          "updatedAt": "2020-10-10T05:33:31.119Z",
-          "uid": "5678",
-          "__v": 0
+        "categories": [
+          {
+            "uid": 525,
+            "name": ""
+          }
+        ],
+        "images": [
+          {
+            "aspect_ratio": "16:25",
+            "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/902_636BLUE/1_1540301094877.jpg",
+            "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/902_636BLUE/1_1540301094877.jpg"
+          }
+        ],
+        "action": {
+          "type": "product",
+          "url": "https://api.addsale.com/v1/products/aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a/",
+          "query": {
+            "product_slug": [
+              "aj-dezines-blue-and-gold-printed-ethnic-set-707569-bff01a"
+            ]
+          }
+        }
+      },
+      "price": {
+        "base": {
+          "add_on": 999,
+          "marked": 2999,
+          "effective": 999,
+          "selling": 999,
+          "currency_code": "INR"
         },
-        "createdAt": "2021-02-18T11:46:12.522Z",
-        "updatedAt": "2021-02-18T11:46:12.522Z",
-        "__v": 0,
-        "id": "602e5384204225eed5cadae7"
+        "converted": {
+          "add_on": 999,
+          "marked": 2999,
+          "effective": 999,
+          "selling": 999,
+          "currency_code": "INR"
+        }
+      },
+      "message": "",
+      "quantity": 1
+    }
+  ],
+  "cart_id": 54,
+  "uid": "54",
+  "breakup_values": {
+    "raw": {
+      "cod_charge": 0,
+      "convenience_fee": 0,
+      "coupon": 0,
+      "delivery_charge": 0,
+      "discount": -2000,
+      "fynd_cash": 0,
+      "gst_charges": 47.57,
+      "mrp_total": 2999,
+      "subtotal": 999,
+      "total": 999,
+      "vog": 951.43,
+      "you_saved": 0
+    },
+    "coupon": {
+      "type": "cash",
+      "code": "",
+      "uid": null,
+      "value": 0,
+      "is_applied": false,
+      "message": "Sorry! Invalid Coupon"
+    },
+    "display": [
+      {
+        "display": "MRP Total",
+        "key": "mrp_total",
+        "value": 2999,
+        "currency_code": "INR"
       },
       {
-        "_id": "60372aa78a046d4d79c46e15",
-        "ticket_id": "41",
-        "type": "diff",
-        "value": {
-          "status": [
-            "pending",
-            "in_progress"
+        "display": "Discount",
+        "key": "discount",
+        "value": -2000,
+        "currency_code": "INR"
+      },
+      {
+        "display": "Subtotal",
+        "key": "subtotal",
+        "value": 999,
+        "currency_code": "INR"
+      },
+      {
+        "display": "Total",
+        "key": "total",
+        "value": 999,
+        "currency_code": "INR"
+      }
+    ],
+    "loyalty_points": {
+      "total": 0,
+      "applicable": 0,
+      "is_applied": false,
+      "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+    }
+  },
+  "delivery_charge_info": "",
+  "coupon_text": "View all offers",
+  "gstin": null,
+  "checkout_mode": "self",
+  "restrict_checkout": false,
+  "is_valid": true,
+  "last_modified": "Tue, 03 Sep 2019 05:35:59 GMT"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAddresses
+Fetch address
+
+
+
+
+```kotlin
+poscart.getAddresses(cartId: cartId, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| cartId | String? | no |  |   
+| mobileNo | String? | no |  |   
+| checkoutMode | String? | no |  |   
+| tags | String? | no |  |   
+| isDefault | Boolean? | no |  |  
+
+
+
+Use this API to get all the addresses associated with an account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional <ul> <li> <font color="monochrome">uid</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
+
+*Returned Response*
+
+
+
+
+[GetAddressesResponse](#GetAddressesResponse)
+
+Success. Returns an Address object containing a list of address saved in the account. Refer `GetAddressesResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "address": [
+    {
+      "landmark": "",
+      "area_code": {
+        "slug": "pincode",
+        "id": 400093
+      },
+      "id": "8b526f521bb14a2593a8b9e3ce8c76b3",
+      "state": "Maharashtra",
+      "meta": {},
+      "user_id": "8b526f521bb14a2593a8b9e3ce8c76b3",
+      "country_code": "IND",
+      "phone": 9915347757,
+      "geo_location": {},
+      "country": "India",
+      "is_default_address": true,
+      "is_active": true,
+      "city": "Mumbai",
+      "pincode": 400093,
+      "checkout_mode": "self",
+      "address_type": "home",
+      "tags": [],
+      "area": "Sector 127",
+      "name": "abc",
+      "email": "ankur@gofynd1.com",
+      "address": "Megatron2",
+      "store_name": "store123"
+    }
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### addAddress
+Add address to an account
+
+
+
+
+```kotlin
+poscart.addAddress(body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [Address](#Address) | yes | Request body |
+
+
+Use this API to add an address to an account.
+
+*Returned Response*
+
+
+
+
+[SaveAddressResponse](#SaveAddressResponse)
+
+Success. Returns the address ID, a flag whether the address is set as default, and a success message. Refer `SaveAddressResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "id": "mongo_object_id",
+  "is_default_address": true,
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAddressById
+Fetch a single address by its ID
+
+
+
+
+```kotlin
+poscart.getAddressById(id: id, cartId: cartId, mobileNo: mobileNo, checkoutMode: checkoutMode, tags: tags, isDefault: isDefault).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes |  |   
+| cartId | String? | no |  |   
+| mobileNo | String? | no |  |   
+| checkoutMode | String? | no |  |   
+| tags | String? | no |  |   
+| isDefault | Boolean? | no |  |  
+
+
+
+Use this API to get an addresses using its ID. If successful, returns a Address resource in the response body specified in `Address`. Attibutes listed below are optional <ul> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
+
+*Returned Response*
+
+
+
+
+[Address](#Address)
+
+Success. Returns an Address object containing a list of address saved in the account. Refer `Address` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "landmark": "",
+  "area_code": {
+    "slug": "pincode",
+    "id": 400093
+  },
+  "state": "Maharashtra",
+  "meta": {},
+  "user_id": "8b526f521bb14a2593a8b9e3ce8c76b3",
+  "country_code": "IND",
+  "phone": 9915347757,
+  "geo_location": {},
+  "country": "India",
+  "is_default_address": true,
+  "is_active": true,
+  "city": "Mumbai",
+  "pincode": 400093,
+  "checkout_mode": "self",
+  "address_type": "home",
+  "uid": 1145,
+  "tags": [],
+  "area": "Sector 127",
+  "name": "abc",
+  "address_id": 1145,
+  "email": "ankur@gofynd1.com",
+  "address": "Megatron2",
+  "store_name": "store123"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateAddress
+Update address added to an account
+
+
+
+
+```kotlin
+poscart.updateAddress(id: id, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | ID allotted to the selected address |  
+| body | [Address](#Address) | yes | Request body |
+
+
+Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
+
+*Returned Response*
+
+
+
+
+[UpdateAddressResponse](#UpdateAddressResponse)
+
+Success. Returns the address ID and a message indicating a successful address updation.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "is_updated": true,
+  "id": "<mongo_object_id>",
+  "is_default_address": true,
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### removeAddress
+Remove address associated with an account
+
+
+
+
+```kotlin
+poscart.removeAddress(id: id).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | ID allotted to the selected address |  
+
+
+
+Use this API to delete an address by its ID. This will returns an object that will indicate whether the address was deleted successfully or not.
+
+*Returned Response*
+
+
+
+
+[DeleteAddressResponse](#DeleteAddressResponse)
+
+Returns a Status object indicating the success or failure of address deletion.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "id": "<mongo_object_id>",
+  "is_deleted": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### selectAddress
+Select an address from available addresses
+
+
+
+
+```kotlin
+poscart.selectAddress(cartId: cartId, i: i, b: b, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| cartId | String? | no |  |   
+| i | Boolean? | no |  |   
+| b | Boolean? | no |  |  
+| body | [SelectCartAddressRequest](#SelectCartAddressRequest) | yes | Request body |
+
+
+<p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
+
+*Returned Response*
+
+
+
+
+[CartDetailResponse](#CartDetailResponse)
+
+Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for more details.  .
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "is_valid": true,
+  "breakup_values": {
+    "raw": {
+      "cod_charge": 0,
+      "convenience_fee": 0,
+      "coupon": -2250,
+      "delivery_charge": 0,
+      "discount": 0,
+      "fynd_cash": 0,
+      "gst_charges": 315.86,
+      "mrp_total": 5198,
+      "subtotal": 5198,
+      "total": 2948,
+      "vog": 2632.15,
+      "you_saved": 0
+    },
+    "display": [
+      {
+        "display": "MRP Total",
+        "key": "mrp_total",
+        "value": 5198,
+        "currency_code": "INR"
+      },
+      {
+        "display": "Subtotal",
+        "key": "subtotal",
+        "value": 5198,
+        "currency_code": "INR"
+      },
+      {
+        "display": "Coupon",
+        "key": "coupon",
+        "value": -2250,
+        "currency_code": "INR"
+      },
+      {
+        "display": "Total",
+        "key": "total",
+        "value": 2948,
+        "currency_code": "INR"
+      }
+    ],
+    "coupon": {
+      "type": "cash",
+      "code": "PRISMC22250111",
+      "uid": 17743,
+      "value": 2250,
+      "is_applied": true,
+      "message": "coupn applied"
+    },
+    "loyalty_points": {
+      "total": 0,
+      "applicable": 0,
+      "is_applied": false,
+      "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+    }
+  },
+  "items": [
+    {
+      "message": "",
+      "quantity": 1,
+      "availability": {
+        "sizes": [
+          "M",
+          "S",
+          "L",
+          "XXL",
+          "XL"
+        ],
+        "other_store_quantity": 10,
+        "out_of_stock": false,
+        "deliverable": true,
+        "is_valid": true
+      },
+      "coupon_message": "PRISMC22250111 coupon applied",
+      "price": {
+        "base": {
+          "add_on": 3199,
+          "marked": 3199,
+          "effective": 3199,
+          "selling": 3199,
+          "currency_code": "INR"
+        },
+        "converted": {
+          "add_on": 3199,
+          "marked": 3199,
+          "effective": 3199,
+          "selling": 3199,
+          "currency_code": "INR"
+        }
+      },
+      "bulk_offer": {},
+      "article": {
+        "type": "article",
+        "uid": "381_610_IGPL01_LETTER19APINK_S",
+        "size": "S",
+        "seller": {
+          "uid": 381,
+          "name": "INTERSOURCE GARMENTS PVT LTD"
+        },
+        "store": {
+          "uid": 3009,
+          "name": "Kormangala"
+        },
+        "quantity": 11,
+        "price": {
+          "base": {
+            "marked": 3199,
+            "effective": 3199,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "marked": 3199,
+            "effective": 3199,
+            "currency_code": "INR"
+          }
+        }
+      },
+      "product": {
+        "type": "product",
+        "uid": 857596,
+        "name": "Pink Solid Hoodie",
+        "slug": "883-police-pink-solid-hoodie-857596-111bdc",
+        "brand": {
+          "uid": 610,
+          "name": "883 Police"
+        },
+        "categories": [
+          {
+            "uid": 144,
+            "name": "Hoodies"
+          }
+        ],
+        "images": [
+          {
+            "aspect_ratio": "16:25",
+            "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/610_LETTER19APINK/1_1553062658148.jpg",
+            "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/610_LETTER19APINK/1_1553062658148.jpg"
+          }
+        ],
+        "action": {
+          "type": "product",
+          "url": "https://api.addsale.com/platform/content/v1/products/883-police-pink-solid-hoodie-857596-111bdc/",
+          "query": {
+            "product_slug": [
+              "883-police-pink-solid-hoodie-857596-111bdc"
+            ]
+          }
+        }
+      },
+      "key": "857596_S",
+      "discount": ""
+    },
+    {
+      "message": "",
+      "quantity": 1,
+      "availability": {
+        "sizes": [
+          "L",
+          "XL",
+          "XXL"
+        ],
+        "other_store_quantity": 1,
+        "out_of_stock": false,
+        "deliverable": true,
+        "is_valid": true
+      },
+      "coupon_message": "PRISMC22250111 coupon applied",
+      "price": {
+        "base": {
+          "add_on": 1999,
+          "marked": 1999,
+          "effective": 1999,
+          "selling": 1999,
+          "currency_code": "INR"
+        },
+        "converted": {
+          "add_on": 1999,
+          "marked": 1999,
+          "effective": 1999,
+          "selling": 1999,
+          "currency_code": "INR"
+        }
+      },
+      "bulk_offer": {},
+      "article": {
+        "type": "article",
+        "uid": "381_610_IGPL01_SPIRAL19ANAVY_L",
+        "size": "L",
+        "seller": {
+          "uid": 381,
+          "name": "INTERSOURCE GARMENTS PVT LTD"
+        },
+        "store": {
+          "uid": 3009,
+          "name": "Kormangala"
+        },
+        "quantity": 2,
+        "price": {
+          "base": {
+            "marked": 1999,
+            "effective": 1999,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "marked": 1999,
+            "effective": 1999,
+            "currency_code": "INR"
+          }
+        }
+      },
+      "product": {
+        "type": "product",
+        "uid": 820312,
+        "name": "Navy Blue Melange Shorts",
+        "slug": "883-police-navy-blue-melange-shorts-820312-4943a8",
+        "brand": {
+          "uid": 610,
+          "name": "883 Police"
+        },
+        "categories": [
+          {
+            "uid": 193,
+            "name": "Shorts"
+          }
+        ],
+        "images": [
+          {
+            "aspect_ratio": "16:25",
+            "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg",
+            "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg"
+          }
+        ],
+        "action": {
+          "type": "product",
+          "url": "https://api.addsale.com/platform/content/v1/products/883-police-navy-blue-melange-shorts-820312-4943a8/",
+          "query": {
+            "product_slug": [
+              "883-police-navy-blue-melange-shorts-820312-4943a8"
+            ]
+          }
+        }
+      },
+      "key": "820312_L",
+      "discount": ""
+    }
+  ],
+  "delivery_charge_info": "",
+  "coupon_text": "View all offers",
+  "uid": "7477",
+  "gstin": null,
+  "checkout_mode": "self",
+  "last_modified": "Fri, 23 Aug 2019 08:03:12 GMT",
+  "restrict_checkout": false
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### selectPaymentMode
+Update cart payment
+
+
+
+
+```kotlin
+poscart.selectPaymentMode(id: id, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String? | no |  |  
+| body | [UpdateCartPaymentRequest](#UpdateCartPaymentRequest) | yes | Request body |
+
+
+Use this API to update cart payment.
+
+*Returned Response*
+
+
+
+
+[CartDetailResponse](#CartDetailResponse)
+
+Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true,
+  "error_message": "Note: Your order delivery will be delayed by 7-10 Days",
+  "user_type": "Store User",
+  "cod_charges": 0,
+  "order_id": null,
+  "cod_available": true,
+  "cod_message": "No additional COD charges applicable",
+  "delivery_charges": 0,
+  "delivery_charge_order_value": 0,
+  "store_code": "",
+  "store_emps": [],
+  "breakup_values": {
+    "raw": {
+      "cod_charge": 0,
+      "convenience_fee": 0,
+      "coupon": -2250,
+      "delivery_charge": 0,
+      "discount": 0,
+      "fynd_cash": 0,
+      "gst_charges": 315.86,
+      "mrp_total": 5198,
+      "subtotal": 5198,
+      "total": 2948,
+      "vog": 2632.15,
+      "you_saved": 0
+    },
+    "display": [
+      {
+        "display": "MRP Total",
+        "key": "mrp_total",
+        "value": 5198,
+        "currency_code": "INR"
+      },
+      {
+        "display": "Subtotal",
+        "key": "subtotal",
+        "value": 5198,
+        "currency_code": "INR"
+      },
+      {
+        "display": "Coupon",
+        "key": "coupon",
+        "value": -2250,
+        "currency_code": "INR"
+      },
+      {
+        "display": "Total",
+        "key": "total",
+        "value": 2948,
+        "currency_code": "INR"
+      }
+    ],
+    "coupon": {
+      "type": "cash",
+      "code": "PRISMC22250111",
+      "uid": 17743,
+      "value": 2250,
+      "is_applied": true,
+      "message": "coupn applied"
+    },
+    "loyalty_points": {
+      "total": 0,
+      "applicable": 0,
+      "is_applied": false,
+      "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+    }
+  },
+  "items": [
+    {
+      "message": "",
+      "quantity": 1,
+      "availability": {
+        "sizes": [
+          "M",
+          "S",
+          "L",
+          "XXL",
+          "XL"
+        ],
+        "other_store_quantity": 10,
+        "out_of_stock": false,
+        "deliverable": true,
+        "is_valid": true
+      },
+      "coupon_message": "PRISMC22250111 coupon applied",
+      "price": {
+        "base": {
+          "add_on": 3199,
+          "marked": 3199,
+          "effective": 3199,
+          "selling": 3199,
+          "currency_code": "INR"
+        },
+        "converted": {
+          "add_on": 3199,
+          "marked": 3199,
+          "effective": 3199,
+          "selling": 3199,
+          "currency_code": "INR"
+        }
+      },
+      "bulk_offer": {},
+      "article": {
+        "type": "article",
+        "uid": "381_610_IGPL01_LETTER19APINK_S",
+        "size": "S",
+        "seller": {
+          "uid": 381,
+          "name": "INTERSOURCE GARMENTS PVT LTD"
+        },
+        "store": {
+          "uid": 3009,
+          "name": "Kormangala"
+        },
+        "quantity": 11,
+        "price": {
+          "base": {
+            "marked": 3199,
+            "effective": 3199,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "marked": 3199,
+            "effective": 3199,
+            "currency_code": "INR"
+          }
+        }
+      },
+      "product": {
+        "type": "product",
+        "uid": 857596,
+        "name": "Pink Solid Hoodie",
+        "slug": "883-police-pink-solid-hoodie-857596-111bdc",
+        "brand": {
+          "uid": 610,
+          "name": "883 Police"
+        },
+        "categories": [
+          {
+            "uid": 144,
+            "name": "Hoodies"
+          }
+        ],
+        "images": [
+          {
+            "aspect_ratio": "16:25",
+            "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/610_LETTER19APINK/1_1553062658148.jpg",
+            "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/610_LETTER19APINK/1_1553062658148.jpg"
+          }
+        ],
+        "action": {
+          "type": "product",
+          "url": "https://api.addsale.com/platform/content/v1/products/883-police-pink-solid-hoodie-857596-111bdc/",
+          "query": {
+            "product_slug": [
+              "883-police-pink-solid-hoodie-857596-111bdc"
+            ]
+          }
+        }
+      },
+      "key": "857596_S",
+      "discount": ""
+    },
+    {
+      "message": "",
+      "quantity": 1,
+      "availability": {
+        "sizes": [
+          "L",
+          "XL",
+          "XXL"
+        ],
+        "other_store_quantity": 1,
+        "out_of_stock": false,
+        "deliverable": true,
+        "is_valid": true
+      },
+      "coupon_message": "PRISMC22250111 coupon applied",
+      "price": {
+        "base": {
+          "add_on": 1999,
+          "marked": 1999,
+          "effective": 1999,
+          "selling": 1999,
+          "currency_code": "INR"
+        },
+        "converted": {
+          "add_on": 1999,
+          "marked": 1999,
+          "effective": 1999,
+          "selling": 1999,
+          "currency_code": "INR"
+        }
+      },
+      "bulk_offer": {},
+      "article": {
+        "type": "article",
+        "uid": "381_610_IGPL01_SPIRAL19ANAVY_L",
+        "size": "L",
+        "seller": {
+          "uid": 381,
+          "name": "INTERSOURCE GARMENTS PVT LTD"
+        },
+        "store": {
+          "uid": 3009,
+          "name": "Kormangala"
+        },
+        "quantity": 2,
+        "price": {
+          "base": {
+            "marked": 1999,
+            "effective": 1999,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "marked": 1999,
+            "effective": 1999,
+            "currency_code": "INR"
+          }
+        }
+      },
+      "product": {
+        "type": "product",
+        "uid": 820312,
+        "name": "Navy Blue Melange Shorts",
+        "slug": "883-police-navy-blue-melange-shorts-820312-4943a8",
+        "brand": {
+          "uid": 610,
+          "name": "883 Police"
+        },
+        "categories": [
+          {
+            "uid": 193,
+            "name": "Shorts"
+          }
+        ],
+        "images": [
+          {
+            "aspect_ratio": "16:25",
+            "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg",
+            "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg"
+          }
+        ],
+        "action": {
+          "type": "product",
+          "url": "https://api.addsale.com/platform/content/v1/products/883-police-navy-blue-melange-shorts-820312-4943a8/",
+          "query": {
+            "product_slug": [
+              "883-police-navy-blue-melange-shorts-820312-4943a8"
+            ]
+          }
+        }
+      },
+      "key": "820312_L",
+      "discount": ""
+    }
+  ],
+  "delivery_charge_info": "",
+  "coupon_text": "View all offers",
+  "cart_id": 7477,
+  "uid": "7477",
+  "gstin": null,
+  "checkout_mode": "self",
+  "last_modified": "Fri, 23 Aug 2019 08:03:04 GMT",
+  "restrict_checkout": false,
+  "is_valid": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### validateCouponForPayment
+Verify the coupon eligibility against the payment mode
+
+
+
+
+```kotlin
+poscart.validateCouponForPayment(id: id, addressId: addressId, paymentMode: paymentMode, paymentIdentifier: paymentIdentifier, aggregatorName: aggregatorName, merchantCode: merchantCode).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String? | no |  |   
+| addressId | String? | no |  |   
+| paymentMode | String? | no |  |   
+| paymentIdentifier | String? | no |  |   
+| aggregatorName | String? | no |  |   
+| merchantCode | String? | no |  |  
+
+
+
+Use this API to validate a coupon against the payment mode such as NetBanking, Wallet, UPI etc.
+
+*Returned Response*
+
+
+
+
+[PaymentCouponValidate](#PaymentCouponValidate)
+
+Success. Returns a success message and the coupon validity. Refer `PaymentCouponValidate` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true,
+  "message": "",
+  "coupon_validity": {
+    "valid": true,
+    "discount": 499.5,
+    "code": "testpayment",
+    "display_message_en": "",
+    "title": "Coupon value will change."
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getShipments
+Get delivery date and options before checkout
+
+
+
+
+```kotlin
+poscart.getShipments(pickAtStoreUid: pickAtStoreUid, orderingStoreId: orderingStoreId, p: p, id: id, addressId: addressId, areaCode: areaCode, orderType: orderType).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pickAtStoreUid | Int? | no |  |   
+| orderingStoreId | Int? | no |  |   
+| p | Boolean? | no | This is a boolean value. Select `true` for getting a payment option in response. |   
+| id | String? | no | The unique identifier of the cart |   
+| addressId | String? | no | ID allotted to the selected address |   
+| areaCode | String? | no | The PIN Code of the destination address, e.g. 400059 |   
+| orderType | String? | no | The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. |  
+
+
+
+Use this API to get shipment details, expected delivery date, items and price breakup of the shipment.
+
+*Returned Response*
+
+
+
+
+[CartShipmentsResponse](#CartShipmentsResponse)
+
+Success. Returns delivery promise along with shipment details and price breakup. Refer `CartShipmentsResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Shipment Generated</i></summary>
+
+```json
+{
+  "value": {
+    "items": [],
+    "cart_id": 7501,
+    "uid": "7501",
+    "success": true,
+    "error_message": "Note: Your order delivery will be delayed by 7-10 Days",
+    "payment_options": {
+      "payment_option": [
+        {
+          "name": "COD",
+          "display_name": "Cash on Delivery",
+          "display_priority": 1,
+          "payment_mode_id": 11,
+          "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+          "logo_url": {
+            "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+            "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png"
+          },
+          "list": []
+        },
+        {
+          "name": "CARD",
+          "display_priority": 2,
+          "payment_mode_id": 2,
+          "display_name": "Card",
+          "list": []
+        },
+        {
+          "name": "NB",
+          "display_priority": 3,
+          "payment_mode_id": 3,
+          "display_name": "Net Banking",
+          "list": [
+            {
+              "aggregator_name": "Razorpay",
+              "bank_name": "ICICI Bank",
+              "bank_code": "ICIC",
+              "url": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png"
+              },
+              "merchant_code": "NB_ICICI",
+              "display_priority": 1
+            }
           ]
         },
-        "created_by": {
-          "gender": "male",
-          "accountType": "user",
-          "active": true,
-          "profilePicUrl": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
-          "hasOldPasswordHash": false,
-          "_id": "5e79e721768c6bf54b783146",
-          "emails": [
+        {
+          "name": "WL",
+          "display_priority": 4,
+          "payment_mode_id": 4,
+          "display_name": "Wallet",
+          "list": [
             {
-              "active": true,
-              "primary": true,
-              "verified": true,
-              "email": "nikhilmshchs@gmail.com"
+              "wallet_name": "Paytm",
+              "wallet_code": "paytm",
+              "wallet_id": 4,
+              "merchant_code": "PAYTM",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_small.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_large.png"
+              },
+              "aggregator_name": "Juspay",
+              "display_priority": 1
+            }
+          ]
+        },
+        {
+          "name": "UPI",
+          "display_priority": 9,
+          "payment_mode_id": 6,
+          "display_name": "UPI",
+          "list": [
+            {
+              "aggregator_name": "UPI_Razorpay",
+              "name": "UPI",
+              "display_name": "BHIM UPI",
+              "code": "UPI",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_100x78.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_150x100.png"
+              },
+              "merchant_code": "UPI",
+              "timeout": 240,
+              "retry_count": 0,
+              "fynd_vpa": "shopsense.rzp@hdfcbank",
+              "intent_flow": true,
+              "intent_app_error_list": [
+                "com.csam.icici.bank.imobile",
+                "in.org.npci.upiapp",
+                "com.whatsapp"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PL",
+          "display_priority": 11,
+          "payment_mode_id": 1,
+          "display_name": "Pay Later",
+          "list": [
+            {
+              "aggregator_name": "Simpl",
+              "name": "Simpl",
+              "code": "simpl",
+              "merchant_code": "SIMPL",
+              "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png"
+              }
+            }
+          ]
+        }
+      ],
+      "payment_flows": {
+        "Simpl": {
+          "data": {
+            "gateway": {
+              "route": "simpl",
+              "entity": "sdk",
+              "is_customer_validation_required": true,
+              "cust_validation_url": "https://api.addsale.com/gringotts/api/v1/validate-customer/",
+              "sdk": {
+                "config": {
+                  "redirect": false,
+                  "callback_url": null,
+                  "action_url": "https://api.addsale.com/avis/api/v1/payments/charge-gringotts-transaction/"
+                },
+                "data": {
+                  "user_phone": "8452996729",
+                  "user_email": "paymentsdummy@gofynd.com"
+                }
+              },
+              "return_url": null
+            }
+          },
+          "api_link": "",
+          "payment_flow": "sdk"
+        },
+        "Juspay": {
+          "data": {},
+          "api_link": "https://sandbox.juspay.in/txns",
+          "payment_flow": "api"
+        },
+        "Razorpay": {
+          "data": {},
+          "api_link": "",
+          "payment_flow": "sdk"
+        },
+        "UPI_Razorpay": {
+          "data": {},
+          "api_link": "https://api.addsale.com/gringotts/api/v1/external/payment-initialisation/",
+          "payment_flow": "api"
+        },
+        "Fynd": {
+          "data": {},
+          "api_link": "",
+          "payment_flow": "api"
+        }
+      },
+      "default": {}
+    },
+    "user_type": "Store User",
+    "cod_charges": 0,
+    "order_id": null,
+    "cod_available": true,
+    "cod_message": "No additional COD charges applicable",
+    "delivery_charges": 0,
+    "delivery_charge_order_value": 0,
+    "delivery_slots": [
+      {
+        "date": "Sat, 24 Aug",
+        "delivery_slot": [
+          {
+            "delivery_slot_timing": "By 9:00 PM",
+            "default": true,
+            "delivery_slot_id": 1
+          }
+        ]
+      }
+    ],
+    "store_code": "",
+    "store_emps": [],
+    "breakup_values": {
+      "loyalty_points": {
+        "total": 0,
+        "applicable": 0,
+        "is_applied": false,
+        "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+      },
+      "coupon": {
+        "type": "cash",
+        "code": "",
+        "uid": null,
+        "value": 0,
+        "is_applied": false,
+        "message": "Sorry! Invalid Coupon"
+      },
+      "raw": {
+        "cod_charge": 0,
+        "convenience_fee": 0,
+        "coupon": 0,
+        "delivery_charge": 0,
+        "discount": 0,
+        "fynd_cash": 0,
+        "gst_charges": 214.18,
+        "mrp_total": 1999,
+        "subtotal": 1999,
+        "total": 1999,
+        "vog": 1784.82,
+        "you_saved": 0
+      },
+      "display": [
+        {
+          "display": "MRP Total",
+          "key": "mrp_total",
+          "value": 1999,
+          "currency_code": "INR"
+        },
+        {
+          "display": "Subtotal",
+          "key": "subtotal",
+          "value": 1999,
+          "currency_code": "INR"
+        },
+        {
+          "display": "Total",
+          "key": "total",
+          "value": 1999,
+          "currency_code": "INR"
+        }
+      ]
+    },
+    "shipments": [
+      {
+        "fulfillment_id": 3009,
+        "shipment_type": "single_shipment",
+        "fulfillment_type": "store",
+        "dp_id": "29",
+        "dp_options": {
+          "4": {
+            "f_priority": 4,
+            "r_priority": 5,
+            "is_cod": true,
+            "is_prepaid": true,
+            "is_reverse": true
+          },
+          "7": {
+            "f_priority": 3,
+            "r_priority": 4,
+            "is_cod": true,
+            "is_prepaid": true,
+            "is_reverse": true
+          },
+          "29": {
+            "f_priority": 1,
+            "r_priority": 2,
+            "is_cod": true,
+            "is_prepaid": true,
+            "is_reverse": true
+          }
+        },
+        "promise": {
+          "timestamp": {
+            "min": 1566678108,
+            "max": 1567023708
+          },
+          "formatted": {
+            "min": "Aug 24",
+            "max": "Aug 28"
+          }
+        },
+        "box_type": "Small Courier bag",
+        "shipments": 1,
+        "items": [
+          {
+            "quantity": 1,
+            "product": {
+              "type": "product",
+              "uid": 820312,
+              "name": "Navy Blue Melange Shorts",
+              "slug": "883-police-navy-blue-melange-shorts-820312-4943a8",
+              "brand": {
+                "uid": 610,
+                "name": "883 Police"
+              },
+              "categories": [
+                {
+                  "uid": 193,
+                  "name": "Shorts"
+                }
+              ],
+              "images": [
+                {
+                  "aspect_ratio": "16:25",
+                  "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg",
+                  "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg"
+                }
+              ],
+              "action": {
+                "type": "product",
+                "url": "https://api.addsale.com/platform/content/v1/products/883-police-navy-blue-melange-shorts-820312-4943a8/",
+                "query": {
+                  "product_slug": [
+                    "883-police-navy-blue-melange-shorts-820312-4943a8"
+                  ]
+                }
+              }
             },
-            {
-              "active": true,
-              "primary": false,
-              "verified": true,
-              "email": "nikhilmanapure@gofynd.com"
+            "discount": "",
+            "bulk_offer": {},
+            "key": "820312_L",
+            "price": {
+              "base": {
+                "add_on": 1999,
+                "marked": 1999,
+                "effective": 1999,
+                "selling": 1999,
+                "currency_code": "INR"
+              },
+              "converted": {
+                "add_on": 1999,
+                "marked": 1999,
+                "effective": 1999,
+                "selling": 1999,
+                "currency_code": "INR"
+              }
             },
-            {
-              "active": true,
-              "primary": false,
-              "verified": true,
-              "email": "nikhilmanapure@fynd.com"
+            "article": {
+              "type": "article",
+              "uid": "381_610_IGPL01_SPIRAL19ANAVY_L",
+              "size": "L",
+              "seller": {
+                "uid": 381,
+                "name": "INTERSOURCE GARMENTS PVT LTD"
+              },
+              "store": {
+                "uid": 3009,
+                "name": "Kormangala"
+              },
+              "quantity": 2,
+              "price": {
+                "base": {
+                  "marked": 1999,
+                  "effective": 1999,
+                  "currency_code": "INR"
+                },
+                "converted": {
+                  "marked": 1999,
+                  "effective": 1999,
+                  "currency_code": "INR"
+                }
+              }
             },
+            "availability": {
+              "sizes": [
+                "L",
+                "XL",
+                "XXL"
+              ],
+              "other_store_quantity": 1,
+              "out_of_stock": false,
+              "deliverable": true,
+              "is_valid": true
+            },
+            "coupon_message": "",
+            "message": ""
+          }
+        ]
+      }
+    ],
+    "delivery_charge_info": "",
+    "coupon_text": "View all offers",
+    "gstin": null,
+    "checkout_mode": "self",
+    "last_modified": "Thu, 22 Aug 2019 20:21:48 GMT",
+    "restrict_checkout": false,
+    "is_valid": true
+  }
+}
+```
+</details>
+
+<details>
+<summary><i>&nbsp; Shipment Generation Failed</i></summary>
+
+```json
+{
+  "value": {
+    "items": [],
+    "cart_id": 7501,
+    "uid": "7501",
+    "success": true,
+    "error_message": "Note: Your order delivery will be delayed by 7-10 Days",
+    "payment_options": {
+      "payment_option": [
+        {
+          "name": "COD",
+          "display_name": "Cash on Delivery",
+          "display_priority": 1,
+          "payment_mode_id": 11,
+          "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+          "logo_url": {
+            "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+            "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png"
+          },
+          "list": []
+        },
+        {
+          "name": "CARD",
+          "display_priority": 2,
+          "payment_mode_id": 2,
+          "display_name": "Card",
+          "list": []
+        },
+        {
+          "name": "NB",
+          "display_priority": 3,
+          "payment_mode_id": 3,
+          "display_name": "Net Banking",
+          "list": [
             {
-              "active": true,
-              "primary": false,
-              "verified": true,
-              "email": "nikhilmanapure@uniket.store"
+              "aggregator_name": "Razorpay",
+              "bank_name": "ICICI Bank",
+              "bank_code": "ICIC",
+              "url": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png"
+              },
+              "merchant_code": "NB_ICICI",
+              "display_priority": 1
+            }
+          ]
+        },
+        {
+          "name": "WL",
+          "display_priority": 4,
+          "payment_mode_id": 4,
+          "display_name": "Wallet",
+          "list": [
+            {
+              "wallet_name": "Paytm",
+              "wallet_code": "paytm",
+              "wallet_id": 4,
+              "merchant_code": "PAYTM",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_small.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_large.png"
+              },
+              "aggregator_name": "Juspay",
+              "display_priority": 1
+            }
+          ]
+        },
+        {
+          "name": "UPI",
+          "display_priority": 9,
+          "payment_mode_id": 6,
+          "display_name": "UPI",
+          "list": [
+            {
+              "aggregator_name": "UPI_Razorpay",
+              "name": "UPI",
+              "display_name": "BHIM UPI",
+              "code": "UPI",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_100x78.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_150x100.png"
+              },
+              "merchant_code": "UPI",
+              "timeout": 240,
+              "retry_count": 0,
+              "fynd_vpa": "shopsense.rzp@hdfcbank",
+              "intent_flow": true,
+              "intent_app_error_list": [
+                "com.csam.icici.bank.imobile",
+                "in.org.npci.upiapp",
+                "com.whatsapp"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PL",
+          "display_priority": 11,
+          "payment_mode_id": 1,
+          "display_name": "Pay Later",
+          "list": [
+            {
+              "aggregator_name": "Simpl",
+              "name": "Simpl",
+              "code": "simpl",
+              "merchant_code": "SIMPL",
+              "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png"
+              }
+            }
+          ]
+        }
+      ],
+      "payment_flows": {
+        "Simpl": {
+          "data": {
+            "gateway": {
+              "route": "simpl",
+              "entity": "sdk",
+              "is_customer_validation_required": true,
+              "cust_validation_url": "https://api.addsale.com/gringotts/api/v1/validate-customer/",
+              "sdk": {
+                "config": {
+                  "redirect": false,
+                  "callback_url": null,
+                  "action_url": "https://api.addsale.com/avis/api/v1/payments/charge-gringotts-transaction/"
+                },
+                "data": {
+                  "user_phone": "8452996729",
+                  "user_email": "paymentsdummy@gofynd.com"
+                }
+              },
+              "return_url": null
+            }
+          },
+          "api_link": "",
+          "payment_flow": "sdk"
+        },
+        "Juspay": {
+          "data": {},
+          "api_link": "https://sandbox.juspay.in/txns",
+          "payment_flow": "api"
+        },
+        "Razorpay": {
+          "data": {},
+          "api_link": "",
+          "payment_flow": "sdk"
+        },
+        "UPI_Razorpay": {
+          "data": {},
+          "api_link": "https://api.addsale.com/gringotts/api/v1/external/payment-initialisation/",
+          "payment_flow": "api"
+        },
+        "Fynd": {
+          "data": {},
+          "api_link": "",
+          "payment_flow": "api"
+        }
+      },
+      "default": {}
+    },
+    "user_type": "Store User",
+    "cod_charges": 0,
+    "order_id": null,
+    "cod_available": true,
+    "cod_message": "No additional COD charges applicable",
+    "delivery_charges": 0,
+    "delivery_charge_order_value": 0,
+    "delivery_slots": [
+      {
+        "date": "Sat, 24 Aug",
+        "delivery_slot": [
+          {
+            "delivery_slot_timing": "By 9:00 PM",
+            "default": true,
+            "delivery_slot_id": 1
+          }
+        ]
+      }
+    ],
+    "store_code": "",
+    "store_emps": [],
+    "breakup_values": {
+      "loyalty_points": {
+        "total": 0,
+        "applicable": 0,
+        "is_applied": false,
+        "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+      },
+      "coupon": {
+        "type": "cash",
+        "code": "",
+        "uid": null,
+        "value": 0,
+        "is_applied": false,
+        "message": "Sorry! Invalid Coupon"
+      },
+      "raw": {
+        "cod_charge": 0,
+        "convenience_fee": 0,
+        "coupon": 0,
+        "delivery_charge": 0,
+        "discount": 0,
+        "fynd_cash": 0,
+        "gst_charges": 214.18,
+        "mrp_total": 1999,
+        "subtotal": 1999,
+        "total": 1999,
+        "vog": 1784.82,
+        "you_saved": 0
+      },
+      "display": [
+        {
+          "display": "MRP Total",
+          "key": "mrp_total",
+          "value": 1999,
+          "currency_code": "INR"
+        },
+        {
+          "display": "Subtotal",
+          "key": "subtotal",
+          "value": 1999,
+          "currency_code": "INR"
+        },
+        {
+          "display": "Total",
+          "key": "total",
+          "value": 1999,
+          "currency_code": "INR"
+        }
+      ]
+    },
+    "shipments": [],
+    "message": "Shipments could not be generated. Please Try again after some time.",
+    "delivery_charge_info": "",
+    "coupon_text": "View all offers",
+    "gstin": null,
+    "checkout_mode": "self",
+    "last_modified": "Thu, 22 Aug 2019 20:21:48 GMT",
+    "restrict_checkout": false,
+    "is_valid": false
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateShipments
+Update shipment delivery type and quantity before checkout
+
+
+
+
+```kotlin
+poscart.updateShipments(i: i, p: p, id: id, addressId: addressId, orderType: orderType, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| i | Boolean? | no | This is a boolean value. Select `true` to retrieve all the items added in the cart. |   
+| p | Boolean? | no | This is a boolean value. Select `true` for getting a payment option in response. |   
+| id | String? | no | The unique identifier of the cart |   
+| addressId | String? | no | ID allotted to an address |   
+| orderType | String? | no | The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. |  
+| body | [UpdateCartShipmentRequest](#UpdateCartShipmentRequest) | yes | Request body |
+
+
+Use this API to update the delivery type and quantity as per customer's preference for either store pick-up or home-delivery.
+
+*Returned Response*
+
+
+
+
+[CartShipmentsResponse](#CartShipmentsResponse)
+
+Success. Returns delivery promise along with shipment details and price breakup. Refer `CartShipmentsResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Shipment Generated</i></summary>
+
+```json
+{
+  "value": {
+    "items": [],
+    "cart_id": 7501,
+    "uid": "7501",
+    "success": true,
+    "error_message": "Note: Your order delivery will be delayed by 7-10 Days",
+    "payment_options": {
+      "payment_option": [
+        {
+          "name": "COD",
+          "display_name": "Cash on Delivery",
+          "display_priority": 1,
+          "payment_mode_id": 11,
+          "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+          "logo_url": {
+            "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+            "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png"
+          },
+          "list": []
+        },
+        {
+          "name": "CARD",
+          "display_priority": 2,
+          "payment_mode_id": 2,
+          "display_name": "Card",
+          "list": []
+        },
+        {
+          "name": "NB",
+          "display_priority": 3,
+          "payment_mode_id": 3,
+          "display_name": "Net Banking",
+          "list": [
+            {
+              "aggregator_name": "Razorpay",
+              "bank_name": "ICICI Bank",
+              "bank_code": "ICIC",
+              "url": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png"
+              },
+              "merchant_code": "NB_ICICI",
+              "display_priority": 1
+            }
+          ]
+        },
+        {
+          "name": "WL",
+          "display_priority": 4,
+          "payment_mode_id": 4,
+          "display_name": "Wallet",
+          "list": [
+            {
+              "wallet_name": "Paytm",
+              "wallet_code": "paytm",
+              "wallet_id": 4,
+              "merchant_code": "PAYTM",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_small.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_large.png"
+              },
+              "aggregator_name": "Juspay",
+              "display_priority": 1
+            }
+          ]
+        },
+        {
+          "name": "UPI",
+          "display_priority": 9,
+          "payment_mode_id": 6,
+          "display_name": "UPI",
+          "list": [
+            {
+              "aggregator_name": "UPI_Razorpay",
+              "name": "UPI",
+              "display_name": "BHIM UPI",
+              "code": "UPI",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_100x78.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_150x100.png"
+              },
+              "merchant_code": "UPI",
+              "timeout": 240,
+              "retry_count": 0,
+              "fynd_vpa": "shopsense.rzp@hdfcbank",
+              "intent_flow": true,
+              "intent_app_error_list": [
+                "com.csam.icici.bank.imobile",
+                "in.org.npci.upiapp",
+                "com.whatsapp"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PL",
+          "display_priority": 11,
+          "payment_mode_id": 1,
+          "display_name": "Pay Later",
+          "list": [
+            {
+              "aggregator_name": "Simpl",
+              "name": "Simpl",
+              "code": "simpl",
+              "merchant_code": "SIMPL",
+              "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png"
+              }
+            }
+          ]
+        }
+      ],
+      "payment_flows": {
+        "Simpl": {
+          "data": {
+            "gateway": {
+              "route": "simpl",
+              "entity": "sdk",
+              "is_customer_validation_required": true,
+              "cust_validation_url": "https://api.addsale.com/gringotts/api/v1/validate-customer/",
+              "sdk": {
+                "config": {
+                  "redirect": false,
+                  "callback_url": null,
+                  "action_url": "https://api.addsale.com/avis/api/v1/payments/charge-gringotts-transaction/"
+                },
+                "data": {
+                  "user_phone": "8452996729",
+                  "user_email": "paymentsdummy@gofynd.com"
+                }
+              },
+              "return_url": null
+            }
+          },
+          "api_link": "",
+          "payment_flow": "sdk"
+        },
+        "Juspay": {
+          "data": {},
+          "api_link": "https://sandbox.juspay.in/txns",
+          "payment_flow": "api"
+        },
+        "Razorpay": {
+          "data": {},
+          "api_link": "",
+          "payment_flow": "sdk"
+        },
+        "UPI_Razorpay": {
+          "data": {},
+          "api_link": "https://api.addsale.com/gringotts/api/v1/external/payment-initialisation/",
+          "payment_flow": "api"
+        },
+        "Fynd": {
+          "data": {},
+          "api_link": "",
+          "payment_flow": "api"
+        }
+      },
+      "default": {}
+    },
+    "user_type": "Store User",
+    "cod_charges": 0,
+    "order_id": null,
+    "cod_available": true,
+    "cod_message": "No additional COD charges applicable",
+    "delivery_charges": 0,
+    "delivery_charge_order_value": 0,
+    "delivery_slots": [
+      {
+        "date": "Sat, 24 Aug",
+        "delivery_slot": [
+          {
+            "delivery_slot_timing": "By 9:00 PM",
+            "default": true,
+            "delivery_slot_id": 1
+          }
+        ]
+      }
+    ],
+    "store_code": "",
+    "store_emps": [],
+    "breakup_values": {
+      "loyalty_points": {
+        "total": 0,
+        "applicable": 0,
+        "is_applied": false,
+        "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+      },
+      "coupon": {
+        "type": "cash",
+        "code": "",
+        "uid": null,
+        "value": 0,
+        "is_applied": false,
+        "message": "Sorry! Invalid Coupon"
+      },
+      "raw": {
+        "cod_charge": 0,
+        "convenience_fee": 0,
+        "coupon": 0,
+        "delivery_charge": 0,
+        "discount": 0,
+        "fynd_cash": 0,
+        "gst_charges": 214.18,
+        "mrp_total": 1999,
+        "subtotal": 1999,
+        "total": 1999,
+        "vog": 1784.82,
+        "you_saved": 0
+      },
+      "display": [
+        {
+          "display": "MRP Total",
+          "key": "mrp_total",
+          "value": 1999,
+          "currency_code": "INR"
+        },
+        {
+          "display": "Subtotal",
+          "key": "subtotal",
+          "value": 1999,
+          "currency_code": "INR"
+        },
+        {
+          "display": "Total",
+          "key": "total",
+          "value": 1999,
+          "currency_code": "INR"
+        }
+      ]
+    },
+    "shipments": [
+      {
+        "fulfillment_id": 3009,
+        "shipment_type": "single_shipment",
+        "fulfillment_type": "store",
+        "dp_id": "29",
+        "order_type": "PickAtStore",
+        "dp_options": {
+          "4": {
+            "f_priority": 4,
+            "r_priority": 5,
+            "is_cod": true,
+            "is_prepaid": true,
+            "is_reverse": true
+          },
+          "7": {
+            "f_priority": 3,
+            "r_priority": 4,
+            "is_cod": true,
+            "is_prepaid": true,
+            "is_reverse": true
+          },
+          "29": {
+            "f_priority": 1,
+            "r_priority": 2,
+            "is_cod": true,
+            "is_prepaid": true,
+            "is_reverse": true
+          }
+        },
+        "promise": {
+          "timestamp": {
+            "min": 1566678108,
+            "max": 1567023708
+          },
+          "formatted": {
+            "min": "Aug 24",
+            "max": "Aug 28"
+          }
+        },
+        "box_type": "Small Courier bag",
+        "shipments": 1,
+        "items": [
+          {
+            "quantity": 1,
+            "product": {
+              "type": "product",
+              "uid": 820312,
+              "name": "Navy Blue Melange Shorts",
+              "slug": "883-police-navy-blue-melange-shorts-820312-4943a8",
+              "brand": {
+                "uid": 610,
+                "name": "883 Police"
+              },
+              "categories": [
+                {
+                  "uid": 193,
+                  "name": "Shorts"
+                }
+              ],
+              "images": [
+                {
+                  "aspect_ratio": "16:25",
+                  "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg",
+                  "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg"
+                }
+              ],
+              "action": {
+                "type": "product",
+                "url": "https://api.addsale.com/platform/content/v1/products/883-police-navy-blue-melange-shorts-820312-4943a8/",
+                "query": {
+                  "product_slug": [
+                    "883-police-navy-blue-melange-shorts-820312-4943a8"
+                  ]
+                }
+              }
+            },
+            "discount": "",
+            "bulk_offer": {},
+            "key": "820312_L",
+            "price": {
+              "base": {
+                "add_on": 1999,
+                "marked": 1999,
+                "effective": 1999,
+                "selling": 1999,
+                "currency_code": "INR"
+              },
+              "converted": {
+                "add_on": 1999,
+                "marked": 1999,
+                "effective": 1999,
+                "selling": 1999,
+                "currency_code": "INR"
+              }
+            },
+            "article": {
+              "type": "article",
+              "uid": "381_610_IGPL01_SPIRAL19ANAVY_L",
+              "size": "L",
+              "seller": {
+                "uid": 381,
+                "name": "INTERSOURCE GARMENTS PVT LTD"
+              },
+              "store": {
+                "uid": 3009,
+                "name": "Kormangala"
+              },
+              "quantity": 2,
+              "price": {
+                "base": {
+                  "marked": 1999,
+                  "effective": 1999,
+                  "currency_code": "INR"
+                },
+                "converted": {
+                  "marked": 1999,
+                  "effective": 1999,
+                  "currency_code": "INR"
+                }
+              }
+            },
+            "availability": {
+              "sizes": [
+                "L",
+                "XL",
+                "XXL"
+              ],
+              "other_store_quantity": 1,
+              "out_of_stock": false,
+              "deliverable": true,
+              "is_valid": true
+            },
+            "coupon_message": "",
+            "message": ""
+          }
+        ]
+      }
+    ],
+    "delivery_charge_info": "",
+    "coupon_text": "View all offers",
+    "gstin": null,
+    "checkout_mode": "self",
+    "last_modified": "Thu, 22 Aug 2019 20:21:48 GMT",
+    "restrict_checkout": false,
+    "is_valid": true
+  }
+}
+```
+</details>
+
+<details>
+<summary><i>&nbsp; Shipment Generation Failed</i></summary>
+
+```json
+{
+  "value": {
+    "items": [],
+    "cart_id": 7501,
+    "uid": "7501",
+    "success": true,
+    "error_message": "Note: Your order delivery will be delayed by 7-10 Days",
+    "payment_options": {
+      "payment_option": [
+        {
+          "name": "COD",
+          "display_name": "Cash on Delivery",
+          "display_priority": 1,
+          "payment_mode_id": 11,
+          "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+          "logo_url": {
+            "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+            "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png"
+          },
+          "list": []
+        },
+        {
+          "name": "CARD",
+          "display_priority": 2,
+          "payment_mode_id": 2,
+          "display_name": "Card",
+          "list": []
+        },
+        {
+          "name": "NB",
+          "display_priority": 3,
+          "payment_mode_id": 3,
+          "display_name": "Net Banking",
+          "list": [
+            {
+              "aggregator_name": "Razorpay",
+              "bank_name": "ICICI Bank",
+              "bank_code": "ICIC",
+              "url": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png"
+              },
+              "merchant_code": "NB_ICICI",
+              "display_priority": 1
+            }
+          ]
+        },
+        {
+          "name": "WL",
+          "display_priority": 4,
+          "payment_mode_id": 4,
+          "display_name": "Wallet",
+          "list": [
+            {
+              "wallet_name": "Paytm",
+              "wallet_code": "paytm",
+              "wallet_id": 4,
+              "merchant_code": "PAYTM",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_small.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_large.png"
+              },
+              "aggregator_name": "Juspay",
+              "display_priority": 1
+            }
+          ]
+        },
+        {
+          "name": "UPI",
+          "display_priority": 9,
+          "payment_mode_id": 6,
+          "display_name": "UPI",
+          "list": [
+            {
+              "aggregator_name": "UPI_Razorpay",
+              "name": "UPI",
+              "display_name": "BHIM UPI",
+              "code": "UPI",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_100x78.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_150x100.png"
+              },
+              "merchant_code": "UPI",
+              "timeout": 240,
+              "retry_count": 0,
+              "fynd_vpa": "shopsense.rzp@hdfcbank",
+              "intent_flow": true,
+              "intent_app_error_list": [
+                "com.csam.icici.bank.imobile",
+                "in.org.npci.upiapp",
+                "com.whatsapp"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PL",
+          "display_priority": 11,
+          "payment_mode_id": 1,
+          "display_name": "Pay Later",
+          "list": [
+            {
+              "aggregator_name": "Simpl",
+              "name": "Simpl",
+              "code": "simpl",
+              "merchant_code": "SIMPL",
+              "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png"
+              }
+            }
+          ]
+        }
+      ],
+      "payment_flows": {
+        "Simpl": {
+          "data": {
+            "gateway": {
+              "route": "simpl",
+              "entity": "sdk",
+              "is_customer_validation_required": true,
+              "cust_validation_url": "https://api.addsale.com/gringotts/api/v1/validate-customer/",
+              "sdk": {
+                "config": {
+                  "redirect": false,
+                  "callback_url": null,
+                  "action_url": "https://api.addsale.com/avis/api/v1/payments/charge-gringotts-transaction/"
+                },
+                "data": {
+                  "user_phone": "8452996729",
+                  "user_email": "paymentsdummy@gofynd.com"
+                }
+              },
+              "return_url": null
+            }
+          },
+          "api_link": "",
+          "payment_flow": "sdk"
+        },
+        "Juspay": {
+          "data": {},
+          "api_link": "https://sandbox.juspay.in/txns",
+          "payment_flow": "api"
+        },
+        "Razorpay": {
+          "data": {},
+          "api_link": "",
+          "payment_flow": "sdk"
+        },
+        "UPI_Razorpay": {
+          "data": {},
+          "api_link": "https://api.addsale.com/gringotts/api/v1/external/payment-initialisation/",
+          "payment_flow": "api"
+        },
+        "Fynd": {
+          "data": {},
+          "api_link": "",
+          "payment_flow": "api"
+        }
+      },
+      "default": {}
+    },
+    "user_type": "Store User",
+    "cod_charges": 0,
+    "order_id": null,
+    "cod_available": true,
+    "cod_message": "No additional COD charges applicable",
+    "delivery_charges": 0,
+    "delivery_charge_order_value": 0,
+    "delivery_slots": [
+      {
+        "date": "Sat, 24 Aug",
+        "delivery_slot": [
+          {
+            "delivery_slot_timing": "By 9:00 PM",
+            "default": true,
+            "delivery_slot_id": 1
+          }
+        ]
+      }
+    ],
+    "store_code": "",
+    "store_emps": [],
+    "breakup_values": {
+      "loyalty_points": {
+        "total": 0,
+        "applicable": 0,
+        "is_applied": false,
+        "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+      },
+      "coupon": {
+        "type": "cash",
+        "code": "",
+        "uid": null,
+        "value": 0,
+        "is_applied": false,
+        "message": "Sorry! Invalid Coupon"
+      },
+      "raw": {
+        "cod_charge": 0,
+        "convenience_fee": 0,
+        "coupon": 0,
+        "delivery_charge": 0,
+        "discount": 0,
+        "fynd_cash": 0,
+        "gst_charges": 214.18,
+        "mrp_total": 1999,
+        "subtotal": 1999,
+        "total": 1999,
+        "vog": 1784.82,
+        "you_saved": 0
+      },
+      "display": [
+        {
+          "display": "MRP Total",
+          "key": "mrp_total",
+          "value": 1999,
+          "currency_code": "INR"
+        },
+        {
+          "display": "Subtotal",
+          "key": "subtotal",
+          "value": 1999,
+          "currency_code": "INR"
+        },
+        {
+          "display": "Total",
+          "key": "total",
+          "value": 1999,
+          "currency_code": "INR"
+        }
+      ]
+    },
+    "shipments": [],
+    "message": "Shipments could not be generated. Please Try again after some time.",
+    "delivery_charge_info": "",
+    "coupon_text": "View all offers",
+    "gstin": null,
+    "checkout_mode": "self",
+    "last_modified": "Thu, 22 Aug 2019 20:21:48 GMT",
+    "restrict_checkout": false,
+    "is_valid": false
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### checkoutCart
+Checkout all items in the cart
+
+
+
+
+```kotlin
+poscart.checkoutCart(id: id, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String? | no |  |  
+| body | [CartPosCheckoutDetailRequest](#CartPosCheckoutDetailRequest) | yes | Request body |
+
+
+Use this API to checkout all items in the cart for payment and order generation. For COD, order will be generated directly, whereas for other checkout modes, user will be redirected to a payment gateway.
+
+*Returned Response*
+
+
+
+
+[CartCheckoutResponse](#CartCheckoutResponse)
+
+Success. Returns the status of cart checkout. Refer `CartCheckoutResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Address id not found</i></summary>
+
+```json
+{
+  "value": {
+    "success": false,
+    "message": "No address found with address id {address_id}"
+  }
+}
+```
+</details>
+
+<details>
+<summary><i>&nbsp; Missing address_id</i></summary>
+
+```json
+{
+  "value": {
+    "address_id": [
+      "Missing data for required field."
+    ]
+  }
+}
+```
+</details>
+
+<details>
+<summary><i>&nbsp; Successful checkout cod payment</i></summary>
+
+```json
+{
+  "value": {
+    "success": true,
+    "cart": {
+      "success": true,
+      "error_message": "Note: Your order delivery will be delayed by 7-10 Days",
+      "payment_options": {
+        "payment_option": [
+          {
+            "name": "COD",
+            "display_name": "Cash on Delivery",
+            "display_priority": 1,
+            "payment_mode_id": 11,
+            "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+            "logo_url": {
+              "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+              "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png"
+            },
+            "list": []
+          },
+          {
+            "name": "CARD",
+            "display_priority": 2,
+            "payment_mode_id": 2,
+            "display_name": "Card",
+            "list": []
+          },
+          {
+            "name": "NB",
+            "display_priority": 3,
+            "payment_mode_id": 3,
+            "display_name": "Net Banking",
+            "list": [
+              {
+                "aggregator_name": "Razorpay",
+                "bank_name": "ICICI Bank",
+                "bank_code": "ICIC",
+                "url": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+                "logo_url": {
+                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png"
+                },
+                "merchant_code": "NB_ICICI",
+                "display_priority": 1
+              }
+            ]
+          },
+          {
+            "name": "WL",
+            "display_priority": 4,
+            "payment_mode_id": 4,
+            "display_name": "Wallet",
+            "list": [
+              {
+                "wallet_name": "Paytm",
+                "wallet_code": "paytm",
+                "wallet_id": 4,
+                "merchant_code": "PAYTM",
+                "logo_url": {
+                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_small.png",
+                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_large.png"
+                },
+                "aggregator_name": "Juspay",
+                "display_priority": 1
+              }
+            ]
+          },
+          {
+            "name": "UPI",
+            "display_priority": 9,
+            "payment_mode_id": 6,
+            "display_name": "UPI",
+            "list": [
+              {
+                "aggregator_name": "UPI_Razorpay",
+                "name": "UPI",
+                "display_name": "BHIM UPI",
+                "code": "UPI",
+                "logo_url": {
+                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_100x78.png",
+                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_150x100.png"
+                },
+                "merchant_code": "UPI",
+                "timeout": 240,
+                "retry_count": 0,
+                "fynd_vpa": "shopsense.rzp@hdfcbank",
+                "intent_flow": true,
+                "intent_app_error_list": [
+                  "com.csam.icici.bank.imobile",
+                  "in.org.npci.upiapp",
+                  "com.whatsapp"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "PL",
+            "display_priority": 11,
+            "payment_mode_id": 1,
+            "display_name": "Pay Later",
+            "list": [
+              {
+                "aggregator_name": "Simpl",
+                "name": "Simpl",
+                "code": "simpl",
+                "merchant_code": "SIMPL",
+                "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+                "logo_url": {
+                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png"
+                }
+              }
+            ]
+          }
+        ],
+        "payment_flows": {
+          "Simpl": {
+            "data": {
+              "gateway": {
+                "route": "simpl",
+                "entity": "sdk",
+                "is_customer_validation_required": true,
+                "cust_validation_url": "https://api.addsale.com/gringotts/api/v1/validate-customer/",
+                "sdk": {
+                  "config": {
+                    "redirect": false,
+                    "callback_url": null,
+                    "action_url": "https://api.addsale.com/avis/api/v1/payments/charge-gringotts-transaction/"
+                  },
+                  "data": {
+                    "user_phone": "8452996729",
+                    "user_email": "paymentsdummy@gofynd.com"
+                  }
+                },
+                "return_url": null
+              }
+            },
+            "api_link": "",
+            "payment_flow": "sdk"
+          },
+          "Juspay": {
+            "data": {},
+            "api_link": "https://sandbox.juspay.in/txns",
+            "payment_flow": "api"
+          },
+          "Razorpay": {
+            "data": {},
+            "api_link": "",
+            "payment_flow": "sdk"
+          },
+          "UPI_Razorpay": {
+            "data": {},
+            "api_link": "https://api.addsale.com/gringotts/api/v1/external/payment-initialisation/",
+            "payment_flow": "api"
+          },
+          "Fynd": {
+            "data": {},
+            "api_link": "",
+            "payment_flow": "api"
+          }
+        },
+        "default": {}
+      },
+      "user_type": "Store User",
+      "cod_charges": 0,
+      "order_id": "FY5D5E215CF287584CE6",
+      "cod_available": true,
+      "cod_message": "No additional COD charges applicable",
+      "delivery_charges": 0,
+      "delivery_charge_order_value": 0,
+      "delivery_slots": [
+        {
+          "date": "Sat, 24 Aug",
+          "delivery_slot": [
+            {
+              "delivery_slot_timing": "By 9:00 PM",
+              "default": true,
+              "delivery_slot_id": 1
+            }
+          ]
+        }
+      ],
+      "store_code": "",
+      "store_emps": [],
+      "breakup_values": {
+        "coupon": {
+          "type": "cash",
+          "code": "",
+          "uid": null,
+          "value": 0,
+          "is_applied": false,
+          "message": "Sorry! Invalid Coupon"
+        },
+        "loyalty_points": {
+          "total": 0,
+          "applicable": 0,
+          "is_applied": false,
+          "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+        },
+        "raw": {
+          "cod_charge": 0,
+          "convenience_fee": 0,
+          "coupon": 0,
+          "delivery_charge": 0,
+          "discount": 0,
+          "fynd_cash": 0,
+          "gst_charges": 214.18,
+          "mrp_total": 1999,
+          "subtotal": 1999,
+          "total": 1999,
+          "vog": 1784.82,
+          "you_saved": 0
+        },
+        "display": [
+          {
+            "display": "MRP Total",
+            "key": "mrp_total",
+            "value": 1999,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Subtotal",
+            "key": "subtotal",
+            "value": 1999,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Total",
+            "key": "total",
+            "value": 1999,
+            "currency_code": "INR"
+          }
+        ]
+      },
+      "items": [
+        {
+          "key": "820312_L",
+          "message": "",
+          "bulk_offer": {},
+          "price": {
+            "base": {
+              "add_on": 1999,
+              "marked": 1999,
+              "effective": 1999,
+              "selling": 1999,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "add_on": 1999,
+              "marked": 1999,
+              "effective": 1999,
+              "selling": 1999,
+              "currency_code": "INR"
+            }
+          },
+          "quantity": 1,
+          "discount": "",
+          "product": {
+            "type": "product",
+            "uid": 820312,
+            "name": "Navy Blue Melange Shorts",
+            "slug": "883-police-navy-blue-melange-shorts-820312-4943a8",
+            "brand": {
+              "uid": 610,
+              "name": "883 Police"
+            },
+            "categories": [
+              {
+                "uid": 193,
+                "name": "Shorts"
+              }
+            ],
+            "images": [
+              {
+                "aspect_ratio": "16:25",
+                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg",
+                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg"
+              }
+            ],
+            "action": {
+              "type": "product",
+              "url": "https://api.addsale.com/platform/content/v1/products/883-police-navy-blue-melange-shorts-820312-4943a8/",
+              "query": {
+                "product_slug": [
+                  "883-police-navy-blue-melange-shorts-820312-4943a8"
+                ]
+              }
+            }
+          },
+          "article": {
+            "type": "article",
+            "uid": "381_610_IGPL01_SPIRAL19ANAVY_L",
+            "size": "L",
+            "seller": {
+              "uid": 381,
+              "name": "INTERSOURCE GARMENTS PVT LTD"
+            },
+            "store": {
+              "uid": 3009,
+              "name": "Kormangala"
+            },
+            "quantity": 2,
+            "price": {
+              "base": {
+                "marked": 1999,
+                "effective": 1999,
+                "currency_code": "INR"
+              },
+              "converted": {
+                "marked": 1999,
+                "effective": 1999,
+                "currency_code": "INR"
+              }
+            }
+          },
+          "coupon_message": "",
+          "availability": {
+            "sizes": [
+              "L",
+              "XL",
+              "XXL"
+            ],
+            "other_store_quantity": 1,
+            "out_of_stock": false,
+            "deliverable": true,
+            "is_valid": true
+          }
+        }
+      ],
+      "delivery_charge_info": "",
+      "coupon_text": "View all offers",
+      "cart_id": 7483,
+      "uid": "7483",
+      "gstin": null,
+      "checkout_mode": "self",
+      "last_modified": "Thu, 22 Aug 2019 04:58:44 GMT",
+      "restrict_checkout": false,
+      "is_valid": true
+    },
+    "callback_url": "https://api.addsale.com/gringotts/api/v1/external/payment-callback/",
+    "app_intercept_url": "http://uniket-testing.addsale.link/cart/order-status",
+    "message": "",
+    "data": {
+      "order_id": "FY5D5E215CF287584CE6"
+    },
+    "order_id": "FY5D5E215CF287584CE6"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateCartMeta
+Update the cart meta
+
+
+
+
+```kotlin
+poscart.updateCartMeta(id: id, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String? | no | The unique identifier of the cart |  
+| body | [CartMetaRequest](#CartMetaRequest) | yes | Request body |
+
+
+Use this API to update cart meta like checkout_mode and gstin.
+
+*Returned Response*
+
+
+
+
+[CartMetaResponse](#CartMetaResponse)
+
+Returns a message indicating the success of cart meta updation as shown below.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "message": "cart meta updated"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getAvailableDeliveryModes
+Get available delivery modes for cart
+
+
+
+
+```kotlin
+poscart.getAvailableDeliveryModes(areaCode: areaCode, id: id).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| areaCode | String | yes |  |   
+| id | String? | no |  |  
+
+
+
+Use this API to get the delivery modes (home-delivery/store-pickup) along with a list of pickup stores available for a given cart at a given PIN Code. User can then view the address of a pickup store with the help of store-address API.
+
+*Returned Response*
+
+
+
+
+[CartDeliveryModesResponse](#CartDeliveryModesResponse)
+
+Success. Returns the available delivery mode available for a given PIN Code, along with the UID of all the eligible pickup stores.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "available_modes": [
+    "HomeDelivery",
+    "PickAtStore"
+  ],
+  "pickup_stores": [
+    1
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getStoreAddressByUid
+Get list of stores for give uids
+
+
+
+
+```kotlin
+poscart.getStoreAddressByUid(storeUid: storeUid).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| storeUid | Int | yes |  |  
+
+
+
+Use this API to get the store details by entering the unique identifier of the pickup stores shown in the response of available-delivery-mode API.
+
+*Returned Response*
+
+
+
+
+[StoreDetailsResponse](#StoreDetailsResponse)
+
+Success. Returns available store information with its address as shown below.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "name": "Tennille Urse",
+      "phone": "9819716565",
+      "email": "rehman@cashkart.com",
+      "address_type": "store",
+      "address": "NO",
+      "area": "",
+      "pincode": 400072,
+      "area_code": 400072,
+      "area_code_slug": "pincode",
+      "landmark": "",
+      "country": "INDIA",
+      "city": "MUMBAI",
+      "state": "MAHA",
+      "store_code": "6462b3cd-9d64-4da9-a764-b0e6a52cf5e8",
+      "uid": 20,
+      "geo_location": {
+        "longitude": 1,
+        "latitude": 1
+      }
+    }
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCartShareLink
+Generate token for sharing the cart
+
+
+
+
+```kotlin
+poscart.getCartShareLink(body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [GetShareCartLinkRequest](#GetShareCartLinkRequest) | yes | Request body |
+
+
+Use this API to generate a shared cart snapshot and return a shortlink token. The link can be shared with other users for getting the same items in their cart.
+
+*Returned Response*
+
+
+
+
+[GetShareCartLinkResponse](#GetShareCartLinkResponse)
+
+Returns a URL to share and a token as shown below.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Token Generated</i></summary>
+
+```json
+{
+  "value": {
+    "token": "ZweG1XyX",
+    "share_url": "https://uniket-testing.addsale.link/shared-cart/ZweG1XyX"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCartSharedItems
+Get details of a shared cart
+
+
+
+
+```kotlin
+poscart.getCartSharedItems(token: token).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| token | String | yes | Token of the shared short link |  
+
+
+
+Use this API to get the shared cart details as per the token generated using the share-cart API.
+
+*Returned Response*
+
+
+
+
+[SharedCartResponse](#SharedCartResponse)
+
+Success. Returns a Cart object as per the valid token. Refer `SharedCartResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "cart": {
+    "shared_cart_details": {
+      "token": "BQ9jySQ9",
+      "user": {
+        "user_id": "23109086",
+        "is_anonymous": false
+      },
+      "meta": {
+        "selected_staff": "",
+        "ordering_store": null
+      },
+      "selected_staff": "",
+      "ordering_store": null,
+      "source": {},
+      "created_on": "2019-12-18T14:00:07.165000"
+    },
+    "items": [
+      {
+        "key": "791651_6",
+        "discount": "",
+        "bulk_offer": {},
+        "coupon_message": "",
+        "article": {
+          "type": "article",
+          "uid": "304_1054_9036_R1005753_6",
+          "size": "6",
+          "seller": {
+            "uid": 304,
+            "name": "LEAYAN GLOBAL PVT. LTD."
+          },
+          "store": {
+            "uid": 5322,
+            "name": "Vaisali Nagar"
+          },
+          "quantity": 1,
+          "price": {
+            "base": {
+              "marked": 2095,
+              "effective": 2095,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "marked": 2095,
+              "effective": 2095,
+              "currency_code": "INR"
+            }
+          }
+        },
+        "product": {
+          "type": "product",
+          "uid": 791651,
+          "name": "Black Running Shoes",
+          "slug": "furo-black-running-shoes-791651-f8bcc3",
+          "brand": {
+            "uid": 1054,
+            "name": "Furo"
+          },
+          "categories": [
+            {
+              "uid": 160,
+              "name": "Running Shoes"
             }
           ],
-          "phoneNumbers": [
+          "images": [
             {
-              "active": true,
-              "primary": true,
-              "verified": true,
-              "countryCode": 91,
-              "phone": "9890425946"
+              "aspect_ratio": "16:25",
+              "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/1054_R1005753/1_1546490507364.jpg",
+              "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/1054_R1005753/1_1546490507364.jpg"
             }
           ],
-          "firstName": "Nikhil",
-          "lastName": "Manapure",
-          "username": "nikhilmanapure_gofynd_com_29298",
-          "createdAt": "2020-03-24T10:55:29.298Z",
-          "updatedAt": "2020-05-12T07:46:41.816Z",
-          "uid": "5567",
-          "__v": 2
-        },
-        "createdAt": "2021-02-25T04:42:15.225Z",
-        "updatedAt": "2021-02-25T04:42:15.225Z",
-        "__v": 0,
-        "id": "60372aa78a046d4d79c46e15"
-      }
-    ],
-    "total": 2,
-    "limit": 100,
-    "page": 1,
-    "pages": 1
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### getCustomForm
-Get specific custom form using it's slug
-
-
-
-
-```kotlin
-client.application("<APPLICATION_ID>").lead.getCustomForm(slug: slug).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID of the application |   
-| applicationId | String | yes | Application ID for the form |   
-| slug | String | yes | Slug of form whose response is getting submitted |  
-
-
-
-Get specific custom form using it's slug, this is used to view the form.
-
-*Returned Response*
-
-
-
-
-[CustomForm](#CustomForm)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "login_required": false,
-    "should_notify": false,
-    "inputs": [
-      {
-        "required": false,
-        "type": "text",
-        "display": "Name",
-        "placeholder": "Please enter your name",
-        "key": "name"
-      }
-    ],
-    "available_assignees": [],
-    "_id": "5fd258a9088f957f34c288fc",
-    "title": "trail form",
-    "description": "Trail form description",
-    "slug": "trail-form",
-    "application_id": "000000000000000000000003",
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "87.0.4280.88"
-        },
-        "os": {
-          "name": "macOS",
-          "version": "10.15.6",
-          "versionName": "Catalina"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
-        }
-      }
-    },
-    "created_by": "5d1363adf599d850df93175e",
-    "createdAt": "2020-12-10T17:19:37.515Z",
-    "updatedAt": "2020-12-10T17:19:43.214Z",
-    "__v": 0
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### editCustomForm
-Edit the given custom form
-
-
-
-
-```kotlin
-client.application("<APPLICATION_ID>").lead.editCustomForm(slug: slug, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID of the application |   
-| applicationId | String | yes | Application ID for the form |   
-| slug | String | yes | Slug of form whose response is getting submitted |  
-| body | [EditCustomFormPayload](#EditCustomFormPayload) | yes | Request body |
-
-
-Edit the given custom form field such as adding or deleting input, assignee, title, decription, notification and polling information.
-
-*Returned Response*
-
-
-
-
-[CustomForm](#CustomForm)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "login_required": false,
-    "should_notify": false,
-    "inputs": [
-      {
-        "type": "email",
-        "showRegexInput": true,
-        "enum": [],
-        "regex": "\\S+@\\S+\\.\\S+",
-        "display": "email",
-        "required": true,
-        "key": "email"
-      },
-      {
-        "type": "number",
-        "showRegexInput": false,
-        "enum": [],
-        "display": "Enter your fav number",
-        "placeholder": "123",
-        "key": "enter-your-fav-number"
-      }
-    ],
-    "available_assignees": [],
-    "_id": "602e900a2042255c03cadaf0",
-    "title": "service-test-satyen",
-    "description": "testing form from service",
-    "slug": "service-test-satyen",
-    "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
-    "application_id": "000000000000000000000001",
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "88.0.4324.150"
-        },
-        "os": {
-          "name": "macOS",
-          "version": "11.2.0"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
-        }
-      }
-    },
-    "created_by": "5f8147abbd1a0a870f61f1a6",
-    "createdAt": "2021-02-18T16:04:26.495Z",
-    "updatedAt": "2021-02-26T10:16:49.272Z",
-    "__v": 0
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### getCustomForms
-Get list of custom form
-
-
-
-
-```kotlin
-client.application("<APPLICATION_ID>").lead.getCustomForms().safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID of the application |   
-| applicationId | String | yes | Application ID for the form |  
-
-
-
-Get list of custom form for given application
-
-*Returned Response*
-
-
-
-
-[CustomFormList](#CustomFormList)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "docs": [
-      {
-        "_id": "602e900a2042255c03cadaf0",
-        "login_required": false,
-        "should_notify": false,
-        "inputs": [
-          {
-            "type": "email",
-            "showRegexInput": true,
-            "enum": [],
-            "regex": "\\S+@\\S+\\.\\S+",
-            "display": "email",
-            "required": true,
-            "key": "email"
-          },
-          {
-            "type": "number",
-            "showRegexInput": false,
-            "enum": [],
-            "display": "Enter your fav number",
-            "placeholder": "123",
-            "key": "enter-your-fav-number"
-          },
-          {
-            "type": "textarea",
-            "showRegexInput": false,
-            "enum": [],
-            "display": "kjhgjhvjb",
-            "required": true,
-            "key": "kjhgjhvjb"
-          }
-        ],
-        "available_assignees": [],
-        "title": "service-test-satyen",
-        "description": "testing form from service",
-        "slug": "service-test-satyen",
-        "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
-        "application_id": "000000000000000000000001",
-        "created_on": {
-          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-          "platform": "web",
-          "meta": {
-            "browser": {
-              "name": "Chrome",
-              "version": "88.0.4324.150"
-            },
-            "os": {
-              "name": "macOS",
-              "version": "11.2.0"
-            },
-            "platform": {
-              "type": "desktop",
-              "vendor": "Apple"
-            },
-            "engine": {
-              "name": "Blink"
+          "action": {
+            "type": "product",
+            "url": "https://api.addsale.com/platform/content/v1/products/furo-black-running-shoes-791651-f8bcc3/",
+            "query": {
+              "product_slug": [
+                "furo-black-running-shoes-791651-f8bcc3"
+              ]
             }
           }
         },
-        "created_by": "5f8147abbd1a0a870f61f1a6",
-        "createdAt": "2021-02-18T16:04:26.495Z",
-        "updatedAt": "2021-02-24T15:49:56.256Z",
-        "__v": 0,
-        "id": "602e900a2042255c03cadaf0"
+        "message": "",
+        "quantity": 1,
+        "availability": {
+          "sizes": [
+            "7",
+            "8",
+            "9",
+            "10",
+            "6"
+          ],
+          "other_store_quantity": 12,
+          "out_of_stock": false,
+          "deliverable": true,
+          "is_valid": true
+        },
+        "price": {
+          "base": {
+            "add_on": 2095,
+            "marked": 2095,
+            "effective": 2095,
+            "selling": 2095,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "add_on": 2095,
+            "marked": 2095,
+            "effective": 2095,
+            "selling": 2095,
+            "currency_code": "INR"
+          }
+        }
       },
       {
-        "_id": "60124e4a4d2bc363625e1bf4",
-        "login_required": false,
-        "should_notify": true,
-        "inputs": [
-          {
-            "type": "text",
-            "showRegexInput": false,
-            "enum": [],
-            "display": "asdf",
-            "key": "asdf"
+        "key": "791651_7",
+        "discount": "",
+        "bulk_offer": {},
+        "coupon_message": "",
+        "article": {
+          "type": "article",
+          "uid": "304_1054_9036_R1005753_7",
+          "size": "7",
+          "seller": {
+            "uid": 304,
+            "name": "LEAYAN GLOBAL PVT. LTD."
           },
-          {
-            "type": "mobile",
-            "showRegexInput": false,
-            "enum": [],
-            "display": "mob num",
-            "regex": "[0-9]{10}$",
-            "key": "mob-num"
-          }
-        ],
-        "available_assignees": [
-          "5e79e721768c6bf54b783146"
-        ],
-        "title": "asdf444",
-        "description": "adf",
-        "slug": "asdf444",
-        "application_id": "000000000000000000000001",
-        "created_on": {
-          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
-          "platform": "web",
-          "meta": {
-            "browser": {
-              "name": "Chrome",
-              "version": "88.0.4324.96"
+          "store": {
+            "uid": 5322,
+            "name": "Vaisali Nagar"
+          },
+          "quantity": 2,
+          "price": {
+            "base": {
+              "marked": 2095,
+              "effective": 2095,
+              "currency_code": "INR"
             },
-            "os": {
-              "name": "macOS",
-              "version": "10.15.7",
-              "versionName": "Catalina"
-            },
-            "platform": {
-              "type": "desktop",
-              "vendor": "Apple"
-            },
-            "engine": {
-              "name": "Blink"
+            "converted": {
+              "marked": 2095,
+              "effective": 2095,
+              "currency_code": "INR"
             }
           }
         },
-        "created_by": "5e79e721768c6bf54b783146",
-        "createdAt": "2021-01-28T05:40:26.271Z",
-        "updatedAt": "2021-02-18T16:02:32.086Z",
-        "__v": 0,
-        "poll_for_assignment": {
-          "duration": 20,
-          "message": "We are looking for executive to connect you",
-          "success_message": "Executive found",
-          "failure_message": "All our executives are busy at the moment, We have accepted your request and someone will connect with you soon!"
+        "product": {
+          "type": "product",
+          "uid": 791651,
+          "name": "Black Running Shoes",
+          "slug": "furo-black-running-shoes-791651-f8bcc3",
+          "brand": {
+            "uid": 1054,
+            "name": "Furo"
+          },
+          "categories": [
+            {
+              "uid": 160,
+              "name": "Running Shoes"
+            }
+          ],
+          "images": [
+            {
+              "aspect_ratio": "16:25",
+              "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/1054_R1005753/1_1546490507364.jpg",
+              "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/1054_R1005753/1_1546490507364.jpg"
+            }
+          ],
+          "action": {
+            "type": "product",
+            "url": "https://api.addsale.com/platform/content/v1/products/furo-black-running-shoes-791651-f8bcc3/",
+            "query": {
+              "product_slug": [
+                "furo-black-running-shoes-791651-f8bcc3"
+              ]
+            }
+          }
         },
-        "id": "60124e4a4d2bc363625e1bf4"
-      }
-    ],
-    "total": 2,
-    "limit": 10,
-    "page": 1,
-    "pages": 1
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### createCustomForm
-Creates a new custom form
-
-
-
-
-```kotlin
-client.application("<APPLICATION_ID>").lead.createCustomForm(body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID of the application |   
-| applicationId | String | yes | Application ID for the form |  
-| body | [CreateCustomFormPayload](#CreateCustomFormPayload) | yes | Request body |
-
-
-Creates a new custom form for given application
-
-*Returned Response*
-
-
-
-
-[CustomForm](#CustomForm)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "login_required": false,
-    "should_notify": false,
-    "inputs": [
-      {
-        "type": "email",
-        "showRegexInput": true,
-        "enum": [],
-        "regex": "\\S+@\\S+\\.\\S+",
-        "display": "email",
-        "required": true,
-        "key": "email"
-      },
-      {
-        "type": "number",
-        "showRegexInput": false,
-        "enum": [],
-        "display": "Enter your fav number",
-        "placeholder": "123",
-        "key": "enter-your-fav-number"
-      }
-    ],
-    "available_assignees": [],
-    "_id": "602e900a2042255c03cadaf0",
-    "title": "service-test-satyen",
-    "description": "testing form from service",
-    "slug": "service-test-satyen",
-    "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
-    "application_id": "000000000000000000000001",
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "88.0.4324.150"
+        "message": "",
+        "quantity": 2,
+        "availability": {
+          "sizes": [
+            "7",
+            "8",
+            "9",
+            "10",
+            "6"
+          ],
+          "other_store_quantity": 7,
+          "out_of_stock": false,
+          "deliverable": true,
+          "is_valid": true
         },
-        "os": {
-          "name": "macOS",
-          "version": "11.2.0"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
+        "price": {
+          "base": {
+            "add_on": 4190,
+            "marked": 4190,
+            "effective": 4190,
+            "selling": 4190,
+            "currency_code": "INR"
+          },
+          "converted": {
+            "add_on": 4190,
+            "marked": 4190,
+            "effective": 4190,
+            "selling": 4190,
+            "currency_code": "INR"
+          }
         }
       }
+    ],
+    "cart_id": 13055,
+    "uid": "13055",
+    "breakup_values": {
+      "raw": {
+        "cod_charge": 0,
+        "convenience_fee": 0,
+        "coupon": 0,
+        "delivery_charge": 0,
+        "discount": 0,
+        "fynd_cash": 0,
+        "gst_charges": 958.73,
+        "mrp_total": 6285,
+        "subtotal": 6285,
+        "total": 6285,
+        "vog": 5326.27,
+        "you_saved": 0
+      },
+      "loyalty_points": {
+        "total": 0,
+        "applicable": 0,
+        "is_applied": false,
+        "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+      },
+      "coupon": {
+        "type": "cash",
+        "code": "",
+        "uid": null,
+        "value": 0,
+        "is_applied": false,
+        "message": "Sorry! Invalid coupon"
+      },
+      "display": [
+        {
+          "display": "MRP Total",
+          "key": "mrp_total",
+          "value": 6285,
+          "currency_code": "INR"
+        },
+        {
+          "display": "Subtotal",
+          "key": "subtotal",
+          "value": 6285,
+          "currency_code": "INR"
+        },
+        {
+          "display": "Total",
+          "key": "total",
+          "value": 6285,
+          "currency_code": "INR"
+        }
+      ]
     },
-    "created_by": "5f8147abbd1a0a870f61f1a6",
-    "createdAt": "2021-02-18T16:04:26.495Z",
-    "updatedAt": "2021-02-26T10:16:49.272Z",
-    "__v": 0
-  }
+    "delivery_charge_info": "",
+    "coupon_text": "View all offers",
+    "gstin": null,
+    "comment": "",
+    "checkout_mode": "self",
+    "payment_selection_lock": {
+      "enabled": false,
+      "default_options": "COD",
+      "payment_identifier": null
+    },
+    "restrict_checkout": false,
+    "is_valid": true,
+    "last_modified": "Mon, 16 Dec 2019 07:02:18 GMT"
+  },
+  "error": ""
 }
 ```
-</details>
-
 </details>
 
 
@@ -3575,14 +6329,14 @@ Success
 ---
 
 
-#### getTokenForVideoRoom
-Get Token to join a specific Video Room using it's unqiue name
+#### updateCartWithSharedItems
+Merge or replace existing cart
 
 
 
 
 ```kotlin
-client.lead.getTokenForVideoRoom(uniqueName: uniqueName).safeAwait{ response,error->
+poscart.updateCartWithSharedItems(token: token, action: action).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -3598,21 +6352,21 @@ client.lead.getTokenForVideoRoom(uniqueName: uniqueName).safeAwait{ response,err
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company Id for video room |   
-| uniqueName | String | yes | Unique name of video room |  
+| token | String | yes | Token of the shared short link |   
+| action | String | yes | Operation to perform on the existing cart merge or replace. |  
 
 
 
-Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
+Use this API to merge the shared cart with existing cart, or replace the existing cart with the shared cart. The `action` parameter is used to indicate the operation Merge or Replace.
 
 *Returned Response*
 
 
 
 
-[GetTokenForVideoRoomResponse](#GetTokenForVideoRoomResponse)
+[SharedCartResponse](#SharedCartResponse)
 
-Success
+Success. Returns a merged or replaced cart as per the valid token. Refer `SharedCartResponse` for more details.
 
 
 
@@ -3622,370 +6376,285 @@ Success
 
 
 <details>
-<summary><i>&nbsp; Default</i></summary>
+<summary><i>&nbsp; Cart Merged/Replaced</i></summary>
 
 ```json
 {
   "value": {
-    "access_token": "your_token_to_the_room"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### getTokenForVideoRoom
-Get Token to join a specific Video Room using it's unqiue name
-
-
-
-
-```kotlin
-client.application("<APPLICATION_ID>").lead.getTokenForVideoRoom(uniqueName: uniqueName).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID of the application |   
-| applicationId | String | yes | Application ID for video room |   
-| uniqueName | String | yes | Unique name of video room |  
-
-
-
-Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
-
-*Returned Response*
-
-
-
-
-[GetTokenForVideoRoomResponse](#GetTokenForVideoRoomResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "access_token": "your_token_to_the_room"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### getVideoParticipants
-Get participants of a specific Video Room using it's unique name
-
-
-
-
-```kotlin
-client.lead.getVideoParticipants(uniqueName: uniqueName).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company Id for video room |   
-| uniqueName | String | yes | Unique name of Video Room |  
-
-
-
-Get participants of a specific Video Room using it's unique name, this can be used to check if people are already there in the room and also to show their names.
-
-*Returned Response*
-
-
-
-
-[GetParticipantsInsideVideoRoomResponse](#GetParticipantsInsideVideoRoomResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "participants": []
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### getVideoParticipants
-Get participants of a specific Video Room using it's unique name
-
-
-
-
-```kotlin
-client.application("<APPLICATION_ID>").lead.getVideoParticipants(uniqueName: uniqueName).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID of the application |   
-| applicationId | String | yes | Application ID for video room |   
-| uniqueName | String | yes | Unique name of Video Room |  
-
-
-
-Get participants of a specific Video Room using it's unique name, this can be used to check if people are already there in the room and also to show their names.
-
-*Returned Response*
-
-
-
-
-[GetParticipantsInsideVideoRoomResponse](#GetParticipantsInsideVideoRoomResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "participants": []
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### openVideoRoom
-Open a video room.
-
-
-
-
-```kotlin
-client.application("<APPLICATION_ID>").lead.openVideoRoom(body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID of the application |   
-| applicationId | String | yes | Application ID for video room |  
-| body | [CreateVideoRoomPayload](#CreateVideoRoomPayload) | yes | Request body |
-
-
-Open a video room.
-
-*Returned Response*
-
-
-
-
-[CreateVideoRoomResponse](#CreateVideoRoomResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "unique_name": "alphanumeric123"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### closeVideoRoom
-Close the video room and force all participants to leave.
-
-
-
-
-```kotlin
-client.application("<APPLICATION_ID>").lead.closeVideoRoom(uniqueName: uniqueName).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID of the application |   
-| applicationId | String | yes | Application ID for video room |   
-| uniqueName | String | yes | Unique name of Video Room |  
-
-
-
-Close the video room and force all participants to leave.
-
-*Returned Response*
-
-
-
-
-[CloseVideoRoomResponse](#CloseVideoRoomResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "success": true
+    "cart": {
+      "shared_cart_details": {
+        "token": "BQ9jySQ9",
+        "user": {
+          "user_id": "23109086",
+          "is_anonymous": false
+        },
+        "meta": {
+          "selected_staff": "",
+          "ordering_store": null
+        },
+        "selected_staff": "",
+        "ordering_store": null,
+        "source": {},
+        "created_on": "2019-12-18T14:00:07.165000"
+      },
+      "items": [
+        {
+          "key": "791651_6",
+          "discount": "",
+          "bulk_offer": {},
+          "coupon_message": "",
+          "article": {
+            "type": "article",
+            "uid": "304_1054_9036_R1005753_6",
+            "size": "6",
+            "seller": {
+              "uid": 304,
+              "name": "LEAYAN GLOBAL PVT. LTD."
+            },
+            "store": {
+              "uid": 5322,
+              "name": "Vaisali Nagar"
+            },
+            "quantity": 1,
+            "price": {
+              "base": {
+                "marked": 2095,
+                "effective": 2095,
+                "currency_code": "INR"
+              },
+              "converted": {
+                "marked": 2095,
+                "effective": 2095,
+                "currency_code": "INR"
+              }
+            }
+          },
+          "product": {
+            "type": "product",
+            "uid": 791651,
+            "name": "Black Running Shoes",
+            "slug": "furo-black-running-shoes-791651-f8bcc3",
+            "brand": {
+              "uid": 1054,
+              "name": "Furo"
+            },
+            "categories": [
+              {
+                "uid": 160,
+                "name": "Running Shoes"
+              }
+            ],
+            "images": [
+              {
+                "aspect_ratio": "16:25",
+                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/1054_R1005753/1_1546490507364.jpg",
+                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/1054_R1005753/1_1546490507364.jpg"
+              }
+            ],
+            "action": {
+              "type": "product",
+              "url": "https://api.addsale.com/platform/content/v1/products/furo-black-running-shoes-791651-f8bcc3/",
+              "query": {
+                "product_slug": [
+                  "furo-black-running-shoes-791651-f8bcc3"
+                ]
+              }
+            }
+          },
+          "message": "",
+          "quantity": 1,
+          "availability": {
+            "sizes": [
+              "7",
+              "8",
+              "9",
+              "10",
+              "6"
+            ],
+            "other_store_quantity": 12,
+            "out_of_stock": false,
+            "deliverable": true,
+            "is_valid": true
+          },
+          "price": {
+            "base": {
+              "add_on": 2095,
+              "marked": 2095,
+              "effective": 2095,
+              "selling": 2095,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "add_on": 2095,
+              "marked": 2095,
+              "effective": 2095,
+              "selling": 2095,
+              "currency_code": "INR"
+            }
+          }
+        },
+        {
+          "key": "791651_7",
+          "discount": "",
+          "bulk_offer": {},
+          "coupon_message": "",
+          "article": {
+            "type": "article",
+            "uid": "304_1054_9036_R1005753_7",
+            "size": "7",
+            "seller": {
+              "uid": 304,
+              "name": "LEAYAN GLOBAL PVT. LTD."
+            },
+            "store": {
+              "uid": 5322,
+              "name": "Vaisali Nagar"
+            },
+            "quantity": 2,
+            "price": {
+              "base": {
+                "marked": 2095,
+                "effective": 2095,
+                "currency_code": "INR"
+              },
+              "converted": {
+                "marked": 2095,
+                "effective": 2095,
+                "currency_code": "INR"
+              }
+            }
+          },
+          "product": {
+            "type": "product",
+            "uid": 791651,
+            "name": "Black Running Shoes",
+            "slug": "furo-black-running-shoes-791651-f8bcc3",
+            "brand": {
+              "uid": 1054,
+              "name": "Furo"
+            },
+            "categories": [
+              {
+                "uid": 160,
+                "name": "Running Shoes"
+              }
+            ],
+            "images": [
+              {
+                "aspect_ratio": "16:25",
+                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/1054_R1005753/1_1546490507364.jpg",
+                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/1054_R1005753/1_1546490507364.jpg"
+              }
+            ],
+            "action": {
+              "type": "product",
+              "url": "https://api.addsale.com/platform/content/v1/products/furo-black-running-shoes-791651-f8bcc3/",
+              "query": {
+                "product_slug": [
+                  "furo-black-running-shoes-791651-f8bcc3"
+                ]
+              }
+            }
+          },
+          "message": "",
+          "quantity": 2,
+          "availability": {
+            "sizes": [
+              "7",
+              "8",
+              "9",
+              "10",
+              "6"
+            ],
+            "other_store_quantity": 7,
+            "out_of_stock": false,
+            "deliverable": true,
+            "is_valid": true
+          },
+          "price": {
+            "base": {
+              "add_on": 4190,
+              "marked": 4190,
+              "effective": 4190,
+              "selling": 4190,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "add_on": 4190,
+              "marked": 4190,
+              "effective": 4190,
+              "selling": 4190,
+              "currency_code": "INR"
+            }
+          }
+        }
+      ],
+      "cart_id": 13055,
+      "uid": "13055",
+      "breakup_values": {
+        "raw": {
+          "cod_charge": 0,
+          "convenience_fee": 0,
+          "coupon": 0,
+          "delivery_charge": 0,
+          "discount": 0,
+          "fynd_cash": 0,
+          "gst_charges": 958.73,
+          "mrp_total": 6285,
+          "subtotal": 6285,
+          "total": 6285,
+          "vog": 5326.27,
+          "you_saved": 0
+        },
+        "loyalty_points": {
+          "total": 0,
+          "applicable": 0,
+          "is_applied": false,
+          "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+        },
+        "coupon": {
+          "type": "cash",
+          "code": "",
+          "uid": null,
+          "value": 0,
+          "is_applied": false,
+          "message": "Sorry! Invalid coupon"
+        },
+        "display": [
+          {
+            "display": "MRP Total",
+            "key": "mrp_total",
+            "value": 6285,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Subtotal",
+            "key": "subtotal",
+            "value": 6285,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Total",
+            "key": "total",
+            "value": 6285,
+            "currency_code": "INR"
+          }
+        ]
+      },
+      "delivery_charge_info": "",
+      "coupon_text": "View all offers",
+      "gstin": null,
+      "comment": "",
+      "checkout_mode": "self",
+      "payment_selection_lock": {
+        "enabled": false,
+        "default_options": "COD",
+        "payment_identifier": null
+      },
+      "restrict_checkout": false,
+      "is_valid": true,
+      "last_modified": "Mon, 16 Dec 2019 07:02:18 GMT"
+    }
   }
 }
 ```
@@ -13097,15 +15766,67 @@ Success
 
  
  
+ #### [SearchKeywordResult](#SearchKeywordResult)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | query | HashMap<String,Any> |  no  |  |
+ | sortOn | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [CreateSearchKeyword](#CreateSearchKeyword)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | words | ArrayList<String>? |  yes  |  |
+ | appId | String? |  yes  |  |
+ | result | [SearchKeywordResult](#SearchKeywordResult) |  no  |  |
+ | isActive | Boolean? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [GetSearchWordsData](#GetSearchWordsData)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | String? |  yes  |  |
+ | words | ArrayList<String>? |  yes  |  |
  | appId | String? |  yes  |  |
  | result | HashMap<String,Any>? |  yes  |  |
- | words | ArrayList<String>? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | uid | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ErrorResponse](#ErrorResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | code | String? |  yes  |  |
+ | message | String? |  yes  |  |
+ | status | Int? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [DeleteResponse](#DeleteResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | message | String? |  yes  |  |
 
 ---
 
@@ -13124,58 +15845,6 @@ Success
 
  
  
- #### [ErrorResponse](#ErrorResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | message | String? |  yes  |  |
- | status | Int? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | code | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [SearchKeywordResult](#SearchKeywordResult)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | sortOn | String |  no  |  |
- | query | HashMap<String,Any> |  no  |  |
-
----
-
-
- 
- 
- #### [CreateSearchKeyword](#CreateSearchKeyword)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | appId | String? |  yes  |  |
- | result | [SearchKeywordResult](#SearchKeywordResult) |  no  |  |
- | words | ArrayList<String>? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
-
----
-
-
- 
- 
- #### [DeleteResponse](#DeleteResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | message | String? |  yes  |  |
-
----
-
-
- 
- 
  #### [GetSearchWordsResponse](#GetSearchWordsResponse)
 
  | Properties | Type | Nullable | Description |
@@ -13188,41 +15857,14 @@ Success
 
  
  
- #### [GetAutocompleteWordsData](#GetAutocompleteWordsData)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | uid | String? |  yes  |  |
- | appId | String? |  yes  |  |
- | results | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | words | ArrayList<String>? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
-
----
-
-
- 
- 
- #### [GetAutocompleteWordsResponse](#GetAutocompleteWordsResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<[GetAutocompleteWordsData](#GetAutocompleteWordsData)>? |  yes  |  |
- | page | [Page](#Page)? |  yes  |  |
-
----
-
-
- 
- 
  #### [AutocompletePageAction](#AutocompletePageAction)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | params | HashMap<String,Any>? |  yes  |  |
+ | query | HashMap<String,Any> |  no  |  |
  | type | String |  no  |  |
  | url | String? |  yes  |  |
- | query | HashMap<String,Any> |  no  |  |
+ | params | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -13257,10 +15899,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | customJson | HashMap<String,Any>? |  yes  |  |
  | action | [AutocompleteAction](#AutocompleteAction)? |  yes  |  |
- | logo | [Media](#Media)? |  yes  |  |
  | display | String? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+ | logo | [Media](#Media)? |  yes  |  |
 
 ---
 
@@ -13271,11 +15913,38 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | appId | String? |  yes  |  |
- | results | ArrayList<[AutocompleteResult](#AutocompleteResult)>? |  yes  |  |
  | words | ArrayList<String>? |  yes  |  |
+ | appId | String? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | results | ArrayList<[AutocompleteResult](#AutocompleteResult)>? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [GetAutocompleteWordsData](#GetAutocompleteWordsData)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | words | ArrayList<String>? |  yes  |  |
+ | appId | String? |  yes  |  |
+ | results | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+ | uid | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [GetAutocompleteWordsResponse](#GetAutocompleteWordsResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | items | ArrayList<[GetAutocompleteWordsData](#GetAutocompleteWordsData)>? |  yes  |  |
+ | page | [Page](#Page)? |  yes  |  |
 
 ---
 
@@ -13286,10 +15955,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | words | ArrayList<String>? |  yes  |  |
  | appId | String? |  yes  |  |
- | results | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | words | ArrayList<String>? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | results | ArrayList<HashMap<String,Any>>? |  yes  |  |
 
 ---
 
@@ -13300,12 +15969,12 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | maxQuantity | Int |  no  |  |
- | autoAddToCart | Boolean? |  yes  |  |
- | productUid | Int |  no  |  |
- | minQuantity | Int |  no  |  |
- | autoSelect | Boolean? |  yes  |  |
  | allowRemove | Boolean? |  yes  |  |
+ | maxQuantity | Int |  no  |  |
+ | autoSelect | Boolean? |  yes  |  |
+ | productUid | Int |  no  |  |
+ | autoAddToCart | Boolean? |  yes  |  |
+ | minQuantity | Int |  no  |  |
 
 ---
 
@@ -13316,21 +15985,21 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | choice | String |  no  |  |
+ | createdOn | String? |  yes  |  |
+ | companyId | Int? |  yes  |  |
+ | products | ArrayList<[ProductBundleItem](#ProductBundleItem)> |  no  |  |
  | isActive | Boolean |  no  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | pageVisibility | ArrayList<String>? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | id | String? |  yes  |  |
+ | logo | String? |  yes  |  |
  | modifiedOn | String? |  yes  |  |
  | sameStoreAssignment | Boolean? |  yes  |  |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | choice | String |  no  |  |
- | logo | String? |  yes  |  |
  | name | String |  no  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
  | slug | String |  no  |  |
- | createdOn | String? |  yes  |  |
- | products | ArrayList<[ProductBundleItem](#ProductBundleItem)> |  no  |  |
- | pageVisibility | ArrayList<String>? |  yes  |  |
- | companyId | Int? |  yes  |  |
- | id | String? |  yes  |  |
 
 ---
 
@@ -13353,19 +16022,62 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean |  no  |  |
- | modifiedOn | String? |  yes  |  |
- | sameStoreAssignment | Boolean? |  yes  |  |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
  | choice | String |  no  |  |
- | logo | String? |  yes  |  |
- | name | String |  no  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
- | slug | String |  no  |  |
  | createdOn | String? |  yes  |  |
  | products | ArrayList<[ProductBundleItem](#ProductBundleItem)> |  no  |  |
+ | isActive | Boolean |  no  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
  | pageVisibility | ArrayList<String>? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | sameStoreAssignment | Boolean? |  yes  |  |
+ | name | String |  no  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | slug | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ProductBundleUpdateRequest](#ProductBundleUpdateRequest)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | choice | String |  no  |  |
+ | products | ArrayList<[ProductBundleItem](#ProductBundleItem)> |  no  |  |
+ | isActive | Boolean |  no  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | pageVisibility | ArrayList<String>? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | sameStoreAssignment | Boolean? |  yes  |  |
+ | name | String |  no  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | slug | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [LimitedProductData](#LimitedProductData)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | identifier | HashMap<String,Any>? |  yes  |  |
+ | countryOfOrigin | String? |  yes  |  |
+ | itemCode | String? |  yes  |  |
+ | attributes | HashMap<String,Any>? |  yes  |  |
+ | price | HashMap<String,Any>? |  yes  |  |
+ | quantity | Int? |  yes  |  |
+ | sizes | ArrayList<String>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | shortDescription | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | images | ArrayList<String>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -13378,8 +16090,8 @@ Success
  | ---------- | ---- | -------- | ----------- |
  | isAvailable | Boolean? |  yes  |  |
  | quantity | Int? |  yes  |  |
- | value | String? |  yes  |  |
  | display | String? |  yes  |  |
+ | value | String? |  yes  |  |
 
 ---
 
@@ -13390,33 +16102,11 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | maxMarked | Double? |  yes  |  |
- | minMarked | Double? |  yes  |  |
- | currency | String? |  yes  |  |
- | minEffective | Double? |  yes  |  |
  | maxEffective | Double? |  yes  |  |
-
----
-
-
- 
- 
- #### [LimitedProductData](#LimitedProductData)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | quantity | Int? |  yes  |  |
- | name | String? |  yes  |  |
- | identifier | HashMap<String,Any>? |  yes  |  |
- | slug | String? |  yes  |  |
- | sizes | ArrayList<String>? |  yes  |  |
- | attributes | HashMap<String,Any>? |  yes  |  |
- | shortDescription | String? |  yes  |  |
- | images | ArrayList<String>? |  yes  |  |
- | price | HashMap<String,Any>? |  yes  |  |
- | itemCode | String? |  yes  |  |
- | countryOfOrigin | String? |  yes  |  |
+ | currency | String? |  yes  |  |
+ | maxMarked | Double? |  yes  |  |
+ | minEffective | Double? |  yes  |  |
+ | minMarked | Double? |  yes  |  |
 
 ---
 
@@ -13427,15 +16117,15 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | productDetails | [LimitedProductData](#LimitedProductData)? |  yes  |  |
+ | allowRemove | Boolean? |  yes  |  |
  | maxQuantity | Int? |  yes  |  |
+ | autoSelect | Boolean? |  yes  |  |
  | productUid | Int? |  yes  |  |
+ | sizes | ArrayList<[Size](#Size)>? |  yes  |  |
+ | price | [Price](#Price)? |  yes  |  |
  | autoAddToCart | Boolean? |  yes  |  |
  | minQuantity | Int? |  yes  |  |
- | autoSelect | Boolean? |  yes  |  |
- | sizes | ArrayList<[Size](#Size)>? |  yes  |  |
- | allowRemove | Boolean? |  yes  |  |
- | price | [Price](#Price)? |  yes  |  |
- | productDetails | [LimitedProductData](#LimitedProductData)? |  yes  |  |
 
 ---
 
@@ -13446,37 +16136,16 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | sameStoreAssignment | Boolean? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
  | choice | String? |  yes  |  |
- | logo | String? |  yes  |  |
- | name | String? |  yes  |  |
- | slug | String? |  yes  |  |
- | products | ArrayList<[GetProducts](#GetProducts)>? |  yes  |  |
- | pageVisibility | ArrayList<String>? |  yes  |  |
  | companyId | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [ProductBundleUpdateRequest](#ProductBundleUpdateRequest)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean |  no  |  |
- | modifiedOn | String? |  yes  |  |
- | sameStoreAssignment | Boolean? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | choice | String |  no  |  |
+ | products | ArrayList<[GetProducts](#GetProducts)>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
  | logo | String? |  yes  |  |
- | name | String |  no  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
- | slug | String |  no  |  |
- | products | ArrayList<[ProductBundleItem](#ProductBundleItem)> |  no  |  |
+ | sameStoreAssignment | Boolean? |  yes  |  |
+ | name | String? |  yes  |  |
  | pageVisibility | ArrayList<String>? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -13499,9 +16168,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | values | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | unit | String? |  yes  |  |
  | headers | HashMap<String,Any>? |  yes  |  |
+ | values | ArrayList<HashMap<String,Any>>? |  yes  |  |
 
 ---
 
@@ -13523,21 +16192,21 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
  | tag | String? |  yes  |  |
- | guide | [Guide](#Guide)? |  yes  |  |
- | name | String |  no  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
- | id | String? |  yes  |  |
- | image | String? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | subtitle | String? |  yes  |  |
- | brandId | Int? |  yes  |  |
- | active | Boolean? |  yes  |  |
  | companyId | Int? |  yes  |  |
  | title | String |  no  |  |
+ | guide | [Guide](#Guide)? |  yes  |  |
+ | image | String? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | brandId | Int? |  yes  |  |
  | description | String? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | subtitle | String? |  yes  |  |
+ | id | String? |  yes  |  |
+ | active | Boolean? |  yes  |  |
+ | name | String |  no  |  |
 
 ---
 
@@ -13548,8 +16217,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
  | success | Boolean? |  yes  |  |
+ | uid | Int? |  yes  |  |
 
 ---
 
@@ -13560,19 +16229,44 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | companyId | Int? |  yes  |  |
  | tag | String? |  yes  |  |
  | guide | HashMap<String,Any>? |  yes  |  |
- | name | String? |  yes  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | subtitle | String? |  yes  |  |
- | brandId | Int? |  yes  |  |
- | active | Boolean? |  yes  |  |
- | companyId | Int? |  yes  |  |
  | title | String? |  yes  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | brandId | Int? |  yes  |  |
+ | subtitle | String? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
  | id | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | active | Boolean? |  yes  |  |
+ | name | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [MetaDataListingFilterMetaResponse](#MetaDataListingFilterMetaResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | key | String? |  yes  |  |
+ | units | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | display | String? |  yes  |  |
+ | filterTypes | ArrayList<String>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [MetaDataListingFilterResponse](#MetaDataListingFilterResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | data | ArrayList<[MetaDataListingFilterMetaResponse](#MetaDataListingFilterMetaResponse)>? |  yes  |  |
 
 ---
 
@@ -13602,37 +16296,12 @@ Success
 
  
  
- #### [MetaDataListingFilterMetaResponse](#MetaDataListingFilterMetaResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | units | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | filterTypes | ArrayList<String>? |  yes  |  |
- | key | String? |  yes  |  |
- | display | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [MetaDataListingFilterResponse](#MetaDataListingFilterResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | data | ArrayList<[MetaDataListingFilterMetaResponse](#MetaDataListingFilterMetaResponse)>? |  yes  |  |
-
----
-
-
- 
- 
  #### [MetaDataListingResponse](#MetaDataListingResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | sort | [MetaDataListingSortResponse](#MetaDataListingSortResponse) |  no  |  |
  | filter | [MetaDataListingFilterResponse](#MetaDataListingFilterResponse) |  no  |  |
+ | sort | [MetaDataListingSortResponse](#MetaDataListingSortResponse) |  no  |  |
 
 ---
 
@@ -13644,9 +16313,9 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | detail | HashMap<String,Any>? |  yes  |  |
+ | variant | HashMap<String,Any>? |  yes  |  |
  | compare | HashMap<String,Any>? |  yes  |  |
  | similar | HashMap<String,Any>? |  yes  |  |
- | variant | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -13659,33 +16328,6 @@ Success
  | ---------- | ---- | -------- | ----------- |
  | listing | [MetaDataListingResponse](#MetaDataListingResponse)? |  yes  |  |
  | product | [GetCatalogConfigurationDetailsProduct](#GetCatalogConfigurationDetailsProduct)? |  yes  |  |
-
----
-
-
- 
- 
- #### [ConfigurationListingSortConfig](#ConfigurationListingSortConfig)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean |  no  |  |
- | priority | Int |  no  |  |
- | logo | String? |  yes  |  |
- | name | String? |  yes  |  |
- | key | String |  no  |  |
-
----
-
-
- 
- 
- #### [ConfigurationListingSort](#ConfigurationListingSort)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | defaultKey | String |  no  |  |
- | config | ArrayList<[ConfigurationListingSortConfig](#ConfigurationListingSortConfig)>? |  yes  |  |
 
 ---
 
@@ -13709,10 +16351,10 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | value | String? |  yes  |  |
- | sort | String? |  yes  |  |
+ | condition | String? |  yes  |  |
  | map | HashMap<String,Any>? |  yes  |  |
  | bucketPoints | ArrayList<[ConfigurationBucketPoints](#ConfigurationBucketPoints)>? |  yes  |  |
- | condition | String? |  yes  |  |
+ | sort | String? |  yes  |  |
 
 ---
 
@@ -13723,13 +16365,13 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean |  no  |  |
- | priority | Int |  no  |  |
- | logo | String? |  yes  |  |
- | name | String? |  yes  |  |
- | key | String |  no  |  |
  | type | String |  no  |  |
+ | priority | Int |  no  |  |
+ | isActive | Boolean |  no  |  |
  | valueConfig | [ConfigurationListingFilterValue](#ConfigurationListingFilterValue)? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | key | String |  no  |  |
+ | name | String? |  yes  |  |
 
 ---
 
@@ -13740,8 +16382,35 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | allowSingle | Boolean |  no  |  |
  | attributeConfig | ArrayList<[ConfigurationListingFilterConfig](#ConfigurationListingFilterConfig)>? |  yes  |  |
+ | allowSingle | Boolean |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ConfigurationListingSortConfig](#ConfigurationListingSortConfig)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | priority | Int |  no  |  |
+ | isActive | Boolean |  no  |  |
+ | logo | String? |  yes  |  |
+ | key | String |  no  |  |
+ | name | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ConfigurationListingSort](#ConfigurationListingSort)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | defaultKey | String |  no  |  |
+ | config | ArrayList<[ConfigurationListingSortConfig](#ConfigurationListingSortConfig)>? |  yes  |  |
 
 ---
 
@@ -13752,8 +16421,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | sort | [ConfigurationListingSort](#ConfigurationListingSort) |  no  |  |
  | filter | [ConfigurationListingFilter](#ConfigurationListingFilter) |  no  |  |
+ | sort | [ConfigurationListingSort](#ConfigurationListingSort) |  no  |  |
 
 ---
 
@@ -13764,36 +16433,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | max | Int |  no  |  |
  | min | Int |  no  |  |
-
----
-
-
- 
- 
- #### [ConfigurationProductConfig](#ConfigurationProductConfig)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean |  no  |  |
- | priority | Int |  no  |  |
- | logo | String? |  yes  |  |
- | size | [ProductSize](#ProductSize)? |  yes  |  |
- | key | String |  no  |  |
- | subtitle | String? |  yes  |  |
- | title | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [ConfigurationProductSimilar](#ConfigurationProductSimilar)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | config | ArrayList<[ConfigurationProductConfig](#ConfigurationProductConfig)>? |  yes  |  |
+ | max | Int |  no  |  |
 
 ---
 
@@ -13804,13 +16445,13 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean |  no  |  |
  | priority | Int |  no  |  |
- | logo | String? |  yes  |  |
- | name | String |  no  |  |
+ | isActive | Boolean |  no  |  |
  | size | [ProductSize](#ProductSize) |  no  |  |
+ | logo | String? |  yes  |  |
  | key | String |  no  |  |
  | displayType | String |  no  |  |
+ | name | String |  no  |  |
 
 ---
 
@@ -13828,12 +16469,40 @@ Success
 
  
  
+ #### [ConfigurationProductConfig](#ConfigurationProductConfig)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | title | String? |  yes  |  |
+ | priority | Int |  no  |  |
+ | isActive | Boolean |  no  |  |
+ | subtitle | String? |  yes  |  |
+ | size | [ProductSize](#ProductSize)? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | key | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ConfigurationProductSimilar](#ConfigurationProductSimilar)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | config | ArrayList<[ConfigurationProductConfig](#ConfigurationProductConfig)>? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [ConfigurationProduct](#ConfigurationProduct)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | similar | [ConfigurationProductSimilar](#ConfigurationProductSimilar) |  no  |  |
  | variant | [ConfigurationProductVariant](#ConfigurationProductVariant) |  no  |  |
+ | similar | [ConfigurationProductSimilar](#ConfigurationProductSimilar) |  no  |  |
 
 ---
 
@@ -13844,12 +16513,12 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | listing | [ConfigurationListing](#ConfigurationListing)? |  yes  |  |
- | appId | String |  no  |  |
- | product | [ConfigurationProduct](#ConfigurationProduct)? |  yes  |  |
- | configType | String |  no  |  |
- | id | String? |  yes  |  |
  | configId | String? |  yes  |  |
+ | configType | String |  no  |  |
+ | appId | String |  no  |  |
+ | listing | [ConfigurationListing](#ConfigurationListing)? |  yes  |  |
+ | product | [ConfigurationProduct](#ConfigurationProduct)? |  yes  |  |
+ | id | String? |  yes  |  |
 
 ---
 
@@ -13860,8 +16529,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | [AppCatalogConfiguration](#AppCatalogConfiguration)? |  yes  |  |
  | isDefault | Boolean? |  yes  |  |
+ | data | [AppCatalogConfiguration](#AppCatalogConfiguration)? |  yes  |  |
 
 ---
 
@@ -13872,11 +16541,11 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | listing | [ConfigurationListing](#ConfigurationListing)? |  yes  |  |
- | appId | String |  no  |  |
- | product | [ConfigurationProduct](#ConfigurationProduct)? |  yes  |  |
- | configType | String |  no  |  |
  | configId | String? |  yes  |  |
+ | configType | String |  no  |  |
+ | appId | String |  no  |  |
+ | listing | [ConfigurationListing](#ConfigurationListing)? |  yes  |  |
+ | product | [ConfigurationProduct](#ConfigurationProduct)? |  yes  |  |
 
 ---
 
@@ -13887,8 +16556,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | sort | HashMap<String,Any>? |  yes  |  |
  | filter | HashMap<String,Any>? |  yes  |  |
+ | sort | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -13899,12 +16568,12 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | listing | [GetCatalogConfigurationDetailsSchemaListing](#GetCatalogConfigurationDetailsSchemaListing)? |  yes  |  |
- | appId | String |  no  |  |
- | product | [GetCatalogConfigurationDetailsProduct](#GetCatalogConfigurationDetailsProduct)? |  yes  |  |
- | configType | String |  no  |  |
- | id | String? |  yes  |  |
  | configId | String? |  yes  |  |
+ | configType | String |  no  |  |
+ | appId | String |  no  |  |
+ | listing | [GetCatalogConfigurationDetailsSchemaListing](#GetCatalogConfigurationDetailsSchemaListing)? |  yes  |  |
+ | product | [GetCatalogConfigurationDetailsProduct](#GetCatalogConfigurationDetailsProduct)? |  yes  |  |
+ | id | String? |  yes  |  |
 
 ---
 
@@ -13915,43 +16584,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | [EntityConfiguration](#EntityConfiguration)? |  yes  |  |
  | isDefault | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [ProductSortOn](#ProductSortOn)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | value | String? |  yes  |  |
- | isSelected | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [ProductFiltersValue](#ProductFiltersValue)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | value | String |  no  |  |
- | displayFormat | String? |  yes  |  |
- | count | Int? |  yes  |  |
- | currencyCode | String? |  yes  |  |
- | isSelected | Boolean |  no  |  |
- | min | Int? |  yes  |  |
- | queryFormat | String? |  yes  |  |
- | max | Int? |  yes  |  |
- | currencySymbol | String? |  yes  |  |
- | selectedMin | Int? |  yes  |  |
- | selectedMax | Int? |  yes  |  |
- | display | String |  no  |  |
+ | data | [EntityConfiguration](#EntityConfiguration)? |  yes  |  |
 
 ---
 
@@ -13963,9 +16597,31 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | kind | String? |  yes  |  |
+ | display | String |  no  |  |
  | name | String |  no  |  |
  | logo | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ProductFiltersValue](#ProductFiltersValue)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | displayFormat | String? |  yes  |  |
+ | max | Int? |  yes  |  |
+ | value | String |  no  |  |
+ | currencyCode | String? |  yes  |  |
+ | currencySymbol | String? |  yes  |  |
+ | min | Int? |  yes  |  |
+ | queryFormat | String? |  yes  |  |
  | display | String |  no  |  |
+ | isSelected | Boolean |  no  |  |
+ | selectedMin | Int? |  yes  |  |
+ | selectedMax | Int? |  yes  |  |
+ | count | Int? |  yes  |  |
 
 ---
 
@@ -13976,8 +16632,21 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | values | ArrayList<[ProductFiltersValue](#ProductFiltersValue)> |  no  |  |
  | key | [ProductFiltersKey](#ProductFiltersKey) |  no  |  |
+ | values | ArrayList<[ProductFiltersValue](#ProductFiltersValue)> |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ProductSortOn](#ProductSortOn)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | isSelected | Boolean? |  yes  |  |
+ | name | String? |  yes  |  |
+ | value | String? |  yes  |  |
 
 ---
 
@@ -13988,8 +16657,59 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | sortOn | ArrayList<[ProductSortOn](#ProductSortOn)>? |  yes  |  |
  | filters | ArrayList<[ProductFilters](#ProductFilters)>? |  yes  |  |
+ | sortOn | ArrayList<[ProductSortOn](#ProductSortOn)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CollectionListingFilterTag](#CollectionListingFilterTag)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | display | String? |  yes  |  |
+ | name | String? |  yes  |  |
+ | isSelected | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CollectionListingFilterType](#CollectionListingFilterType)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | display | String? |  yes  |  |
+ | name | String? |  yes  |  |
+ | isSelected | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CollectionListingFilter](#CollectionListingFilter)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | tags | ArrayList<[CollectionListingFilterTag](#CollectionListingFilterTag)>? |  yes  |  |
+ | type | ArrayList<[CollectionListingFilterType](#CollectionListingFilterType)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Media1](#Media1)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | type | String? |  yes  |  |
+ | url | String |  no  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -14000,8 +16720,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | type | String? |  yes  |  |
  | query | HashMap<String,Any>? |  yes  |  |
+ | type | String? |  yes  |  |
 
 ---
 
@@ -14024,8 +16744,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | url | String? |  yes  |  |
  | aspectRatio | String? |  yes  |  |
+ | url | String? |  yes  |  |
 
 ---
 
@@ -14044,80 +16764,29 @@ Success
 
  
  
- #### [Media1](#Media1)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | type | String? |  yes  |  |
- | url | String |  no  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
-
----
-
-
- 
- 
  #### [GetCollectionDetailNest](#GetCollectionDetailNest)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | cron | HashMap<String,Any>? |  yes  |  |
- | allowSort | Boolean? |  yes  |  |
+ | tag | ArrayList<String>? |  yes  |  |
+ | logo | [Media1](#Media1)? |  yes  |  |
  | allowFacets | Boolean? |  yes  |  |
- | name | String? |  yes  |  |
- | description | String? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | slug | String? |  yes  |  |
  | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | appId | String? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | badge | HashMap<String,Any>? |  yes  |  |
- | query | HashMap<String,Any>? |  yes  |  |
- | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
  | uid | String? |  yes  |  |
- | logo | [Media1](#Media1)? |  yes  |  |
- | tag | ArrayList<String>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
+ | badge | HashMap<String,Any>? |  yes  |  |
+ | description | String? |  yes  |  |
+ | cron | HashMap<String,Any>? |  yes  |  |
  | schedule | HashMap<String,Any>? |  yes  |  |
- | slug | String? |  yes  |  |
- | type | String? |  yes  |  |
+ | query | HashMap<String,Any>? |  yes  |  |
+ | allowSort | Boolean? |  yes  |  |
  | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
-
----
-
-
- 
- 
- #### [CollectionListingFilterType](#CollectionListingFilterType)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | display | String? |  yes  |  |
- | name | String? |  yes  |  |
- | isSelected | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [CollectionListingFilterTag](#CollectionListingFilterTag)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | display | String? |  yes  |  |
- | name | String? |  yes  |  |
- | isSelected | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [CollectionListingFilter](#CollectionListingFilter)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | type | ArrayList<[CollectionListingFilterType](#CollectionListingFilterType)>? |  yes  |  |
- | tags | ArrayList<[CollectionListingFilterTag](#CollectionListingFilterTag)>? |  yes  |  |
+ | type | String? |  yes  |  |
 
 ---
 
@@ -14128,21 +16797,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | filters | [CollectionListingFilter](#CollectionListingFilter)? |  yes  |  |
  | items | ArrayList<[GetCollectionDetailNest](#GetCollectionDetailNest)>? |  yes  |  |
  | page | [Page](#Page)? |  yes  |  |
- | filters | [CollectionListingFilter](#CollectionListingFilter)? |  yes  |  |
-
----
-
-
- 
- 
- #### [SeoDetail](#SeoDetail)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | title | String? |  yes  |  |
- | description | String? |  yes  |  |
 
 ---
 
@@ -14153,22 +16810,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | String? |  yes  |  |
  | userId | String? |  yes  |  |
  | username | String? |  yes  |  |
+ | uid | String? |  yes  |  |
  | email | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [CollectionBadge](#CollectionBadge)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | text | String? |  yes  |  |
- | color | String? |  yes  |  |
 
 ---
 
@@ -14179,8 +16824,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | url | String |  no  |  |
  | aspectRatio | String |  no  |  |
+ | url | String |  no  |  |
 
 ---
 
@@ -14199,14 +16844,38 @@ Success
 
  
  
+ #### [CollectionBadge](#CollectionBadge)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | text | String? |  yes  |  |
+ | color | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [SeoDetail](#SeoDetail)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | description | String? |  yes  |  |
+ | title | String? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [Schedule](#Schedule)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | duration | Int? |  yes  |  |
- | start | String? |  yes  |  |
  | end | String? |  yes  |  |
+ | duration | Int? |  yes  |  |
  | cron | String? |  yes  |  |
+ | start | String? |  yes  |  |
 
 ---
 
@@ -14217,28 +16886,28 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | seo | [SeoDetail](#SeoDetail)? |  yes  |  |
- | allowSort | Boolean? |  yes  |  |
+ | tags | ArrayList<String>? |  yes  |  |
  | createdBy | [UserInfo](#UserInfo)? |  yes  |  |
+ | logo | [CollectionImage](#CollectionImage) |  no  |  |
  | sortOn | String? |  yes  |  |
  | allowFacets | Boolean? |  yes  |  |
- | name | String |  no  |  |
- | description | String? |  yes  |  |
- | appId | String |  no  |  |
- | badge | [CollectionBadge](#CollectionBadge)? |  yes  |  |
- | published | Boolean? |  yes  |  |
  | meta | HashMap<String,Any>? |  yes  |  |
- | localeLanguage | HashMap<String,Any>? |  yes  |  |
- | modifiedBy | [UserInfo](#UserInfo)? |  yes  |  |
- | query | HashMap<String,Any>? |  yes  |  |
- | banners | [CollectionBanner](#CollectionBanner) |  no  |  |
- | logo | [CollectionImage](#CollectionImage) |  no  |  |
- | schedule | [Schedule](#Schedule)? |  yes  |  |
  | slug | String |  no  |  |
- | type | String |  no  |  |
- | tags | ArrayList<String>? |  yes  |  |
+ | appId | String |  no  |  |
+ | isActive | Boolean? |  yes  |  |
+ | name | String |  no  |  |
+ | localeLanguage | HashMap<String,Any>? |  yes  |  |
+ | banners | [CollectionBanner](#CollectionBanner) |  no  |  |
+ | badge | [CollectionBadge](#CollectionBadge)? |  yes  |  |
+ | modifiedBy | [UserInfo](#UserInfo)? |  yes  |  |
+ | description | String? |  yes  |  |
+ | seo | [SeoDetail](#SeoDetail)? |  yes  |  |
+ | schedule | [Schedule](#Schedule)? |  yes  |  |
+ | query | HashMap<String,Any>? |  yes  |  |
+ | allowSort | Boolean? |  yes  |  |
  | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
+ | published | Boolean? |  yes  |  |
+ | type | String |  no  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
 
 ---
@@ -14250,23 +16919,23 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | appId | String? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | logo | [BannerImage](#BannerImage)? |  yes  |  |
- | tag | ArrayList<String>? |  yes  |  |
- | allowFacets | Boolean? |  yes  |  |
- | badge | HashMap<String,Any>? |  yes  |  |
- | name | String? |  yes  |  |
- | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
  | schedule | HashMap<String,Any>? |  yes  |  |
- | query | HashMap<String,Any>? |  yes  |  |
- | slug | String? |  yes  |  |
- | cron | HashMap<String,Any>? |  yes  |  |
- | type | String? |  yes  |  |
+ | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
+ | tag | ArrayList<String>? |  yes  |  |
  | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
+ | appId | String? |  yes  |  |
+ | type | String? |  yes  |  |
+ | badge | HashMap<String,Any>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | allowFacets | Boolean? |  yes  |  |
  | description | String? |  yes  |  |
+ | cron | HashMap<String,Any>? |  yes  |  |
+ | logo | [BannerImage](#BannerImage)? |  yes  |  |
+ | query | HashMap<String,Any>? |  yes  |  |
  | allowSort | Boolean? |  yes  |  |
+ | name | String? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -14277,23 +16946,23 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | appId | String? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | logo | [Media1](#Media1)? |  yes  |  |
- | tag | ArrayList<String>? |  yes  |  |
- | allowFacets | Boolean? |  yes  |  |
- | badge | HashMap<String,Any>? |  yes  |  |
- | name | String? |  yes  |  |
- | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
  | schedule | HashMap<String,Any>? |  yes  |  |
- | query | HashMap<String,Any>? |  yes  |  |
- | slug | String? |  yes  |  |
- | cron | HashMap<String,Any>? |  yes  |  |
- | type | String? |  yes  |  |
+ | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
+ | tag | ArrayList<String>? |  yes  |  |
  | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
+ | appId | String? |  yes  |  |
+ | type | String? |  yes  |  |
+ | badge | HashMap<String,Any>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | allowFacets | Boolean? |  yes  |  |
  | description | String? |  yes  |  |
+ | cron | HashMap<String,Any>? |  yes  |  |
+ | logo | [Media1](#Media1)? |  yes  |  |
+ | query | HashMap<String,Any>? |  yes  |  |
  | allowSort | Boolean? |  yes  |  |
+ | name | String? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -14304,40 +16973,26 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | seo | [SeoDetail](#SeoDetail)? |  yes  |  |
- | allowSort | Boolean? |  yes  |  |
+ | tags | ArrayList<String>? |  yes  |  |
+ | logo | [CollectionImage](#CollectionImage)? |  yes  |  |
  | sortOn | String? |  yes  |  |
  | allowFacets | Boolean? |  yes  |  |
- | name | String? |  yes  |  |
- | description | String? |  yes  |  |
- | badge | [CollectionBadge](#CollectionBadge)? |  yes  |  |
- | published | Boolean? |  yes  |  |
  | meta | HashMap<String,Any>? |  yes  |  |
- | localeLanguage | HashMap<String,Any>? |  yes  |  |
- | modifiedBy | [UserInfo](#UserInfo)? |  yes  |  |
- | query | HashMap<String,Any>? |  yes  |  |
- | banners | [CollectionBanner](#CollectionBanner)? |  yes  |  |
- | logo | [CollectionImage](#CollectionImage)? |  yes  |  |
- | schedule | [Schedule](#Schedule)? |  yes  |  |
  | slug | String? |  yes  |  |
- | tags | ArrayList<String>? |  yes  |  |
- | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
-
----
-
-
- 
- 
- #### [ProductBrand](#ProductBrand)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
  | name | String? |  yes  |  |
- | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
- | logo | [Media1](#Media1)? |  yes  |  |
+ | localeLanguage | HashMap<String,Any>? |  yes  |  |
+ | banners | [CollectionBanner](#CollectionBanner)? |  yes  |  |
+ | badge | [CollectionBadge](#CollectionBadge)? |  yes  |  |
+ | modifiedBy | [UserInfo](#UserInfo)? |  yes  |  |
+ | description | String? |  yes  |  |
+ | seo | [SeoDetail](#SeoDetail)? |  yes  |  |
+ | query | HashMap<String,Any>? |  yes  |  |
+ | schedule | [Schedule](#Schedule)? |  yes  |  |
+ | allowSort | Boolean? |  yes  |  |
+ | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
+ | published | Boolean? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -14348,10 +17003,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | currencyCode | String? |  yes  |  |
- | max | Double? |  yes  |  |
- | currencySymbol | String? |  yes  |  |
  | min | Double? |  yes  |  |
+ | currencyCode | String? |  yes  |  |
+ | currencySymbol | String? |  yes  |  |
+ | max | Double? |  yes  |  |
 
 ---
 
@@ -14374,9 +17029,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | key | String? |  yes  |  |
  | type | String? |  yes  |  |
  | value | String? |  yes  |  |
- | key | String? |  yes  |  |
 
 ---
 
@@ -14387,8 +17042,22 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | title | String? |  yes  |  |
  | details | ArrayList<[ProductDetailAttribute](#ProductDetailAttribute)>? |  yes  |  |
+ | title | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ProductBrand](#ProductBrand)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | name | String? |  yes  |  |
+ | logo | [Media1](#Media1)? |  yes  |  |
 
 ---
 
@@ -14399,32 +17068,32 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | hasVariant | Boolean? |  yes  |  |
- | brand | [ProductBrand](#ProductBrand)? |  yes  |  |
  | itemCode | String? |  yes  |  |
- | imageNature | String? |  yes  |  |
- | promoMeta | HashMap<String,Any>? |  yes  |  |
- | name | String? |  yes  |  |
- | color | String? |  yes  |  |
- | price | [ProductListingPrice](#ProductListingPrice)? |  yes  |  |
- | description | String? |  yes  |  |
- | ratingCount | Int? |  yes  |  |
- | shortDescription | String? |  yes  |  |
- | highlights | ArrayList<String>? |  yes  |  |
- | similars | ArrayList<String>? |  yes  |  |
- | groupedAttributes | ArrayList<[ProductDetailGroupedAttribute](#ProductDetailGroupedAttribute)>? |  yes  |  |
- | teaserTag | HashMap<String,Any>? |  yes  |  |
- | uid | Int? |  yes  |  |
- | sellable | Boolean? |  yes  |  |
- | tryouts | ArrayList<String>? |  yes  |  |
- | slug | String |  no  |  |
- | discount | String? |  yes  |  |
- | type | String? |  yes  |  |
- | attributes | HashMap<String,Any>? |  yes  |  |
+ | itemType | String? |  yes  |  |
  | rating | Double? |  yes  |  |
  | productOnlineDate | String? |  yes  |  |
- | itemType | String? |  yes  |  |
+ | slug | String |  no  |  |
+ | discount | String? |  yes  |  |
+ | attributes | HashMap<String,Any>? |  yes  |  |
+ | price | [ProductListingPrice](#ProductListingPrice)? |  yes  |  |
+ | tryouts | ArrayList<String>? |  yes  |  |
  | medias | ArrayList<[Media1](#Media1)>? |  yes  |  |
+ | shortDescription | String? |  yes  |  |
+ | hasVariant | Boolean? |  yes  |  |
+ | groupedAttributes | ArrayList<[ProductDetailGroupedAttribute](#ProductDetailGroupedAttribute)>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | similars | ArrayList<String>? |  yes  |  |
+ | teaserTag | HashMap<String,Any>? |  yes  |  |
+ | promoMeta | HashMap<String,Any>? |  yes  |  |
+ | highlights | ArrayList<String>? |  yes  |  |
+ | sellable | Boolean? |  yes  |  |
+ | description | String? |  yes  |  |
+ | imageNature | String? |  yes  |  |
+ | ratingCount | Int? |  yes  |  |
+ | brand | [ProductBrand](#ProductBrand)? |  yes  |  |
+ | type | String? |  yes  |  |
+ | color | String? |  yes  |  |
 
 ---
 
@@ -14435,10 +17104,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | filters | ArrayList<[ProductFilters](#ProductFilters)>? |  yes  |  |
  | sortOn | ArrayList<[ProductSortOn](#ProductSortOn)>? |  yes  |  |
  | items | ArrayList<[ProductListingDetail](#ProductListingDetail)>? |  yes  |  |
  | page | [Page](#Page)? |  yes  |  |
- | filters | ArrayList<[ProductFilters](#ProductFilters)>? |  yes  |  |
 
 ---
 
@@ -14449,8 +17118,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | pageSize | Int |  no  |  |
  | pageNo | Int |  no  |  |
+ | pageSize | Int |  no  |  |
 
 ---
 
@@ -14468,29 +17137,29 @@ Success
 
  
  
- #### [CatalogInsightBrand](#CatalogInsightBrand)
+ #### [CatalogInsightItem](#CatalogInsightItem)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | availableArticles | Int? |  yes  |  |
- | availableSizes | Int? |  yes  |  |
- | name | String? |  yes  |  |
- | articleFreshness | Int? |  yes  |  |
- | totalArticles | Int? |  yes  |  |
- | totalSizes | Int? |  yes  |  |
+ | outOfStockCount | Int? |  yes  |  |
+ | count | Int? |  yes  |  |
+ | sellableCount | Int? |  yes  |  |
 
 ---
 
 
  
  
- #### [CatalogInsightItem](#CatalogInsightItem)
+ #### [CatalogInsightBrand](#CatalogInsightBrand)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | count | Int? |  yes  |  |
- | sellableCount | Int? |  yes  |  |
- | outOfStockCount | Int? |  yes  |  |
+ | totalArticles | Int? |  yes  |  |
+ | availableArticles | Int? |  yes  |  |
+ | totalSizes | Int? |  yes  |  |
+ | availableSizes | Int? |  yes  |  |
+ | name | String? |  yes  |  |
+ | articleFreshness | Int? |  yes  |  |
 
 ---
 
@@ -14501,8 +17170,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | brandDistribution | [CatalogInsightBrand](#CatalogInsightBrand)? |  yes  |  |
  | item | [CatalogInsightItem](#CatalogInsightItem)? |  yes  |  |
+ | brandDistribution | [CatalogInsightBrand](#CatalogInsightBrand)? |  yes  |  |
 
 ---
 
@@ -14525,8 +17194,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | brandDistribution | [CatalogInsightBrand](#CatalogInsightBrand)? |  yes  |  |
  | data | [CrossSellingData](#CrossSellingData)? |  yes  |  |
+ | brandDistribution | [CatalogInsightBrand](#CatalogInsightBrand)? |  yes  |  |
 
 ---
 
@@ -14538,9 +17207,9 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | enabled | Boolean? |  yes  |  |
+ | brandIds | ArrayList<Int>? |  yes  |  |
  | optLevel | String |  no  |  |
  | storeIds | ArrayList<Int>? |  yes  |  |
- | brandIds | ArrayList<Int>? |  yes  |  |
 
 ---
 
@@ -14551,16 +17220,16 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | modifiedOn | Int |  no  |  |
+ | platform | String |  no  |  |
+ | createdOn | Int |  no  |  |
+ | companyId | Int |  no  |  |
+ | enabled | Boolean |  no  |  |
  | optLevel | String |  no  |  |
  | modifiedBy | HashMap<String,Any>? |  yes  |  |
  | brandIds | ArrayList<Int> |  no  |  |
- | createdOn | Int |  no  |  |
- | enabled | Boolean |  no  |  |
- | companyId | Int |  no  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | modifiedOn | Int |  no  |  |
  | storeIds | ArrayList<Int> |  no  |  |
- | platform | String |  no  |  |
 
 ---
 
@@ -14583,10 +17252,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
+ | businessType | String? |  yes  |  |
  | companyType | String? |  yes  |  |
  | name | String? |  yes  |  |
- | businessType | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
 
 ---
 
@@ -14598,8 +17267,8 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | brandName | String? |  yes  |  |
- | totalArticle | Int? |  yes  |  |
  | brandId | Int? |  yes  |  |
+ | totalArticle | Int? |  yes  |  |
  | companyId | Int? |  yes  |  |
 
 ---
@@ -14623,9 +17292,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | brand | Int? |  yes  |  |
  | store | Int? |  yes  |  |
  | company | String? |  yes  |  |
+ | brand | Int? |  yes  |  |
 
 ---
 
@@ -14636,17 +17305,17 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | name | String? |  yes  |  |
- | storeCode | String? |  yes  |  |
  | createdOn | String? |  yes  |  |
  | documents | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | additionalContacts | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | storeType | String? |  yes  |  |
- | timing | HashMap<String,Any>? |  yes  |  |
  | companyId | Int? |  yes  |  |
+ | additionalContacts | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | timing | HashMap<String,Any>? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
  | displayName | String? |  yes  |  |
+ | name | String? |  yes  |  |
+ | storeCode | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
 
 ---
 
@@ -14659,6 +17328,58 @@ Success
  | ---------- | ---- | -------- | ----------- |
  | items | ArrayList<[StoreDetail](#StoreDetail)>? |  yes  |  |
  | page | [Page](#Page)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [AttributeMasterFilter](#AttributeMasterFilter)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | indexing | Boolean |  no  |  |
+ | dependsOn | ArrayList<String>? |  yes  |  |
+ | priority | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [AttributeSchemaRange](#AttributeSchemaRange)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | min | Int? |  yes  |  |
+ | max | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [AttributeMaster](#AttributeMaster)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | allowedValues | ArrayList<String>? |  yes  |  |
+ | format | String? |  yes  |  |
+ | type | String |  no  |  |
+ | range | [AttributeSchemaRange](#AttributeSchemaRange)? |  yes  |  |
+ | mandatory | Boolean? |  yes  |  |
+ | multi | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [AttributeMasterDetails](#AttributeMasterDetails)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | displayType | String |  no  |  |
 
 ---
 
@@ -14680,60 +17401,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | enriched | Boolean? |  yes  |  |
  | mandatoryDetails | [AttributeMasterMandatoryDetails](#AttributeMasterMandatoryDetails) |  no  |  |
-
----
-
-
- 
- 
- #### [AttributeMasterFilter](#AttributeMasterFilter)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | priority | Int? |  yes  |  |
- | indexing | Boolean |  no  |  |
- | dependsOn | ArrayList<String>? |  yes  |  |
-
----
-
-
- 
- 
- #### [AttributeMasterDetails](#AttributeMasterDetails)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | displayType | String |  no  |  |
-
----
-
-
- 
- 
- #### [AttributeSchemaRange](#AttributeSchemaRange)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | max | Int? |  yes  |  |
- | min | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [AttributeMaster](#AttributeMaster)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | range | [AttributeSchemaRange](#AttributeSchemaRange)? |  yes  |  |
- | multi | Boolean? |  yes  |  |
- | mandatory | Boolean? |  yes  |  |
- | type | String |  no  |  |
- | format | String? |  yes  |  |
- | allowedValues | ArrayList<String>? |  yes  |  |
+ | enriched | Boolean? |  yes  |  |
 
 ---
 
@@ -14744,18 +17413,18 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | meta | [AttributeMasterMeta](#AttributeMasterMeta)? |  yes  |  |
- | logo | String? |  yes  |  |
- | enabledForEndConsumer | Boolean? |  yes  |  |
  | filters | [AttributeMasterFilter](#AttributeMasterFilter)? |  yes  |  |
- | name | String? |  yes  |  |
- | id | String? |  yes  |  |
- | slug | String? |  yes  |  |
- | details | [AttributeMasterDetails](#AttributeMasterDetails)? |  yes  |  |
- | departments | ArrayList<String>? |  yes  |  |
- | schema | [AttributeMaster](#AttributeMaster)? |  yes  |  |
  | isNested | Boolean? |  yes  |  |
+ | enabledForEndConsumer | Boolean? |  yes  |  |
+ | schema | [AttributeMaster](#AttributeMaster)? |  yes  |  |
+ | details | [AttributeMasterDetails](#AttributeMasterDetails)? |  yes  |  |
  | description | String? |  yes  |  |
+ | id | String? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | departments | ArrayList<String>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | meta | [AttributeMasterMeta](#AttributeMasterMeta)? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -14778,11 +17447,11 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | meta | HashMap<String,Any>? |  yes  |  |
  | code | String? |  yes  |  |
- | message | String? |  yes  |  |
  | errors | HashMap<String,Any>? |  yes  |  |
+ | message | String? |  yes  |  |
  | status | Int? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -14793,9 +17462,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | username | String? |  yes  |  |
  | userId | String? |  yes  |  |
  | contact | String? |  yes  |  |
+ | username | String? |  yes  |  |
 
 ---
 
@@ -14806,21 +17475,21 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | isActive | Boolean? |  yes  |  |
- | createdBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | logo | String? |  yes  |  |
- | search | String? |  yes  |  |
- | name | String? |  yes  |  |
- | priorityOrder | Int? |  yes  |  |
- | modifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | slug | String? |  yes  |  |
- | synonyms | ArrayList<String>? |  yes  |  |
  | createdOn | String? |  yes  |  |
- | pageSize | Int? |  yes  |  |
  | itemType | String? |  yes  |  |
  | pageNo | Int? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | modifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
+ | priorityOrder | Int? |  yes  |  |
+ | createdBy | [UserSerializer](#UserSerializer)? |  yes  |  |
+ | pageSize | Int? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | search | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | name | String? |  yes  |  |
+ | synonyms | ArrayList<String>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -14843,11 +17512,11 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | meta | HashMap<String,Any>? |  yes  |  |
  | code | String? |  yes  |  |
- | message | String? |  yes  |  |
  | errors | HashMap<String,Any>? |  yes  |  |
+ | message | String? |  yes  |  |
  | status | Int? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -14858,21 +17527,21 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | categories | ArrayList<String>? |  yes  |  |
  | tag | String? |  yes  |  |
- | logo | String? |  yes  |  |
- | name | String? |  yes  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
- | slug | String |  no  |  |
- | isPhysical | Boolean |  no  |  |
- | createdOn | String? |  yes  |  |
- | departments | ArrayList<String>? |  yes  |  |
- | attributes | ArrayList<String>? |  yes  |  |
- | description | String? |  yes  |  |
  | isArchived | Boolean? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | attributes | ArrayList<String>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | isPhysical | Boolean |  no  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | description | String? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | departments | ArrayList<String>? |  yes  |  |
+ | categories | ArrayList<String>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | slug | String |  no  |  |
 
 ---
 
@@ -14895,36 +17564,36 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | HashMap<String,Any>? |  yes  |  |
- | productGroupTag | HashMap<String,Any>? |  yes  |  |
- | isDependent | HashMap<String,Any>? |  yes  |  |
- | moq | HashMap<String,Any>? |  yes  |  |
- | customOrder | HashMap<String,Any>? |  yes  |  |
- | itemCode | HashMap<String,Any>? |  yes  |  |
- | sizeGuide | HashMap<String,Any>? |  yes  |  |
- | variants | HashMap<String,Any>? |  yes  |  |
- | media | HashMap<String,Any>? |  yes  |  |
- | name | HashMap<String,Any>? |  yes  |  |
- | returnConfig | HashMap<String,Any>? |  yes  |  |
- | currency | HashMap<String,Any>? |  yes  |  |
- | productPublish | HashMap<String,Any>? |  yes  |  |
- | description | HashMap<String,Any>? |  yes  |  |
- | command | HashMap<String,Any>? |  yes  |  |
- | countryOfOrigin | HashMap<String,Any>? |  yes  |  |
- | trader | HashMap<String,Any>? |  yes  |  |
- | categorySlug | HashMap<String,Any>? |  yes  |  |
- | hsnCode | HashMap<String,Any>? |  yes  |  |
- | sizes | HashMap<String,Any>? |  yes  |  |
- | shortDescription | HashMap<String,Any>? |  yes  |  |
- | highlights | HashMap<String,Any>? |  yes  |  |
- | teaserTag | HashMap<String,Any>? |  yes  |  |
- | brandUid | HashMap<String,Any>? |  yes  |  |
- | traderType | HashMap<String,Any>? |  yes  |  |
- | slug | HashMap<String,Any>? |  yes  |  |
  | tags | HashMap<String,Any>? |  yes  |  |
- | multiSize | HashMap<String,Any>? |  yes  |  |
+ | itemCode | HashMap<String,Any>? |  yes  |  |
  | itemType | HashMap<String,Any>? |  yes  |  |
+ | customOrder | HashMap<String,Any>? |  yes  |  |
+ | multiSize | HashMap<String,Any>? |  yes  |  |
+ | slug | HashMap<String,Any>? |  yes  |  |
+ | productPublish | HashMap<String,Any>? |  yes  |  |
+ | productGroupTag | HashMap<String,Any>? |  yes  |  |
+ | returnConfig | HashMap<String,Any>? |  yes  |  |
+ | isActive | HashMap<String,Any>? |  yes  |  |
+ | currency | HashMap<String,Any>? |  yes  |  |
+ | shortDescription | HashMap<String,Any>? |  yes  |  |
  | noOfBoxes | HashMap<String,Any>? |  yes  |  |
+ | variants | HashMap<String,Any>? |  yes  |  |
+ | name | HashMap<String,Any>? |  yes  |  |
+ | traderType | HashMap<String,Any>? |  yes  |  |
+ | teaserTag | HashMap<String,Any>? |  yes  |  |
+ | highlights | HashMap<String,Any>? |  yes  |  |
+ | hsnCode | HashMap<String,Any>? |  yes  |  |
+ | moq | HashMap<String,Any>? |  yes  |  |
+ | sizeGuide | HashMap<String,Any>? |  yes  |  |
+ | media | HashMap<String,Any>? |  yes  |  |
+ | description | HashMap<String,Any>? |  yes  |  |
+ | categorySlug | HashMap<String,Any>? |  yes  |  |
+ | countryOfOrigin | HashMap<String,Any>? |  yes  |  |
+ | isDependent | HashMap<String,Any>? |  yes  |  |
+ | trader | HashMap<String,Any>? |  yes  |  |
+ | sizes | HashMap<String,Any>? |  yes  |  |
+ | command | HashMap<String,Any>? |  yes  |  |
+ | brandUid | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -14935,12 +17604,12 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | properties | [Properties](#Properties)? |  yes  |  |
- | required | ArrayList<String>? |  yes  |  |
- | type | String? |  yes  |  |
  | definitions | HashMap<String,Any>? |  yes  |  |
  | title | String? |  yes  |  |
+ | type | String? |  yes  |  |
+ | properties | [Properties](#Properties)? |  yes  |  |
  | description | String? |  yes  |  |
+ | required | ArrayList<String>? |  yes  |  |
 
 ---
 
@@ -14963,18 +17632,18 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | categories | ArrayList<String>? |  yes  |  |
  | tag | String? |  yes  |  |
- | logo | String? |  yes  |  |
- | name | String? |  yes  |  |
- | id | String? |  yes  |  |
- | slug | String |  no  |  |
- | isPhysical | Boolean |  no  |  |
- | departments | ArrayList<String>? |  yes  |  |
- | attributes | ArrayList<String>? |  yes  |  |
- | description | String? |  yes  |  |
  | isArchived | Boolean? |  yes  |  |
+ | attributes | ArrayList<String>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | isPhysical | Boolean |  no  |  |
+ | description | String? |  yes  |  |
+ | id | String? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | departments | ArrayList<String>? |  yes  |  |
+ | categories | ArrayList<String>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | slug | String |  no  |  |
 
 ---
 
@@ -15033,8 +17702,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | username | String? |  yes  |  |
  | userId | String? |  yes  |  |
+ | username | String? |  yes  |  |
 
 ---
 
@@ -15045,9 +17714,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | templates | ArrayList<String>? |  yes  |  |
  | type | String? |  yes  |  |
  | brand | ArrayList<String>? |  yes  |  |
- | templates | ArrayList<String>? |  yes  |  |
 
 ---
 
@@ -15058,16 +17727,16 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | createdBy | [VerifiedBy](#VerifiedBy)? |  yes  |  |
- | url | String? |  yes  |  |
  | triggerOn | String? |  yes  |  |
- | data | [ProductDownloadItemsData](#ProductDownloadItemsData)? |  yes  |  |
  | completedOn | String? |  yes  |  |
- | id | String? |  yes  |  |
- | sellerId | Double? |  yes  |  |
- | templateTags | HashMap<String,Any>? |  yes  |  |
  | taskId | String? |  yes  |  |
+ | sellerId | Double? |  yes  |  |
  | status | String? |  yes  |  |
+ | templateTags | HashMap<String,Any>? |  yes  |  |
+ | createdBy | [VerifiedBy](#VerifiedBy)? |  yes  |  |
+ | id | String? |  yes  |  |
+ | data | [ProductDownloadItemsData](#ProductDownloadItemsData)? |  yes  |  |
+ | url | String? |  yes  |  |
 
 ---
 
@@ -15090,8 +17759,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | multivalue | Boolean? |  yes  |  |
  | data | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | multivalue | Boolean? |  yes  |  |
 
 ---
 
@@ -15102,22 +17771,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | l1 | Int |  no  |  |
  | department | Int |  no  |  |
+ | l1 | Int |  no  |  |
  | l2 | Int |  no  |  |
-
----
-
-
- 
- 
- #### [Media2](#Media2)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | portrait | String |  no  |  |
- | logo | String |  no  |  |
- | landscape | String |  no  |  |
 
 ---
 
@@ -15140,9 +17796,22 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | google | [CategoryMappingValues](#CategoryMappingValues)? |  yes  |  |
  | ajio | [CategoryMappingValues](#CategoryMappingValues)? |  yes  |  |
  | facebook | [CategoryMappingValues](#CategoryMappingValues)? |  yes  |  |
- | google | [CategoryMappingValues](#CategoryMappingValues)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Media2](#Media2)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | portrait | String |  no  |  |
+ | landscape | String |  no  |  |
+ | logo | String |  no  |  |
 
 ---
 
@@ -15153,23 +17822,23 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | level | Int |  no  |  |
- | priority | Int? |  yes  |  |
- | isActive | Boolean |  no  |  |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | hierarchy | ArrayList<[Hierarchy](#Hierarchy)>? |  yes  |  |
- | media | [Media2](#Media2)? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | id | String? |  yes  |  |
- | tryouts | ArrayList<String>? |  yes  |  |
- | name | String |  no  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
- | slug | String? |  yes  |  |
- | synonyms | ArrayList<String>? |  yes  |  |
  | createdOn | String? |  yes  |  |
- | departments | ArrayList<Int> |  no  |  |
+ | hierarchy | ArrayList<[Hierarchy](#Hierarchy)>? |  yes  |  |
  | marketplaces | [CategoryMapping](#CategoryMapping)? |  yes  |  |
+ | tryouts | ArrayList<String>? |  yes  |  |
+ | isActive | Boolean |  no  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | level | Int |  no  |  |
+ | media | [Media2](#Media2)? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | id | String? |  yes  |  |
+ | priority | Int? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | departments | ArrayList<Int> |  no  |  |
+ | uid | Int? |  yes  |  |
+ | name | String |  no  |  |
+ | synonyms | ArrayList<String>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -15192,17 +17861,17 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | level | Int |  no  |  |
- | priority | Int? |  yes  |  |
+ | hierarchy | ArrayList<[Hierarchy](#Hierarchy)>? |  yes  |  |
+ | marketplaces | [CategoryMapping](#CategoryMapping)? |  yes  |  |
+ | tryouts | ArrayList<String>? |  yes  |  |
  | isActive | Boolean |  no  |  |
  | media | [Media2](#Media2)? |  yes  |  |
- | hierarchy | ArrayList<[Hierarchy](#Hierarchy)>? |  yes  |  |
- | tryouts | ArrayList<String>? |  yes  |  |
- | name | String |  no  |  |
- | slug | String? |  yes  |  |
- | synonyms | ArrayList<String>? |  yes  |  |
+ | level | Int |  no  |  |
+ | priority | Int? |  yes  |  |
  | departments | ArrayList<Int> |  no  |  |
- | marketplaces | [CategoryMapping](#CategoryMapping)? |  yes  |  |
+ | name | String |  no  |  |
+ | synonyms | ArrayList<String>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -15213,7 +17882,19 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | message | String? |  yes  |  |
  | uid | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CategoryUpdateResponse](#CategoryUpdateResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
  | message | String? |  yes  |  |
 
 ---
@@ -15232,26 +17913,12 @@ Success
 
  
  
- #### [CategoryUpdateResponse](#CategoryUpdateResponse)
+ #### [ProductPublished](#ProductPublished)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | message | String? |  yes  |  |
- | success | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [Image](#Image)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | aspectRatioF | Double? |  yes  |  |
- | url | String? |  yes  |  |
- | secureUrl | String? |  yes  |  |
- | aspectRatio | String? |  yes  |  |
+ | isSet | Boolean? |  yes  |  |
+ | productOnlineDate | Int? |  yes  |  |
 
 ---
 
@@ -15262,10 +17929,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | aspectRatioF | Int? |  yes  |  |
- | url | String? |  yes  |  |
- | secureUrl | String? |  yes  |  |
  | aspectRatio | String? |  yes  |  |
+ | secureUrl | String? |  yes  |  |
+ | url | String? |  yes  |  |
+ | aspectRatioF | Int? |  yes  |  |
 
 ---
 
@@ -15285,12 +17952,14 @@ Success
 
  
  
- #### [ProductPublished](#ProductPublished)
+ #### [Image](#Image)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | productOnlineDate | Int? |  yes  |  |
- | isSet | Boolean? |  yes  |  |
+ | aspectRatio | String? |  yes  |  |
+ | url | String? |  yes  |  |
+ | secureUrl | String? |  yes  |  |
+ | aspectRatioF | Double? |  yes  |  |
 
 ---
 
@@ -15301,43 +17970,43 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | isDependent | Boolean? |  yes  |  |
- | moq | HashMap<String,Any>? |  yes  |  |
- | images | ArrayList<[Image](#Image)>? |  yes  |  |
- | customOrder | HashMap<String,Any>? |  yes  |  |
- | brand | [Brand](#Brand)? |  yes  |  |
- | itemCode | String? |  yes  |  |
- | categoryUid | Int? |  yes  |  |
- | id | String? |  yes  |  |
- | sizeGuide | String? |  yes  |  |
- | imageNature | String? |  yes  |  |
- | variants | HashMap<String,Any>? |  yes  |  |
- | media | ArrayList<[Media1](#Media1)>? |  yes  |  |
- | name | String? |  yes  |  |
- | currency | String? |  yes  |  |
  | isSet | Boolean? |  yes  |  |
- | allSizes | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | isPhysical | Boolean? |  yes  |  |
- | departments | ArrayList<Int>? |  yes  |  |
- | primaryColor | String? |  yes  |  |
- | productPublish | [ProductPublished](#ProductPublished)? |  yes  |  |
- | color | String? |  yes  |  |
- | description | String? |  yes  |  |
- | countryOfOrigin | String? |  yes  |  |
- | categorySlug | String? |  yes  |  |
- | hsnCode | String? |  yes  |  |
- | sizes | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | shortDescription | String? |  yes  |  |
- | templateTag | String? |  yes  |  |
- | highlights | ArrayList<String>? |  yes  |  |
- | l3Mapping | ArrayList<String>? |  yes  |  |
- | uid | Int? |  yes  |  |
- | brandUid | Int? |  yes  |  |
- | slug | String? |  yes  |  |
- | multiSize | Boolean? |  yes  |  |
+ | itemCode | String? |  yes  |  |
  | itemType | String? |  yes  |  |
+ | templateTag | String? |  yes  |  |
+ | customOrder | HashMap<String,Any>? |  yes  |  |
+ | multiSize | Boolean? |  yes  |  |
+ | slug | String? |  yes  |  |
+ | productPublish | [ProductPublished](#ProductPublished)? |  yes  |  |
+ | categoryUid | Int? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | currency | String? |  yes  |  |
+ | primaryColor | String? |  yes  |  |
+ | shortDescription | String? |  yes  |  |
+ | id | String? |  yes  |  |
+ | departments | ArrayList<Int>? |  yes  |  |
+ | variants | HashMap<String,Any>? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | name | String? |  yes  |  |
+ | highlights | ArrayList<String>? |  yes  |  |
+ | hsnCode | String? |  yes  |  |
+ | moq | HashMap<String,Any>? |  yes  |  |
+ | allSizes | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | sizeGuide | String? |  yes  |  |
+ | l3Mapping | ArrayList<String>? |  yes  |  |
+ | media | ArrayList<[Media1](#Media1)>? |  yes  |  |
+ | description | String? |  yes  |  |
+ | categorySlug | String? |  yes  |  |
+ | imageNature | String? |  yes  |  |
+ | countryOfOrigin | String? |  yes  |  |
+ | brand | [Brand](#Brand)? |  yes  |  |
+ | isDependent | Boolean? |  yes  |  |
+ | sizes | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | isPhysical | Boolean? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | brandUid | Int? |  yes  |  |
+ | images | ArrayList<[Image](#Image)>? |  yes  |  |
+ | color | String? |  yes  |  |
 
 ---
 
@@ -15356,39 +18025,13 @@ Success
 
  
  
- #### [OrderQuantity](#OrderQuantity)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | minimum | Int? |  yes  |  |
- | isSet | Boolean? |  yes  |  |
- | maximum | Int? |  yes  |  |
-
----
-
-
- 
- 
  #### [CustomOrder](#CustomOrder)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isCustomOrder | Boolean? |  yes  |  |
- | manufacturingTimeUnit | String? |  yes  |  |
  | manufacturingTime | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [ReturnConfig](#ReturnConfig)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | returnable | Boolean? |  yes  |  |
- | unit | String? |  yes  |  |
- | time | Int? |  yes  |  |
+ | manufacturingTimeUnit | String? |  yes  |  |
+ | isCustomOrder | Boolean? |  yes  |  |
 
 ---
 
@@ -15399,20 +18042,21 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | productOnlineDate | String? |  yes  |  |
  | isSet | Boolean? |  yes  |  |
+ | productOnlineDate | String? |  yes  |  |
 
 ---
 
 
  
  
- #### [Trader](#Trader)
+ #### [ReturnConfig](#ReturnConfig)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | name | String |  no  |  |
- | address | String |  no  |  |
+ | unit | String? |  yes  |  |
+ | returnable | Boolean? |  yes  |  |
+ | time | Int? |  yes  |  |
 
 ---
 
@@ -15431,47 +18075,72 @@ Success
 
  
  
+ #### [OrderQuantity](#OrderQuantity)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | isSet | Boolean? |  yes  |  |
+ | maximum | Int? |  yes  |  |
+ | minimum | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Trader](#Trader)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | name | String |  no  |  |
+ | address | String |  no  |  |
+
+---
+
+
+ 
+ 
  #### [ProductCreateUpdate](#ProductCreateUpdate)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | productGroupTag | ArrayList<String>? |  yes  |  |
- | noOfBoxes | Int? |  yes  |  |
- | isDependent | Boolean? |  yes  |  |
- | moq | [OrderQuantity](#OrderQuantity)? |  yes  |  |
- | isImageLessProduct | Boolean? |  yes  |  |
- | customOrder | [CustomOrder](#CustomOrder)? |  yes  |  |
+ | tags | ArrayList<String>? |  yes  |  |
  | companyId | Int |  no  |  |
  | itemCode | String |  no  |  |
- | sizeGuide | String? |  yes  |  |
- | variants | HashMap<String,Any>? |  yes  |  |
- | media | ArrayList<[Media1](#Media1)>? |  yes  |  |
- | name | String |  no  |  |
- | returnConfig | [ReturnConfig](#ReturnConfig)? |  yes  |  |
  | isSet | Boolean? |  yes  |  |
- | currency | String |  no  |  |
- | departments | ArrayList<Int> |  no  |  |
- | productPublish | [ProductPublish](#ProductPublish)? |  yes  |  |
- | description | String? |  yes  |  |
- | requester | String? |  yes  |  |
- | countryOfOrigin | String |  no  |  |
- | trader | [Trader](#Trader)? |  yes  |  |
- | categorySlug | String |  no  |  |
- | hsnCode | String |  no  |  |
- | shortDescription | String? |  yes  |  |
- | templateTag | String |  no  |  |
- | highlights | ArrayList<String>? |  yes  |  |
- | teaserTag | [TeaserTag](#TeaserTag)? |  yes  |  |
- | uid | Int? |  yes  |  |
- | brandUid | Int |  no  |  |
- | traderType | String? |  yes  |  |
- | slug | String |  no  |  |
- | tags | ArrayList<String>? |  yes  |  |
- | multiSize | Boolean? |  yes  |  |
- | changeRequestId | String? |  yes  |  |
  | itemType | String |  no  |  |
+ | templateTag | String |  no  |  |
+ | changeRequestId | String? |  yes  |  |
+ | customOrder | [CustomOrder](#CustomOrder)? |  yes  |  |
+ | multiSize | Boolean? |  yes  |  |
+ | slug | String |  no  |  |
+ | productPublish | [ProductPublish](#ProductPublish)? |  yes  |  |
+ | productGroupTag | ArrayList<String>? |  yes  |  |
+ | returnConfig | [ReturnConfig](#ReturnConfig)? |  yes  |  |
+ | isImageLessProduct | Boolean? |  yes  |  |
+ | currency | String |  no  |  |
+ | isActive | Boolean? |  yes  |  |
+ | shortDescription | String? |  yes  |  |
+ | noOfBoxes | Int? |  yes  |  |
+ | departments | ArrayList<Int> |  no  |  |
+ | variants | HashMap<String,Any>? |  yes  |  |
+ | name | String |  no  |  |
+ | uid | Int? |  yes  |  |
+ | traderType | String? |  yes  |  |
+ | teaserTag | [TeaserTag](#TeaserTag)? |  yes  |  |
+ | highlights | ArrayList<String>? |  yes  |  |
+ | hsnCode | String |  no  |  |
+ | moq | [OrderQuantity](#OrderQuantity)? |  yes  |  |
+ | requester | String? |  yes  |  |
+ | sizeGuide | String? |  yes  |  |
+ | media | ArrayList<[Media1](#Media1)>? |  yes  |  |
+ | description | String? |  yes  |  |
+ | categorySlug | String |  no  |  |
+ | countryOfOrigin | String |  no  |  |
+ | isDependent | Boolean? |  yes  |  |
+ | trader | [Trader](#Trader)? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | brandUid | Int |  no  |  |
 
 ---
 
@@ -15493,9 +18162,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | username | String? |  yes  |  |
- | userId | String? |  yes  |  |
  | fullName | String? |  yes  |  |
+ | userId | String? |  yes  |  |
+ | username | String? |  yes  |  |
 
 ---
 
@@ -15506,21 +18175,21 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | createdBy | [UserDetail](#UserDetail)? |  yes  |  |
- | succeed | Int? |  yes  |  |
- | filePath | String? |  yes  |  |
- | cancelledRecords | ArrayList<String>? |  yes  |  |
- | failedRecords | ArrayList<String>? |  yes  |  |
  | stage | String? |  yes  |  |
  | createdOn | String? |  yes  |  |
- | total | Int? |  yes  |  |
- | modifiedBy | [UserDetail](#UserDetail)? |  yes  |  |
- | templateTag | String? |  yes  |  |
+ | companyId | Int? |  yes  |  |
+ | filePath | String? |  yes  |  |
  | cancelled | Int? |  yes  |  |
  | template | [ProductTemplate](#ProductTemplate)? |  yes  |  |
- | companyId | Int? |  yes  |  |
+ | cancelledRecords | ArrayList<String>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | templateTag | String? |  yes  |  |
+ | modifiedBy | [UserDetail](#UserDetail)? |  yes  |  |
+ | total | Int? |  yes  |  |
+ | createdBy | [UserDetail](#UserDetail)? |  yes  |  |
+ | failedRecords | ArrayList<String>? |  yes  |  |
+ | succeed | Int? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
  | failed | Int? |  yes  |  |
 
 ---
@@ -15544,9 +18213,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | String? |  yes  |  |
  | userId | String? |  yes  |  |
  | username | String? |  yes  |  |
+ | uid | String? |  yes  |  |
  | email | String? |  yes  |  |
 
 ---
@@ -15558,22 +18227,22 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | stage | String? |  yes  |  |
+ | createdOn | String |  no  |  |
+ | companyId | Int |  no  |  |
+ | cancelled | Int? |  yes  |  |
+ | filePath | String? |  yes  |  |
+ | trackingUrl | String? |  yes  |  |
  | isActive | Boolean? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
+ | modifiedBy | [UserInfo1](#UserInfo1)? |  yes  |  |
+ | cancelledRecords | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | templateTag | String? |  yes  |  |
+ | total | Int |  no  |  |
  | createdBy | [UserInfo1](#UserInfo1)? |  yes  |  |
  | succeed | Int? |  yes  |  |
- | filePath | String? |  yes  |  |
- | customTemplateTag | String? |  yes  |  |
- | modifiedBy | [UserInfo1](#UserInfo1)? |  yes  |  |
- | total | Int |  no  |  |
- | createdOn | String |  no  |  |
- | cancelledRecords | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | failedRecords | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | stage | String? |  yes  |  |
- | cancelled | Int? |  yes  |  |
- | templateTag | String? |  yes  |  |
- | trackingUrl | String? |  yes  |  |
- | companyId | Int |  no  |  |
+ | modifiedOn | String? |  yes  |  |
+ | customTemplateTag | String? |  yes  |  |
  | failed | Int? |  yes  |  |
 
 ---
@@ -15585,9 +18254,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | ArrayList<HashMap<String,Any>> |  no  |  |
  | templateTag | String |  no  |  |
  | batchId | String |  no  |  |
+ | data | ArrayList<HashMap<String,Any>> |  no  |  |
  | companyId | Int |  no  |  |
 
 ---
@@ -15621,8 +18290,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | username | String? |  yes  |  |
  | userId | String? |  yes  |  |
+ | username | String? |  yes  |  |
  | companyId | Int? |  yes  |  |
 
 ---
@@ -15634,23 +18303,23 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | createdBy | [UserCommon](#UserCommon)? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | isActive | Boolean? |  yes  |  |
- | filePath | String? |  yes  |  |
- | retry | Int? |  yes  |  |
- | modifiedBy | [UserCommon](#UserCommon)? |  yes  |  |
- | cancelledRecords | ArrayList<String>? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | failedRecords | ArrayList<String>? |  yes  |  |
  | stage | String? |  yes  |  |
- | total | Int? |  yes  |  |
+ | retry | Int? |  yes  |  |
+ | filePath | String? |  yes  |  |
+ | createdOn | String? |  yes  |  |
  | companyId | Int? |  yes  |  |
  | cancelled | Int? |  yes  |  |
  | trackingUrl | String? |  yes  |  |
+ | cancelledRecords | ArrayList<String>? |  yes  |  |
+ | modifiedBy | [UserCommon](#UserCommon)? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | total | Int? |  yes  |  |
+ | createdBy | [UserCommon](#UserCommon)? |  yes  |  |
  | succeed | Int? |  yes  |  |
- | failed | Int? |  yes  |  |
+ | failedRecords | ArrayList<String>? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
  | id | String? |  yes  |  |
+ | failed | Int? |  yes  |  |
 
 ---
 
@@ -15673,8 +18342,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | url | String |  no  |  |
  | user | HashMap<String,Any> |  no  |  |
+ | url | String |  no  |  |
  | companyId | Int? |  yes  |  |
 
 ---
@@ -15687,8 +18356,8 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | itemId | Int? |  yes  |  |
- | size | String? |  yes  |  |
  | companyId | Int? |  yes  |  |
+ | size | String? |  yes  |  |
 
 ---
 
@@ -15699,8 +18368,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | [ProductSizeDeleteDataResponse](#ProductSizeDeleteDataResponse)? |  yes  |  |
  | success | Boolean? |  yes  |  |
+ | data | [ProductSizeDeleteDataResponse](#ProductSizeDeleteDataResponse)? |  yes  |  |
 
 ---
 
@@ -15711,19 +18380,19 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | String? |  yes  |  |
- | quantity | Int? |  yes  |  |
  | priceTransfer | Int? |  yes  |  |
- | sellableQuantity | Int? |  yes  |  |
  | priceEffective | Int? |  yes  |  |
- | currency | String? |  yes  |  |
- | size | String? |  yes  |  |
- | itemId | Int? |  yes  |  |
- | store | HashMap<String,Any>? |  yes  |  |
  | price | Int? |  yes  |  |
+ | quantity | Int? |  yes  |  |
+ | store | HashMap<String,Any>? |  yes  |  |
+ | currency | String? |  yes  |  |
  | identifiers | HashMap<String,Any>? |  yes  |  |
+ | itemId | Int? |  yes  |  |
+ | size | String? |  yes  |  |
  | sellerIdentifier | Int? |  yes  |  |
+ | sellableQuantity | Int? |  yes  |  |
  | inventoryUpdatedOn | String? |  yes  |  |
+ | uid | String? |  yes  |  |
 
 ---
 
@@ -15734,9 +18403,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | brandUid | Int? |  yes  |  |
  | itemCode | String? |  yes  |  |
+ | brandUid | Int? |  yes  |  |
+ | uid | Int? |  yes  |  |
 
 ---
 
@@ -15747,8 +18416,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | size | String |  no  |  |
  | pieces | Int |  no  |  |
+ | size | String |  no  |  |
 
 ---
 
@@ -15782,9 +18451,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | gtinValue | String |  no  |  |
- | gtinType | String |  no  |  |
  | primary | Boolean? |  yes  |  |
+ | gtinType | String |  no  |  |
+ | gtinValue | String |  no  |  |
 
 ---
 
@@ -15795,22 +18464,22 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | itemLength | Double? |  yes  |  |
- | quantity | Int |  no  |  |
- | priceTransfer | Double? |  yes  |  |
- | itemWeightUnitOfMeasure | String? |  yes  |  |
- | storeCode | String |  no  |  |
- | priceEffective | Double |  no  |  |
- | size | String |  no  |  |
- | isSet | Boolean? |  yes  |  |
  | itemHeight | Double? |  yes  |  |
- | currency | String |  no  |  |
- | set | [InventorySet](#InventorySet)? |  yes  |  |
- | itemDimensionsUnitOfMeasure | String? |  yes  |  |
- | price | Double |  no  |  |
+ | priceTransfer | Double? |  yes  |  |
  | itemWidth | Double? |  yes  |  |
+ | itemDimensionsUnitOfMeasure | String? |  yes  |  |
+ | isSet | Boolean? |  yes  |  |
+ | priceEffective | Double |  no  |  |
+ | price | Double |  no  |  |
+ | itemWeightUnitOfMeasure | String? |  yes  |  |
+ | quantity | Int |  no  |  |
+ | itemLength | Double? |  yes  |  |
+ | set | [InventorySet](#InventorySet)? |  yes  |  |
  | itemWeight | Double? |  yes  |  |
  | identifiers | ArrayList<[GTIN](#GTIN)> |  no  |  |
+ | currency | String |  no  |  |
+ | size | String |  no  |  |
+ | storeCode | String |  no  |  |
 
 ---
 
@@ -15835,8 +18504,8 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | itemId | Int? |  yes  |  |
- | size | String? |  yes  |  |
  | locationId | Int? |  yes  |  |
+ | size | String? |  yes  |  |
 
 ---
 
@@ -15847,8 +18516,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | [InventoryDeleteData](#InventoryDeleteData)? |  yes  |  |
  | success | Boolean? |  yes  |  |
+ | data | [InventoryDeleteData](#InventoryDeleteData)? |  yes  |  |
 
 ---
 
@@ -15859,21 +18528,21 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | isActive | Boolean? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | succeed | Int? |  yes  |  |
- | filePath | String? |  yes  |  |
- | cancelledRecords | ArrayList<String>? |  yes  |  |
- | failedRecords | ArrayList<String>? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
  | stage | String? |  yes  |  |
- | total | Int? |  yes  |  |
+ | createdOn | String? |  yes  |  |
  | cancelled | Int? |  yes  |  |
  | companyId | Int? |  yes  |  |
- | failed | Int? |  yes  |  |
+ | filePath | String? |  yes  |  |
+ | cancelledRecords | ArrayList<String>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | total | Int? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | failedRecords | ArrayList<String>? |  yes  |  |
  | id | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | succeed | Int? |  yes  |  |
+ | failed | Int? |  yes  |  |
 
 ---
 
@@ -15907,23 +18576,23 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | itemLength | Double? |  yes  |  |
- | quantity | Int |  no  |  |
- | priceTransfer | Double? |  yes  |  |
- | itemWeightUnitOfMeasure | String? |  yes  |  |
- | storeCode | String |  no  |  |
- | priceEffective | Double |  no  |  |
- | size | String? |  yes  |  |
- | isSet | Boolean? |  yes  |  |
  | itemHeight | Double? |  yes  |  |
- | currency | String |  no  |  |
- | set | [InventorySet](#InventorySet)? |  yes  |  |
- | itemDimensionsUnitOfMeasure | String? |  yes  |  |
- | price | Double |  no  |  |
+ | priceTransfer | Double? |  yes  |  |
  | itemWidth | Double? |  yes  |  |
+ | itemDimensionsUnitOfMeasure | String? |  yes  |  |
+ | isSet | Boolean? |  yes  |  |
+ | priceEffective | Double |  no  |  |
+ | price | Double |  no  |  |
+ | itemWeightUnitOfMeasure | String? |  yes  |  |
+ | quantity | Int |  no  |  |
+ | itemLength | Double? |  yes  |  |
+ | set | [InventorySet](#InventorySet)? |  yes  |  |
  | itemWeight | Double? |  yes  |  |
  | identifiers | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | currency | String |  no  |  |
+ | size | String? |  yes  |  |
  | sellerIdentifier | String |  no  |  |
+ | storeCode | String |  no  |  |
 
 ---
 
@@ -15934,10 +18603,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | batchId | String |  no  |  |
  | user | HashMap<String,Any>? |  yes  |  |
  | sizes | ArrayList<[Size1](#Size1)> |  no  |  |
  | companyId | Int |  no  |  |
+ | batchId | String |  no  |  |
 
 ---
 
@@ -15948,13 +18617,13 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | url | String? |  yes  |  |
  | triggerOn | String? |  yes  |  |
  | completedOn | String? |  yes  |  |
- | requestParams | HashMap<String,Any>? |  yes  |  |
- | sellerId | Int |  no  |  |
  | taskId | String |  no  |  |
+ | sellerId | Int |  no  |  |
  | status | String? |  yes  |  |
+ | requestParams | HashMap<String,Any>? |  yes  |  |
+ | url | String? |  yes  |  |
 
 ---
 
@@ -15966,8 +18635,8 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | type | String? |  yes  |  |
- | brand | ArrayList<Int>? |  yes  |  |
  | store | ArrayList<Int>? |  yes  |  |
+ | brand | ArrayList<Int>? |  yes  |  |
 
 ---
 
@@ -15978,8 +18647,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | value | String? |  yes  |  |
  | display | String? |  yes  |  |
+ | value | String? |  yes  |  |
 
 ---
 
@@ -15990,8 +18659,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | ArrayList<[FilerList](#FilerList)>? |  yes  |  |
  | multivalues | Boolean? |  yes  |  |
+ | data | ArrayList<[FilerList](#FilerList)>? |  yes  |  |
 
 ---
 
@@ -16002,17 +18671,17 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | threshold1 | Double? |  yes  |  |
- | taxOnEsp | Boolean? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | hs2Code | String? |  yes  |  |
  | tax1 | Double? |  yes  |  |
- | hsnCode | String? |  yes  |  |
- | taxOnMrp | Boolean? |  yes  |  |
- | id | String? |  yes  |  |
- | tax2 | Double? |  yes  |  |
  | companyId | Int? |  yes  |  |
  | threshold2 | Double? |  yes  |  |
+ | threshold1 | Double? |  yes  |  |
+ | hsnCode | String? |  yes  |  |
+ | taxOnMrp | Boolean? |  yes  |  |
+ | hs2Code | String? |  yes  |  |
+ | taxOnEsp | Boolean? |  yes  |  |
+ | id | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | tax2 | Double? |  yes  |  |
 
 ---
 
@@ -16023,9 +18692,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | itemTotal | Int? |  yes  |  |
  | hasNext | Boolean? |  yes  |  |
  | size | Int? |  yes  |  |
- | itemTotal | Int? |  yes  |  |
  | hasPrevious | Boolean? |  yes  |  |
  | current | String? |  yes  |  |
 
@@ -16050,16 +18719,16 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | threshold1 | Double |  no  |  |
- | taxOnEsp | Boolean? |  yes  |  |
- | uid | Int? |  yes  |  |
- | hs2Code | String |  no  |  |
  | tax1 | Double |  no  |  |
- | hsnCode | String |  no  |  |
- | taxOnMrp | Boolean |  no  |  |
- | tax2 | Double? |  yes  |  |
  | companyId | Int |  no  |  |
  | threshold2 | Double? |  yes  |  |
+ | threshold1 | Double |  no  |  |
+ | hsnCode | String |  no  |  |
+ | taxOnMrp | Boolean |  no  |  |
+ | hs2Code | String |  no  |  |
+ | taxOnEsp | Boolean? |  yes  |  |
+ | tax2 | Double? |  yes  |  |
+ | uid | Int? |  yes  |  |
 
 ---
 
@@ -16103,14 +18772,14 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
+ | discount | String? |  yes  |  |
+ | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
+ | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
  | logo | [Media](#Media)? |  yes  |  |
+ | departments | ArrayList<String>? |  yes  |  |
+ | uid | Int? |  yes  |  |
  | name | String? |  yes  |  |
  | slug | String? |  yes  |  |
- | discount | String? |  yes  |  |
- | departments | ArrayList<String>? |  yes  |  |
- | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
- | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
 
 ---
 
@@ -16133,10 +18802,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | logo | [Media](#Media)? |  yes  |  |
- | name | String? |  yes  |  |
  | priorityOrder | Int? |  yes  |  |
+ | logo | [Media](#Media)? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | name | String? |  yes  |  |
  | slug | String? |  yes  |  |
 
 ---
@@ -16171,13 +18840,13 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | name | String? |  yes  |  |
- | slug | String? |  yes  |  |
+ | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | childs | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
- | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -16188,13 +18857,13 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | name | String? |  yes  |  |
- | slug | String? |  yes  |  |
+ | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | childs | ArrayList<[ThirdLevelChild](#ThirdLevelChild)>? |  yes  |  |
  | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
- | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -16205,13 +18874,13 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | name | String? |  yes  |  |
- | slug | String? |  yes  |  |
+ | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | childs | ArrayList<[SecondLevelChild](#SecondLevelChild)>? |  yes  |  |
  | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
- | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -16222,12 +18891,12 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | name | String? |  yes  |  |
- | slug | String? |  yes  |  |
+ | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | childs | ArrayList<[Child](#Child)>? |  yes  |  |
  | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
- | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
+ | name | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -16262,10 +18931,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | filters | ArrayList<[ProductFilters](#ProductFilters)>? |  yes  |  |
  | sortOn | ArrayList<[ProductSortOn](#ProductSortOn)>? |  yes  |  |
  | items | ArrayList<[ProductListingDetail](#ProductListingDetail)>? |  yes  |  |
  | page | [Page](#Page) |  no  |  |
- | filters | ArrayList<[ProductFilters](#ProductFilters)>? |  yes  |  |
 
 ---
 
@@ -16276,33 +18945,105 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | hasVariant | Boolean? |  yes  |  |
- | brand | [ProductBrand](#ProductBrand)? |  yes  |  |
  | itemCode | String? |  yes  |  |
- | imageNature | String? |  yes  |  |
- | promoMeta | HashMap<String,Any>? |  yes  |  |
- | name | String? |  yes  |  |
- | color | String? |  yes  |  |
- | description | String? |  yes  |  |
- | ratingCount | Int? |  yes  |  |
- | shortDescription | String? |  yes  |  |
- | highlights | ArrayList<String>? |  yes  |  |
- | similars | ArrayList<String>? |  yes  |  |
- | groupedAttributes | ArrayList<[ProductDetailGroupedAttribute](#ProductDetailGroupedAttribute)>? |  yes  |  |
- | teaserTag | HashMap<String,Any>? |  yes  |  |
- | uid | Int? |  yes  |  |
- | tryouts | ArrayList<String>? |  yes  |  |
- | slug | String |  no  |  |
- | type | String? |  yes  |  |
- | attributes | HashMap<String,Any>? |  yes  |  |
+ | itemType | String? |  yes  |  |
  | rating | Double? |  yes  |  |
  | productOnlineDate | String? |  yes  |  |
- | itemType | String? |  yes  |  |
+ | slug | String |  no  |  |
+ | attributes | HashMap<String,Any>? |  yes  |  |
+ | tryouts | ArrayList<String>? |  yes  |  |
  | medias | ArrayList<[Media1](#Media1)>? |  yes  |  |
+ | shortDescription | String? |  yes  |  |
+ | hasVariant | Boolean? |  yes  |  |
+ | groupedAttributes | ArrayList<[ProductDetailGroupedAttribute](#ProductDetailGroupedAttribute)>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | similars | ArrayList<String>? |  yes  |  |
+ | teaserTag | HashMap<String,Any>? |  yes  |  |
+ | promoMeta | HashMap<String,Any>? |  yes  |  |
+ | highlights | ArrayList<String>? |  yes  |  |
+ | description | String? |  yes  |  |
+ | imageNature | String? |  yes  |  |
+ | ratingCount | Int? |  yes  |  |
+ | brand | [ProductBrand](#ProductBrand)? |  yes  |  |
+ | type | String? |  yes  |  |
+ | color | String? |  yes  |  |
 
 ---
 
 
+
+
+ 
+ 
+ #### [BusinessCountryInfo](#BusinessCountryInfo)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | country | String? |  yes  |  |
+ | countryCode | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Document](#Document)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | value | String |  no  |  |
+ | verified | Boolean? |  yes  |  |
+ | legalName | String? |  yes  |  |
+ | type | String |  no  |  |
+ | url | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [SellerPhoneNumber](#SellerPhoneNumber)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | countryCode | Int |  no  |  |
+ | number | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ContactDetails](#ContactDetails)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | phone | ArrayList<[SellerPhoneNumber](#SellerPhoneNumber)>? |  yes  |  |
+ | emails | ArrayList<String>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [GetAddressSerializer](#GetAddressSerializer)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | countryCode | String? |  yes  |  |
+ | longitude | Double? |  yes  |  |
+ | addressType | String? |  yes  |  |
+ | state | String? |  yes  |  |
+ | pincode | Int? |  yes  |  |
+ | landmark | String? |  yes  |  |
+ | latitude | Double? |  yes  |  |
+ | address1 | String? |  yes  |  |
+ | address2 | String? |  yes  |  |
+ | country | String? |  yes  |  |
+ | city | String? |  yes  |  |
+
+---
 
 
  
@@ -16329,103 +19070,31 @@ Success
 
  
  
- #### [BusinessCountryInfo](#BusinessCountryInfo)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | country | String? |  yes  |  |
- | countryCode | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [SellerPhoneNumber](#SellerPhoneNumber)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | number | String |  no  |  |
- | countryCode | Int |  no  |  |
-
----
-
-
- 
- 
- #### [ContactDetails](#ContactDetails)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | phone | ArrayList<[SellerPhoneNumber](#SellerPhoneNumber)>? |  yes  |  |
- | emails | ArrayList<String>? |  yes  |  |
-
----
-
-
- 
- 
- #### [Document](#Document)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | type | String |  no  |  |
- | url | String? |  yes  |  |
- | legalName | String? |  yes  |  |
- | verified | Boolean? |  yes  |  |
- | value | String |  no  |  |
-
----
-
-
- 
- 
- #### [GetAddressSerializer](#GetAddressSerializer)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | address1 | String? |  yes  |  |
- | state | String? |  yes  |  |
- | landmark | String? |  yes  |  |
- | addressType | String? |  yes  |  |
- | countryCode | String? |  yes  |  |
- | address2 | String? |  yes  |  |
- | country | String? |  yes  |  |
- | pincode | Int? |  yes  |  |
- | city | String? |  yes  |  |
- | latitude | Double? |  yes  |  |
- | longitude | Double? |  yes  |  |
-
----
-
-
- 
- 
  #### [GetCompanyProfileSerializerResponse](#GetCompanyProfileSerializerResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | businessDetails | [BusinessDetails](#BusinessDetails)? |  yes  |  |
- | warnings | HashMap<String,Any>? |  yes  |  |
- | mode | String? |  yes  |  |
- | notificationEmails | ArrayList<String>? |  yes  |  |
- | businessInfo | String? |  yes  |  |
- | companyType | String |  no  |  |
- | createdBy | [UserSerializer](#UserSerializer)? |  yes  |  |
  | businessCountryInfo | [BusinessCountryInfo](#BusinessCountryInfo)? |  yes  |  |
- | contactDetails | [ContactDetails](#ContactDetails)? |  yes  |  |
- | verifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | businessType | String |  no  |  |
- | name | String? |  yes  |  |
- | uid | Int |  no  |  |
- | modifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | franchiseEnabled | Boolean? |  yes  |  |
+ | notificationEmails | ArrayList<String>? |  yes  |  |
  | stage | String? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
+ | warnings | HashMap<String,Any>? |  yes  |  |
+ | verifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
+ | modifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
+ | uid | Int |  no  |  |
+ | name | String? |  yes  |  |
  | documents | ArrayList<[Document](#Document)>? |  yes  |  |
+ | businessType | String |  no  |  |
  | createdOn | String? |  yes  |  |
+ | contactDetails | [ContactDetails](#ContactDetails)? |  yes  |  |
+ | franchiseEnabled | Boolean? |  yes  |  |
  | verifiedOn | String? |  yes  |  |
+ | mode | String? |  yes  |  |
+ | businessInfo | String? |  yes  |  |
  | addresses | ArrayList<[GetAddressSerializer](#GetAddressSerializer)>? |  yes  |  |
+ | createdBy | [UserSerializer](#UserSerializer)? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | businessDetails | [BusinessDetails](#BusinessDetails)? |  yes  |  |
+ | companyType | String |  no  |  |
 
 ---
 
@@ -16436,17 +19105,17 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | address1 | String |  no  |  |
- | state | String |  no  |  |
- | landmark | String? |  yes  |  |
- | addressType | String |  no  |  |
  | countryCode | String? |  yes  |  |
- | country | String |  no  |  |
- | address2 | String? |  yes  |  |
- | pincode | Int |  no  |  |
- | city | String |  no  |  |
- | latitude | Double |  no  |  |
  | longitude | Double |  no  |  |
+ | addressType | String |  no  |  |
+ | state | String |  no  |  |
+ | pincode | Int |  no  |  |
+ | landmark | String? |  yes  |  |
+ | latitude | Double |  no  |  |
+ | address1 | String |  no  |  |
+ | address2 | String? |  yes  |  |
+ | country | String |  no  |  |
+ | city | String |  no  |  |
 
 ---
 
@@ -16457,18 +19126,18 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | companyType | String? |  yes  |  |
- | businessInfo | String? |  yes  |  |
- | franchiseEnabled | Boolean? |  yes  |  |
- | rejectReason | String? |  yes  |  |
- | warnings | HashMap<String,Any>? |  yes  |  |
- | businessDetails | [BusinessDetails](#BusinessDetails)? |  yes  |  |
  | documents | ArrayList<[Document](#Document)>? |  yes  |  |
- | contactDetails | [ContactDetails](#ContactDetails)? |  yes  |  |
- | name | String? |  yes  |  |
- | addresses | ArrayList<[CreateUpdateAddressSerializer](#CreateUpdateAddressSerializer)>? |  yes  |  |
- | businessType | String? |  yes  |  |
  | notificationEmails | ArrayList<String>? |  yes  |  |
+ | businessInfo | String? |  yes  |  |
+ | addresses | ArrayList<[CreateUpdateAddressSerializer](#CreateUpdateAddressSerializer)>? |  yes  |  |
+ | contactDetails | [ContactDetails](#ContactDetails)? |  yes  |  |
+ | warnings | HashMap<String,Any>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | franchiseEnabled | Boolean? |  yes  |  |
+ | businessType | String? |  yes  |  |
+ | rejectReason | String? |  yes  |  |
+ | businessDetails | [BusinessDetails](#BusinessDetails)? |  yes  |  |
+ | companyType | String? |  yes  |  |
 
 ---
 
@@ -16479,8 +19148,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | pending | Int? |  yes  |  |
  | verified | Int? |  yes  |  |
+ | pending | Int? |  yes  |  |
 
 ---
 
@@ -16491,13 +19160,45 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | stage | String? |  yes  |  |
- | store | [DocumentsObj](#DocumentsObj)? |  yes  |  |
- | brand | [DocumentsObj](#DocumentsObj)? |  yes  |  |
  | storeDocuments | [DocumentsObj](#DocumentsObj)? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | stage | String? |  yes  |  |
+ | brand | [DocumentsObj](#DocumentsObj)? |  yes  |  |
  | product | [DocumentsObj](#DocumentsObj)? |  yes  |  |
  | companyDocuments | [DocumentsObj](#DocumentsObj)? |  yes  |  |
+ | store | [DocumentsObj](#DocumentsObj)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [BrandBannerSerializer](#BrandBannerSerializer)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | portrait | String? |  yes  |  |
+ | landscape | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CreateUpdateBrandRequestSerializer](#CreateUpdateBrandRequestSerializer)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | companyId | Int? |  yes  |  |
+ | brandTier | String? |  yes  |  |
+ | logo | String |  no  |  |
  | uid | Int? |  yes  |  |
+ | description | String? |  yes  |  |
+ | banner | [BrandBannerSerializer](#BrandBannerSerializer)? |  yes  |  |
+ | localeLanguage | HashMap<String,Any>? |  yes  |  |
+ | name | String |  no  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+ | synonyms | ArrayList<String>? |  yes  |  |
 
 ---
 
@@ -16517,60 +19218,41 @@ Success
 
  
  
- #### [BrandBannerSerializer](#BrandBannerSerializer)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | landscape | String? |  yes  |  |
- | portrait | String? |  yes  |  |
-
----
-
-
- 
- 
  #### [GetBrandResponseSerializer](#GetBrandResponseSerializer)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | slugKey | String? |  yes  |  |
  | modifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | synonyms | ArrayList<String>? |  yes  |  |
- | logo | String? |  yes  |  |
- | createdBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | stage | String? |  yes  |  |
- | rejectReason | String? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | warnings | HashMap<String,Any>? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
  | createdOn | String? |  yes  |  |
- | localeLanguage | HashMap<String,Any>? |  yes  |  |
- | verifiedOn | String? |  yes  |  |
- | banner | [BrandBannerSerializer](#BrandBannerSerializer)? |  yes  |  |
- | verifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | name | String |  no  |  |
+ | logo | String? |  yes  |  |
  | uid | Int? |  yes  |  |
  | description | String? |  yes  |  |
+ | banner | [BrandBannerSerializer](#BrandBannerSerializer)? |  yes  |  |
+ | createdBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
+ | slugKey | String? |  yes  |  |
+ | stage | String? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+ | name | String |  no  |  |
+ | warnings | HashMap<String,Any>? |  yes  |  |
+ | localeLanguage | HashMap<String,Any>? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | rejectReason | String? |  yes  |  |
+ | verifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
+ | verifiedOn | String? |  yes  |  |
+ | synonyms | ArrayList<String>? |  yes  |  |
 
 ---
 
 
  
  
- #### [CreateUpdateBrandRequestSerializer](#CreateUpdateBrandRequestSerializer)
+ #### [CompanyBrandPostRequestSerializer](#CompanyBrandPostRequestSerializer)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | synonyms | ArrayList<String>? |  yes  |  |
- | logo | String |  no  |  |
- | companyId | Int? |  yes  |  |
- | localeLanguage | HashMap<String,Any>? |  yes  |  |
- | banner | [BrandBannerSerializer](#BrandBannerSerializer)? |  yes  |  |
- | brandTier | String? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
- | name | String |  no  |  |
+ | company | Int |  no  |  |
+ | brands | ArrayList<Int> |  no  |  |
  | uid | Int? |  yes  |  |
- | description | String? |  yes  |  |
 
 ---
 
@@ -16582,18 +19264,18 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | modifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | companyType | String? |  yes  |  |
- | createdBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | stage | String? |  yes  |  |
  | rejectReason | String? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | addresses | ArrayList<[GetAddressSerializer](#GetAddressSerializer)>? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | stage | String? |  yes  |  |
+ | createdBy | [UserSerializer](#UserSerializer)? |  yes  |  |
+ | name | String? |  yes  |  |
  | modifiedOn | String? |  yes  |  |
  | businessType | String? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | verifiedOn | String? |  yes  |  |
- | addresses | ArrayList<[GetAddressSerializer](#GetAddressSerializer)>? |  yes  |  |
  | verifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | name | String? |  yes  |  |
- | uid | Int? |  yes  |  |
+ | verifiedOn | String? |  yes  |  |
+ | companyType | String? |  yes  |  |
 
 ---
 
@@ -16605,17 +19287,17 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | modifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | company | [GetCompanySerializer](#GetCompanySerializer)? |  yes  |  |
- | createdBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
  | stage | String? |  yes  |  |
- | rejectReason | String? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
+ | createdBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
  | warnings | HashMap<String,Any>? |  yes  |  |
  | brand | [GetBrandResponseSerializer](#GetBrandResponseSerializer)? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | verifiedOn | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | company | [GetCompanySerializer](#GetCompanySerializer)? |  yes  |  |
+ | rejectReason | String? |  yes  |  |
  | verifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | uid | Int? |  yes  |  |
+ | verifiedOn | String? |  yes  |  |
 
 ---
 
@@ -16626,70 +19308,29 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | page | [Page](#Page)? |  yes  |  |
  | items | ArrayList<[CompanyBrandSerializer](#CompanyBrandSerializer)>? |  yes  |  |
+ | page | [Page](#Page)? |  yes  |  |
 
 ---
 
 
  
  
- #### [CompanyBrandPostRequestSerializer](#CompanyBrandPostRequestSerializer)
+ #### [GetAddressSerializer1](#GetAddressSerializer1)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | brands | ArrayList<Int> |  no  |  |
- | uid | Int? |  yes  |  |
- | company | Int |  no  |  |
-
----
-
-
- 
- 
- #### [InvoiceCredSerializer](#InvoiceCredSerializer)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | username | String? |  yes  |  |
- | password | String? |  yes  |  |
- | enabled | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [InvoiceDetailsSerializer](#InvoiceDetailsSerializer)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | eInvoice | [InvoiceCredSerializer](#InvoiceCredSerializer)? |  yes  |  |
- | eWaybill | [InvoiceCredSerializer](#InvoiceCredSerializer)? |  yes  |  |
-
----
-
-
- 
- 
- #### [LocationIntegrationType](#LocationIntegrationType)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | order | String? |  yes  |  |
- | inventory | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | onSameStore | Boolean? |  yes  |  |
- | storeUid | Int? |  yes  |  |
+ | countryCode | String? |  yes  |  |
+ | longitude | Double? |  yes  |  |
+ | addressType | String? |  yes  |  |
+ | state | String? |  yes  |  |
+ | pincode | Int? |  yes  |  |
+ | landmark | String? |  yes  |  |
+ | latitude | Double? |  yes  |  |
+ | address1 | String? |  yes  |  |
+ | address2 | String? |  yes  |  |
+ | country | String? |  yes  |  |
+ | city | String? |  yes  |  |
 
 ---
 
@@ -16712,10 +19353,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | closing | [LocationTimingSerializer](#LocationTimingSerializer)? |  yes  |  |
- | weekday | String |  no  |  |
- | open | Boolean |  no  |  |
  | opening | [LocationTimingSerializer](#LocationTimingSerializer)? |  yes  |  |
+ | closing | [LocationTimingSerializer](#LocationTimingSerializer)? |  yes  |  |
+ | open | Boolean |  no  |  |
+ | weekday | String |  no  |  |
 
 ---
 
@@ -16726,77 +19367,46 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
  | email | String? |  yes  |  |
  | mobileNo | [SellerPhoneNumber](#SellerPhoneNumber) |  no  |  |
+ | name | String? |  yes  |  |
 
 ---
 
 
  
  
- #### [GetLocationSerializer](#GetLocationSerializer)
+ #### [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | company | [GetCompanySerializer](#GetCompanySerializer)? |  yes  |  |
- | gstCredentials | [InvoiceDetailsSerializer](#InvoiceDetailsSerializer)? |  yes  |  |
- | integrationType | [LocationIntegrationType](#LocationIntegrationType)? |  yes  |  |
- | displayName | String |  no  |  |
- | code | String |  no  |  |
- | contactNumbers | ArrayList<[SellerPhoneNumber](#SellerPhoneNumber)>? |  yes  |  |
- | productReturnConfig | [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)? |  yes  |  |
- | address | [GetAddressSerializer](#GetAddressSerializer) |  no  |  |
- | warnings | HashMap<String,Any>? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
- | notificationEmails | ArrayList<String>? |  yes  |  |
- | timing | ArrayList<[LocationDayWiseSerializer](#LocationDayWiseSerializer)>? |  yes  |  |
- | createdBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | phoneNumber | String |  no  |  |
- | verifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | name | String |  no  |  |
- | storeType | String? |  yes  |  |
- | uid | Int? |  yes  |  |
- | modifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | stage | String? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | documents | ArrayList<[Document](#Document)>? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | verifiedOn | String? |  yes  |  |
- | manager | [LocationManagerSerializer](#LocationManagerSerializer)? |  yes  |  |
+ | storeUid | Int? |  yes  |  |
+ | onSameStore | Boolean? |  yes  |  |
 
 ---
 
 
  
  
- #### [LocationListSerializer](#LocationListSerializer)
+ #### [InvoiceCredSerializer](#InvoiceCredSerializer)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | page | [Page](#Page)? |  yes  |  |
- | items | ArrayList<[GetLocationSerializer](#GetLocationSerializer)>? |  yes  |  |
+ | username | String? |  yes  |  |
+ | enabled | Boolean? |  yes  |  |
+ | password | String? |  yes  |  |
 
 ---
 
 
  
  
- #### [GetAddressSerializer1](#GetAddressSerializer1)
+ #### [InvoiceDetailsSerializer](#InvoiceDetailsSerializer)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | address1 | String? |  yes  |  |
- | state | String? |  yes  |  |
- | landmark | String? |  yes  |  |
- | addressType | String? |  yes  |  |
- | countryCode | String? |  yes  |  |
- | address2 | String? |  yes  |  |
- | country | String? |  yes  |  |
- | pincode | Int? |  yes  |  |
- | city | String? |  yes  |  |
- | latitude | Double? |  yes  |  |
- | longitude | Double? |  yes  |  |
+ | eInvoice | [InvoiceCredSerializer](#InvoiceCredSerializer)? |  yes  |  |
+ | eWaybill | [InvoiceCredSerializer](#InvoiceCredSerializer)? |  yes  |  |
 
 ---
 
@@ -16807,23 +19417,82 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | timing | ArrayList<[LocationDayWiseSerializer](#LocationDayWiseSerializer)>? |  yes  |  |
- | code | String |  no  |  |
- | contactNumbers | ArrayList<[SellerPhoneNumber](#SellerPhoneNumber)>? |  yes  |  |
- | company | Int |  no  |  |
- | notificationEmails | ArrayList<String>? |  yes  |  |
- | stage | String? |  yes  |  |
- | productReturnConfig | [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)? |  yes  |  |
- | gstCredentials | [InvoiceDetailsSerializer](#InvoiceDetailsSerializer)? |  yes  |  |
- | address | [GetAddressSerializer1](#GetAddressSerializer1) |  no  |  |
  | documents | ArrayList<[Document](#Document)>? |  yes  |  |
- | warnings | HashMap<String,Any>? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
- | displayName | String |  no  |  |
- | name | String |  no  |  |
+ | code | String |  no  |  |
+ | address | [GetAddressSerializer1](#GetAddressSerializer1) |  no  |  |
+ | timing | ArrayList<[LocationDayWiseSerializer](#LocationDayWiseSerializer)>? |  yes  |  |
+ | notificationEmails | ArrayList<String>? |  yes  |  |
  | manager | [LocationManagerSerializer](#LocationManagerSerializer)? |  yes  |  |
+ | productReturnConfig | [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)? |  yes  |  |
  | uid | Int? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+ | stage | String? |  yes  |  |
+ | warnings | HashMap<String,Any>? |  yes  |  |
+ | gstCredentials | [InvoiceDetailsSerializer](#InvoiceDetailsSerializer)? |  yes  |  |
+ | name | String |  no  |  |
+ | displayName | String |  no  |  |
  | storeType | String? |  yes  |  |
+ | company | Int |  no  |  |
+ | contactNumbers | ArrayList<[SellerPhoneNumber](#SellerPhoneNumber)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [LocationIntegrationType](#LocationIntegrationType)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | order | String? |  yes  |  |
+ | inventory | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [GetLocationSerializer](#GetLocationSerializer)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | address | [GetAddressSerializer](#GetAddressSerializer) |  no  |  |
+ | notificationEmails | ArrayList<String>? |  yes  |  |
+ | manager | [LocationManagerSerializer](#LocationManagerSerializer)? |  yes  |  |
+ | stage | String? |  yes  |  |
+ | warnings | HashMap<String,Any>? |  yes  |  |
+ | gstCredentials | [InvoiceDetailsSerializer](#InvoiceDetailsSerializer)? |  yes  |  |
+ | verifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
+ | phoneNumber | String |  no  |  |
+ | modifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
+ | productReturnConfig | [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | name | String |  no  |  |
+ | documents | ArrayList<[Document](#Document)>? |  yes  |  |
+ | storeType | String? |  yes  |  |
+ | code | String |  no  |  |
+ | timing | ArrayList<[LocationDayWiseSerializer](#LocationDayWiseSerializer)>? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | integrationType | [LocationIntegrationType](#LocationIntegrationType)? |  yes  |  |
+ | displayName | String |  no  |  |
+ | contactNumbers | ArrayList<[SellerPhoneNumber](#SellerPhoneNumber)>? |  yes  |  |
+ | verifiedOn | String? |  yes  |  |
+ | createdBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | company | [GetCompanySerializer](#GetCompanySerializer)? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [LocationListSerializer](#LocationListSerializer)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | items | ArrayList<[GetLocationSerializer](#GetLocationSerializer)>? |  yes  |  |
+ | page | [Page](#Page)? |  yes  |  |
 
 ---
 

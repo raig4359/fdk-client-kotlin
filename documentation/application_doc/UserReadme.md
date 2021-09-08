@@ -2,45 +2,54 @@
 
 
 
-## Theme Methods
-Responsible for themes
-* [getAllPages](#getallpages)
-* [createPage](#createpage)
-* [updateMultiplePages](#updatemultiplepages)
-* [getPage](#getpage)
-* [updatePage](#updatepage)
-* [deletePage](#deletepage)
-* [getThemeLibrary](#getthemelibrary)
-* [addToThemeLibrary](#addtothemelibrary)
-* [applyTheme](#applytheme)
-* [isUpgradable](#isupgradable)
-* [upgradeTheme](#upgradetheme)
-* [getPublicThemes](#getpublicthemes)
-* [createTheme](#createtheme)
-* [getAppliedTheme](#getappliedtheme)
-* [getFonts](#getfonts)
-* [getThemeById](#getthemebyid)
-* [updateTheme](#updatetheme)
-* [deleteTheme](#deletetheme)
-* [getThemeForPreview](#getthemeforpreview)
-* [publishTheme](#publishtheme)
-* [unpublishTheme](#unpublishtheme)
-* [archiveTheme](#archivetheme)
-* [unarchiveTheme](#unarchivetheme)
+## User Methods
+Authentication Service
+* [loginWithFacebook](#loginwithfacebook)
+* [loginWithGoogle](#loginwithgoogle)
+* [loginWithGoogleAndroid](#loginwithgoogleandroid)
+* [loginWithGoogleIOS](#loginwithgoogleios)
+* [loginWithOTP](#loginwithotp)
+* [loginWithEmailAndPassword](#loginwithemailandpassword)
+* [sendResetPasswordEmail](#sendresetpasswordemail)
+* [forgotPassword](#forgotpassword)
+* [sendResetToken](#sendresettoken)
+* [loginWithToken](#loginwithtoken)
+* [registerWithForm](#registerwithform)
+* [verifyEmail](#verifyemail)
+* [verifyMobile](#verifymobile)
+* [hasPassword](#haspassword)
+* [updatePassword](#updatepassword)
+* [logout](#logout)
+* [sendOTPOnMobile](#sendotponmobile)
+* [verifyMobileOTP](#verifymobileotp)
+* [sendOTPOnEmail](#sendotponemail)
+* [verifyEmailOTP](#verifyemailotp)
+* [getLoggedInUser](#getloggedinuser)
+* [getListOfActiveSessions](#getlistofactivesessions)
+* [getPlatformConfig](#getplatformconfig)
+* [updateProfile](#updateprofile)
+* [addMobileNumber](#addmobilenumber)
+* [deleteMobileNumber](#deletemobilenumber)
+* [setMobileNumberAsPrimary](#setmobilenumberasprimary)
+* [sendVerificationLinkToMobile](#sendverificationlinktomobile)
+* [addEmail](#addemail)
+* [deleteEmail](#deleteemail)
+* [setEmailAsPrimary](#setemailasprimary)
+* [sendVerificationLinkToEmail](#sendverificationlinktoemail)
 
----
+
 
 ## Methods with example and description
 
 
-#### getAllPages
-Get all pages of a theme
+#### loginWithFacebook
+Login or Register using Facebook
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").theme.getAllPages(themeId: themeId).safeAwait{ response,error->
+user.loginWithFacebook(platform: platform, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -56,446 +65,20 @@ client.application("<APPLICATION_ID>").theme.getAllPages(themeId: themeId).safeA
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID |   
-| applicationId | String | yes | Application ID |   
-| themeId | String | yes | ID of the theme to be retrieved |  
+| platform | String? | no | ID of the application |  
+| body | [OAuthRequestSchema](#OAuthRequestSchema) | yes | Request body |
 
 
-
-Use this API to retrieve all the available pages of a theme by its ID.
+Use this API to login or register using Facebook credentials.
 
 *Returned Response*
 
 
 
 
-[AllAvailablePageSchema](#AllAvailablePageSchema)
+[AuthSuccess](#AuthSuccess)
 
-Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; All pages</i></summary>
-
-```json
-{
-  "$ref": "#/components/examples/AllAvailablePagesExample"
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### createPage
-Create a page 
-
-
-
-
-```kotlin
-client.application("<APPLICATION_ID>").theme.createPage(themeId: themeId, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID |   
-| applicationId | String | yes | Application ID |   
-| themeId | String | yes | ID of the theme |  
-| body | [AvailablePageSchema](#AvailablePageSchema) | yes | Request body |
-
-
-Use this API to create a page for a theme by its ID.
-
-*Returned Response*
-
-
-
-
-[AvailablePageSchema](#AvailablePageSchema)
-
-Success. Returns the page of the theme. Refer `AvailablePageSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; page</i></summary>
-
-```json
-{
-  "$ref": "#/components/examples/AvailablePageExample"
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### updateMultiplePages
-Update multiple pages of a theme
-
-
-
-
-```kotlin
-client.application("<APPLICATION_ID>").theme.updateMultiplePages(themeId: themeId, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID |   
-| applicationId | String | yes | Application ID |   
-| themeId | String | yes | ID of the theme to be retrieved |  
-| body | [AllAvailablePageSchema](#AllAvailablePageSchema) | yes | Request body |
-
-
-Use this API to update multiple pages of a theme by its ID.
-
-*Returned Response*
-
-
-
-
-[AllAvailablePageSchema](#AllAvailablePageSchema)
-
-Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; All pages</i></summary>
-
-```json
-{
-  "$ref": "#/components/examples/AllAvailablePagesExample"
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### getPage
-Get page of a theme
-
-
-
-
-```kotlin
-client.application("<APPLICATION_ID>").theme.getPage(themeId: themeId, pageValue: pageValue).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID |   
-| applicationId | String | yes | Application ID |   
-| themeId | String | yes | ID of the theme to be retrieved |   
-| pageValue | String | yes | Value of the page to be retrieved |  
-
-
-
-Use this API to retrieve a page of a theme.
-
-*Returned Response*
-
-
-
-
-[AvailablePageSchema](#AvailablePageSchema)
-
-Success. Returns an object of the page.  Refer `AvailablePageSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Home page</i></summary>
-
-```json
-{
-  "$ref": "#/components/examples/AvailablePageExample"
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### updatePage
-Updates a page 
-
-
-
-
-```kotlin
-client.application("<APPLICATION_ID>").theme.updatePage(themeId: themeId, pageValue: pageValue, body: body).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID |   
-| applicationId | String | yes | Application ID |   
-| themeId | String | yes | ID of the theme |   
-| pageValue | String | yes | Value of the page to be updated |  
-| body | [AvailablePageSchema](#AvailablePageSchema) | yes | Request body |
-
-
-Use this API to update a page for a theme by its ID.
-
-*Returned Response*
-
-
-
-
-[AvailablePageSchema](#AvailablePageSchema)
-
-Success. Returns a the page of the theme. Refer `AvailablePageSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; page</i></summary>
-
-```json
-{
-  "$ref": "#/components/examples/AvailablePageExample"
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### deletePage
-Deletes a page 
-
-
-
-
-```kotlin
-client.application("<APPLICATION_ID>").theme.deletePage(themeId: themeId, pageValue: pageValue).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company ID |   
-| applicationId | String | yes | Application ID |   
-| themeId | String | yes | ID of the theme |   
-| pageValue | String | yes | Value of the page to be updated |  
-
-
-
-Use this API to delete a page for a theme by its ID and page_value.
-
-*Returned Response*
-
-
-
-
-[AvailablePageSchema](#AvailablePageSchema)
-
-Success. Returns a the page of the theme. Refer `AvailablePageSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; page</i></summary>
-
-```json
-{
-  "$ref": "#/components/examples/AvailablePageExample"
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-#### getThemeLibrary
-Get a list of themes from the theme library
-
-
-
-
-```kotlin
-client.application("<APPLICATION_ID>").theme.getThemeLibrary(pageSize: pageSize, pageNo: pageNo).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Numeric ID allotted to a business account on Fynd Platform. |   
-| applicationId | String | yes | Alphanumeric ID allotted to an application created within a business account. |   
-| pageSize | Int? | no | The number of items to retrieve in each page. Default value is 10.  |   
-| pageNo | Int? | no | The page number to navigate through the given set of results. Default value is 1. |  
-
-
-
-Theme library is a personalized collection of themes that are chosen and added from the available themes. Use this API to fetch a list of themes from the library along with their configuration details. 
-
-*Returned Response*
-
-
-
-
-[ThemesListingResponseSchema](#ThemesListingResponseSchema)
-
-Success. Refer `ThemesListingResponseSchema` for more details.
+Success. Returns a JSON object with the user details. Check the example shown below or refer `AuthSuccess` for more details.
 
 
 
@@ -509,7 +92,7 @@ Success. Refer `ThemesListingResponseSchema` for more details.
 
 ```json
 {
-  "$ref": "#/components/examples/ThemesListingResponse"
+  "$ref": "#/components/examples/AuthSuccess"
 }
 ```
 </details>
@@ -527,14 +110,14 @@ Success. Refer `ThemesListingResponseSchema` for more details.
 ---
 
 
-#### addToThemeLibrary
-Add a theme to the theme library
+#### loginWithGoogle
+Login or Register using Google
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").theme.addToThemeLibrary(body: body).safeAwait{ response,error->
+user.loginWithGoogle(platform: platform, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -550,21 +133,20 @@ client.application("<APPLICATION_ID>").theme.addToThemeLibrary(body: body).safeA
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Numeric ID allotted to a business account on Fynd Platform. |   
-| applicationId | String | yes | Alphanumeric ID allotted to an application created within a business account. |  
-| body | [AddThemeRequestSchema](#AddThemeRequestSchema) | yes | Request body |
+| platform | String? | no | ID of the application |  
+| body | [OAuthRequestSchema](#OAuthRequestSchema) | yes | Request body |
 
 
-Theme library is a personalized collection of themes that are chosen and added from the available themes. Use this API to choose a theme and add it to the theme library.
+Use this API to login or register using Google Account credentials.
 
 *Returned Response*
 
 
 
 
-[ThemesSchema](#ThemesSchema)
+[AuthSuccess](#AuthSuccess)
 
-Success. Refer `ThemesSchema` for more details.
+Success. Returns a JSON object with the user details. Check the example shown below or refer `AuthSuccess` for more details.
 
 
 
@@ -578,7 +160,7 @@ Success. Refer `ThemesSchema` for more details.
 
 ```json
 {
-  "$ref": "#/components/examples/Themes"
+  "$ref": "#/components/examples/AuthSuccess"
 }
 ```
 </details>
@@ -596,14 +178,14 @@ Success. Refer `ThemesSchema` for more details.
 ---
 
 
-#### applyTheme
-Apply a theme
+#### loginWithGoogleAndroid
+Login or Register using Google on Android
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").theme.applyTheme(body: body).safeAwait{ response,error->
+user.loginWithGoogleAndroid(platform: platform, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -619,21 +201,20 @@ client.application("<APPLICATION_ID>").theme.applyTheme(body: body).safeAwait{ r
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Numeric ID allotted to a business account on Fynd Platform. |   
-| applicationId | String | yes | Alphanumeric ID allotted to an application created within a business account. |  
-| body | [AddThemeRequestSchema](#AddThemeRequestSchema) | yes | Request body |
+| platform | String? | no | ID of the application |  
+| body | [OAuthRequestSchema](#OAuthRequestSchema) | yes | Request body |
 
 
-Use this API to apply a theme to the website.
+Use this API to login or register in Android app using Google Account credentials.
 
 *Returned Response*
 
 
 
 
-[ThemesSchema](#ThemesSchema)
+[AuthSuccess](#AuthSuccess)
 
-Success. Refer `ThemesSchema` for more details.
+Success. Returns a JSON object with the user details. Check the example shown below or refer `AuthSuccess` for more details.
 
 
 
@@ -647,7 +228,7 @@ Success. Refer `ThemesSchema` for more details.
 
 ```json
 {
-  "$ref": "#/components/examples/Themes"
+  "$ref": "#/components/examples/AuthSuccess"
 }
 ```
 </details>
@@ -665,14 +246,14 @@ Success. Refer `ThemesSchema` for more details.
 ---
 
 
-#### isUpgradable
-Checks if theme is upgradable
+#### loginWithGoogleIOS
+Login or Register using Google on iOS
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").theme.isUpgradable(themeId: themeId).safeAwait{ response,error->
+user.loginWithGoogleIOS(platform: platform, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -688,22 +269,20 @@ client.application("<APPLICATION_ID>").theme.isUpgradable(themeId: themeId).safe
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Numeric ID allotted to a business account on Fynd Platform. |   
-| applicationId | String | yes | Alphanumeric ID allotted to an application created within a business account. |   
-| themeId | String | yes | Theme ID |  
+| platform | String? | no | ID of the application |  
+| body | [OAuthRequestSchema](#OAuthRequestSchema) | yes | Request body |
 
 
-
-There's always a possibility that new features get added to a theme. Use this API to check if the applied theme has an upgrade available.
+Use this API to login or register in iOS app using Google Account credentials.
 
 *Returned Response*
 
 
 
 
-[UpgradableThemeSchema](#UpgradableThemeSchema)
+[AuthSuccess](#AuthSuccess)
 
-Success. If the boolean value of `upgrade` returns **true**, the theme can be upgraded. Refer `UpgradableThemeSchema` for more details.
+Success. Returns a JSON object with the user details. Check the example shown below or refer `AuthSuccess` for more details.
 
 
 
@@ -717,7 +296,7 @@ Success. If the boolean value of `upgrade` returns **true**, the theme can be up
 
 ```json
 {
-  "$ref": "#/components/examples/UpgradableTheme"
+  "$ref": "#/components/examples/AuthSuccess"
 }
 ```
 </details>
@@ -735,14 +314,14 @@ Success. If the boolean value of `upgrade` returns **true**, the theme can be up
 ---
 
 
-#### upgradeTheme
-Upgrade a theme
+#### loginWithOTP
+Login or Register with OTP
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").theme.upgradeTheme(themeId: themeId).safeAwait{ response,error->
+user.loginWithOTP(platform: platform, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -758,22 +337,20 @@ client.application("<APPLICATION_ID>").theme.upgradeTheme(themeId: themeId).safe
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Numeric ID allotted to a business account on Fynd Platform. |   
-| applicationId | String | yes | Alphanumeric ID allotted to an application created within a business account. |   
-| themeId | String | yes | ID allotted to the theme. |  
+| platform | String? | no | ID of the application |  
+| body | [SendOtpRequestSchema](#SendOtpRequestSchema) | yes | Request body |
 
 
-
-Use this API to upgrade the current theme to its latest version.
+Use this API to login or register with a One-time Password (OTP) sent via Email or SMS.
 
 *Returned Response*
 
 
 
 
-[ThemesSchema](#ThemesSchema)
+[SendOtpResponse](#SendOtpResponse)
 
-Success. Upgrades the theme and shares the details of the new version in the response. Refer `ThemesSchema` for more details.
+Success. Check the example shown below or refer `SendOtpResponse` for more details.
 
 
 
@@ -787,7 +364,7 @@ Success. Upgrades the theme and shares the details of the new version in the res
 
 ```json
 {
-  "$ref": "#/components/examples/Themes"
+  "$ref": "#/components/examples/SendOtpResponse"
 }
 ```
 </details>
@@ -805,14 +382,14 @@ Success. Upgrades the theme and shares the details of the new version in the res
 ---
 
 
-#### getPublicThemes
-Get all public themes
+#### loginWithEmailAndPassword
+Login or Register with password
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").theme.getPublicThemes(pageSize: pageSize, pageNo: pageNo).safeAwait{ response,error->
+user.loginWithEmailAndPassword(body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -827,24 +404,20 @@ client.application("<APPLICATION_ID>").theme.getPublicThemes(pageSize: pageSize,
 
 
 | Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Numeric ID allotted to a business account on Fynd Platform. |   
-| applicationId | String | yes | Alphanumeric ID allotted to an application created within a business account. |   
-| pageSize | Int? | no | The number of items to retrieve in each page. Default value is 10.  |   
-| pageNo | Int? | no | The page number to navigate through the given set of results. Default value is 1.  |  
+| --------- | -----  | -------- | ----------- |
+| body | [PasswordLoginRequestSchema](#PasswordLoginRequestSchema) | yes | Request body |
 
 
-
-Use this API to get a list of free themes that you can apply to your website.
+Use this API to login or register using an email address and password.
 
 *Returned Response*
 
 
 
 
-[ThemesListingResponseSchema](#ThemesListingResponseSchema)
+[LoginSuccess](#LoginSuccess)
 
-Success. Refer `ThemesListingResponseSchema` for more details.
+Success. Check the example shown below or refer `LoginSuccess` for more details.
 
 
 
@@ -858,7 +431,7 @@ Success. Refer `ThemesListingResponseSchema` for more details.
 
 ```json
 {
-  "$ref": "#/components/examples/ThemesListingResponse"
+  "$ref": "#/components/examples/UserExampleObject"
 }
 ```
 </details>
@@ -876,14 +449,14 @@ Success. Refer `ThemesListingResponseSchema` for more details.
 ---
 
 
-#### createTheme
-Create a new theme
+#### sendResetPasswordEmail
+Reset Password
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").theme.createTheme(body: body).safeAwait{ response,error->
+user.sendResetPasswordEmail(platform: platform, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -899,21 +472,81 @@ client.application("<APPLICATION_ID>").theme.createTheme(body: body).safeAwait{ 
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Numeric ID allotted to a business account on Fynd Platform. |   
-| applicationId | String | yes | Alphanumeric ID allotted to an application created within a business account. |  
-| body | [ThemesSchema](#ThemesSchema) | yes | Request body |
+| platform | String? | no | ID of the application |  
+| body | [SendResetPasswordEmailRequestSchema](#SendResetPasswordEmailRequestSchema) | yes | Request body |
 
 
-Themes improve the look and appearance of a website. Use this API to create a theme.
+Use this API to reset a password using the link sent on email.
 
 *Returned Response*
 
 
 
 
-[ThemesSchema](#ThemesSchema)
+[ResetPasswordSuccess](#ResetPasswordSuccess)
 
-Theme
+Success. Check the example shown below or refer `ResetPasswordSuccess` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "status": "sent"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### forgotPassword
+Forgot Password
+
+
+
+
+```kotlin
+user.forgotPassword(body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [ForgotPasswordRequestSchema](#ForgotPasswordRequestSchema) | yes | Request body |
+
+
+Use this API to reset a password using the code sent on email or SMS.
+
+*Returned Response*
+
+
+
+
+[LoginSuccess](#LoginSuccess)
+
+Success. Check the example shown below or refer `LoginSuccess` for more details.
 
 
 
@@ -927,7 +560,7 @@ Theme
 
 ```json
 {
-  "$ref": "#/components/examples/Themes"
+  "$ref": "#/components/examples/UserExampleObject"
 }
 ```
 </details>
@@ -945,14 +578,14 @@ Theme
 ---
 
 
-#### getAppliedTheme
-Get the applied theme
+#### sendResetToken
+Reset Password using token
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").theme.getAppliedTheme().safeAwait{ response,error->
+user.sendResetToken(body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -967,22 +600,81 @@ client.application("<APPLICATION_ID>").theme.getAppliedTheme().safeAwait{ respon
 
 
 | Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Numeric ID allotted to a business account on Fynd Platform. |   
-| applicationId | String | yes | Alphanumeric ID allotted to an application created within a business account. |  
+| --------- | -----  | -------- | ----------- |
+| body | [CodeRequestBodySchema](#CodeRequestBodySchema) | yes | Request body |
 
 
-
-Use this API to retrieve the theme that is currently applied to the website along with its details.
+Use this API to send code to reset password.
 
 *Returned Response*
 
 
 
 
-[ThemesSchema](#ThemesSchema)
+[ResetPasswordSuccess](#ResetPasswordSuccess)
 
-Success. Refer `ThemesSchema` for more details.
+Success. Check the example shown below or refer `ResetPasswordSuccess` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "status": "success"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### loginWithToken
+Login or Register with token
+
+
+
+
+```kotlin
+user.loginWithToken(body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [TokenRequestBodySchema](#TokenRequestBodySchema) | yes | Request body |
+
+
+Use this API to login or register using a token for authentication.
+
+*Returned Response*
+
+
+
+
+[LoginSuccess](#LoginSuccess)
+
+Success. Check the example shown below or refer `LoginSuccess` for more details.
 
 
 
@@ -996,7 +688,7 @@ Success. Refer `ThemesSchema` for more details.
 
 ```json
 {
-  "$ref": "#/components/examples/Themes"
+  "$ref": "#/components/examples/UserExampleObject"
 }
 ```
 </details>
@@ -1014,14 +706,14 @@ Success. Refer `ThemesSchema` for more details.
 ---
 
 
-#### getFonts
-Get all the supported fonts in a theme
+#### registerWithForm
+Registration using a form
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").theme.getFonts().safeAwait{ response,error->
+user.registerWithForm(platform: platform, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -1037,21 +729,452 @@ client.application("<APPLICATION_ID>").theme.getFonts().safeAwait{ response,erro
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Numeric ID allotted to a business account on Fynd Platform. |   
-| applicationId | String | yes | Alphanumeric ID allotted to an application created within a business account. |  
+| platform | String? | no | ID of the application |  
+| body | [FormRegisterRequestSchema](#FormRegisterRequestSchema) | yes | Request body |
 
 
-
-Font is a collection of characters with a similar design. Use this API to retrieve a list of website fonts.
+Use this API to perform user registration by sending form data in the request body.
 
 *Returned Response*
 
 
 
 
-[FontsSchema](#FontsSchema)
+[RegisterFormSuccess](#RegisterFormSuccess)
 
-Success. Refer `FontsSchema` for more details.
+Success. Check the example shown below or refer `RegisterFormSuccess` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true,
+  "request_id": "ebc059191393681cdfb805b5424bddad",
+  "message": "OTP sent",
+  "mobile": "7400448798",
+  "country_code": "91",
+  "resend_timer": 30,
+  "resend_token": "5197ff90-66e2-11eb-9399-0312fbf2c2a6",
+  "verify_mobile_otp": true,
+  "register_token": "276e718a-d406-4a4b-83f7-cb6cb72b99ff",
+  "userExists": false
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### verifyEmail
+Verify email
+
+
+
+
+```kotlin
+user.verifyEmail(body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [CodeRequestBodySchema](#CodeRequestBodySchema) | yes | Request body |
+
+
+Use this API to send a verification code to verify an email.
+
+*Returned Response*
+
+
+
+
+[VerifyEmailSuccess](#VerifyEmailSuccess)
+
+Success. Check the example shown below or refer `VerifyEmailSuccess` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "message": "verified"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### verifyMobile
+Verify mobile
+
+
+
+
+```kotlin
+user.verifyMobile(body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [CodeRequestBodySchema](#CodeRequestBodySchema) | yes | Request body |
+
+
+Use this API to send a verification code to verify a mobile number.
+
+*Returned Response*
+
+
+
+
+[VerifyEmailSuccess](#VerifyEmailSuccess)
+
+Success. Check the example shown below or refer `VerifyEmailSuccess` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "message": "verified"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### hasPassword
+Check password
+
+
+
+
+```kotlin
+user.hasPassword().safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+
+Use this API to check if user has created a password for login.
+
+*Returned Response*
+
+
+
+
+[HasPasswordSuccess](#HasPasswordSuccess)
+
+Success. Returns a boolean value. Check the example shown below or refer `HasPasswordSuccess` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updatePassword
+Update user password
+
+
+
+
+```kotlin
+user.updatePassword(body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [UpdatePasswordRequestSchema](#UpdatePasswordRequestSchema) | yes | Request body |
+
+
+Use this API to update the password.
+
+*Returned Response*
+
+
+
+
+[VerifyEmailSuccess](#VerifyEmailSuccess)
+
+Success. Returns a success message. Refer `VerifyEmailSuccess` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "message": "success"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### logout
+Logs out currently logged in user
+
+
+
+
+```kotlin
+user.logout().safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+
+Use this API to check to logout a user from the app.
+
+*Returned Response*
+
+
+
+
+[LogoutSuccess](#LogoutSuccess)
+
+Success. Returns a success message as shown below. Refer `LogoutSuccess` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### sendOTPOnMobile
+Send OTP on mobile
+
+
+
+
+```kotlin
+user.sendOTPOnMobile(platform: platform, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| platform | String? | no | ID of the application |  
+| body | [SendMobileOtpRequestSchema](#SendMobileOtpRequestSchema) | yes | Request body |
+
+
+Use this API to send an OTP to a mobile number.
+
+*Returned Response*
+
+
+
+
+[OtpSuccess](#OtpSuccess)
+
+Success. Returns a JSON object as shown below. Refer `OtpSuccess` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true,
+  "request_id": "01503005aeab87cbed93d40f46cc2749",
+  "message": "OTP sent",
+  "mobile": "8652523958",
+  "country_code": "91",
+  "resend_timer": 30,
+  "resend_token": "18fc3d60-66e5-11eb-9399-0312fbf2c2a6"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### verifyMobileOTP
+Verify OTP on mobile
+
+
+
+
+```kotlin
+user.verifyMobileOTP(platform: platform, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| platform | String? | no | ID of the application |  
+| body | [VerifyOtpRequestSchema](#VerifyOtpRequestSchema) | yes | Request body |
+
+
+Use this API to verify the OTP received on a mobile number.
+
+*Returned Response*
+
+
+
+
+[VerifyOtpSuccess](#VerifyOtpSuccess)
+
+Success. Returns a JSON object as shown below. Refer `VerifyOtpSuccess` for more details.
 
 
 
@@ -1061,11 +1184,11 @@ Success. Refer `FontsSchema` for more details.
 
 
 <details>
-<summary><i>&nbsp; Success</i></summary>
+<summary><i>&nbsp; default</i></summary>
 
 ```json
 {
-  "$ref": "#/components/examples/FontsResponse"
+  "$ref": "#/components/examples/VerifyMobileOTP"
 }
 ```
 </details>
@@ -1083,14 +1206,14 @@ Success. Refer `FontsSchema` for more details.
 ---
 
 
-#### getThemeById
-Gets theme by id
+#### sendOTPOnEmail
+Send OTP on email
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").theme.getThemeById(themeId: themeId).safeAwait{ response,error->
+user.sendOTPOnEmail(platform: platform, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -1106,22 +1229,82 @@ client.application("<APPLICATION_ID>").theme.getThemeById(themeId: themeId).safe
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Numeric ID allotted to a business account on Fynd Platform. |   
-| applicationId | String | yes | Alphanumeric ID allotted to an application created within a business account. |   
-| themeId | String | yes | ID allotted to the theme. |  
+| platform | String? | no | ID of the application |  
+| body | [SendEmailOtpRequestSchema](#SendEmailOtpRequestSchema) | yes | Request body |
 
 
-
-Use this API to retrieve the details of a specific theme by using its ID.
+Use this API to send an OTP to an email ID.
 
 *Returned Response*
 
 
 
 
-[ThemesSchema](#ThemesSchema)
+[EmailOtpSuccess](#EmailOtpSuccess)
 
-Success. Refer `ThemesSchema` for more details.
+Success. Returns a JSON object as shown below. Refer `EmailOtpSuccess` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### verifyEmailOTP
+Verify OTP on email
+
+
+
+
+```kotlin
+user.verifyEmailOTP(platform: platform, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| platform | String? | no | ID of the application |  
+| body | [VerifyEmailOtpRequestSchema](#VerifyEmailOtpRequestSchema) | yes | Request body |
+
+
+Use this API to verify the OTP received on an email ID.
+
+*Returned Response*
+
+
+
+
+[VerifyOtpSuccess](#VerifyOtpSuccess)
+
+Success. Returns a JSON object as shown below. Refer `VerifyOtpSuccess` for more details.
 
 
 
@@ -1131,11 +1314,11 @@ Success. Refer `ThemesSchema` for more details.
 
 
 <details>
-<summary><i>&nbsp; Success</i></summary>
+<summary><i>&nbsp; default</i></summary>
 
 ```json
 {
-  "$ref": "#/components/examples/Themes"
+  "$ref": "#/components/examples/VerifyMobileOTP"
 }
 ```
 </details>
@@ -1153,14 +1336,14 @@ Success. Refer `ThemesSchema` for more details.
 ---
 
 
-#### updateTheme
-Update a theme
+#### getLoggedInUser
+Get logged in user
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").theme.updateTheme(themeId: themeId, body: body).safeAwait{ response,error->
+user.getLoggedInUser().safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -1174,24 +1357,17 @@ client.application("<APPLICATION_ID>").theme.updateTheme(themeId: themeId, body:
 
 
 
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Numeric ID allotted to a business account on Fynd Platform. |   
-| applicationId | String | yes | Alphanumeric ID allotted to an application created within a business account. |   
-| themeId | String | yes | ID allotted to the theme. |  
-| body | [ThemesSchema](#ThemesSchema) | yes | Request body |
 
-
-Use this API to edit an existing theme. You can customize the website font, sections, images, styles, and many more.
+Use this API  to get the details of a logged in user.
 
 *Returned Response*
 
 
 
 
-[ThemesSchema](#ThemesSchema)
+[UserObjectSchema](#UserObjectSchema)
 
-Success. Refer `ThemesSchema` for more details.
+Success. Returns a JSON object with user details. Refer `UserObjectSchema` for more details.
 
 
 
@@ -1201,11 +1377,11 @@ Success. Refer `ThemesSchema` for more details.
 
 
 <details>
-<summary><i>&nbsp; Success</i></summary>
+<summary><i>&nbsp; default</i></summary>
 
 ```json
 {
-  "$ref": "#/components/examples/Themes"
+  "$ref": "#/components/examples/UserExampleObject"
 }
 ```
 </details>
@@ -1223,14 +1399,74 @@ Success. Refer `ThemesSchema` for more details.
 ---
 
 
-#### deleteTheme
-Delete a theme
+#### getListOfActiveSessions
+Get list of sessions
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").theme.deleteTheme(themeId: themeId).safeAwait{ response,error->
+user.getListOfActiveSessions().safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+
+Use this API to retrieve all active sessions of a user.
+
+*Returned Response*
+
+
+
+
+[SessionListSuccess](#SessionListSuccess)
+
+Success. Returns a JSON object containing an array of sessions. Refer `SessionListSuccess` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "sessions": [
+    "session_1",
+    "session_2"
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getPlatformConfig
+Get platform configurations
+
+
+
+
+```kotlin
+user.getPlatformConfig(name: name).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -1246,22 +1482,145 @@ client.application("<APPLICATION_ID>").theme.deleteTheme(themeId: themeId).safeA
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Numeric ID allotted to a business account on Fynd Platform. |   
-| applicationId | String | yes | Alphanumeric ID allotted to an application created within a business account. |   
-| themeId | String | yes | ID allotted to the theme. |  
+| name | String? | no | Name of the application, e.g. Fynd |  
 
 
 
-Use this API to delete a theme from the theme library.
+Use this API to get all the platform configurations such as mobile image, desktop image, social logins, and all other text.
 
 *Returned Response*
 
 
 
 
-[ThemesSchema](#ThemesSchema)
+[PlatformSchema](#PlatformSchema)
 
-Success. Refer `ThemesSchema` for more details.
+Success. Returns a JSON object containing the all the platform configurations. Refer `PlatformSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "active": true,
+  "mobile_image": null,
+  "desktop_image": null,
+  "social": {
+    "facebook": true,
+    "google": true,
+    "account_kit": true
+  },
+  "flash_card": {
+    "text": "",
+    "text_color": "#FFFFFF",
+    "background_color": "#EF5350"
+  },
+  "register": true,
+  "forgot_password": true,
+  "login": {
+    "password": true,
+    "otp": true
+  },
+  "skip_captcha": false,
+  "display": "Fynd",
+  "subtext": "Login to Fynd",
+  "name": "Fynd",
+  "meta": {},
+  "required_fields": {
+    "email": {
+      "is_required": false,
+      "level": "hard"
+    },
+    "mobile": {
+      "is_required": true,
+      "level": "hard"
+    }
+  },
+  "register_required_fields": {
+    "email": {
+      "is_required": false,
+      "level": "hard"
+    },
+    "mobile": {
+      "is_required": true,
+      "level": "hard"
+    }
+  },
+  "skip_login": false,
+  "look_and_feel": {
+    "background_color": "#F5F5F5",
+    "card_position": "center"
+  },
+  "social_tokens": {
+    "google": {
+      "appId": "token_123"
+    },
+    "facebook": {
+      "appId": "2033146826724884"
+    },
+    "account_kit": {
+      "appId": "548529975557631"
+    }
+  },
+  "_id": "5e04a5e5220bc15839ad9bc0",
+  "created_at": "2019-12-26T12:21:57.878Z",
+  "updated_at": "2020-08-13T14:31:09.878Z",
+  "__v": 0
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### updateProfile
+Edit Profile Details
+
+
+
+
+```kotlin
+user.updateProfile(platform: platform, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| platform | String? | no | ID of the application |  
+| body | [EditProfileRequestSchema](#EditProfileRequestSchema) | yes | Request body |
+
+
+Use this API to update details in the user profile. Details can be first name, last name, gender, email, phone number, or profile picture.
+
+*Returned Response*
+
+
+
+
+[ProfileEditSuccess](#ProfileEditSuccess)
+
+Success. Check the example shown below or refer `LoginSuccess` for more details.
 
 
 
@@ -1271,11 +1630,11 @@ Success. Refer `ThemesSchema` for more details.
 
 
 <details>
-<summary><i>&nbsp; Success</i></summary>
+<summary><i>&nbsp; default</i></summary>
 
 ```json
 {
-  "$ref": "#/components/examples/Themes"
+  "$ref": "#/components/examples/UserExampleObject"
 }
 ```
 </details>
@@ -1293,14 +1652,14 @@ Success. Refer `ThemesSchema` for more details.
 ---
 
 
-#### getThemeForPreview
-Get a theme preview
+#### addMobileNumber
+Add mobile number to profile
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").theme.getThemeForPreview(themeId: themeId).safeAwait{ response,error->
+user.addMobileNumber(platform: platform, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -1316,22 +1675,20 @@ client.application("<APPLICATION_ID>").theme.getThemeForPreview(themeId: themeId
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Numeric ID allotted to a business account on Fynd Platform. |   
-| applicationId | String | yes | Alphanumeric ID allotted to an application created within a business account. |   
-| themeId | String | yes | ID allotted to the theme. |  
+| platform | String? | no | ID of the application |  
+| body | [EditMobileRequestSchema](#EditMobileRequestSchema) | yes | Request body |
 
 
-
-A theme can be previewed before applying it. Use this API to retrieve the theme preview by using its ID.
+Use this API to add a new mobile number to a profile.
 
 *Returned Response*
 
 
 
 
-[ThemesSchema](#ThemesSchema)
+[VerifyMobileOTPSuccess](#VerifyMobileOTPSuccess)
 
-Success. Refer `ThemesSchema` for more details.
+Success. Check the example shown below or refer `VerifyMobileOTPSuccess` for more details.
 
 
 
@@ -1341,11 +1698,11 @@ Success. Refer `ThemesSchema` for more details.
 
 
 <details>
-<summary><i>&nbsp; Success</i></summary>
+<summary><i>&nbsp; default</i></summary>
 
 ```json
 {
-  "$ref": "#/components/examples/Themes"
+  "$ref": "#/components/examples/VerifyMobileOTP"
 }
 ```
 </details>
@@ -1363,14 +1720,14 @@ Success. Refer `ThemesSchema` for more details.
 ---
 
 
-#### publishTheme
-Publish a theme
+#### deleteMobileNumber
+Delete mobile number from profile
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").theme.publishTheme(themeId: themeId).safeAwait{ response,error->
+user.deleteMobileNumber(platform: platform, active: active, primary: primary, verified: verified, countryCode: countryCode, phone: phone).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -1386,22 +1743,25 @@ client.application("<APPLICATION_ID>").theme.publishTheme(themeId: themeId).safe
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Numeric ID allotted to a business account on Fynd Platform. |   
-| applicationId | String | yes | Alphanumeric ID allotted to an application created within a business account. |   
-| themeId | String | yes | ID allotted to the theme. |  
+| platform | String? | no | ID of the application |   
+| active | Boolean | yes | This is a boolean value to check if mobile number is active 1.True - Number is active 2. False - Number is inactive |   
+| primary | Boolean | yes | This is a boolean value to check if mobile number is primary number (main number) 1. True - Number is primary 2. False - Number is not primary |   
+| verified | Boolean | yes | This is a boolean value to check if mobile number is verified 1. True - Number is verified 2.False - Number is not verified yet |   
+| countryCode | String | yes | Country code of the phone number, e.g. 91 |   
+| phone | String | yes | Phone number |  
 
 
 
-Use this API to publish a theme that is either newly created or edited.
+Use this API to delete a mobile number from a profile.
 
 *Returned Response*
 
 
 
 
-[ThemesSchema](#ThemesSchema)
+[LoginSuccess](#LoginSuccess)
 
-Success. Refer `ThemesSchema` for more details.
+Success. Check the example shown below or refer `LoginSuccess` for more details.
 
 
 
@@ -1411,11 +1771,11 @@ Success. Refer `ThemesSchema` for more details.
 
 
 <details>
-<summary><i>&nbsp; Success</i></summary>
+<summary><i>&nbsp; default</i></summary>
 
 ```json
 {
-  "$ref": "#/components/examples/Themes"
+  "$ref": "#/components/examples/UserExampleObject"
 }
 ```
 </details>
@@ -1433,14 +1793,14 @@ Success. Refer `ThemesSchema` for more details.
 ---
 
 
-#### unpublishTheme
-Unpublish a theme
+#### setMobileNumberAsPrimary
+Set mobile as primary
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").theme.unpublishTheme(themeId: themeId).safeAwait{ response,error->
+user.setMobileNumberAsPrimary(body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -1455,23 +1815,20 @@ client.application("<APPLICATION_ID>").theme.unpublishTheme(themeId: themeId).sa
 
 
 | Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Numeric ID allotted to a business account on Fynd Platform. |   
-| applicationId | String | yes | Alphanumeric ID allotted to an application created within a business account. |   
-| themeId | String | yes | ID allotted to the theme. |  
+| --------- | -----  | -------- | ----------- |
+| body | [SendVerificationLinkMobileRequestSchema](#SendVerificationLinkMobileRequestSchema) | yes | Request body |
 
 
-
-Use this API to remove an existing theme from the list of available themes.
+Use this API to set a mobile number as primary. Primary number is a verified number used for all future communications.
 
 *Returned Response*
 
 
 
 
-[ThemesSchema](#ThemesSchema)
+[LoginSuccess](#LoginSuccess)
 
-Success. Refer `ThemesSchema` for more details.
+Success. Check the example shown below or refer `LoginSuccess` for more details.
 
 
 
@@ -1481,11 +1838,11 @@ Success. Refer `ThemesSchema` for more details.
 
 
 <details>
-<summary><i>&nbsp; Success</i></summary>
+<summary><i>&nbsp; default</i></summary>
 
 ```json
 {
-  "$ref": "#/components/examples/Themes"
+  "$ref": "#/components/examples/UserExampleObject"
 }
 ```
 </details>
@@ -1503,14 +1860,14 @@ Success. Refer `ThemesSchema` for more details.
 ---
 
 
-#### archiveTheme
-Archive a theme
+#### sendVerificationLinkToMobile
+Send verification link to mobile
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").theme.archiveTheme(themeId: themeId).safeAwait{ response,error->
+user.sendVerificationLinkToMobile(platform: platform, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -1526,22 +1883,20 @@ client.application("<APPLICATION_ID>").theme.archiveTheme(themeId: themeId).safe
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Numeric ID allotted to a business account on Fynd Platform. |   
-| applicationId | String | yes | Alphanumeric ID allotted to an application created within a business account. |   
-| themeId | String | yes | ID allotted to the theme. |  
+| platform | String? | no | ID of the application |  
+| body | [SendVerificationLinkMobileRequestSchema](#SendVerificationLinkMobileRequestSchema) | yes | Request body |
 
 
-
-Use this API to store an existing theme but not delete it so that it can be used in future if required. 
+Use this API to send a verification link to a mobile number
 
 *Returned Response*
 
 
 
 
-[ThemesSchema](#ThemesSchema)
+[SendMobileVerifyLinkSuccess](#SendMobileVerifyLinkSuccess)
 
-Success. Refer `ThemesSchema` for more details.
+Success. Check the example shown below or refer `SendMobileVerifyLinkSuccess` for more details.
 
 
 
@@ -1551,11 +1906,11 @@ Success. Refer `ThemesSchema` for more details.
 
 
 <details>
-<summary><i>&nbsp; Success</i></summary>
+<summary><i>&nbsp; default</i></summary>
 
 ```json
 {
-  "$ref": "#/components/examples/Themes"
+  "$ref": "#/components/examples/VerifyMobileOTP"
 }
 ```
 </details>
@@ -1573,14 +1928,14 @@ Success. Refer `ThemesSchema` for more details.
 ---
 
 
-#### unarchiveTheme
-Unarchive a theme
+#### addEmail
+Add email to profile
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").theme.unarchiveTheme(themeId: themeId).safeAwait{ response,error->
+user.addEmail(platform: platform, body: body).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -1596,22 +1951,20 @@ client.application("<APPLICATION_ID>").theme.unarchiveTheme(themeId: themeId).sa
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Numeric ID allotted to a business account on Fynd Platform. |   
-| applicationId | String | yes | Alphanumeric ID allotted to an application created within a business account. |   
-| themeId | String | yes | ID allotted to the theme. |  
+| platform | String? | no | ID of the application |  
+| body | [EditEmailRequestSchema](#EditEmailRequestSchema) | yes | Request body |
 
 
-
-Use this API to restore an archived theme and bring it back for editing or publishing. 
+Use this API to add a new email address to a profile
 
 *Returned Response*
 
 
 
 
-[ThemesSchema](#ThemesSchema)
+[VerifyEmailOTPSuccess](#VerifyEmailOTPSuccess)
 
-Success. Refer `ThemesSchema` for more details.
+Success. Returns a JSON object with user details. Refer `VerifyEmailOTPSuccess` for more details.
 
 
 
@@ -1621,15 +1974,214 @@ Success. Refer `ThemesSchema` for more details.
 
 
 <details>
-<summary><i>&nbsp; Success</i></summary>
+<summary><i>&nbsp; default</i></summary>
 
 ```json
 {
-  "$ref": "#/components/examples/Themes"
+  "$ref": "#/components/examples/VerifyEmailOTP"
 }
 ```
 </details>
 
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### deleteEmail
+Delete email from profile
+
+
+
+
+```kotlin
+user.deleteEmail(platform: platform, active: active, primary: primary, verified: verified, email: email).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| platform | String? | no | ID of the application |   
+| active | Boolean | yes | This is a boolean value to check if email ID is active 1. True - Email ID is active 2.False - Email ID is inactive |   
+| primary | Boolean | yes | This is a boolean value to check if email ID is primary (main email ID) 1. True - Email ID is primary 2.False - Email ID is not primary |   
+| verified | Boolean | yes | This is a boolean value to check if email ID is verified 1. True - Email ID is verified 2.False - Email ID is not verified yet |   
+| email | String | yes | The email ID to delete |  
+
+
+
+Use this API to delete an email address from a profile
+
+*Returned Response*
+
+
+
+
+[LoginSuccess](#LoginSuccess)
+
+Success. Returns a JSON object with user details. Refer `LoginSuccess` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; default</i></summary>
+
+```json
+{
+  "$ref": "#/components/examples/UserExampleObject"
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### setEmailAsPrimary
+Set email as primary
+
+
+
+
+```kotlin
+user.setEmailAsPrimary(body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [EditEmailRequestSchema](#EditEmailRequestSchema) | yes | Request body |
+
+
+Use this API to set an email address as primary. Primary email ID is a email address used for all future communications.
+
+*Returned Response*
+
+
+
+
+[LoginSuccess](#LoginSuccess)
+
+Success. Returns a JSON object with user details. Refer `LoginSuccess` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; default</i></summary>
+
+```json
+{
+  "$ref": "#/components/examples/UserExampleObject"
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### sendVerificationLinkToEmail
+Send verification link to email
+
+
+
+
+```kotlin
+user.sendVerificationLinkToEmail(platform: platform, body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| platform | String? | no | ID of the application |  
+| body | [EditEmailRequestSchema](#EditEmailRequestSchema) | yes | Request body |
+
+
+Use this API to send verification link to an email address.
+
+*Returned Response*
+
+
+
+
+[SendEmailVerifyLinkSuccess](#SendEmailVerifyLinkSuccess)
+
+Request body must contain an email ID. Refer `EditEmailRequestSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
 </details>
 
 
@@ -10736,15 +11288,67 @@ Success. Refer `ThemesSchema` for more details.
 
  
  
+ #### [SearchKeywordResult](#SearchKeywordResult)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | query | HashMap<String,Any> |  no  |  |
+ | sortOn | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [CreateSearchKeyword](#CreateSearchKeyword)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | words | ArrayList<String>? |  yes  |  |
+ | appId | String? |  yes  |  |
+ | result | [SearchKeywordResult](#SearchKeywordResult) |  no  |  |
+ | isActive | Boolean? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [GetSearchWordsData](#GetSearchWordsData)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | String? |  yes  |  |
+ | words | ArrayList<String>? |  yes  |  |
  | appId | String? |  yes  |  |
  | result | HashMap<String,Any>? |  yes  |  |
- | words | ArrayList<String>? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | uid | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ErrorResponse](#ErrorResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | code | String? |  yes  |  |
+ | message | String? |  yes  |  |
+ | status | Int? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [DeleteResponse](#DeleteResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | message | String? |  yes  |  |
 
 ---
 
@@ -10763,58 +11367,6 @@ Success. Refer `ThemesSchema` for more details.
 
  
  
- #### [ErrorResponse](#ErrorResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | message | String? |  yes  |  |
- | status | Int? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | code | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [SearchKeywordResult](#SearchKeywordResult)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | sortOn | String |  no  |  |
- | query | HashMap<String,Any> |  no  |  |
-
----
-
-
- 
- 
- #### [CreateSearchKeyword](#CreateSearchKeyword)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | appId | String? |  yes  |  |
- | result | [SearchKeywordResult](#SearchKeywordResult) |  no  |  |
- | words | ArrayList<String>? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
-
----
-
-
- 
- 
- #### [DeleteResponse](#DeleteResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | message | String? |  yes  |  |
-
----
-
-
- 
- 
  #### [GetSearchWordsResponse](#GetSearchWordsResponse)
 
  | Properties | Type | Nullable | Description |
@@ -10827,41 +11379,14 @@ Success. Refer `ThemesSchema` for more details.
 
  
  
- #### [GetAutocompleteWordsData](#GetAutocompleteWordsData)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | uid | String? |  yes  |  |
- | appId | String? |  yes  |  |
- | results | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | words | ArrayList<String>? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
-
----
-
-
- 
- 
- #### [GetAutocompleteWordsResponse](#GetAutocompleteWordsResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<[GetAutocompleteWordsData](#GetAutocompleteWordsData)>? |  yes  |  |
- | page | [Page](#Page)? |  yes  |  |
-
----
-
-
- 
- 
  #### [AutocompletePageAction](#AutocompletePageAction)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | params | HashMap<String,Any>? |  yes  |  |
+ | query | HashMap<String,Any> |  no  |  |
  | type | String |  no  |  |
  | url | String? |  yes  |  |
- | query | HashMap<String,Any> |  no  |  |
+ | params | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -10896,10 +11421,10 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | customJson | HashMap<String,Any>? |  yes  |  |
  | action | [AutocompleteAction](#AutocompleteAction)? |  yes  |  |
- | logo | [Media](#Media)? |  yes  |  |
  | display | String? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+ | logo | [Media](#Media)? |  yes  |  |
 
 ---
 
@@ -10910,11 +11435,38 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | appId | String? |  yes  |  |
- | results | ArrayList<[AutocompleteResult](#AutocompleteResult)>? |  yes  |  |
  | words | ArrayList<String>? |  yes  |  |
+ | appId | String? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | results | ArrayList<[AutocompleteResult](#AutocompleteResult)>? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [GetAutocompleteWordsData](#GetAutocompleteWordsData)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | words | ArrayList<String>? |  yes  |  |
+ | appId | String? |  yes  |  |
+ | results | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+ | uid | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [GetAutocompleteWordsResponse](#GetAutocompleteWordsResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | items | ArrayList<[GetAutocompleteWordsData](#GetAutocompleteWordsData)>? |  yes  |  |
+ | page | [Page](#Page)? |  yes  |  |
 
 ---
 
@@ -10925,10 +11477,10 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | words | ArrayList<String>? |  yes  |  |
  | appId | String? |  yes  |  |
- | results | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | words | ArrayList<String>? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | results | ArrayList<HashMap<String,Any>>? |  yes  |  |
 
 ---
 
@@ -10939,12 +11491,12 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | maxQuantity | Int |  no  |  |
- | autoAddToCart | Boolean? |  yes  |  |
- | productUid | Int |  no  |  |
- | minQuantity | Int |  no  |  |
- | autoSelect | Boolean? |  yes  |  |
  | allowRemove | Boolean? |  yes  |  |
+ | maxQuantity | Int |  no  |  |
+ | autoSelect | Boolean? |  yes  |  |
+ | productUid | Int |  no  |  |
+ | autoAddToCart | Boolean? |  yes  |  |
+ | minQuantity | Int |  no  |  |
 
 ---
 
@@ -10955,21 +11507,21 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | choice | String |  no  |  |
+ | createdOn | String? |  yes  |  |
+ | companyId | Int? |  yes  |  |
+ | products | ArrayList<[ProductBundleItem](#ProductBundleItem)> |  no  |  |
  | isActive | Boolean |  no  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | pageVisibility | ArrayList<String>? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | id | String? |  yes  |  |
+ | logo | String? |  yes  |  |
  | modifiedOn | String? |  yes  |  |
  | sameStoreAssignment | Boolean? |  yes  |  |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | choice | String |  no  |  |
- | logo | String? |  yes  |  |
  | name | String |  no  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
  | slug | String |  no  |  |
- | createdOn | String? |  yes  |  |
- | products | ArrayList<[ProductBundleItem](#ProductBundleItem)> |  no  |  |
- | pageVisibility | ArrayList<String>? |  yes  |  |
- | companyId | Int? |  yes  |  |
- | id | String? |  yes  |  |
 
 ---
 
@@ -10992,19 +11544,62 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean |  no  |  |
- | modifiedOn | String? |  yes  |  |
- | sameStoreAssignment | Boolean? |  yes  |  |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
  | choice | String |  no  |  |
- | logo | String? |  yes  |  |
- | name | String |  no  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
- | slug | String |  no  |  |
  | createdOn | String? |  yes  |  |
  | products | ArrayList<[ProductBundleItem](#ProductBundleItem)> |  no  |  |
+ | isActive | Boolean |  no  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
  | pageVisibility | ArrayList<String>? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | sameStoreAssignment | Boolean? |  yes  |  |
+ | name | String |  no  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | slug | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ProductBundleUpdateRequest](#ProductBundleUpdateRequest)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | choice | String |  no  |  |
+ | products | ArrayList<[ProductBundleItem](#ProductBundleItem)> |  no  |  |
+ | isActive | Boolean |  no  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | pageVisibility | ArrayList<String>? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | sameStoreAssignment | Boolean? |  yes  |  |
+ | name | String |  no  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | slug | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [LimitedProductData](#LimitedProductData)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | identifier | HashMap<String,Any>? |  yes  |  |
+ | countryOfOrigin | String? |  yes  |  |
+ | itemCode | String? |  yes  |  |
+ | attributes | HashMap<String,Any>? |  yes  |  |
+ | price | HashMap<String,Any>? |  yes  |  |
+ | quantity | Int? |  yes  |  |
+ | sizes | ArrayList<String>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | shortDescription | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | images | ArrayList<String>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -11017,8 +11612,8 @@ Success. Refer `ThemesSchema` for more details.
  | ---------- | ---- | -------- | ----------- |
  | isAvailable | Boolean? |  yes  |  |
  | quantity | Int? |  yes  |  |
- | value | String? |  yes  |  |
  | display | String? |  yes  |  |
+ | value | String? |  yes  |  |
 
 ---
 
@@ -11029,33 +11624,11 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | maxMarked | Double? |  yes  |  |
- | minMarked | Double? |  yes  |  |
- | currency | String? |  yes  |  |
- | minEffective | Double? |  yes  |  |
  | maxEffective | Double? |  yes  |  |
-
----
-
-
- 
- 
- #### [LimitedProductData](#LimitedProductData)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | quantity | Int? |  yes  |  |
- | name | String? |  yes  |  |
- | identifier | HashMap<String,Any>? |  yes  |  |
- | slug | String? |  yes  |  |
- | sizes | ArrayList<String>? |  yes  |  |
- | attributes | HashMap<String,Any>? |  yes  |  |
- | shortDescription | String? |  yes  |  |
- | images | ArrayList<String>? |  yes  |  |
- | price | HashMap<String,Any>? |  yes  |  |
- | itemCode | String? |  yes  |  |
- | countryOfOrigin | String? |  yes  |  |
+ | currency | String? |  yes  |  |
+ | maxMarked | Double? |  yes  |  |
+ | minEffective | Double? |  yes  |  |
+ | minMarked | Double? |  yes  |  |
 
 ---
 
@@ -11066,15 +11639,15 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | productDetails | [LimitedProductData](#LimitedProductData)? |  yes  |  |
+ | allowRemove | Boolean? |  yes  |  |
  | maxQuantity | Int? |  yes  |  |
+ | autoSelect | Boolean? |  yes  |  |
  | productUid | Int? |  yes  |  |
+ | sizes | ArrayList<[Size](#Size)>? |  yes  |  |
+ | price | [Price](#Price)? |  yes  |  |
  | autoAddToCart | Boolean? |  yes  |  |
  | minQuantity | Int? |  yes  |  |
- | autoSelect | Boolean? |  yes  |  |
- | sizes | ArrayList<[Size](#Size)>? |  yes  |  |
- | allowRemove | Boolean? |  yes  |  |
- | price | [Price](#Price)? |  yes  |  |
- | productDetails | [LimitedProductData](#LimitedProductData)? |  yes  |  |
 
 ---
 
@@ -11085,37 +11658,16 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | sameStoreAssignment | Boolean? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
  | choice | String? |  yes  |  |
- | logo | String? |  yes  |  |
- | name | String? |  yes  |  |
- | slug | String? |  yes  |  |
- | products | ArrayList<[GetProducts](#GetProducts)>? |  yes  |  |
- | pageVisibility | ArrayList<String>? |  yes  |  |
  | companyId | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [ProductBundleUpdateRequest](#ProductBundleUpdateRequest)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean |  no  |  |
- | modifiedOn | String? |  yes  |  |
- | sameStoreAssignment | Boolean? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | choice | String |  no  |  |
+ | products | ArrayList<[GetProducts](#GetProducts)>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
  | logo | String? |  yes  |  |
- | name | String |  no  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
- | slug | String |  no  |  |
- | products | ArrayList<[ProductBundleItem](#ProductBundleItem)> |  no  |  |
+ | sameStoreAssignment | Boolean? |  yes  |  |
+ | name | String? |  yes  |  |
  | pageVisibility | ArrayList<String>? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -11138,9 +11690,9 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | values | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | unit | String? |  yes  |  |
  | headers | HashMap<String,Any>? |  yes  |  |
+ | values | ArrayList<HashMap<String,Any>>? |  yes  |  |
 
 ---
 
@@ -11162,21 +11714,21 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
  | tag | String? |  yes  |  |
- | guide | [Guide](#Guide)? |  yes  |  |
- | name | String |  no  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
- | id | String? |  yes  |  |
- | image | String? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | subtitle | String? |  yes  |  |
- | brandId | Int? |  yes  |  |
- | active | Boolean? |  yes  |  |
  | companyId | Int? |  yes  |  |
  | title | String |  no  |  |
+ | guide | [Guide](#Guide)? |  yes  |  |
+ | image | String? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | brandId | Int? |  yes  |  |
  | description | String? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | subtitle | String? |  yes  |  |
+ | id | String? |  yes  |  |
+ | active | Boolean? |  yes  |  |
+ | name | String |  no  |  |
 
 ---
 
@@ -11187,8 +11739,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
  | success | Boolean? |  yes  |  |
+ | uid | Int? |  yes  |  |
 
 ---
 
@@ -11199,19 +11751,44 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | companyId | Int? |  yes  |  |
  | tag | String? |  yes  |  |
  | guide | HashMap<String,Any>? |  yes  |  |
- | name | String? |  yes  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | subtitle | String? |  yes  |  |
- | brandId | Int? |  yes  |  |
- | active | Boolean? |  yes  |  |
- | companyId | Int? |  yes  |  |
  | title | String? |  yes  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | brandId | Int? |  yes  |  |
+ | subtitle | String? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
  | id | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | active | Boolean? |  yes  |  |
+ | name | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [MetaDataListingFilterMetaResponse](#MetaDataListingFilterMetaResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | key | String? |  yes  |  |
+ | units | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | display | String? |  yes  |  |
+ | filterTypes | ArrayList<String>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [MetaDataListingFilterResponse](#MetaDataListingFilterResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | data | ArrayList<[MetaDataListingFilterMetaResponse](#MetaDataListingFilterMetaResponse)>? |  yes  |  |
 
 ---
 
@@ -11241,37 +11818,12 @@ Success. Refer `ThemesSchema` for more details.
 
  
  
- #### [MetaDataListingFilterMetaResponse](#MetaDataListingFilterMetaResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | units | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | filterTypes | ArrayList<String>? |  yes  |  |
- | key | String? |  yes  |  |
- | display | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [MetaDataListingFilterResponse](#MetaDataListingFilterResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | data | ArrayList<[MetaDataListingFilterMetaResponse](#MetaDataListingFilterMetaResponse)>? |  yes  |  |
-
----
-
-
- 
- 
  #### [MetaDataListingResponse](#MetaDataListingResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | sort | [MetaDataListingSortResponse](#MetaDataListingSortResponse) |  no  |  |
  | filter | [MetaDataListingFilterResponse](#MetaDataListingFilterResponse) |  no  |  |
+ | sort | [MetaDataListingSortResponse](#MetaDataListingSortResponse) |  no  |  |
 
 ---
 
@@ -11283,9 +11835,9 @@ Success. Refer `ThemesSchema` for more details.
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | detail | HashMap<String,Any>? |  yes  |  |
+ | variant | HashMap<String,Any>? |  yes  |  |
  | compare | HashMap<String,Any>? |  yes  |  |
  | similar | HashMap<String,Any>? |  yes  |  |
- | variant | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -11298,33 +11850,6 @@ Success. Refer `ThemesSchema` for more details.
  | ---------- | ---- | -------- | ----------- |
  | listing | [MetaDataListingResponse](#MetaDataListingResponse)? |  yes  |  |
  | product | [GetCatalogConfigurationDetailsProduct](#GetCatalogConfigurationDetailsProduct)? |  yes  |  |
-
----
-
-
- 
- 
- #### [ConfigurationListingSortConfig](#ConfigurationListingSortConfig)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean |  no  |  |
- | priority | Int |  no  |  |
- | logo | String? |  yes  |  |
- | name | String? |  yes  |  |
- | key | String |  no  |  |
-
----
-
-
- 
- 
- #### [ConfigurationListingSort](#ConfigurationListingSort)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | defaultKey | String |  no  |  |
- | config | ArrayList<[ConfigurationListingSortConfig](#ConfigurationListingSortConfig)>? |  yes  |  |
 
 ---
 
@@ -11348,10 +11873,10 @@ Success. Refer `ThemesSchema` for more details.
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | value | String? |  yes  |  |
- | sort | String? |  yes  |  |
+ | condition | String? |  yes  |  |
  | map | HashMap<String,Any>? |  yes  |  |
  | bucketPoints | ArrayList<[ConfigurationBucketPoints](#ConfigurationBucketPoints)>? |  yes  |  |
- | condition | String? |  yes  |  |
+ | sort | String? |  yes  |  |
 
 ---
 
@@ -11362,13 +11887,13 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean |  no  |  |
- | priority | Int |  no  |  |
- | logo | String? |  yes  |  |
- | name | String? |  yes  |  |
- | key | String |  no  |  |
  | type | String |  no  |  |
+ | priority | Int |  no  |  |
+ | isActive | Boolean |  no  |  |
  | valueConfig | [ConfigurationListingFilterValue](#ConfigurationListingFilterValue)? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | key | String |  no  |  |
+ | name | String? |  yes  |  |
 
 ---
 
@@ -11379,8 +11904,35 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | allowSingle | Boolean |  no  |  |
  | attributeConfig | ArrayList<[ConfigurationListingFilterConfig](#ConfigurationListingFilterConfig)>? |  yes  |  |
+ | allowSingle | Boolean |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ConfigurationListingSortConfig](#ConfigurationListingSortConfig)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | priority | Int |  no  |  |
+ | isActive | Boolean |  no  |  |
+ | logo | String? |  yes  |  |
+ | key | String |  no  |  |
+ | name | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ConfigurationListingSort](#ConfigurationListingSort)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | defaultKey | String |  no  |  |
+ | config | ArrayList<[ConfigurationListingSortConfig](#ConfigurationListingSortConfig)>? |  yes  |  |
 
 ---
 
@@ -11391,8 +11943,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | sort | [ConfigurationListingSort](#ConfigurationListingSort) |  no  |  |
  | filter | [ConfigurationListingFilter](#ConfigurationListingFilter) |  no  |  |
+ | sort | [ConfigurationListingSort](#ConfigurationListingSort) |  no  |  |
 
 ---
 
@@ -11403,36 +11955,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | max | Int |  no  |  |
  | min | Int |  no  |  |
-
----
-
-
- 
- 
- #### [ConfigurationProductConfig](#ConfigurationProductConfig)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean |  no  |  |
- | priority | Int |  no  |  |
- | logo | String? |  yes  |  |
- | size | [ProductSize](#ProductSize)? |  yes  |  |
- | key | String |  no  |  |
- | subtitle | String? |  yes  |  |
- | title | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [ConfigurationProductSimilar](#ConfigurationProductSimilar)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | config | ArrayList<[ConfigurationProductConfig](#ConfigurationProductConfig)>? |  yes  |  |
+ | max | Int |  no  |  |
 
 ---
 
@@ -11443,13 +11967,13 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean |  no  |  |
  | priority | Int |  no  |  |
- | logo | String? |  yes  |  |
- | name | String |  no  |  |
+ | isActive | Boolean |  no  |  |
  | size | [ProductSize](#ProductSize) |  no  |  |
+ | logo | String? |  yes  |  |
  | key | String |  no  |  |
  | displayType | String |  no  |  |
+ | name | String |  no  |  |
 
 ---
 
@@ -11467,12 +11991,40 @@ Success. Refer `ThemesSchema` for more details.
 
  
  
+ #### [ConfigurationProductConfig](#ConfigurationProductConfig)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | title | String? |  yes  |  |
+ | priority | Int |  no  |  |
+ | isActive | Boolean |  no  |  |
+ | subtitle | String? |  yes  |  |
+ | size | [ProductSize](#ProductSize)? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | key | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ConfigurationProductSimilar](#ConfigurationProductSimilar)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | config | ArrayList<[ConfigurationProductConfig](#ConfigurationProductConfig)>? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [ConfigurationProduct](#ConfigurationProduct)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | similar | [ConfigurationProductSimilar](#ConfigurationProductSimilar) |  no  |  |
  | variant | [ConfigurationProductVariant](#ConfigurationProductVariant) |  no  |  |
+ | similar | [ConfigurationProductSimilar](#ConfigurationProductSimilar) |  no  |  |
 
 ---
 
@@ -11483,12 +12035,12 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | listing | [ConfigurationListing](#ConfigurationListing)? |  yes  |  |
- | appId | String |  no  |  |
- | product | [ConfigurationProduct](#ConfigurationProduct)? |  yes  |  |
- | configType | String |  no  |  |
- | id | String? |  yes  |  |
  | configId | String? |  yes  |  |
+ | configType | String |  no  |  |
+ | appId | String |  no  |  |
+ | listing | [ConfigurationListing](#ConfigurationListing)? |  yes  |  |
+ | product | [ConfigurationProduct](#ConfigurationProduct)? |  yes  |  |
+ | id | String? |  yes  |  |
 
 ---
 
@@ -11499,8 +12051,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | [AppCatalogConfiguration](#AppCatalogConfiguration)? |  yes  |  |
  | isDefault | Boolean? |  yes  |  |
+ | data | [AppCatalogConfiguration](#AppCatalogConfiguration)? |  yes  |  |
 
 ---
 
@@ -11511,11 +12063,11 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | listing | [ConfigurationListing](#ConfigurationListing)? |  yes  |  |
- | appId | String |  no  |  |
- | product | [ConfigurationProduct](#ConfigurationProduct)? |  yes  |  |
- | configType | String |  no  |  |
  | configId | String? |  yes  |  |
+ | configType | String |  no  |  |
+ | appId | String |  no  |  |
+ | listing | [ConfigurationListing](#ConfigurationListing)? |  yes  |  |
+ | product | [ConfigurationProduct](#ConfigurationProduct)? |  yes  |  |
 
 ---
 
@@ -11526,8 +12078,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | sort | HashMap<String,Any>? |  yes  |  |
  | filter | HashMap<String,Any>? |  yes  |  |
+ | sort | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -11538,12 +12090,12 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | listing | [GetCatalogConfigurationDetailsSchemaListing](#GetCatalogConfigurationDetailsSchemaListing)? |  yes  |  |
- | appId | String |  no  |  |
- | product | [GetCatalogConfigurationDetailsProduct](#GetCatalogConfigurationDetailsProduct)? |  yes  |  |
- | configType | String |  no  |  |
- | id | String? |  yes  |  |
  | configId | String? |  yes  |  |
+ | configType | String |  no  |  |
+ | appId | String |  no  |  |
+ | listing | [GetCatalogConfigurationDetailsSchemaListing](#GetCatalogConfigurationDetailsSchemaListing)? |  yes  |  |
+ | product | [GetCatalogConfigurationDetailsProduct](#GetCatalogConfigurationDetailsProduct)? |  yes  |  |
+ | id | String? |  yes  |  |
 
 ---
 
@@ -11554,43 +12106,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | [EntityConfiguration](#EntityConfiguration)? |  yes  |  |
  | isDefault | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [ProductSortOn](#ProductSortOn)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | value | String? |  yes  |  |
- | isSelected | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [ProductFiltersValue](#ProductFiltersValue)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | value | String |  no  |  |
- | displayFormat | String? |  yes  |  |
- | count | Int? |  yes  |  |
- | currencyCode | String? |  yes  |  |
- | isSelected | Boolean |  no  |  |
- | min | Int? |  yes  |  |
- | queryFormat | String? |  yes  |  |
- | max | Int? |  yes  |  |
- | currencySymbol | String? |  yes  |  |
- | selectedMin | Int? |  yes  |  |
- | selectedMax | Int? |  yes  |  |
- | display | String |  no  |  |
+ | data | [EntityConfiguration](#EntityConfiguration)? |  yes  |  |
 
 ---
 
@@ -11602,9 +12119,31 @@ Success. Refer `ThemesSchema` for more details.
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | kind | String? |  yes  |  |
+ | display | String |  no  |  |
  | name | String |  no  |  |
  | logo | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ProductFiltersValue](#ProductFiltersValue)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | displayFormat | String? |  yes  |  |
+ | max | Int? |  yes  |  |
+ | value | String |  no  |  |
+ | currencyCode | String? |  yes  |  |
+ | currencySymbol | String? |  yes  |  |
+ | min | Int? |  yes  |  |
+ | queryFormat | String? |  yes  |  |
  | display | String |  no  |  |
+ | isSelected | Boolean |  no  |  |
+ | selectedMin | Int? |  yes  |  |
+ | selectedMax | Int? |  yes  |  |
+ | count | Int? |  yes  |  |
 
 ---
 
@@ -11615,8 +12154,21 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | values | ArrayList<[ProductFiltersValue](#ProductFiltersValue)> |  no  |  |
  | key | [ProductFiltersKey](#ProductFiltersKey) |  no  |  |
+ | values | ArrayList<[ProductFiltersValue](#ProductFiltersValue)> |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ProductSortOn](#ProductSortOn)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | isSelected | Boolean? |  yes  |  |
+ | name | String? |  yes  |  |
+ | value | String? |  yes  |  |
 
 ---
 
@@ -11627,8 +12179,59 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | sortOn | ArrayList<[ProductSortOn](#ProductSortOn)>? |  yes  |  |
  | filters | ArrayList<[ProductFilters](#ProductFilters)>? |  yes  |  |
+ | sortOn | ArrayList<[ProductSortOn](#ProductSortOn)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CollectionListingFilterTag](#CollectionListingFilterTag)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | display | String? |  yes  |  |
+ | name | String? |  yes  |  |
+ | isSelected | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CollectionListingFilterType](#CollectionListingFilterType)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | display | String? |  yes  |  |
+ | name | String? |  yes  |  |
+ | isSelected | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CollectionListingFilter](#CollectionListingFilter)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | tags | ArrayList<[CollectionListingFilterTag](#CollectionListingFilterTag)>? |  yes  |  |
+ | type | ArrayList<[CollectionListingFilterType](#CollectionListingFilterType)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Media1](#Media1)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | type | String? |  yes  |  |
+ | url | String |  no  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -11639,8 +12242,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | type | String? |  yes  |  |
  | query | HashMap<String,Any>? |  yes  |  |
+ | type | String? |  yes  |  |
 
 ---
 
@@ -11663,8 +12266,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | url | String? |  yes  |  |
  | aspectRatio | String? |  yes  |  |
+ | url | String? |  yes  |  |
 
 ---
 
@@ -11683,80 +12286,29 @@ Success. Refer `ThemesSchema` for more details.
 
  
  
- #### [Media1](#Media1)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | type | String? |  yes  |  |
- | url | String |  no  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
-
----
-
-
- 
- 
  #### [GetCollectionDetailNest](#GetCollectionDetailNest)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | cron | HashMap<String,Any>? |  yes  |  |
- | allowSort | Boolean? |  yes  |  |
+ | tag | ArrayList<String>? |  yes  |  |
+ | logo | [Media1](#Media1)? |  yes  |  |
  | allowFacets | Boolean? |  yes  |  |
- | name | String? |  yes  |  |
- | description | String? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | slug | String? |  yes  |  |
  | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | appId | String? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | badge | HashMap<String,Any>? |  yes  |  |
- | query | HashMap<String,Any>? |  yes  |  |
- | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
  | uid | String? |  yes  |  |
- | logo | [Media1](#Media1)? |  yes  |  |
- | tag | ArrayList<String>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
+ | badge | HashMap<String,Any>? |  yes  |  |
+ | description | String? |  yes  |  |
+ | cron | HashMap<String,Any>? |  yes  |  |
  | schedule | HashMap<String,Any>? |  yes  |  |
- | slug | String? |  yes  |  |
- | type | String? |  yes  |  |
+ | query | HashMap<String,Any>? |  yes  |  |
+ | allowSort | Boolean? |  yes  |  |
  | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
-
----
-
-
- 
- 
- #### [CollectionListingFilterType](#CollectionListingFilterType)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | display | String? |  yes  |  |
- | name | String? |  yes  |  |
- | isSelected | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [CollectionListingFilterTag](#CollectionListingFilterTag)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | display | String? |  yes  |  |
- | name | String? |  yes  |  |
- | isSelected | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [CollectionListingFilter](#CollectionListingFilter)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | type | ArrayList<[CollectionListingFilterType](#CollectionListingFilterType)>? |  yes  |  |
- | tags | ArrayList<[CollectionListingFilterTag](#CollectionListingFilterTag)>? |  yes  |  |
+ | type | String? |  yes  |  |
 
 ---
 
@@ -11767,21 +12319,9 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | filters | [CollectionListingFilter](#CollectionListingFilter)? |  yes  |  |
  | items | ArrayList<[GetCollectionDetailNest](#GetCollectionDetailNest)>? |  yes  |  |
  | page | [Page](#Page)? |  yes  |  |
- | filters | [CollectionListingFilter](#CollectionListingFilter)? |  yes  |  |
-
----
-
-
- 
- 
- #### [SeoDetail](#SeoDetail)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | title | String? |  yes  |  |
- | description | String? |  yes  |  |
 
 ---
 
@@ -11792,22 +12332,10 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | String? |  yes  |  |
  | userId | String? |  yes  |  |
  | username | String? |  yes  |  |
+ | uid | String? |  yes  |  |
  | email | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [CollectionBadge](#CollectionBadge)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | text | String? |  yes  |  |
- | color | String? |  yes  |  |
 
 ---
 
@@ -11818,8 +12346,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | url | String |  no  |  |
  | aspectRatio | String |  no  |  |
+ | url | String |  no  |  |
 
 ---
 
@@ -11838,14 +12366,38 @@ Success. Refer `ThemesSchema` for more details.
 
  
  
+ #### [CollectionBadge](#CollectionBadge)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | text | String? |  yes  |  |
+ | color | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [SeoDetail](#SeoDetail)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | description | String? |  yes  |  |
+ | title | String? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [Schedule](#Schedule)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | duration | Int? |  yes  |  |
- | start | String? |  yes  |  |
  | end | String? |  yes  |  |
+ | duration | Int? |  yes  |  |
  | cron | String? |  yes  |  |
+ | start | String? |  yes  |  |
 
 ---
 
@@ -11856,28 +12408,28 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | seo | [SeoDetail](#SeoDetail)? |  yes  |  |
- | allowSort | Boolean? |  yes  |  |
+ | tags | ArrayList<String>? |  yes  |  |
  | createdBy | [UserInfo](#UserInfo)? |  yes  |  |
+ | logo | [CollectionImage](#CollectionImage) |  no  |  |
  | sortOn | String? |  yes  |  |
  | allowFacets | Boolean? |  yes  |  |
- | name | String |  no  |  |
- | description | String? |  yes  |  |
- | appId | String |  no  |  |
- | badge | [CollectionBadge](#CollectionBadge)? |  yes  |  |
- | published | Boolean? |  yes  |  |
  | meta | HashMap<String,Any>? |  yes  |  |
- | localeLanguage | HashMap<String,Any>? |  yes  |  |
- | modifiedBy | [UserInfo](#UserInfo)? |  yes  |  |
- | query | HashMap<String,Any>? |  yes  |  |
- | banners | [CollectionBanner](#CollectionBanner) |  no  |  |
- | logo | [CollectionImage](#CollectionImage) |  no  |  |
- | schedule | [Schedule](#Schedule)? |  yes  |  |
  | slug | String |  no  |  |
- | type | String |  no  |  |
- | tags | ArrayList<String>? |  yes  |  |
+ | appId | String |  no  |  |
+ | isActive | Boolean? |  yes  |  |
+ | name | String |  no  |  |
+ | localeLanguage | HashMap<String,Any>? |  yes  |  |
+ | banners | [CollectionBanner](#CollectionBanner) |  no  |  |
+ | badge | [CollectionBadge](#CollectionBadge)? |  yes  |  |
+ | modifiedBy | [UserInfo](#UserInfo)? |  yes  |  |
+ | description | String? |  yes  |  |
+ | seo | [SeoDetail](#SeoDetail)? |  yes  |  |
+ | schedule | [Schedule](#Schedule)? |  yes  |  |
+ | query | HashMap<String,Any>? |  yes  |  |
+ | allowSort | Boolean? |  yes  |  |
  | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
+ | published | Boolean? |  yes  |  |
+ | type | String |  no  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
 
 ---
@@ -11889,23 +12441,23 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | appId | String? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | logo | [BannerImage](#BannerImage)? |  yes  |  |
- | tag | ArrayList<String>? |  yes  |  |
- | allowFacets | Boolean? |  yes  |  |
- | badge | HashMap<String,Any>? |  yes  |  |
- | name | String? |  yes  |  |
- | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
  | schedule | HashMap<String,Any>? |  yes  |  |
- | query | HashMap<String,Any>? |  yes  |  |
- | slug | String? |  yes  |  |
- | cron | HashMap<String,Any>? |  yes  |  |
- | type | String? |  yes  |  |
+ | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
+ | tag | ArrayList<String>? |  yes  |  |
  | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
+ | appId | String? |  yes  |  |
+ | type | String? |  yes  |  |
+ | badge | HashMap<String,Any>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | allowFacets | Boolean? |  yes  |  |
  | description | String? |  yes  |  |
+ | cron | HashMap<String,Any>? |  yes  |  |
+ | logo | [BannerImage](#BannerImage)? |  yes  |  |
+ | query | HashMap<String,Any>? |  yes  |  |
  | allowSort | Boolean? |  yes  |  |
+ | name | String? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -11916,23 +12468,23 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | appId | String? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | logo | [Media1](#Media1)? |  yes  |  |
- | tag | ArrayList<String>? |  yes  |  |
- | allowFacets | Boolean? |  yes  |  |
- | badge | HashMap<String,Any>? |  yes  |  |
- | name | String? |  yes  |  |
- | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
  | schedule | HashMap<String,Any>? |  yes  |  |
- | query | HashMap<String,Any>? |  yes  |  |
- | slug | String? |  yes  |  |
- | cron | HashMap<String,Any>? |  yes  |  |
- | type | String? |  yes  |  |
+ | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
+ | tag | ArrayList<String>? |  yes  |  |
  | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
+ | appId | String? |  yes  |  |
+ | type | String? |  yes  |  |
+ | badge | HashMap<String,Any>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | allowFacets | Boolean? |  yes  |  |
  | description | String? |  yes  |  |
+ | cron | HashMap<String,Any>? |  yes  |  |
+ | logo | [Media1](#Media1)? |  yes  |  |
+ | query | HashMap<String,Any>? |  yes  |  |
  | allowSort | Boolean? |  yes  |  |
+ | name | String? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -11943,40 +12495,26 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | seo | [SeoDetail](#SeoDetail)? |  yes  |  |
- | allowSort | Boolean? |  yes  |  |
+ | tags | ArrayList<String>? |  yes  |  |
+ | logo | [CollectionImage](#CollectionImage)? |  yes  |  |
  | sortOn | String? |  yes  |  |
  | allowFacets | Boolean? |  yes  |  |
- | name | String? |  yes  |  |
- | description | String? |  yes  |  |
- | badge | [CollectionBadge](#CollectionBadge)? |  yes  |  |
- | published | Boolean? |  yes  |  |
  | meta | HashMap<String,Any>? |  yes  |  |
- | localeLanguage | HashMap<String,Any>? |  yes  |  |
- | modifiedBy | [UserInfo](#UserInfo)? |  yes  |  |
- | query | HashMap<String,Any>? |  yes  |  |
- | banners | [CollectionBanner](#CollectionBanner)? |  yes  |  |
- | logo | [CollectionImage](#CollectionImage)? |  yes  |  |
- | schedule | [Schedule](#Schedule)? |  yes  |  |
  | slug | String? |  yes  |  |
- | tags | ArrayList<String>? |  yes  |  |
- | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
-
----
-
-
- 
- 
- #### [ProductBrand](#ProductBrand)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
  | name | String? |  yes  |  |
- | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
- | logo | [Media1](#Media1)? |  yes  |  |
+ | localeLanguage | HashMap<String,Any>? |  yes  |  |
+ | banners | [CollectionBanner](#CollectionBanner)? |  yes  |  |
+ | badge | [CollectionBadge](#CollectionBadge)? |  yes  |  |
+ | modifiedBy | [UserInfo](#UserInfo)? |  yes  |  |
+ | description | String? |  yes  |  |
+ | seo | [SeoDetail](#SeoDetail)? |  yes  |  |
+ | query | HashMap<String,Any>? |  yes  |  |
+ | schedule | [Schedule](#Schedule)? |  yes  |  |
+ | allowSort | Boolean? |  yes  |  |
+ | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
+ | published | Boolean? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -11987,10 +12525,10 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | currencyCode | String? |  yes  |  |
- | max | Double? |  yes  |  |
- | currencySymbol | String? |  yes  |  |
  | min | Double? |  yes  |  |
+ | currencyCode | String? |  yes  |  |
+ | currencySymbol | String? |  yes  |  |
+ | max | Double? |  yes  |  |
 
 ---
 
@@ -12013,9 +12551,9 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | key | String? |  yes  |  |
  | type | String? |  yes  |  |
  | value | String? |  yes  |  |
- | key | String? |  yes  |  |
 
 ---
 
@@ -12026,8 +12564,22 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | title | String? |  yes  |  |
  | details | ArrayList<[ProductDetailAttribute](#ProductDetailAttribute)>? |  yes  |  |
+ | title | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ProductBrand](#ProductBrand)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | name | String? |  yes  |  |
+ | logo | [Media1](#Media1)? |  yes  |  |
 
 ---
 
@@ -12038,32 +12590,32 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | hasVariant | Boolean? |  yes  |  |
- | brand | [ProductBrand](#ProductBrand)? |  yes  |  |
  | itemCode | String? |  yes  |  |
- | imageNature | String? |  yes  |  |
- | promoMeta | HashMap<String,Any>? |  yes  |  |
- | name | String? |  yes  |  |
- | color | String? |  yes  |  |
- | price | [ProductListingPrice](#ProductListingPrice)? |  yes  |  |
- | description | String? |  yes  |  |
- | ratingCount | Int? |  yes  |  |
- | shortDescription | String? |  yes  |  |
- | highlights | ArrayList<String>? |  yes  |  |
- | similars | ArrayList<String>? |  yes  |  |
- | groupedAttributes | ArrayList<[ProductDetailGroupedAttribute](#ProductDetailGroupedAttribute)>? |  yes  |  |
- | teaserTag | HashMap<String,Any>? |  yes  |  |
- | uid | Int? |  yes  |  |
- | sellable | Boolean? |  yes  |  |
- | tryouts | ArrayList<String>? |  yes  |  |
- | slug | String |  no  |  |
- | discount | String? |  yes  |  |
- | type | String? |  yes  |  |
- | attributes | HashMap<String,Any>? |  yes  |  |
+ | itemType | String? |  yes  |  |
  | rating | Double? |  yes  |  |
  | productOnlineDate | String? |  yes  |  |
- | itemType | String? |  yes  |  |
+ | slug | String |  no  |  |
+ | discount | String? |  yes  |  |
+ | attributes | HashMap<String,Any>? |  yes  |  |
+ | price | [ProductListingPrice](#ProductListingPrice)? |  yes  |  |
+ | tryouts | ArrayList<String>? |  yes  |  |
  | medias | ArrayList<[Media1](#Media1)>? |  yes  |  |
+ | shortDescription | String? |  yes  |  |
+ | hasVariant | Boolean? |  yes  |  |
+ | groupedAttributes | ArrayList<[ProductDetailGroupedAttribute](#ProductDetailGroupedAttribute)>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | similars | ArrayList<String>? |  yes  |  |
+ | teaserTag | HashMap<String,Any>? |  yes  |  |
+ | promoMeta | HashMap<String,Any>? |  yes  |  |
+ | highlights | ArrayList<String>? |  yes  |  |
+ | sellable | Boolean? |  yes  |  |
+ | description | String? |  yes  |  |
+ | imageNature | String? |  yes  |  |
+ | ratingCount | Int? |  yes  |  |
+ | brand | [ProductBrand](#ProductBrand)? |  yes  |  |
+ | type | String? |  yes  |  |
+ | color | String? |  yes  |  |
 
 ---
 
@@ -12074,10 +12626,10 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | filters | ArrayList<[ProductFilters](#ProductFilters)>? |  yes  |  |
  | sortOn | ArrayList<[ProductSortOn](#ProductSortOn)>? |  yes  |  |
  | items | ArrayList<[ProductListingDetail](#ProductListingDetail)>? |  yes  |  |
  | page | [Page](#Page)? |  yes  |  |
- | filters | ArrayList<[ProductFilters](#ProductFilters)>? |  yes  |  |
 
 ---
 
@@ -12088,8 +12640,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | pageSize | Int |  no  |  |
  | pageNo | Int |  no  |  |
+ | pageSize | Int |  no  |  |
 
 ---
 
@@ -12107,29 +12659,29 @@ Success. Refer `ThemesSchema` for more details.
 
  
  
- #### [CatalogInsightBrand](#CatalogInsightBrand)
+ #### [CatalogInsightItem](#CatalogInsightItem)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | availableArticles | Int? |  yes  |  |
- | availableSizes | Int? |  yes  |  |
- | name | String? |  yes  |  |
- | articleFreshness | Int? |  yes  |  |
- | totalArticles | Int? |  yes  |  |
- | totalSizes | Int? |  yes  |  |
+ | outOfStockCount | Int? |  yes  |  |
+ | count | Int? |  yes  |  |
+ | sellableCount | Int? |  yes  |  |
 
 ---
 
 
  
  
- #### [CatalogInsightItem](#CatalogInsightItem)
+ #### [CatalogInsightBrand](#CatalogInsightBrand)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | count | Int? |  yes  |  |
- | sellableCount | Int? |  yes  |  |
- | outOfStockCount | Int? |  yes  |  |
+ | totalArticles | Int? |  yes  |  |
+ | availableArticles | Int? |  yes  |  |
+ | totalSizes | Int? |  yes  |  |
+ | availableSizes | Int? |  yes  |  |
+ | name | String? |  yes  |  |
+ | articleFreshness | Int? |  yes  |  |
 
 ---
 
@@ -12140,8 +12692,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | brandDistribution | [CatalogInsightBrand](#CatalogInsightBrand)? |  yes  |  |
  | item | [CatalogInsightItem](#CatalogInsightItem)? |  yes  |  |
+ | brandDistribution | [CatalogInsightBrand](#CatalogInsightBrand)? |  yes  |  |
 
 ---
 
@@ -12164,8 +12716,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | brandDistribution | [CatalogInsightBrand](#CatalogInsightBrand)? |  yes  |  |
  | data | [CrossSellingData](#CrossSellingData)? |  yes  |  |
+ | brandDistribution | [CatalogInsightBrand](#CatalogInsightBrand)? |  yes  |  |
 
 ---
 
@@ -12177,9 +12729,9 @@ Success. Refer `ThemesSchema` for more details.
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | enabled | Boolean? |  yes  |  |
+ | brandIds | ArrayList<Int>? |  yes  |  |
  | optLevel | String |  no  |  |
  | storeIds | ArrayList<Int>? |  yes  |  |
- | brandIds | ArrayList<Int>? |  yes  |  |
 
 ---
 
@@ -12190,16 +12742,16 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | modifiedOn | Int |  no  |  |
+ | platform | String |  no  |  |
+ | createdOn | Int |  no  |  |
+ | companyId | Int |  no  |  |
+ | enabled | Boolean |  no  |  |
  | optLevel | String |  no  |  |
  | modifiedBy | HashMap<String,Any>? |  yes  |  |
  | brandIds | ArrayList<Int> |  no  |  |
- | createdOn | Int |  no  |  |
- | enabled | Boolean |  no  |  |
- | companyId | Int |  no  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | modifiedOn | Int |  no  |  |
  | storeIds | ArrayList<Int> |  no  |  |
- | platform | String |  no  |  |
 
 ---
 
@@ -12222,10 +12774,10 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
+ | businessType | String? |  yes  |  |
  | companyType | String? |  yes  |  |
  | name | String? |  yes  |  |
- | businessType | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
 
 ---
 
@@ -12237,8 +12789,8 @@ Success. Refer `ThemesSchema` for more details.
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | brandName | String? |  yes  |  |
- | totalArticle | Int? |  yes  |  |
  | brandId | Int? |  yes  |  |
+ | totalArticle | Int? |  yes  |  |
  | companyId | Int? |  yes  |  |
 
 ---
@@ -12262,9 +12814,9 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | brand | Int? |  yes  |  |
  | store | Int? |  yes  |  |
  | company | String? |  yes  |  |
+ | brand | Int? |  yes  |  |
 
 ---
 
@@ -12275,17 +12827,17 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | name | String? |  yes  |  |
- | storeCode | String? |  yes  |  |
  | createdOn | String? |  yes  |  |
  | documents | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | additionalContacts | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | storeType | String? |  yes  |  |
- | timing | HashMap<String,Any>? |  yes  |  |
  | companyId | Int? |  yes  |  |
+ | additionalContacts | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | timing | HashMap<String,Any>? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
  | displayName | String? |  yes  |  |
+ | name | String? |  yes  |  |
+ | storeCode | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
 
 ---
 
@@ -12298,6 +12850,58 @@ Success. Refer `ThemesSchema` for more details.
  | ---------- | ---- | -------- | ----------- |
  | items | ArrayList<[StoreDetail](#StoreDetail)>? |  yes  |  |
  | page | [Page](#Page)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [AttributeMasterFilter](#AttributeMasterFilter)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | indexing | Boolean |  no  |  |
+ | dependsOn | ArrayList<String>? |  yes  |  |
+ | priority | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [AttributeSchemaRange](#AttributeSchemaRange)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | min | Int? |  yes  |  |
+ | max | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [AttributeMaster](#AttributeMaster)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | allowedValues | ArrayList<String>? |  yes  |  |
+ | format | String? |  yes  |  |
+ | type | String |  no  |  |
+ | range | [AttributeSchemaRange](#AttributeSchemaRange)? |  yes  |  |
+ | mandatory | Boolean? |  yes  |  |
+ | multi | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [AttributeMasterDetails](#AttributeMasterDetails)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | displayType | String |  no  |  |
 
 ---
 
@@ -12319,60 +12923,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | enriched | Boolean? |  yes  |  |
  | mandatoryDetails | [AttributeMasterMandatoryDetails](#AttributeMasterMandatoryDetails) |  no  |  |
-
----
-
-
- 
- 
- #### [AttributeMasterFilter](#AttributeMasterFilter)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | priority | Int? |  yes  |  |
- | indexing | Boolean |  no  |  |
- | dependsOn | ArrayList<String>? |  yes  |  |
-
----
-
-
- 
- 
- #### [AttributeMasterDetails](#AttributeMasterDetails)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | displayType | String |  no  |  |
-
----
-
-
- 
- 
- #### [AttributeSchemaRange](#AttributeSchemaRange)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | max | Int? |  yes  |  |
- | min | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [AttributeMaster](#AttributeMaster)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | range | [AttributeSchemaRange](#AttributeSchemaRange)? |  yes  |  |
- | multi | Boolean? |  yes  |  |
- | mandatory | Boolean? |  yes  |  |
- | type | String |  no  |  |
- | format | String? |  yes  |  |
- | allowedValues | ArrayList<String>? |  yes  |  |
+ | enriched | Boolean? |  yes  |  |
 
 ---
 
@@ -12383,18 +12935,18 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | meta | [AttributeMasterMeta](#AttributeMasterMeta)? |  yes  |  |
- | logo | String? |  yes  |  |
- | enabledForEndConsumer | Boolean? |  yes  |  |
  | filters | [AttributeMasterFilter](#AttributeMasterFilter)? |  yes  |  |
- | name | String? |  yes  |  |
- | id | String? |  yes  |  |
- | slug | String? |  yes  |  |
- | details | [AttributeMasterDetails](#AttributeMasterDetails)? |  yes  |  |
- | departments | ArrayList<String>? |  yes  |  |
- | schema | [AttributeMaster](#AttributeMaster)? |  yes  |  |
  | isNested | Boolean? |  yes  |  |
+ | enabledForEndConsumer | Boolean? |  yes  |  |
+ | schema | [AttributeMaster](#AttributeMaster)? |  yes  |  |
+ | details | [AttributeMasterDetails](#AttributeMasterDetails)? |  yes  |  |
  | description | String? |  yes  |  |
+ | id | String? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | departments | ArrayList<String>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | meta | [AttributeMasterMeta](#AttributeMasterMeta)? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -12417,11 +12969,11 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | meta | HashMap<String,Any>? |  yes  |  |
  | code | String? |  yes  |  |
- | message | String? |  yes  |  |
  | errors | HashMap<String,Any>? |  yes  |  |
+ | message | String? |  yes  |  |
  | status | Int? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -12432,9 +12984,9 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | username | String? |  yes  |  |
  | userId | String? |  yes  |  |
  | contact | String? |  yes  |  |
+ | username | String? |  yes  |  |
 
 ---
 
@@ -12445,21 +12997,21 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | isActive | Boolean? |  yes  |  |
- | createdBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | logo | String? |  yes  |  |
- | search | String? |  yes  |  |
- | name | String? |  yes  |  |
- | priorityOrder | Int? |  yes  |  |
- | modifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | slug | String? |  yes  |  |
- | synonyms | ArrayList<String>? |  yes  |  |
  | createdOn | String? |  yes  |  |
- | pageSize | Int? |  yes  |  |
  | itemType | String? |  yes  |  |
  | pageNo | Int? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | modifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
+ | priorityOrder | Int? |  yes  |  |
+ | createdBy | [UserSerializer](#UserSerializer)? |  yes  |  |
+ | pageSize | Int? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | search | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | name | String? |  yes  |  |
+ | synonyms | ArrayList<String>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -12482,11 +13034,11 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | meta | HashMap<String,Any>? |  yes  |  |
  | code | String? |  yes  |  |
- | message | String? |  yes  |  |
  | errors | HashMap<String,Any>? |  yes  |  |
+ | message | String? |  yes  |  |
  | status | Int? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -12497,21 +13049,21 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | categories | ArrayList<String>? |  yes  |  |
  | tag | String? |  yes  |  |
- | logo | String? |  yes  |  |
- | name | String? |  yes  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
- | slug | String |  no  |  |
- | isPhysical | Boolean |  no  |  |
- | createdOn | String? |  yes  |  |
- | departments | ArrayList<String>? |  yes  |  |
- | attributes | ArrayList<String>? |  yes  |  |
- | description | String? |  yes  |  |
  | isArchived | Boolean? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | attributes | ArrayList<String>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | isPhysical | Boolean |  no  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | description | String? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | departments | ArrayList<String>? |  yes  |  |
+ | categories | ArrayList<String>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | slug | String |  no  |  |
 
 ---
 
@@ -12534,36 +13086,36 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | HashMap<String,Any>? |  yes  |  |
- | productGroupTag | HashMap<String,Any>? |  yes  |  |
- | isDependent | HashMap<String,Any>? |  yes  |  |
- | moq | HashMap<String,Any>? |  yes  |  |
- | customOrder | HashMap<String,Any>? |  yes  |  |
- | itemCode | HashMap<String,Any>? |  yes  |  |
- | sizeGuide | HashMap<String,Any>? |  yes  |  |
- | variants | HashMap<String,Any>? |  yes  |  |
- | media | HashMap<String,Any>? |  yes  |  |
- | name | HashMap<String,Any>? |  yes  |  |
- | returnConfig | HashMap<String,Any>? |  yes  |  |
- | currency | HashMap<String,Any>? |  yes  |  |
- | productPublish | HashMap<String,Any>? |  yes  |  |
- | description | HashMap<String,Any>? |  yes  |  |
- | command | HashMap<String,Any>? |  yes  |  |
- | countryOfOrigin | HashMap<String,Any>? |  yes  |  |
- | trader | HashMap<String,Any>? |  yes  |  |
- | categorySlug | HashMap<String,Any>? |  yes  |  |
- | hsnCode | HashMap<String,Any>? |  yes  |  |
- | sizes | HashMap<String,Any>? |  yes  |  |
- | shortDescription | HashMap<String,Any>? |  yes  |  |
- | highlights | HashMap<String,Any>? |  yes  |  |
- | teaserTag | HashMap<String,Any>? |  yes  |  |
- | brandUid | HashMap<String,Any>? |  yes  |  |
- | traderType | HashMap<String,Any>? |  yes  |  |
- | slug | HashMap<String,Any>? |  yes  |  |
  | tags | HashMap<String,Any>? |  yes  |  |
- | multiSize | HashMap<String,Any>? |  yes  |  |
+ | itemCode | HashMap<String,Any>? |  yes  |  |
  | itemType | HashMap<String,Any>? |  yes  |  |
+ | customOrder | HashMap<String,Any>? |  yes  |  |
+ | multiSize | HashMap<String,Any>? |  yes  |  |
+ | slug | HashMap<String,Any>? |  yes  |  |
+ | productPublish | HashMap<String,Any>? |  yes  |  |
+ | productGroupTag | HashMap<String,Any>? |  yes  |  |
+ | returnConfig | HashMap<String,Any>? |  yes  |  |
+ | isActive | HashMap<String,Any>? |  yes  |  |
+ | currency | HashMap<String,Any>? |  yes  |  |
+ | shortDescription | HashMap<String,Any>? |  yes  |  |
  | noOfBoxes | HashMap<String,Any>? |  yes  |  |
+ | variants | HashMap<String,Any>? |  yes  |  |
+ | name | HashMap<String,Any>? |  yes  |  |
+ | traderType | HashMap<String,Any>? |  yes  |  |
+ | teaserTag | HashMap<String,Any>? |  yes  |  |
+ | highlights | HashMap<String,Any>? |  yes  |  |
+ | hsnCode | HashMap<String,Any>? |  yes  |  |
+ | moq | HashMap<String,Any>? |  yes  |  |
+ | sizeGuide | HashMap<String,Any>? |  yes  |  |
+ | media | HashMap<String,Any>? |  yes  |  |
+ | description | HashMap<String,Any>? |  yes  |  |
+ | categorySlug | HashMap<String,Any>? |  yes  |  |
+ | countryOfOrigin | HashMap<String,Any>? |  yes  |  |
+ | isDependent | HashMap<String,Any>? |  yes  |  |
+ | trader | HashMap<String,Any>? |  yes  |  |
+ | sizes | HashMap<String,Any>? |  yes  |  |
+ | command | HashMap<String,Any>? |  yes  |  |
+ | brandUid | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -12574,12 +13126,12 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | properties | [Properties](#Properties)? |  yes  |  |
- | required | ArrayList<String>? |  yes  |  |
- | type | String? |  yes  |  |
  | definitions | HashMap<String,Any>? |  yes  |  |
  | title | String? |  yes  |  |
+ | type | String? |  yes  |  |
+ | properties | [Properties](#Properties)? |  yes  |  |
  | description | String? |  yes  |  |
+ | required | ArrayList<String>? |  yes  |  |
 
 ---
 
@@ -12602,18 +13154,18 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | categories | ArrayList<String>? |  yes  |  |
  | tag | String? |  yes  |  |
- | logo | String? |  yes  |  |
- | name | String? |  yes  |  |
- | id | String? |  yes  |  |
- | slug | String |  no  |  |
- | isPhysical | Boolean |  no  |  |
- | departments | ArrayList<String>? |  yes  |  |
- | attributes | ArrayList<String>? |  yes  |  |
- | description | String? |  yes  |  |
  | isArchived | Boolean? |  yes  |  |
+ | attributes | ArrayList<String>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | isPhysical | Boolean |  no  |  |
+ | description | String? |  yes  |  |
+ | id | String? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | departments | ArrayList<String>? |  yes  |  |
+ | categories | ArrayList<String>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | slug | String |  no  |  |
 
 ---
 
@@ -12672,8 +13224,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | username | String? |  yes  |  |
  | userId | String? |  yes  |  |
+ | username | String? |  yes  |  |
 
 ---
 
@@ -12684,9 +13236,9 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | templates | ArrayList<String>? |  yes  |  |
  | type | String? |  yes  |  |
  | brand | ArrayList<String>? |  yes  |  |
- | templates | ArrayList<String>? |  yes  |  |
 
 ---
 
@@ -12697,16 +13249,16 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | createdBy | [VerifiedBy](#VerifiedBy)? |  yes  |  |
- | url | String? |  yes  |  |
  | triggerOn | String? |  yes  |  |
- | data | [ProductDownloadItemsData](#ProductDownloadItemsData)? |  yes  |  |
  | completedOn | String? |  yes  |  |
- | id | String? |  yes  |  |
- | sellerId | Double? |  yes  |  |
- | templateTags | HashMap<String,Any>? |  yes  |  |
  | taskId | String? |  yes  |  |
+ | sellerId | Double? |  yes  |  |
  | status | String? |  yes  |  |
+ | templateTags | HashMap<String,Any>? |  yes  |  |
+ | createdBy | [VerifiedBy](#VerifiedBy)? |  yes  |  |
+ | id | String? |  yes  |  |
+ | data | [ProductDownloadItemsData](#ProductDownloadItemsData)? |  yes  |  |
+ | url | String? |  yes  |  |
 
 ---
 
@@ -12729,8 +13281,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | multivalue | Boolean? |  yes  |  |
  | data | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | multivalue | Boolean? |  yes  |  |
 
 ---
 
@@ -12741,22 +13293,9 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | l1 | Int |  no  |  |
  | department | Int |  no  |  |
+ | l1 | Int |  no  |  |
  | l2 | Int |  no  |  |
-
----
-
-
- 
- 
- #### [Media2](#Media2)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | portrait | String |  no  |  |
- | logo | String |  no  |  |
- | landscape | String |  no  |  |
 
 ---
 
@@ -12779,9 +13318,22 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | google | [CategoryMappingValues](#CategoryMappingValues)? |  yes  |  |
  | ajio | [CategoryMappingValues](#CategoryMappingValues)? |  yes  |  |
  | facebook | [CategoryMappingValues](#CategoryMappingValues)? |  yes  |  |
- | google | [CategoryMappingValues](#CategoryMappingValues)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Media2](#Media2)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | portrait | String |  no  |  |
+ | landscape | String |  no  |  |
+ | logo | String |  no  |  |
 
 ---
 
@@ -12792,23 +13344,23 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | level | Int |  no  |  |
- | priority | Int? |  yes  |  |
- | isActive | Boolean |  no  |  |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | hierarchy | ArrayList<[Hierarchy](#Hierarchy)>? |  yes  |  |
- | media | [Media2](#Media2)? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | id | String? |  yes  |  |
- | tryouts | ArrayList<String>? |  yes  |  |
- | name | String |  no  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
- | slug | String? |  yes  |  |
- | synonyms | ArrayList<String>? |  yes  |  |
  | createdOn | String? |  yes  |  |
- | departments | ArrayList<Int> |  no  |  |
+ | hierarchy | ArrayList<[Hierarchy](#Hierarchy)>? |  yes  |  |
  | marketplaces | [CategoryMapping](#CategoryMapping)? |  yes  |  |
+ | tryouts | ArrayList<String>? |  yes  |  |
+ | isActive | Boolean |  no  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | level | Int |  no  |  |
+ | media | [Media2](#Media2)? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | id | String? |  yes  |  |
+ | priority | Int? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | departments | ArrayList<Int> |  no  |  |
+ | uid | Int? |  yes  |  |
+ | name | String |  no  |  |
+ | synonyms | ArrayList<String>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -12831,17 +13383,17 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | level | Int |  no  |  |
- | priority | Int? |  yes  |  |
+ | hierarchy | ArrayList<[Hierarchy](#Hierarchy)>? |  yes  |  |
+ | marketplaces | [CategoryMapping](#CategoryMapping)? |  yes  |  |
+ | tryouts | ArrayList<String>? |  yes  |  |
  | isActive | Boolean |  no  |  |
  | media | [Media2](#Media2)? |  yes  |  |
- | hierarchy | ArrayList<[Hierarchy](#Hierarchy)>? |  yes  |  |
- | tryouts | ArrayList<String>? |  yes  |  |
- | name | String |  no  |  |
- | slug | String? |  yes  |  |
- | synonyms | ArrayList<String>? |  yes  |  |
+ | level | Int |  no  |  |
+ | priority | Int? |  yes  |  |
  | departments | ArrayList<Int> |  no  |  |
- | marketplaces | [CategoryMapping](#CategoryMapping)? |  yes  |  |
+ | name | String |  no  |  |
+ | synonyms | ArrayList<String>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -12852,7 +13404,19 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | message | String? |  yes  |  |
  | uid | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CategoryUpdateResponse](#CategoryUpdateResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
  | message | String? |  yes  |  |
 
 ---
@@ -12871,26 +13435,12 @@ Success. Refer `ThemesSchema` for more details.
 
  
  
- #### [CategoryUpdateResponse](#CategoryUpdateResponse)
+ #### [ProductPublished](#ProductPublished)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | message | String? |  yes  |  |
- | success | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [Image](#Image)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | aspectRatioF | Double? |  yes  |  |
- | url | String? |  yes  |  |
- | secureUrl | String? |  yes  |  |
- | aspectRatio | String? |  yes  |  |
+ | isSet | Boolean? |  yes  |  |
+ | productOnlineDate | Int? |  yes  |  |
 
 ---
 
@@ -12901,10 +13451,10 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | aspectRatioF | Int? |  yes  |  |
- | url | String? |  yes  |  |
- | secureUrl | String? |  yes  |  |
  | aspectRatio | String? |  yes  |  |
+ | secureUrl | String? |  yes  |  |
+ | url | String? |  yes  |  |
+ | aspectRatioF | Int? |  yes  |  |
 
 ---
 
@@ -12924,12 +13474,14 @@ Success. Refer `ThemesSchema` for more details.
 
  
  
- #### [ProductPublished](#ProductPublished)
+ #### [Image](#Image)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | productOnlineDate | Int? |  yes  |  |
- | isSet | Boolean? |  yes  |  |
+ | aspectRatio | String? |  yes  |  |
+ | url | String? |  yes  |  |
+ | secureUrl | String? |  yes  |  |
+ | aspectRatioF | Double? |  yes  |  |
 
 ---
 
@@ -12940,43 +13492,43 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | isDependent | Boolean? |  yes  |  |
- | moq | HashMap<String,Any>? |  yes  |  |
- | images | ArrayList<[Image](#Image)>? |  yes  |  |
- | customOrder | HashMap<String,Any>? |  yes  |  |
- | brand | [Brand](#Brand)? |  yes  |  |
- | itemCode | String? |  yes  |  |
- | categoryUid | Int? |  yes  |  |
- | id | String? |  yes  |  |
- | sizeGuide | String? |  yes  |  |
- | imageNature | String? |  yes  |  |
- | variants | HashMap<String,Any>? |  yes  |  |
- | media | ArrayList<[Media1](#Media1)>? |  yes  |  |
- | name | String? |  yes  |  |
- | currency | String? |  yes  |  |
  | isSet | Boolean? |  yes  |  |
- | allSizes | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | isPhysical | Boolean? |  yes  |  |
- | departments | ArrayList<Int>? |  yes  |  |
- | primaryColor | String? |  yes  |  |
- | productPublish | [ProductPublished](#ProductPublished)? |  yes  |  |
- | color | String? |  yes  |  |
- | description | String? |  yes  |  |
- | countryOfOrigin | String? |  yes  |  |
- | categorySlug | String? |  yes  |  |
- | hsnCode | String? |  yes  |  |
- | sizes | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | shortDescription | String? |  yes  |  |
- | templateTag | String? |  yes  |  |
- | highlights | ArrayList<String>? |  yes  |  |
- | l3Mapping | ArrayList<String>? |  yes  |  |
- | uid | Int? |  yes  |  |
- | brandUid | Int? |  yes  |  |
- | slug | String? |  yes  |  |
- | multiSize | Boolean? |  yes  |  |
+ | itemCode | String? |  yes  |  |
  | itemType | String? |  yes  |  |
+ | templateTag | String? |  yes  |  |
+ | customOrder | HashMap<String,Any>? |  yes  |  |
+ | multiSize | Boolean? |  yes  |  |
+ | slug | String? |  yes  |  |
+ | productPublish | [ProductPublished](#ProductPublished)? |  yes  |  |
+ | categoryUid | Int? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | currency | String? |  yes  |  |
+ | primaryColor | String? |  yes  |  |
+ | shortDescription | String? |  yes  |  |
+ | id | String? |  yes  |  |
+ | departments | ArrayList<Int>? |  yes  |  |
+ | variants | HashMap<String,Any>? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | name | String? |  yes  |  |
+ | highlights | ArrayList<String>? |  yes  |  |
+ | hsnCode | String? |  yes  |  |
+ | moq | HashMap<String,Any>? |  yes  |  |
+ | allSizes | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | sizeGuide | String? |  yes  |  |
+ | l3Mapping | ArrayList<String>? |  yes  |  |
+ | media | ArrayList<[Media1](#Media1)>? |  yes  |  |
+ | description | String? |  yes  |  |
+ | categorySlug | String? |  yes  |  |
+ | imageNature | String? |  yes  |  |
+ | countryOfOrigin | String? |  yes  |  |
+ | brand | [Brand](#Brand)? |  yes  |  |
+ | isDependent | Boolean? |  yes  |  |
+ | sizes | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | isPhysical | Boolean? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | brandUid | Int? |  yes  |  |
+ | images | ArrayList<[Image](#Image)>? |  yes  |  |
+ | color | String? |  yes  |  |
 
 ---
 
@@ -12995,39 +13547,13 @@ Success. Refer `ThemesSchema` for more details.
 
  
  
- #### [OrderQuantity](#OrderQuantity)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | minimum | Int? |  yes  |  |
- | isSet | Boolean? |  yes  |  |
- | maximum | Int? |  yes  |  |
-
----
-
-
- 
- 
  #### [CustomOrder](#CustomOrder)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isCustomOrder | Boolean? |  yes  |  |
- | manufacturingTimeUnit | String? |  yes  |  |
  | manufacturingTime | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [ReturnConfig](#ReturnConfig)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | returnable | Boolean? |  yes  |  |
- | unit | String? |  yes  |  |
- | time | Int? |  yes  |  |
+ | manufacturingTimeUnit | String? |  yes  |  |
+ | isCustomOrder | Boolean? |  yes  |  |
 
 ---
 
@@ -13038,20 +13564,21 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | productOnlineDate | String? |  yes  |  |
  | isSet | Boolean? |  yes  |  |
+ | productOnlineDate | String? |  yes  |  |
 
 ---
 
 
  
  
- #### [Trader](#Trader)
+ #### [ReturnConfig](#ReturnConfig)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | name | String |  no  |  |
- | address | String |  no  |  |
+ | unit | String? |  yes  |  |
+ | returnable | Boolean? |  yes  |  |
+ | time | Int? |  yes  |  |
 
 ---
 
@@ -13070,47 +13597,72 @@ Success. Refer `ThemesSchema` for more details.
 
  
  
+ #### [OrderQuantity](#OrderQuantity)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | isSet | Boolean? |  yes  |  |
+ | maximum | Int? |  yes  |  |
+ | minimum | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Trader](#Trader)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | name | String |  no  |  |
+ | address | String |  no  |  |
+
+---
+
+
+ 
+ 
  #### [ProductCreateUpdate](#ProductCreateUpdate)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | productGroupTag | ArrayList<String>? |  yes  |  |
- | noOfBoxes | Int? |  yes  |  |
- | isDependent | Boolean? |  yes  |  |
- | moq | [OrderQuantity](#OrderQuantity)? |  yes  |  |
- | isImageLessProduct | Boolean? |  yes  |  |
- | customOrder | [CustomOrder](#CustomOrder)? |  yes  |  |
+ | tags | ArrayList<String>? |  yes  |  |
  | companyId | Int |  no  |  |
  | itemCode | String |  no  |  |
- | sizeGuide | String? |  yes  |  |
- | variants | HashMap<String,Any>? |  yes  |  |
- | media | ArrayList<[Media1](#Media1)>? |  yes  |  |
- | name | String |  no  |  |
- | returnConfig | [ReturnConfig](#ReturnConfig)? |  yes  |  |
  | isSet | Boolean? |  yes  |  |
- | currency | String |  no  |  |
- | departments | ArrayList<Int> |  no  |  |
- | productPublish | [ProductPublish](#ProductPublish)? |  yes  |  |
- | description | String? |  yes  |  |
- | requester | String? |  yes  |  |
- | countryOfOrigin | String |  no  |  |
- | trader | [Trader](#Trader)? |  yes  |  |
- | categorySlug | String |  no  |  |
- | hsnCode | String |  no  |  |
- | shortDescription | String? |  yes  |  |
- | templateTag | String |  no  |  |
- | highlights | ArrayList<String>? |  yes  |  |
- | teaserTag | [TeaserTag](#TeaserTag)? |  yes  |  |
- | uid | Int? |  yes  |  |
- | brandUid | Int |  no  |  |
- | traderType | String? |  yes  |  |
- | slug | String |  no  |  |
- | tags | ArrayList<String>? |  yes  |  |
- | multiSize | Boolean? |  yes  |  |
- | changeRequestId | String? |  yes  |  |
  | itemType | String |  no  |  |
+ | templateTag | String |  no  |  |
+ | changeRequestId | String? |  yes  |  |
+ | customOrder | [CustomOrder](#CustomOrder)? |  yes  |  |
+ | multiSize | Boolean? |  yes  |  |
+ | slug | String |  no  |  |
+ | productPublish | [ProductPublish](#ProductPublish)? |  yes  |  |
+ | productGroupTag | ArrayList<String>? |  yes  |  |
+ | returnConfig | [ReturnConfig](#ReturnConfig)? |  yes  |  |
+ | isImageLessProduct | Boolean? |  yes  |  |
+ | currency | String |  no  |  |
+ | isActive | Boolean? |  yes  |  |
+ | shortDescription | String? |  yes  |  |
+ | noOfBoxes | Int? |  yes  |  |
+ | departments | ArrayList<Int> |  no  |  |
+ | variants | HashMap<String,Any>? |  yes  |  |
+ | name | String |  no  |  |
+ | uid | Int? |  yes  |  |
+ | traderType | String? |  yes  |  |
+ | teaserTag | [TeaserTag](#TeaserTag)? |  yes  |  |
+ | highlights | ArrayList<String>? |  yes  |  |
+ | hsnCode | String |  no  |  |
+ | moq | [OrderQuantity](#OrderQuantity)? |  yes  |  |
+ | requester | String? |  yes  |  |
+ | sizeGuide | String? |  yes  |  |
+ | media | ArrayList<[Media1](#Media1)>? |  yes  |  |
+ | description | String? |  yes  |  |
+ | categorySlug | String |  no  |  |
+ | countryOfOrigin | String |  no  |  |
+ | isDependent | Boolean? |  yes  |  |
+ | trader | [Trader](#Trader)? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | brandUid | Int |  no  |  |
 
 ---
 
@@ -13132,9 +13684,9 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | username | String? |  yes  |  |
- | userId | String? |  yes  |  |
  | fullName | String? |  yes  |  |
+ | userId | String? |  yes  |  |
+ | username | String? |  yes  |  |
 
 ---
 
@@ -13145,21 +13697,21 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | createdBy | [UserDetail](#UserDetail)? |  yes  |  |
- | succeed | Int? |  yes  |  |
- | filePath | String? |  yes  |  |
- | cancelledRecords | ArrayList<String>? |  yes  |  |
- | failedRecords | ArrayList<String>? |  yes  |  |
  | stage | String? |  yes  |  |
  | createdOn | String? |  yes  |  |
- | total | Int? |  yes  |  |
- | modifiedBy | [UserDetail](#UserDetail)? |  yes  |  |
- | templateTag | String? |  yes  |  |
+ | companyId | Int? |  yes  |  |
+ | filePath | String? |  yes  |  |
  | cancelled | Int? |  yes  |  |
  | template | [ProductTemplate](#ProductTemplate)? |  yes  |  |
- | companyId | Int? |  yes  |  |
+ | cancelledRecords | ArrayList<String>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | templateTag | String? |  yes  |  |
+ | modifiedBy | [UserDetail](#UserDetail)? |  yes  |  |
+ | total | Int? |  yes  |  |
+ | createdBy | [UserDetail](#UserDetail)? |  yes  |  |
+ | failedRecords | ArrayList<String>? |  yes  |  |
+ | succeed | Int? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
  | failed | Int? |  yes  |  |
 
 ---
@@ -13183,9 +13735,9 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | String? |  yes  |  |
  | userId | String? |  yes  |  |
  | username | String? |  yes  |  |
+ | uid | String? |  yes  |  |
  | email | String? |  yes  |  |
 
 ---
@@ -13197,22 +13749,22 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | stage | String? |  yes  |  |
+ | createdOn | String |  no  |  |
+ | companyId | Int |  no  |  |
+ | cancelled | Int? |  yes  |  |
+ | filePath | String? |  yes  |  |
+ | trackingUrl | String? |  yes  |  |
  | isActive | Boolean? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
+ | modifiedBy | [UserInfo1](#UserInfo1)? |  yes  |  |
+ | cancelledRecords | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | templateTag | String? |  yes  |  |
+ | total | Int |  no  |  |
  | createdBy | [UserInfo1](#UserInfo1)? |  yes  |  |
  | succeed | Int? |  yes  |  |
- | filePath | String? |  yes  |  |
- | customTemplateTag | String? |  yes  |  |
- | modifiedBy | [UserInfo1](#UserInfo1)? |  yes  |  |
- | total | Int |  no  |  |
- | createdOn | String |  no  |  |
- | cancelledRecords | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | failedRecords | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | stage | String? |  yes  |  |
- | cancelled | Int? |  yes  |  |
- | templateTag | String? |  yes  |  |
- | trackingUrl | String? |  yes  |  |
- | companyId | Int |  no  |  |
+ | modifiedOn | String? |  yes  |  |
+ | customTemplateTag | String? |  yes  |  |
  | failed | Int? |  yes  |  |
 
 ---
@@ -13224,9 +13776,9 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | ArrayList<HashMap<String,Any>> |  no  |  |
  | templateTag | String |  no  |  |
  | batchId | String |  no  |  |
+ | data | ArrayList<HashMap<String,Any>> |  no  |  |
  | companyId | Int |  no  |  |
 
 ---
@@ -13260,8 +13812,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | username | String? |  yes  |  |
  | userId | String? |  yes  |  |
+ | username | String? |  yes  |  |
  | companyId | Int? |  yes  |  |
 
 ---
@@ -13273,23 +13825,23 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | createdBy | [UserCommon](#UserCommon)? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | isActive | Boolean? |  yes  |  |
- | filePath | String? |  yes  |  |
- | retry | Int? |  yes  |  |
- | modifiedBy | [UserCommon](#UserCommon)? |  yes  |  |
- | cancelledRecords | ArrayList<String>? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | failedRecords | ArrayList<String>? |  yes  |  |
  | stage | String? |  yes  |  |
- | total | Int? |  yes  |  |
+ | retry | Int? |  yes  |  |
+ | filePath | String? |  yes  |  |
+ | createdOn | String? |  yes  |  |
  | companyId | Int? |  yes  |  |
  | cancelled | Int? |  yes  |  |
  | trackingUrl | String? |  yes  |  |
+ | cancelledRecords | ArrayList<String>? |  yes  |  |
+ | modifiedBy | [UserCommon](#UserCommon)? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | total | Int? |  yes  |  |
+ | createdBy | [UserCommon](#UserCommon)? |  yes  |  |
  | succeed | Int? |  yes  |  |
- | failed | Int? |  yes  |  |
+ | failedRecords | ArrayList<String>? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
  | id | String? |  yes  |  |
+ | failed | Int? |  yes  |  |
 
 ---
 
@@ -13312,8 +13864,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | url | String |  no  |  |
  | user | HashMap<String,Any> |  no  |  |
+ | url | String |  no  |  |
  | companyId | Int? |  yes  |  |
 
 ---
@@ -13326,8 +13878,8 @@ Success. Refer `ThemesSchema` for more details.
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | itemId | Int? |  yes  |  |
- | size | String? |  yes  |  |
  | companyId | Int? |  yes  |  |
+ | size | String? |  yes  |  |
 
 ---
 
@@ -13338,8 +13890,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | [ProductSizeDeleteDataResponse](#ProductSizeDeleteDataResponse)? |  yes  |  |
  | success | Boolean? |  yes  |  |
+ | data | [ProductSizeDeleteDataResponse](#ProductSizeDeleteDataResponse)? |  yes  |  |
 
 ---
 
@@ -13350,19 +13902,19 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | String? |  yes  |  |
- | quantity | Int? |  yes  |  |
  | priceTransfer | Int? |  yes  |  |
- | sellableQuantity | Int? |  yes  |  |
  | priceEffective | Int? |  yes  |  |
- | currency | String? |  yes  |  |
- | size | String? |  yes  |  |
- | itemId | Int? |  yes  |  |
- | store | HashMap<String,Any>? |  yes  |  |
  | price | Int? |  yes  |  |
+ | quantity | Int? |  yes  |  |
+ | store | HashMap<String,Any>? |  yes  |  |
+ | currency | String? |  yes  |  |
  | identifiers | HashMap<String,Any>? |  yes  |  |
+ | itemId | Int? |  yes  |  |
+ | size | String? |  yes  |  |
  | sellerIdentifier | Int? |  yes  |  |
+ | sellableQuantity | Int? |  yes  |  |
  | inventoryUpdatedOn | String? |  yes  |  |
+ | uid | String? |  yes  |  |
 
 ---
 
@@ -13373,9 +13925,9 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | brandUid | Int? |  yes  |  |
  | itemCode | String? |  yes  |  |
+ | brandUid | Int? |  yes  |  |
+ | uid | Int? |  yes  |  |
 
 ---
 
@@ -13386,8 +13938,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | size | String |  no  |  |
  | pieces | Int |  no  |  |
+ | size | String |  no  |  |
 
 ---
 
@@ -13421,9 +13973,9 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | gtinValue | String |  no  |  |
- | gtinType | String |  no  |  |
  | primary | Boolean? |  yes  |  |
+ | gtinType | String |  no  |  |
+ | gtinValue | String |  no  |  |
 
 ---
 
@@ -13434,22 +13986,22 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | itemLength | Double? |  yes  |  |
- | quantity | Int |  no  |  |
- | priceTransfer | Double? |  yes  |  |
- | itemWeightUnitOfMeasure | String? |  yes  |  |
- | storeCode | String |  no  |  |
- | priceEffective | Double |  no  |  |
- | size | String |  no  |  |
- | isSet | Boolean? |  yes  |  |
  | itemHeight | Double? |  yes  |  |
- | currency | String |  no  |  |
- | set | [InventorySet](#InventorySet)? |  yes  |  |
- | itemDimensionsUnitOfMeasure | String? |  yes  |  |
- | price | Double |  no  |  |
+ | priceTransfer | Double? |  yes  |  |
  | itemWidth | Double? |  yes  |  |
+ | itemDimensionsUnitOfMeasure | String? |  yes  |  |
+ | isSet | Boolean? |  yes  |  |
+ | priceEffective | Double |  no  |  |
+ | price | Double |  no  |  |
+ | itemWeightUnitOfMeasure | String? |  yes  |  |
+ | quantity | Int |  no  |  |
+ | itemLength | Double? |  yes  |  |
+ | set | [InventorySet](#InventorySet)? |  yes  |  |
  | itemWeight | Double? |  yes  |  |
  | identifiers | ArrayList<[GTIN](#GTIN)> |  no  |  |
+ | currency | String |  no  |  |
+ | size | String |  no  |  |
+ | storeCode | String |  no  |  |
 
 ---
 
@@ -13474,8 +14026,8 @@ Success. Refer `ThemesSchema` for more details.
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | itemId | Int? |  yes  |  |
- | size | String? |  yes  |  |
  | locationId | Int? |  yes  |  |
+ | size | String? |  yes  |  |
 
 ---
 
@@ -13486,8 +14038,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | [InventoryDeleteData](#InventoryDeleteData)? |  yes  |  |
  | success | Boolean? |  yes  |  |
+ | data | [InventoryDeleteData](#InventoryDeleteData)? |  yes  |  |
 
 ---
 
@@ -13498,21 +14050,21 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | isActive | Boolean? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | succeed | Int? |  yes  |  |
- | filePath | String? |  yes  |  |
- | cancelledRecords | ArrayList<String>? |  yes  |  |
- | failedRecords | ArrayList<String>? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
  | stage | String? |  yes  |  |
- | total | Int? |  yes  |  |
+ | createdOn | String? |  yes  |  |
  | cancelled | Int? |  yes  |  |
  | companyId | Int? |  yes  |  |
- | failed | Int? |  yes  |  |
+ | filePath | String? |  yes  |  |
+ | cancelledRecords | ArrayList<String>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | total | Int? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | failedRecords | ArrayList<String>? |  yes  |  |
  | id | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | succeed | Int? |  yes  |  |
+ | failed | Int? |  yes  |  |
 
 ---
 
@@ -13546,23 +14098,23 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | itemLength | Double? |  yes  |  |
- | quantity | Int |  no  |  |
- | priceTransfer | Double? |  yes  |  |
- | itemWeightUnitOfMeasure | String? |  yes  |  |
- | storeCode | String |  no  |  |
- | priceEffective | Double |  no  |  |
- | size | String? |  yes  |  |
- | isSet | Boolean? |  yes  |  |
  | itemHeight | Double? |  yes  |  |
- | currency | String |  no  |  |
- | set | [InventorySet](#InventorySet)? |  yes  |  |
- | itemDimensionsUnitOfMeasure | String? |  yes  |  |
- | price | Double |  no  |  |
+ | priceTransfer | Double? |  yes  |  |
  | itemWidth | Double? |  yes  |  |
+ | itemDimensionsUnitOfMeasure | String? |  yes  |  |
+ | isSet | Boolean? |  yes  |  |
+ | priceEffective | Double |  no  |  |
+ | price | Double |  no  |  |
+ | itemWeightUnitOfMeasure | String? |  yes  |  |
+ | quantity | Int |  no  |  |
+ | itemLength | Double? |  yes  |  |
+ | set | [InventorySet](#InventorySet)? |  yes  |  |
  | itemWeight | Double? |  yes  |  |
  | identifiers | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | currency | String |  no  |  |
+ | size | String? |  yes  |  |
  | sellerIdentifier | String |  no  |  |
+ | storeCode | String |  no  |  |
 
 ---
 
@@ -13573,10 +14125,10 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | batchId | String |  no  |  |
  | user | HashMap<String,Any>? |  yes  |  |
  | sizes | ArrayList<[Size1](#Size1)> |  no  |  |
  | companyId | Int |  no  |  |
+ | batchId | String |  no  |  |
 
 ---
 
@@ -13587,13 +14139,13 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | url | String? |  yes  |  |
  | triggerOn | String? |  yes  |  |
  | completedOn | String? |  yes  |  |
- | requestParams | HashMap<String,Any>? |  yes  |  |
- | sellerId | Int |  no  |  |
  | taskId | String |  no  |  |
+ | sellerId | Int |  no  |  |
  | status | String? |  yes  |  |
+ | requestParams | HashMap<String,Any>? |  yes  |  |
+ | url | String? |  yes  |  |
 
 ---
 
@@ -13605,8 +14157,8 @@ Success. Refer `ThemesSchema` for more details.
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | type | String? |  yes  |  |
- | brand | ArrayList<Int>? |  yes  |  |
  | store | ArrayList<Int>? |  yes  |  |
+ | brand | ArrayList<Int>? |  yes  |  |
 
 ---
 
@@ -13617,8 +14169,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | value | String? |  yes  |  |
  | display | String? |  yes  |  |
+ | value | String? |  yes  |  |
 
 ---
 
@@ -13629,8 +14181,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | ArrayList<[FilerList](#FilerList)>? |  yes  |  |
  | multivalues | Boolean? |  yes  |  |
+ | data | ArrayList<[FilerList](#FilerList)>? |  yes  |  |
 
 ---
 
@@ -13641,17 +14193,17 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | threshold1 | Double? |  yes  |  |
- | taxOnEsp | Boolean? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | hs2Code | String? |  yes  |  |
  | tax1 | Double? |  yes  |  |
- | hsnCode | String? |  yes  |  |
- | taxOnMrp | Boolean? |  yes  |  |
- | id | String? |  yes  |  |
- | tax2 | Double? |  yes  |  |
  | companyId | Int? |  yes  |  |
  | threshold2 | Double? |  yes  |  |
+ | threshold1 | Double? |  yes  |  |
+ | hsnCode | String? |  yes  |  |
+ | taxOnMrp | Boolean? |  yes  |  |
+ | hs2Code | String? |  yes  |  |
+ | taxOnEsp | Boolean? |  yes  |  |
+ | id | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | tax2 | Double? |  yes  |  |
 
 ---
 
@@ -13662,9 +14214,9 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | itemTotal | Int? |  yes  |  |
  | hasNext | Boolean? |  yes  |  |
  | size | Int? |  yes  |  |
- | itemTotal | Int? |  yes  |  |
  | hasPrevious | Boolean? |  yes  |  |
  | current | String? |  yes  |  |
 
@@ -13689,16 +14241,16 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | threshold1 | Double |  no  |  |
- | taxOnEsp | Boolean? |  yes  |  |
- | uid | Int? |  yes  |  |
- | hs2Code | String |  no  |  |
  | tax1 | Double |  no  |  |
- | hsnCode | String |  no  |  |
- | taxOnMrp | Boolean |  no  |  |
- | tax2 | Double? |  yes  |  |
  | companyId | Int |  no  |  |
  | threshold2 | Double? |  yes  |  |
+ | threshold1 | Double |  no  |  |
+ | hsnCode | String |  no  |  |
+ | taxOnMrp | Boolean |  no  |  |
+ | hs2Code | String |  no  |  |
+ | taxOnEsp | Boolean? |  yes  |  |
+ | tax2 | Double? |  yes  |  |
+ | uid | Int? |  yes  |  |
 
 ---
 
@@ -13742,14 +14294,14 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
+ | discount | String? |  yes  |  |
+ | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
+ | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
  | logo | [Media](#Media)? |  yes  |  |
+ | departments | ArrayList<String>? |  yes  |  |
+ | uid | Int? |  yes  |  |
  | name | String? |  yes  |  |
  | slug | String? |  yes  |  |
- | discount | String? |  yes  |  |
- | departments | ArrayList<String>? |  yes  |  |
- | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
- | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
 
 ---
 
@@ -13772,10 +14324,10 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | logo | [Media](#Media)? |  yes  |  |
- | name | String? |  yes  |  |
  | priorityOrder | Int? |  yes  |  |
+ | logo | [Media](#Media)? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | name | String? |  yes  |  |
  | slug | String? |  yes  |  |
 
 ---
@@ -13810,13 +14362,13 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | name | String? |  yes  |  |
- | slug | String? |  yes  |  |
+ | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | childs | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
- | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -13827,13 +14379,13 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | name | String? |  yes  |  |
- | slug | String? |  yes  |  |
+ | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | childs | ArrayList<[ThirdLevelChild](#ThirdLevelChild)>? |  yes  |  |
  | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
- | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -13844,13 +14396,13 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | name | String? |  yes  |  |
- | slug | String? |  yes  |  |
+ | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | childs | ArrayList<[SecondLevelChild](#SecondLevelChild)>? |  yes  |  |
  | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
- | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -13861,12 +14413,12 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | name | String? |  yes  |  |
- | slug | String? |  yes  |  |
+ | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | childs | ArrayList<[Child](#Child)>? |  yes  |  |
  | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
- | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
+ | name | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -13901,10 +14453,10 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | filters | ArrayList<[ProductFilters](#ProductFilters)>? |  yes  |  |
  | sortOn | ArrayList<[ProductSortOn](#ProductSortOn)>? |  yes  |  |
  | items | ArrayList<[ProductListingDetail](#ProductListingDetail)>? |  yes  |  |
  | page | [Page](#Page) |  no  |  |
- | filters | ArrayList<[ProductFilters](#ProductFilters)>? |  yes  |  |
 
 ---
 
@@ -13915,33 +14467,105 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | hasVariant | Boolean? |  yes  |  |
- | brand | [ProductBrand](#ProductBrand)? |  yes  |  |
  | itemCode | String? |  yes  |  |
- | imageNature | String? |  yes  |  |
- | promoMeta | HashMap<String,Any>? |  yes  |  |
- | name | String? |  yes  |  |
- | color | String? |  yes  |  |
- | description | String? |  yes  |  |
- | ratingCount | Int? |  yes  |  |
- | shortDescription | String? |  yes  |  |
- | highlights | ArrayList<String>? |  yes  |  |
- | similars | ArrayList<String>? |  yes  |  |
- | groupedAttributes | ArrayList<[ProductDetailGroupedAttribute](#ProductDetailGroupedAttribute)>? |  yes  |  |
- | teaserTag | HashMap<String,Any>? |  yes  |  |
- | uid | Int? |  yes  |  |
- | tryouts | ArrayList<String>? |  yes  |  |
- | slug | String |  no  |  |
- | type | String? |  yes  |  |
- | attributes | HashMap<String,Any>? |  yes  |  |
+ | itemType | String? |  yes  |  |
  | rating | Double? |  yes  |  |
  | productOnlineDate | String? |  yes  |  |
- | itemType | String? |  yes  |  |
+ | slug | String |  no  |  |
+ | attributes | HashMap<String,Any>? |  yes  |  |
+ | tryouts | ArrayList<String>? |  yes  |  |
  | medias | ArrayList<[Media1](#Media1)>? |  yes  |  |
+ | shortDescription | String? |  yes  |  |
+ | hasVariant | Boolean? |  yes  |  |
+ | groupedAttributes | ArrayList<[ProductDetailGroupedAttribute](#ProductDetailGroupedAttribute)>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | similars | ArrayList<String>? |  yes  |  |
+ | teaserTag | HashMap<String,Any>? |  yes  |  |
+ | promoMeta | HashMap<String,Any>? |  yes  |  |
+ | highlights | ArrayList<String>? |  yes  |  |
+ | description | String? |  yes  |  |
+ | imageNature | String? |  yes  |  |
+ | ratingCount | Int? |  yes  |  |
+ | brand | [ProductBrand](#ProductBrand)? |  yes  |  |
+ | type | String? |  yes  |  |
+ | color | String? |  yes  |  |
 
 ---
 
 
+
+
+ 
+ 
+ #### [BusinessCountryInfo](#BusinessCountryInfo)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | country | String? |  yes  |  |
+ | countryCode | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Document](#Document)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | value | String |  no  |  |
+ | verified | Boolean? |  yes  |  |
+ | legalName | String? |  yes  |  |
+ | type | String |  no  |  |
+ | url | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [SellerPhoneNumber](#SellerPhoneNumber)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | countryCode | Int |  no  |  |
+ | number | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ContactDetails](#ContactDetails)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | phone | ArrayList<[SellerPhoneNumber](#SellerPhoneNumber)>? |  yes  |  |
+ | emails | ArrayList<String>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [GetAddressSerializer](#GetAddressSerializer)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | countryCode | String? |  yes  |  |
+ | longitude | Double? |  yes  |  |
+ | addressType | String? |  yes  |  |
+ | state | String? |  yes  |  |
+ | pincode | Int? |  yes  |  |
+ | landmark | String? |  yes  |  |
+ | latitude | Double? |  yes  |  |
+ | address1 | String? |  yes  |  |
+ | address2 | String? |  yes  |  |
+ | country | String? |  yes  |  |
+ | city | String? |  yes  |  |
+
+---
 
 
  
@@ -13968,103 +14592,31 @@ Success. Refer `ThemesSchema` for more details.
 
  
  
- #### [BusinessCountryInfo](#BusinessCountryInfo)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | country | String? |  yes  |  |
- | countryCode | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [SellerPhoneNumber](#SellerPhoneNumber)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | number | String |  no  |  |
- | countryCode | Int |  no  |  |
-
----
-
-
- 
- 
- #### [ContactDetails](#ContactDetails)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | phone | ArrayList<[SellerPhoneNumber](#SellerPhoneNumber)>? |  yes  |  |
- | emails | ArrayList<String>? |  yes  |  |
-
----
-
-
- 
- 
- #### [Document](#Document)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | type | String |  no  |  |
- | url | String? |  yes  |  |
- | legalName | String? |  yes  |  |
- | verified | Boolean? |  yes  |  |
- | value | String |  no  |  |
-
----
-
-
- 
- 
- #### [GetAddressSerializer](#GetAddressSerializer)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | address1 | String? |  yes  |  |
- | state | String? |  yes  |  |
- | landmark | String? |  yes  |  |
- | addressType | String? |  yes  |  |
- | countryCode | String? |  yes  |  |
- | address2 | String? |  yes  |  |
- | country | String? |  yes  |  |
- | pincode | Int? |  yes  |  |
- | city | String? |  yes  |  |
- | latitude | Double? |  yes  |  |
- | longitude | Double? |  yes  |  |
-
----
-
-
- 
- 
  #### [GetCompanyProfileSerializerResponse](#GetCompanyProfileSerializerResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | businessDetails | [BusinessDetails](#BusinessDetails)? |  yes  |  |
- | warnings | HashMap<String,Any>? |  yes  |  |
- | mode | String? |  yes  |  |
- | notificationEmails | ArrayList<String>? |  yes  |  |
- | businessInfo | String? |  yes  |  |
- | companyType | String |  no  |  |
- | createdBy | [UserSerializer](#UserSerializer)? |  yes  |  |
  | businessCountryInfo | [BusinessCountryInfo](#BusinessCountryInfo)? |  yes  |  |
- | contactDetails | [ContactDetails](#ContactDetails)? |  yes  |  |
- | verifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | businessType | String |  no  |  |
- | name | String? |  yes  |  |
- | uid | Int |  no  |  |
- | modifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | franchiseEnabled | Boolean? |  yes  |  |
+ | notificationEmails | ArrayList<String>? |  yes  |  |
  | stage | String? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
+ | warnings | HashMap<String,Any>? |  yes  |  |
+ | verifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
+ | modifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
+ | uid | Int |  no  |  |
+ | name | String? |  yes  |  |
  | documents | ArrayList<[Document](#Document)>? |  yes  |  |
+ | businessType | String |  no  |  |
  | createdOn | String? |  yes  |  |
+ | contactDetails | [ContactDetails](#ContactDetails)? |  yes  |  |
+ | franchiseEnabled | Boolean? |  yes  |  |
  | verifiedOn | String? |  yes  |  |
+ | mode | String? |  yes  |  |
+ | businessInfo | String? |  yes  |  |
  | addresses | ArrayList<[GetAddressSerializer](#GetAddressSerializer)>? |  yes  |  |
+ | createdBy | [UserSerializer](#UserSerializer)? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | businessDetails | [BusinessDetails](#BusinessDetails)? |  yes  |  |
+ | companyType | String |  no  |  |
 
 ---
 
@@ -14075,17 +14627,17 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | address1 | String |  no  |  |
- | state | String |  no  |  |
- | landmark | String? |  yes  |  |
- | addressType | String |  no  |  |
  | countryCode | String? |  yes  |  |
- | country | String |  no  |  |
- | address2 | String? |  yes  |  |
- | pincode | Int |  no  |  |
- | city | String |  no  |  |
- | latitude | Double |  no  |  |
  | longitude | Double |  no  |  |
+ | addressType | String |  no  |  |
+ | state | String |  no  |  |
+ | pincode | Int |  no  |  |
+ | landmark | String? |  yes  |  |
+ | latitude | Double |  no  |  |
+ | address1 | String |  no  |  |
+ | address2 | String? |  yes  |  |
+ | country | String |  no  |  |
+ | city | String |  no  |  |
 
 ---
 
@@ -14096,18 +14648,18 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | companyType | String? |  yes  |  |
- | businessInfo | String? |  yes  |  |
- | franchiseEnabled | Boolean? |  yes  |  |
- | rejectReason | String? |  yes  |  |
- | warnings | HashMap<String,Any>? |  yes  |  |
- | businessDetails | [BusinessDetails](#BusinessDetails)? |  yes  |  |
  | documents | ArrayList<[Document](#Document)>? |  yes  |  |
- | contactDetails | [ContactDetails](#ContactDetails)? |  yes  |  |
- | name | String? |  yes  |  |
- | addresses | ArrayList<[CreateUpdateAddressSerializer](#CreateUpdateAddressSerializer)>? |  yes  |  |
- | businessType | String? |  yes  |  |
  | notificationEmails | ArrayList<String>? |  yes  |  |
+ | businessInfo | String? |  yes  |  |
+ | addresses | ArrayList<[CreateUpdateAddressSerializer](#CreateUpdateAddressSerializer)>? |  yes  |  |
+ | contactDetails | [ContactDetails](#ContactDetails)? |  yes  |  |
+ | warnings | HashMap<String,Any>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | franchiseEnabled | Boolean? |  yes  |  |
+ | businessType | String? |  yes  |  |
+ | rejectReason | String? |  yes  |  |
+ | businessDetails | [BusinessDetails](#BusinessDetails)? |  yes  |  |
+ | companyType | String? |  yes  |  |
 
 ---
 
@@ -14118,8 +14670,8 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | pending | Int? |  yes  |  |
  | verified | Int? |  yes  |  |
+ | pending | Int? |  yes  |  |
 
 ---
 
@@ -14130,13 +14682,45 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | stage | String? |  yes  |  |
- | store | [DocumentsObj](#DocumentsObj)? |  yes  |  |
- | brand | [DocumentsObj](#DocumentsObj)? |  yes  |  |
  | storeDocuments | [DocumentsObj](#DocumentsObj)? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | stage | String? |  yes  |  |
+ | brand | [DocumentsObj](#DocumentsObj)? |  yes  |  |
  | product | [DocumentsObj](#DocumentsObj)? |  yes  |  |
  | companyDocuments | [DocumentsObj](#DocumentsObj)? |  yes  |  |
+ | store | [DocumentsObj](#DocumentsObj)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [BrandBannerSerializer](#BrandBannerSerializer)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | portrait | String? |  yes  |  |
+ | landscape | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CreateUpdateBrandRequestSerializer](#CreateUpdateBrandRequestSerializer)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | companyId | Int? |  yes  |  |
+ | brandTier | String? |  yes  |  |
+ | logo | String |  no  |  |
  | uid | Int? |  yes  |  |
+ | description | String? |  yes  |  |
+ | banner | [BrandBannerSerializer](#BrandBannerSerializer)? |  yes  |  |
+ | localeLanguage | HashMap<String,Any>? |  yes  |  |
+ | name | String |  no  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+ | synonyms | ArrayList<String>? |  yes  |  |
 
 ---
 
@@ -14156,60 +14740,41 @@ Success. Refer `ThemesSchema` for more details.
 
  
  
- #### [BrandBannerSerializer](#BrandBannerSerializer)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | landscape | String? |  yes  |  |
- | portrait | String? |  yes  |  |
-
----
-
-
- 
- 
  #### [GetBrandResponseSerializer](#GetBrandResponseSerializer)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | slugKey | String? |  yes  |  |
  | modifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | synonyms | ArrayList<String>? |  yes  |  |
- | logo | String? |  yes  |  |
- | createdBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | stage | String? |  yes  |  |
- | rejectReason | String? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | warnings | HashMap<String,Any>? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
  | createdOn | String? |  yes  |  |
- | localeLanguage | HashMap<String,Any>? |  yes  |  |
- | verifiedOn | String? |  yes  |  |
- | banner | [BrandBannerSerializer](#BrandBannerSerializer)? |  yes  |  |
- | verifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | name | String |  no  |  |
+ | logo | String? |  yes  |  |
  | uid | Int? |  yes  |  |
  | description | String? |  yes  |  |
+ | banner | [BrandBannerSerializer](#BrandBannerSerializer)? |  yes  |  |
+ | createdBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
+ | slugKey | String? |  yes  |  |
+ | stage | String? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+ | name | String |  no  |  |
+ | warnings | HashMap<String,Any>? |  yes  |  |
+ | localeLanguage | HashMap<String,Any>? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | rejectReason | String? |  yes  |  |
+ | verifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
+ | verifiedOn | String? |  yes  |  |
+ | synonyms | ArrayList<String>? |  yes  |  |
 
 ---
 
 
  
  
- #### [CreateUpdateBrandRequestSerializer](#CreateUpdateBrandRequestSerializer)
+ #### [CompanyBrandPostRequestSerializer](#CompanyBrandPostRequestSerializer)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | synonyms | ArrayList<String>? |  yes  |  |
- | logo | String |  no  |  |
- | companyId | Int? |  yes  |  |
- | localeLanguage | HashMap<String,Any>? |  yes  |  |
- | banner | [BrandBannerSerializer](#BrandBannerSerializer)? |  yes  |  |
- | brandTier | String? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
- | name | String |  no  |  |
+ | company | Int |  no  |  |
+ | brands | ArrayList<Int> |  no  |  |
  | uid | Int? |  yes  |  |
- | description | String? |  yes  |  |
 
 ---
 
@@ -14221,18 +14786,18 @@ Success. Refer `ThemesSchema` for more details.
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | modifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | companyType | String? |  yes  |  |
- | createdBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | stage | String? |  yes  |  |
  | rejectReason | String? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | addresses | ArrayList<[GetAddressSerializer](#GetAddressSerializer)>? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | stage | String? |  yes  |  |
+ | createdBy | [UserSerializer](#UserSerializer)? |  yes  |  |
+ | name | String? |  yes  |  |
  | modifiedOn | String? |  yes  |  |
  | businessType | String? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | verifiedOn | String? |  yes  |  |
- | addresses | ArrayList<[GetAddressSerializer](#GetAddressSerializer)>? |  yes  |  |
  | verifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | name | String? |  yes  |  |
- | uid | Int? |  yes  |  |
+ | verifiedOn | String? |  yes  |  |
+ | companyType | String? |  yes  |  |
 
 ---
 
@@ -14244,17 +14809,17 @@ Success. Refer `ThemesSchema` for more details.
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | modifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | company | [GetCompanySerializer](#GetCompanySerializer)? |  yes  |  |
- | createdBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
  | stage | String? |  yes  |  |
- | rejectReason | String? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
+ | createdBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
  | warnings | HashMap<String,Any>? |  yes  |  |
  | brand | [GetBrandResponseSerializer](#GetBrandResponseSerializer)? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | verifiedOn | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | company | [GetCompanySerializer](#GetCompanySerializer)? |  yes  |  |
+ | rejectReason | String? |  yes  |  |
  | verifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | uid | Int? |  yes  |  |
+ | verifiedOn | String? |  yes  |  |
 
 ---
 
@@ -14265,70 +14830,29 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | page | [Page](#Page)? |  yes  |  |
  | items | ArrayList<[CompanyBrandSerializer](#CompanyBrandSerializer)>? |  yes  |  |
+ | page | [Page](#Page)? |  yes  |  |
 
 ---
 
 
  
  
- #### [CompanyBrandPostRequestSerializer](#CompanyBrandPostRequestSerializer)
+ #### [GetAddressSerializer1](#GetAddressSerializer1)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | brands | ArrayList<Int> |  no  |  |
- | uid | Int? |  yes  |  |
- | company | Int |  no  |  |
-
----
-
-
- 
- 
- #### [InvoiceCredSerializer](#InvoiceCredSerializer)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | username | String? |  yes  |  |
- | password | String? |  yes  |  |
- | enabled | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [InvoiceDetailsSerializer](#InvoiceDetailsSerializer)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | eInvoice | [InvoiceCredSerializer](#InvoiceCredSerializer)? |  yes  |  |
- | eWaybill | [InvoiceCredSerializer](#InvoiceCredSerializer)? |  yes  |  |
-
----
-
-
- 
- 
- #### [LocationIntegrationType](#LocationIntegrationType)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | order | String? |  yes  |  |
- | inventory | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | onSameStore | Boolean? |  yes  |  |
- | storeUid | Int? |  yes  |  |
+ | countryCode | String? |  yes  |  |
+ | longitude | Double? |  yes  |  |
+ | addressType | String? |  yes  |  |
+ | state | String? |  yes  |  |
+ | pincode | Int? |  yes  |  |
+ | landmark | String? |  yes  |  |
+ | latitude | Double? |  yes  |  |
+ | address1 | String? |  yes  |  |
+ | address2 | String? |  yes  |  |
+ | country | String? |  yes  |  |
+ | city | String? |  yes  |  |
 
 ---
 
@@ -14351,10 +14875,10 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | closing | [LocationTimingSerializer](#LocationTimingSerializer)? |  yes  |  |
- | weekday | String |  no  |  |
- | open | Boolean |  no  |  |
  | opening | [LocationTimingSerializer](#LocationTimingSerializer)? |  yes  |  |
+ | closing | [LocationTimingSerializer](#LocationTimingSerializer)? |  yes  |  |
+ | open | Boolean |  no  |  |
+ | weekday | String |  no  |  |
 
 ---
 
@@ -14365,77 +14889,46 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
  | email | String? |  yes  |  |
  | mobileNo | [SellerPhoneNumber](#SellerPhoneNumber) |  no  |  |
+ | name | String? |  yes  |  |
 
 ---
 
 
  
  
- #### [GetLocationSerializer](#GetLocationSerializer)
+ #### [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | company | [GetCompanySerializer](#GetCompanySerializer)? |  yes  |  |
- | gstCredentials | [InvoiceDetailsSerializer](#InvoiceDetailsSerializer)? |  yes  |  |
- | integrationType | [LocationIntegrationType](#LocationIntegrationType)? |  yes  |  |
- | displayName | String |  no  |  |
- | code | String |  no  |  |
- | contactNumbers | ArrayList<[SellerPhoneNumber](#SellerPhoneNumber)>? |  yes  |  |
- | productReturnConfig | [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)? |  yes  |  |
- | address | [GetAddressSerializer](#GetAddressSerializer) |  no  |  |
- | warnings | HashMap<String,Any>? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
- | notificationEmails | ArrayList<String>? |  yes  |  |
- | timing | ArrayList<[LocationDayWiseSerializer](#LocationDayWiseSerializer)>? |  yes  |  |
- | createdBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | phoneNumber | String |  no  |  |
- | verifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | name | String |  no  |  |
- | storeType | String? |  yes  |  |
- | uid | Int? |  yes  |  |
- | modifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | stage | String? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | documents | ArrayList<[Document](#Document)>? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | verifiedOn | String? |  yes  |  |
- | manager | [LocationManagerSerializer](#LocationManagerSerializer)? |  yes  |  |
+ | storeUid | Int? |  yes  |  |
+ | onSameStore | Boolean? |  yes  |  |
 
 ---
 
 
  
  
- #### [LocationListSerializer](#LocationListSerializer)
+ #### [InvoiceCredSerializer](#InvoiceCredSerializer)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | page | [Page](#Page)? |  yes  |  |
- | items | ArrayList<[GetLocationSerializer](#GetLocationSerializer)>? |  yes  |  |
+ | username | String? |  yes  |  |
+ | enabled | Boolean? |  yes  |  |
+ | password | String? |  yes  |  |
 
 ---
 
 
  
  
- #### [GetAddressSerializer1](#GetAddressSerializer1)
+ #### [InvoiceDetailsSerializer](#InvoiceDetailsSerializer)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | address1 | String? |  yes  |  |
- | state | String? |  yes  |  |
- | landmark | String? |  yes  |  |
- | addressType | String? |  yes  |  |
- | countryCode | String? |  yes  |  |
- | address2 | String? |  yes  |  |
- | country | String? |  yes  |  |
- | pincode | Int? |  yes  |  |
- | city | String? |  yes  |  |
- | latitude | Double? |  yes  |  |
- | longitude | Double? |  yes  |  |
+ | eInvoice | [InvoiceCredSerializer](#InvoiceCredSerializer)? |  yes  |  |
+ | eWaybill | [InvoiceCredSerializer](#InvoiceCredSerializer)? |  yes  |  |
 
 ---
 
@@ -14446,23 +14939,82 @@ Success. Refer `ThemesSchema` for more details.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | timing | ArrayList<[LocationDayWiseSerializer](#LocationDayWiseSerializer)>? |  yes  |  |
- | code | String |  no  |  |
- | contactNumbers | ArrayList<[SellerPhoneNumber](#SellerPhoneNumber)>? |  yes  |  |
- | company | Int |  no  |  |
- | notificationEmails | ArrayList<String>? |  yes  |  |
- | stage | String? |  yes  |  |
- | productReturnConfig | [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)? |  yes  |  |
- | gstCredentials | [InvoiceDetailsSerializer](#InvoiceDetailsSerializer)? |  yes  |  |
- | address | [GetAddressSerializer1](#GetAddressSerializer1) |  no  |  |
  | documents | ArrayList<[Document](#Document)>? |  yes  |  |
- | warnings | HashMap<String,Any>? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
- | displayName | String |  no  |  |
- | name | String |  no  |  |
+ | code | String |  no  |  |
+ | address | [GetAddressSerializer1](#GetAddressSerializer1) |  no  |  |
+ | timing | ArrayList<[LocationDayWiseSerializer](#LocationDayWiseSerializer)>? |  yes  |  |
+ | notificationEmails | ArrayList<String>? |  yes  |  |
  | manager | [LocationManagerSerializer](#LocationManagerSerializer)? |  yes  |  |
+ | productReturnConfig | [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)? |  yes  |  |
  | uid | Int? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+ | stage | String? |  yes  |  |
+ | warnings | HashMap<String,Any>? |  yes  |  |
+ | gstCredentials | [InvoiceDetailsSerializer](#InvoiceDetailsSerializer)? |  yes  |  |
+ | name | String |  no  |  |
+ | displayName | String |  no  |  |
  | storeType | String? |  yes  |  |
+ | company | Int |  no  |  |
+ | contactNumbers | ArrayList<[SellerPhoneNumber](#SellerPhoneNumber)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [LocationIntegrationType](#LocationIntegrationType)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | order | String? |  yes  |  |
+ | inventory | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [GetLocationSerializer](#GetLocationSerializer)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | address | [GetAddressSerializer](#GetAddressSerializer) |  no  |  |
+ | notificationEmails | ArrayList<String>? |  yes  |  |
+ | manager | [LocationManagerSerializer](#LocationManagerSerializer)? |  yes  |  |
+ | stage | String? |  yes  |  |
+ | warnings | HashMap<String,Any>? |  yes  |  |
+ | gstCredentials | [InvoiceDetailsSerializer](#InvoiceDetailsSerializer)? |  yes  |  |
+ | verifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
+ | phoneNumber | String |  no  |  |
+ | modifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
+ | productReturnConfig | [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | name | String |  no  |  |
+ | documents | ArrayList<[Document](#Document)>? |  yes  |  |
+ | storeType | String? |  yes  |  |
+ | code | String |  no  |  |
+ | timing | ArrayList<[LocationDayWiseSerializer](#LocationDayWiseSerializer)>? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | integrationType | [LocationIntegrationType](#LocationIntegrationType)? |  yes  |  |
+ | displayName | String |  no  |  |
+ | contactNumbers | ArrayList<[SellerPhoneNumber](#SellerPhoneNumber)>? |  yes  |  |
+ | verifiedOn | String? |  yes  |  |
+ | createdBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | company | [GetCompanySerializer](#GetCompanySerializer)? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [LocationListSerializer](#LocationListSerializer)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | items | ArrayList<[GetLocationSerializer](#GetLocationSerializer)>? |  yes  |  |
+ | page | [Page](#Page)? |  yes  |  |
 
 ---
 

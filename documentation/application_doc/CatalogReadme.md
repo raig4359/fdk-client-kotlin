@@ -2,33 +2,52 @@
 
 
 
-## Billing Methods
-Handle platform subscription
-* [createSubscriptionCharge](#createsubscriptioncharge)
-* [getSubscriptionCharge](#getsubscriptioncharge)
-* [cancelSubscriptionCharge](#cancelsubscriptioncharge)
-* [getInvoices](#getinvoices)
-* [getInvoiceById](#getinvoicebyid)
-* [getCustomerDetail](#getcustomerdetail)
-* [upsertCustomerDetail](#upsertcustomerdetail)
-* [getSubscription](#getsubscription)
-* [getFeatureLimitConfig](#getfeaturelimitconfig)
-* [activateSubscriptionPlan](#activatesubscriptionplan)
-* [cancelSubscriptionPlan](#cancelsubscriptionplan)
+## Catalog Methods
+Catalog API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features. 
+* [getProductDetailBySlug](#getproductdetailbyslug)
+* [getProductSizesBySlug](#getproductsizesbyslug)
+* [getProductPriceBySlug](#getproductpricebyslug)
+* [getProductSellersBySlug](#getproductsellersbyslug)
+* [getProductComparisonBySlugs](#getproductcomparisonbyslugs)
+* [getSimilarComparisonProductBySlug](#getsimilarcomparisonproductbyslug)
+* [getComparedFrequentlyProductBySlug](#getcomparedfrequentlyproductbyslug)
+* [getProductSimilarByIdentifier](#getproductsimilarbyidentifier)
+* [getProductVariantsBySlug](#getproductvariantsbyslug)
+* [getProductStockByIds](#getproductstockbyids)
+* [getProductStockForTimeByIds](#getproductstockfortimebyids)
+* [getProducts](#getproducts)
+* [getBrands](#getbrands)
+* [getBrandDetailBySlug](#getbranddetailbyslug)
+* [getCategories](#getcategories)
+* [getCategoryDetailBySlug](#getcategorydetailbyslug)
+* [getHomeProducts](#gethomeproducts)
+* [getDepartments](#getdepartments)
+* [getSearchResults](#getsearchresults)
+* [getCollections](#getcollections)
+* [getCollectionItemsBySlug](#getcollectionitemsbyslug)
+* [getCollectionDetailBySlug](#getcollectiondetailbyslug)
+* [getFollowedListing](#getfollowedlisting)
+* [followById](#followbyid)
+* [unfollowById](#unfollowbyid)
+* [getFollowerCountById](#getfollowercountbyid)
+* [getFollowIds](#getfollowids)
+* [getStores](#getstores)
+* [getInStockLocations](#getinstocklocations)
+* [getLocationDetailsById](#getlocationdetailsbyid)
 
----
+
 
 ## Methods with example and description
 
 
-#### createSubscriptionCharge
-Create subscription charge
+#### getProductDetailBySlug
+Get a product
 
 
 
 
 ```kotlin
-client.billing.createSubscriptionCharge(extensionId: extensionId, body: body).safeAwait{ response,error->
+catalog.getProductDetailBySlug(slug: slug).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -44,21 +63,877 @@ client.billing.createSubscriptionCharge(extensionId: extensionId, body: body).sa
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Customer unique id. In case of company it will be company id. |   
-| extensionId | String | yes | Extension _id |  
-| body | [CreateSubscriptionCharge](#CreateSubscriptionCharge) | yes | Request body |
+| slug | String | yes | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ |  
 
 
-Register subscription charge for a seller of your extension.
+
+Use this API to retrieve a product by its slug value.
 
 *Returned Response*
 
 
 
 
-[CreateSubscriptionResponse](#CreateSubscriptionResponse)
+[ProductDetail](#ProductDetail)
 
-Success
+Success. Returns a Product object. Check the example shown below or refer `ProductDetail` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "type": "product",
+  "grouped_attributes": [
+    {
+      "title": "Alexander Sawyer",
+      "details": [
+        {
+          "key": "Kimberly Davidson",
+          "type": "text",
+          "value": "DarkGrey"
+        },
+        {
+          "key": "Kimberly Mcdaniel",
+          "type": "text",
+          "value": "Men,Women"
+        },
+        {
+          "key": "Monica Hampton",
+          "type": "text",
+          "value": "Neoprene"
+        },
+        {
+          "key": "John Mendoza",
+          "type": "text",
+          "value": "100 g"
+        }
+      ]
+    }
+  ],
+  "medias": [
+    {
+      "type": "image",
+      "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/1309_LGLAPTOPSLEEVE5/1_1564735832806.jpg"
+    }
+  ],
+  "brand": {
+    "name": "Barry, Jennings and Larson",
+    "uid": 1,
+    "logo": {
+      "type": "image",
+      "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+    },
+    "action": {
+      "page": {
+        "type": "products",
+        "query": {
+          "brand": [
+            "Hess-Inc"
+          ]
+        }
+      },
+      "type": "page"
+    },
+    "_custom_json": {}
+  },
+  "uid": 1,
+  "slug": "benchmark-collaborative-paradigms",
+  "attributes": {
+    "color_hex": "808080",
+    "weight": 100,
+    "product_type": "LaptopBags",
+    "gender": [
+      "Men",
+      "Women"
+    ],
+    "material": "Neoprene",
+    "style_note": "Shape up your overall appeal with this stunning laptop bag. The amazing storage and great design will let you carry your laptop in style!",
+    "item_code": "LGLAPTOPSLEEVE5",
+    "occasion": "Casual",
+    "primary_color": "Grey",
+    "primary_material": "Others",
+    "variant": "LGLAPTOPSLEEVE5",
+    "color": "DarkGrey",
+    "product_details": "This is a Unisex Product.",
+    "primary_color_hex": "808080",
+    "brand": "Barry, Jennings and Larson"
+  },
+  "name": "benchmark collaborative paradigms",
+  "has_variant": true,
+  "categories": [
+    {
+      "id": 3,
+      "uid": 3,
+      "name": "Amy Kim DDS",
+      "logo": {
+        "type": "image",
+        "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+      },
+      "action": {
+        "page": {
+          "type": "category",
+          "query": {
+            "category": [
+              "Amy-Kim-DDS"
+            ]
+          }
+        },
+        "type": "page"
+      },
+      "_custom_json": {}
+    }
+  ],
+  "tryouts": [],
+  "rating": 2.7,
+  "rating_count": 2,
+  "image_nature": "standard",
+  "tags": [
+    "Digital"
+  ],
+  "teaser_tag": {},
+  "no_of_boxes": 1,
+  "custom_order": {},
+  "color": "808080",
+  "similars": [
+    "brand"
+  ],
+  "_custom_json": {}
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductSizesBySlug
+Get the sizes of a product
+
+
+
+
+```kotlin
+catalog.getProductSizesBySlug(slug: slug, storeId: storeId).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| slug | String | yes | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ |   
+| storeId | Int? | no | The ID of the store that is selling the product, e.g. 1,2,3. |  
+
+
+
+A product can have multiple sizes. Use this API to fetch all the available sizes of a product.
+
+*Returned Response*
+
+
+
+
+[ProductSizes](#ProductSizes)
+
+Success. Returns a ProductSize object. Check the example shown below or refer `ProductSizes` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "sellable": true,
+  "sizes": [
+    {
+      "display": "13",
+      "value": "13",
+      "quantity": 10,
+      "is_available": true
+    }
+  ],
+  "discount": "",
+  "stores": {
+    "count": 1
+  },
+  "size_chart": {},
+  "price": {
+    "marked": {
+      "min": 66.5,
+      "max": 66.5,
+      "currency_code": "INR",
+      "currency_symbol": "₹"
+    },
+    "effective": {
+      "min": 66.5,
+      "max": 66.5,
+      "currency_code": "INR",
+      "currency_symbol": "₹"
+    }
+  },
+  "tags": [
+    "Digital"
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductPriceBySlug
+Get the price of a product size at a PIN Code
+
+
+
+
+```kotlin
+catalog.getProductPriceBySlug(slug: slug, size: size, pincode: pincode, storeId: storeId).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| slug | String | yes | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ |   
+| size | String | yes | A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes |   
+| pincode | String | yes | The PIN Code of the area near which the selling locations should be searched, e.g. 400059 |   
+| storeId | Int? | no | The ID of the store that is selling the product, e.g. 1,2,3. |  
+
+
+
+Prices may vary for different sizes of a product. Use this API to retrieve the price of a product size at all the selling locations near to a PIN Code.
+
+*Returned Response*
+
+
+
+
+[ProductSizePriceResponse](#ProductSizePriceResponse)
+
+Success. Returns a ProductSizePrice object. Check the example shown below or refer `ProductSizePriceResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "price_per_piece": {
+    "effective": 66.5,
+    "marked": 66.5,
+    "currency_code": "INR",
+    "currency_symbol": "₹"
+  },
+  "price": {
+    "effective": 399,
+    "marked": 399,
+    "currency_code": "INR",
+    "currency_symbol": "₹"
+  },
+  "quantity": 5,
+  "pincode": 400603,
+  "article_id": "1",
+  "long_lat": [
+    72.9159784,
+    19.0990231
+  ],
+  "item_type": "set",
+  "discount": "",
+  "article_assignment": {
+    "level": "multi-companies",
+    "strategy": "optimal"
+  },
+  "seller": {
+    "uid": 1,
+    "name": "Natalie Norman"
+  },
+  "store": {
+    "uid": 1,
+    "name": "Wayne Lamb",
+    "count": 2
+  },
+  "strategy_wise_listing": [
+    {
+      "distance": 11,
+      "quantity": 5,
+      "tat": 2592000,
+      "pincode": 400603
+    },
+    {
+      "distance": 11,
+      "quantity": 5,
+      "tat": 2592000,
+      "pincode": 400603
+    }
+  ],
+  "set": {
+    "size_distribution": {
+      "sizes": [
+        {
+          "size": "5",
+          "pieces": 1
+        },
+        {
+          "size": "7",
+          "pieces": 1
+        },
+        {
+          "size": "8",
+          "pieces": 2
+        },
+        {
+          "size": "9",
+          "pieces": 1
+        },
+        {
+          "size": "10",
+          "pieces": 1
+        }
+      ]
+    },
+    "quantity": 6
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductSellersBySlug
+Get the sellers of a product size at a PIN Code
+
+
+
+
+```kotlin
+catalog.getProductSellersBySlug(slug: slug, size: size, pincode: pincode, strategy: strategy, pageNo: pageNo, pageSize: pageSize).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| slug | String | yes | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ |   
+| size | String | yes | A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes |   
+| pincode | String | yes | The 6-digit PIN Code of the area near which the selling locations should be searched, e.g. 400059 |   
+| strategy | String? | no | Sort stores on the basis of strategy. eg, fast-delivery, low-price, optimal. |   
+| pageNo | Int? | no | The page number to navigate through the given set of results. |   
+| pageSize | Int? | no | The number of items to retrieve in each page. |  
+
+
+
+A product of a particular size may be sold by multiple sellers. Use this API to fetch the sellers having the stock of a particular size at a given PIN Code.
+
+*Returned Response*
+
+
+
+
+[ProductSizeSellersResponse](#ProductSizeSellersResponse)
+
+Success. Returns a ProductSizeSeller object. Check the example shown below or refer `ProductSizeSellersResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "price_per_piece": {
+        "effective": 66.5,
+        "marked": 66.5,
+        "currency_code": "INR",
+        "currency_symbol": "₹"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency_code": "INR",
+        "currency_symbol": "₹"
+      },
+      "quantity": 5,
+      "pincode": 400603,
+      "article_id": "1",
+      "discount": "",
+      "article_assignment": {
+        "level": "single-company",
+        "strategy": "optimal"
+      },
+      "seller": {
+        "uid": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "uid": 1,
+        "name": "Wayne Lamb"
+      }
+    },
+    {
+      "price_per_piece": {
+        "effective": 66.5,
+        "marked": 66.5,
+        "currency_code": "INR",
+        "currency_symbol": "₹"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency_code": "INR",
+        "currency_symbol": "₹"
+      },
+      "quantity": 5,
+      "pincode": 400603,
+      "article_id": "2",
+      "discount": "",
+      "article_assignment": {
+        "level": "single-company",
+        "strategy": "optimal"
+      },
+      "seller": {
+        "uid": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "uid": 1,
+        "name": "Wayne Lamb"
+      }
+    }
+  ],
+  "page": {
+    "current": 1,
+    "total": 1,
+    "has_previous": false,
+    "has_next": false,
+    "item_total": 2,
+    "type": "number"
+  },
+  "sort_on": [
+    {
+      "default": true,
+      "is_selected": true,
+      "name": "Best price & fast delivery",
+      "value": "optimal"
+    },
+    {
+      "default": false,
+      "is_selected": false,
+      "name": "Best Price",
+      "value": "low-price"
+    },
+    {
+      "default": false,
+      "is_selected": false,
+      "name": "Fastest Delivery",
+      "value": "fast-delivery"
+    }
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductComparisonBySlugs
+Compare products
+
+
+
+
+```kotlin
+catalog.getProductComparisonBySlugs(slug: slug).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| slug | ArrayList<String> | yes | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/. |  
+
+
+
+Use this API to compare the features of products belonging to the same category. Note that at least one slug is mandatory in the request query.
+
+*Returned Response*
+
+
+
+
+[ProductsComparisonResponse](#ProductsComparisonResponse)
+
+Success. Returns an array of objects containing the attributes for comparision. Check the example shown below or refer `ProductsComparisonResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "attributes_metadata": [
+    {
+      "title": "Alexander Sawyer",
+      "details": [
+        {
+          "key": "color",
+          "display": "Kimberly Davidson",
+          "description": ""
+        },
+        {
+          "key": "gender",
+          "display": "Kimberly Mcdaniel",
+          "description": ""
+        },
+        {
+          "key": "material",
+          "display": "Monica Hampton",
+          "description": ""
+        },
+        {
+          "key": "weight",
+          "display": "John Mendoza",
+          "description": ""
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "type": "product",
+      "name": "benchmark collaborative paradigms",
+      "item_type": "set",
+      "slug": "benchmark-collaborative-paradigms",
+      "id": 1,
+      "brand": {
+        "type": "brand",
+        "name": "Barry, Jennings and Larson",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Hess-Inc"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "benchmark-collaborative-paradigms"
+          }
+        },
+        "type": "page"
+      },
+      "attributes": {
+        "color_hex": "808080",
+        "weight": 100,
+        "product_type": "LaptopBags",
+        "gender": [
+          "Men",
+          "Women"
+        ],
+        "material": "Neoprene",
+        "style_note": "Shape up your overall appeal with this stunning laptop bag. The amazing storage and great design will let you carry your laptop in style!",
+        "item_code": "LGLAPTOPSLEEVE5",
+        "occasion": "Casual",
+        "primary_color": "Grey",
+        "primary_material": "Others",
+        "variant": "LGLAPTOPSLEEVE5",
+        "color": "DarkGrey",
+        "product_details": "This is a Unisex Product.",
+        "primary_color_hex": "808080"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/1309_LGLAPTOPSLEEVE5/1_1564735832806.jpg"
+        }
+      ],
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Amy Kim DDS",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Amy-Kim-DDS"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "rating": 2.7,
+      "rating_count": 2
+    },
+    {
+      "type": "product",
+      "name": "deploy viral systems",
+      "item_type": "set",
+      "slug": "deploy-viral-systems",
+      "id": 2,
+      "brand": {
+        "type": "brand",
+        "name": "Barry, Jennings and Larson",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Hess-Inc"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "deploy-viral-systems"
+          }
+        },
+        "type": "page"
+      },
+      "attributes": {
+        "color_hex": "808080",
+        "weight": 100,
+        "product_type": "LaptopBags",
+        "gender": [
+          "Men",
+          "Women"
+        ],
+        "material": "Neoprene",
+        "style_note": "Shape up your overall appeal with this stunning laptop bag. The amazing storage and great design will let you carry your laptop in style!",
+        "item_code": "LGLAPTOPSLEEVE5",
+        "occasion": "Casual",
+        "primary_color": "Grey",
+        "primary_material": "Others",
+        "variant": "LGLAPTOPSLEEVE5",
+        "color": "DarkGrey",
+        "product_details": "This is a Unisex Product.",
+        "primary_color_hex": "808080"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/1309_LGLAPTOPSLEEVE5/1_1564735832806.jpg"
+        }
+      ],
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Amy Kim DDS",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Amy-Kim-DDS"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "rating": 2.7,
+      "rating_count": 2
+    }
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSimilarComparisonProductBySlug
+Get comparison between similar products
+
+
+
+
+```kotlin
+catalog.getSimilarComparisonProductBySlug(slug: slug).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| slug | String | yes | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ |  
+
+
+
+Use this API to compare a given product automatically with similar products. Only one slug is needed.
+
+*Returned Response*
+
+
+
+
+[ProductCompareResponse](#ProductCompareResponse)
+
+Success. Returns an array of objects containing the attributes for comparision. Check the example shown below or refer `ProductCompareResponse` for more details.
 
 
 
@@ -82,14 +957,14 @@ Success
 ---
 
 
-#### getSubscriptionCharge
-Get subscription charge details
+#### getComparedFrequentlyProductBySlug
+Get comparison between frequently compared products with the given product
 
 
 
 
 ```kotlin
-client.billing.getSubscriptionCharge(extensionId: extensionId, subscriptionId: subscriptionId).safeAwait{ response,error->
+catalog.getComparedFrequentlyProductBySlug(slug: slug).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -105,22 +980,1333 @@ client.billing.getSubscriptionCharge(extensionId: extensionId, subscriptionId: s
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Customer unique id. In case of company it will be company id. |   
-| extensionId | String | yes | Extension _id |   
-| subscriptionId | String | yes | Subscription charge _id |  
+| slug | String | yes | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ |  
 
 
 
-Get created subscription charge details
+Use this API to compare a given product automatically with products that are frequently compared with it. Only one slug is needed.
 
 *Returned Response*
 
 
 
 
-[EntitySubscription](#EntitySubscription)
+[ProductFrequentlyComparedSimilarResponse](#ProductFrequentlyComparedSimilarResponse)
 
-Success
+Success. Returns an array of objects containing the attributes for comparision. Check the example shown below or refer `ProductFrequentlyComparedSimilarResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "similars": {
+    "title": "Most Compared",
+    "subtitle": "We bet you would love these!",
+    "attributes_metadata": [
+      {
+        "title": "Alexander Sawyer",
+        "details": [
+          {
+            "key": "color",
+            "display": "Kimberly Davidson",
+            "description": ""
+          },
+          {
+            "key": "gender",
+            "display": "Kimberly Mcdaniel",
+            "description": ""
+          },
+          {
+            "key": "material",
+            "display": "Monica Hampton",
+            "description": ""
+          },
+          {
+            "key": "weight",
+            "display": "John Mendoza",
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "type": "product",
+        "name": "benchmark collaborative paradigms",
+        "item_type": "set",
+        "slug": "benchmark-collaborative-paradigms",
+        "id": 1,
+        "brand": {
+          "type": "brand",
+          "name": "Barry, Jennings and Larson",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "products",
+              "query": {
+                "brand": [
+                  "Hess-Inc"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        },
+        "action": {
+          "page": {
+            "type": "product",
+            "query": {
+              "slug": "benchmark-collaborative-paradigms"
+            }
+          },
+          "type": "page"
+        },
+        "attributes": {
+          "color_hex": "808080",
+          "weight": 100,
+          "product_type": "LaptopBags",
+          "gender": [
+            "Men",
+            "Women"
+          ],
+          "material": "Neoprene",
+          "style_note": "Shape up your overall appeal with this stunning laptop bag. The amazing storage and great design will let you carry your laptop in style!",
+          "item_code": "LGLAPTOPSLEEVE5",
+          "occasion": "Casual",
+          "primary_color": "Grey",
+          "primary_material": "Others",
+          "variant": "LGLAPTOPSLEEVE5",
+          "color": "DarkGrey",
+          "product_details": "This is a Unisex Product.",
+          "primary_color_hex": "808080"
+        },
+        "medias": [
+          {
+            "type": "image",
+            "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/1309_LGLAPTOPSLEEVE5/1_1564735832806.jpg"
+          }
+        ],
+        "categories": [
+          {
+            "id": 3,
+            "uid": 3,
+            "name": "Amy Kim DDS",
+            "logo": {
+              "type": "image",
+              "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+            },
+            "action": {
+              "page": {
+                "type": "category",
+                "query": {
+                  "category": [
+                    "Amy-Kim-DDS"
+                  ]
+                }
+              },
+              "type": "page"
+            },
+            "_custom_json": {}
+          }
+        ],
+        "discount": "14% OFF",
+        "price": {
+          "marked": {
+            "min": 1399,
+            "max": 1399,
+            "currency_code": "INR",
+            "currency_symbol": "₹"
+          },
+          "effective": {
+            "min": 1199,
+            "max": 1399,
+            "currency_code": "INR",
+            "currency_symbol": "₹"
+          }
+        },
+        "rating": 2.7,
+        "rating_count": 2
+      },
+      {
+        "type": "product",
+        "attributes": {
+          "primary_color_hex": "808080",
+          "weight": "100",
+          "gender": "women",
+          "material": "Neoprene",
+          "primary_color": "DarkGrey"
+        },
+        "categories": [
+          {
+            "id": 3,
+            "uid": 3,
+            "name": "Amy Kim DDS",
+            "logo": {
+              "type": "image",
+              "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+            },
+            "action": {
+              "page": {
+                "type": "category",
+                "query": {
+                  "category": [
+                    "Amy-Kim-DDS"
+                  ]
+                }
+              },
+              "type": "page"
+            },
+            "_custom_json": {}
+          }
+        ],
+        "sellable": true,
+        "name": "deploy viral systems",
+        "slug": "deploy-viral-systems",
+        "uid": 2,
+        "item_type": "set",
+        "brand": {
+          "type": "brand",
+          "name": "Hess Inc",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "products",
+              "query": {
+                "brand": [
+                  "Hess-Inc"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        },
+        "action": {
+          "page": {
+            "type": "product",
+            "query": {
+              "slug": "deploy-viral-systems"
+            }
+          },
+          "type": "page"
+        },
+        "medias": [
+          {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/fynd_store_items/l2_category/original/2830_c5bb5fc02f414307a828c4c56483c30a.jpg"
+          }
+        ],
+        "discount": "14% OFF",
+        "price": {
+          "marked": {
+            "min": 1399,
+            "max": 1499,
+            "currency_code": "INR",
+            "currency_symbol": "₹"
+          },
+          "effective": {
+            "min": 1199,
+            "max": 1399,
+            "currency_code": "INR",
+            "currency_symbol": "₹"
+          }
+        },
+        "is_tryout": false,
+        "rating": 2.7
+      }
+    ]
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductSimilarByIdentifier
+Get similar products
+
+
+
+
+```kotlin
+catalog.getProductSimilarByIdentifier(slug: slug, similarType: similarType).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| slug | String | yes | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ |   
+| similarType | String | yes | Similarity criteria such as basic, visual, price, seller, category and spec. Visual - Products having similar patterns, Price - Products in similar price range, Seller - Products sold by the same seller, Category - Products belonging to the same category, e.g. sports shoes, Spec - Products having similar specifications, e.g. phones with same memory. |  
+
+
+
+Use this API to retrieve products similar to the one specified by its slug. You can search not only similar looking products, but also those that are sold by same seller, or those that belong to the same category, price, specifications, etc.
+
+*Returned Response*
+
+
+
+
+[SimilarProductByTypeResponse](#SimilarProductByTypeResponse)
+
+Success. Returns a group of similar products based on type. Check the example shown below or refer `SimilarProductByTypeResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "similars": {
+    "title": "Brand",
+    "subtitle": "",
+    "type": "brand",
+    "items": [
+      {
+        "type": "product",
+        "attributes": {
+          "primary_color_hex": null,
+          "features": "<li>Dura-pump Technology</li> <li>i-Pure Technology</li> <li>Powerful Air Throw</li> <li>Cool Flow Dispenser</li> <li>Engg. Plastic: Blower</li> <li>Blower/Fan Diameter (mm): 180</li> <li>Ice Chamber</li> <li>Cool Flow Dispenser</li> <li>Cooling Media: Honeycomb</li> <li>Air Throw Distance (mt): 9/30</li>",
+          "model": "DiET 35T",
+          "air-cooler-type": "Portable",
+          "primary_color": ""
+        },
+        "categories": [
+          {
+            "id": 2717,
+            "uid": 2717,
+            "name": "Air Coolers",
+            "logo": {
+              "type": "image",
+              "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+            },
+            "action": {
+              "page": {
+                "type": "products",
+                "query": {
+                  "category": [
+                    "air-coolers"
+                  ]
+                }
+              },
+              "type": "page"
+            },
+            "_custom_json": {}
+          }
+        ],
+        "sellable": true,
+        "name": "Symphony Diet 35t Portable Air Cooler",
+        "slug": "symphony-diet-35t-portable-air-cooler",
+        "uid": 7502019,
+        "item_type": "standard",
+        "item_code": "491297014",
+        "brand": {
+          "type": "brand",
+          "name": "Symphony",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.jiox0.de/jiox0/brands/pictures/square-logo/original/69sKmY_CX-Logo.jpeg"
+          },
+          "action": {
+            "page": {
+              "type": "products",
+              "query": {
+                "brand": [
+                  "symphony"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        },
+        "action": {
+          "page": {
+            "type": "product",
+            "params": {
+              "slug": [
+                "symphony-diet-35t-portable-air-cooler"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "medias": [
+          {
+            "type": "image",
+            "url": "https://hdn-1.jiox0.de/jiox0/products/pictures/item/free/original/63/491297014/0/5aKOS19APd-symphony-diet-35t-air-coolers-491297014-i-1-1200wx1200h.jpeg"
+          },
+          {
+            "type": "image",
+            "url": "https://hdn-1.jiox0.de/jiox0/products/pictures/item/free/original/63/491297014/1/NY6IJ7xfug-symphony-diet-35t-air-coolers-491297014-i-2-1200wx1200h.jpeg"
+          }
+        ],
+        "discount": "",
+        "price": {
+          "marked": {
+            "min": 9299,
+            "max": 9299,
+            "currency_code": "INR",
+            "currency_symbol": "₹"
+          },
+          "effective": {
+            "min": 9299,
+            "max": 9299,
+            "currency_code": "INR",
+            "currency_symbol": "₹"
+          }
+        },
+        "is_tryout": false,
+        "_custom_json": {},
+        "highlights": [
+          "Powerful Air Throw ",
+          "Large 35 Litre Tank Capacity ",
+          "Automatic Louvers ",
+          "Multi Directional Wheels ",
+          "High Efficiency Honey Comb Pad"
+        ],
+        "description": "Exclusively suited for your cozy bedroom, Symphony DiET 35T Portable Air Cooler, assures you your comfort while it makes summers fun. Powered by a 35 litre tank, a high efficiency honeycomb pad and ice chamber, it is indeed your coolest buddy in summers. Automatic louvers, multi-directional wheels and three speed remote controlled setting options make it an ideal buy.",
+        "country_of_origin": "India"
+      }
+    ]
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductVariantsBySlug
+Get variant of a particular product
+
+
+
+
+```kotlin
+catalog.getProductVariantsBySlug(slug: slug).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| slug | String | yes | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ |  
+
+
+
+A product can have a different type of variants such as colour, shade, memory. Use this API to fetch all the available variants of a product using its slug.
+
+*Returned Response*
+
+
+
+
+[ProductVariantsResponse](#ProductVariantsResponse)
+
+Success. Returns all variants of a product. Check the example shown below or refer `ProductVariantsResponse` for more details. For `display_type:image`, `color` key will be present otherwise `value` key will be shown.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "variants": [
+    {
+      "header": "Addtn. Color",
+      "key": "color",
+      "display_type": "image",
+      "logo": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/360x0/56_MKT02AI060CORAL/1_1567590349681.jpg",
+      "items": [
+        {
+          "action": {
+            "page": {
+              "type": "product",
+              "query": {
+                "slug": "benchmark-collaborative-paradigms"
+              }
+            },
+            "type": "page"
+          },
+          "uid": 1,
+          "slug": "benchmark-collaborative-paradigms",
+          "medias": [
+            {
+              "type": "image",
+              "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/1309_LGLAPTOPSLEEVE5/1_1564735832806.jpg"
+            }
+          ],
+          "name": "benchmark collaborative paradigms",
+          "is_available": true,
+          "color_name": "DarkGrey",
+          "color": "808080"
+        }
+      ]
+    }
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductStockByIds
+Get the stock of a product
+
+
+
+
+```kotlin
+catalog.getProductStockByIds(itemId: itemId, alu: alu, skuCode: skuCode, ean: ean, upc: upc).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| itemId | String? | no | The Item ID of the product (Max. 50 allowed) |   
+| alu | String? | no | ALU of the product (limited upto 50 ALU identifier in a single request) |   
+| skuCode | String? | no | Stock-keeping Unit of the product (limited upto 50 SKU Code in a single request) |   
+| ean | String? | no | European Article Number of the product (limited upto 50 EAN identifier in a single request) |   
+| upc | String? | no | Universal Product Code of the product (limited upto 50 UPC identifier in a single request) |  
+
+
+
+Retrieve the available stock of the products. Use this API to retrieve stock of multiple products (up to 50) at a time.
+
+*Returned Response*
+
+
+
+
+[ProductStockStatusResponse](#ProductStockStatusResponse)
+
+Success. Returns the status of the product stock.Check the example shown below or refer `ProductStockStatusResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "uid": "1",
+      "item_id": 1,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "2",
+      "item_id": 1,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "3",
+      "item_id": 2,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "4",
+      "item_id": 2,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "5",
+      "item_id": 3,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "6",
+      "item_id": 3,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "7",
+      "item_id": 4,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "8",
+      "item_id": 4,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "9",
+      "item_id": 5,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "10",
+      "item_id": 5,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "11",
+      "item_id": 6,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "12",
+      "item_id": 6,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "13",
+      "item_id": 7,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "14",
+      "item_id": 7,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "15",
+      "item_id": 8,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "16",
+      "item_id": 8,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "17",
+      "item_id": 9,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "18",
+      "item_id": 9,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "19",
+      "item_id": 10,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "20",
+      "item_id": 10,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "21",
+      "item_id": 11,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "22",
+      "item_id": 11,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "23",
+      "item_id": 12,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "24",
+      "item_id": 12,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "25",
+      "item_id": 13,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "26",
+      "item_id": 13,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "27",
+      "item_id": 14,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "28",
+      "item_id": 14,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "29",
+      "item_id": 15,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    },
+    {
+      "uid": "30",
+      "item_id": 15,
+      "identifier": {
+        "sku_code": "P10101101154425S"
+      },
+      "price": {
+        "effective": 399,
+        "marked": 399,
+        "currency": "INR"
+      },
+      "size": "13",
+      "company": {
+        "id": 1,
+        "name": "Natalie Norman"
+      },
+      "store": {
+        "id": 1,
+        "name": "Wayne Lamb",
+        "code": "Wayne-Lamb"
+      },
+      "quantity": 5
+    }
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getProductStockForTimeByIds
+Get the stock of a product
+
+
+
+
+```kotlin
+catalog.getProductStockForTimeByIds(timestamp: timestamp, pageSize: pageSize, pageId: pageId).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| timestamp | String | yes | Timestamp in UTC format (2020-07-23T10:27:50Z) |   
+| pageSize | Int? | no | The number of items to retrieve in each page. |   
+| pageId | String? | no | Page ID to retrieve next set of results. |  
+
+
+
+Retrieve the available stock of the products. Use this API to get the stock status of products whose inventory is updated at the specified time
+
+*Returned Response*
+
+
+
+
+[ProductStockPolling](#ProductStockPolling)
+
+Success. Returns the status of the product stock.Check the example shown below or refer `ProductStockPolling` for more details.
 
 
 
@@ -144,14 +2330,14 @@ Success
 ---
 
 
-#### cancelSubscriptionCharge
-Cancel subscription charge
+#### getProducts
+Get all the products
 
 
 
 
 ```kotlin
-client.billing.cancelSubscriptionCharge(extensionId: extensionId, subscriptionId: subscriptionId).safeAwait{ response,error->
+catalog.getProducts(q: q, f: f, filters: filters, sortOn: sortOn, pageId: pageId, pageSize: pageSize, pageNo: pageNo, pageType: pageType).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -167,22 +2353,2464 @@ client.billing.cancelSubscriptionCharge(extensionId: extensionId, subscriptionId
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Customer unique id. In case of company it will be company id. |   
-| extensionId | String | yes | Extension _id |   
-| subscriptionId | String | yes | Subscription charge _id |  
+| q | String? | no | The search query for entering partial or full name of product, brand, category, or collection. |   
+| f | String? | no | The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter paramater applied as an AND condition. |   
+| filters | Boolean? | no | This is a boolean value, True for fetching all filter parameters and False for disabling the filter parameters. |   
+| sortOn | String? | no | The order in which the list of products should be sorted, e.g. popularity, price, latest and discount, in either ascending or descending order. See the supported values below. |   
+| pageId | String? | no | Page ID to retrieve next set of results. |   
+| pageSize | Int? | no | The number of items to retrieve in each page. |   
+| pageNo | Int? | no | The page number to navigate through the given set of results. |   
+| pageType | String? | no | Available pagination types are cursor or number. |  
 
 
 
-Cancel subscription and attached charges.
+Use this API to list all the products. You may choose a sort order or make arbitrary search queries by entering the product name, brand, category or collection.
 
 *Returned Response*
 
 
 
 
-[EntitySubscription](#EntitySubscription)
+[ProductListingResponse](#ProductListingResponse)
 
-Success
+Success. Returns a paginated list of products..Check the example shown below or refer `ProductListingResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "filters": [
+    {
+      "key": {
+        "display": "Department",
+        "name": "department",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Department.svg"
+      },
+      "values": [
+        {
+          "display": "Debra Villarreal",
+          "count": 15,
+          "is_selected": false,
+          "value": "Debra-Villarreal",
+          "logo": {
+            "type": "image",
+            "url": "http://cdn4.gofynd.com/media/category_tab_icons/department/Men.png"
+          }
+        },
+        {
+          "display": "Tracey Miller",
+          "count": 15,
+          "is_selected": false,
+          "value": "Tracey-Miller",
+          "logo": {
+            "type": "image",
+            "url": "http://cdn4.gofynd.com/media/category_tab_icons/department/Men.png"
+          }
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Category",
+        "name": "category",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Category.svg"
+      },
+      "values": [
+        {
+          "display": "Amy Kim DDS",
+          "count": 15,
+          "is_selected": false,
+          "value": "3",
+          "logo": "http://cdn4.gofynd.com/media/banner/category/original/12063_a5bb91bd5cb44c3c9db98c2a0e6b3d99.jpg"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Gender",
+        "name": "gender",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Gender.svg"
+      },
+      "values": [
+        {
+          "display": "Men",
+          "count": 15,
+          "is_selected": false,
+          "value": "men"
+        },
+        {
+          "display": "Women",
+          "count": 15,
+          "is_selected": false,
+          "value": "women"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Size",
+        "name": "sizes",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Sizes.svg"
+      },
+      "values": [
+        {
+          "display": "13",
+          "count": 15,
+          "is_selected": false,
+          "value": "13"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Brand",
+        "name": "brand",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Brand%20ID.svg"
+      },
+      "values": [
+        {
+          "display": "Barry, Jennings and Larson",
+          "count": 15,
+          "is_selected": false,
+          "value": "1",
+          "logo": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Rating",
+        "name": "rating",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Rating.svg"
+      },
+      "values": [
+        {
+          "count": 15,
+          "display": "2 - 3",
+          "value": "[2 TO 3}",
+          "is_selected": false
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Image",
+        "name": "image_nature",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/image%20Nature.svg"
+      },
+      "values": [
+        {
+          "display": "GoodQuality",
+          "count": 15,
+          "is_selected": false,
+          "value": "standard"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Monica Hampton",
+        "name": "material",
+        "kind": "multivalued",
+        "logo": ""
+      },
+      "values": [
+        {
+          "display": "Neoprene",
+          "count": 15,
+          "is_selected": false,
+          "value": "Neoprene"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "John Mendoza",
+        "name": "weight",
+        "kind": "multivalued",
+        "logo": ""
+      },
+      "values": [
+        {
+          "display": "100",
+          "count": 15,
+          "is_selected": false,
+          "value": "100"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Kimberly Mcdaniel",
+        "name": "gender",
+        "kind": "multivalued",
+        "logo": ""
+      },
+      "values": [
+        {
+          "display": "['Men', 'Women']",
+          "count": 15,
+          "is_selected": false,
+          "value": "['Men', 'Women']"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Kimberly Davidson",
+        "name": "color",
+        "kind": "multivalued",
+        "logo": ""
+      },
+      "values": [
+        {
+          "display": "Grey",
+          "count": 15,
+          "is_selected": false,
+          "value": "808080"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Available",
+        "name": "is_available",
+        "kind": "singlevalued"
+      },
+      "values": [
+        {
+          "display": "Available",
+          "count": 3,
+          "is_selected": false,
+          "value": "true"
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "type": "product",
+      "attributes": {
+        "primary_color_hex": "808080",
+        "weight": "100",
+        "gender": "women",
+        "material": "Neoprene",
+        "primary_color": "DarkGrey"
+      },
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Amy Kim DDS",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Amy-Kim-DDS"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "sellable": true,
+      "name": "benchmark collaborative paradigms",
+      "slug": "benchmark-collaborative-paradigms",
+      "uid": 1,
+      "item_type": "set",
+      "brand": {
+        "type": "brand",
+        "name": "Hess Inc",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Hess-Inc"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "benchmark-collaborative-paradigms"
+          }
+        },
+        "type": "page"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/fynd_store_items/l2_category/original/2830_c5bb5fc02f414307a828c4c56483c30a.jpg"
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1499,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "is_tryout": false,
+      "promo_meta": {
+        "title": "",
+        "subtitle": ""
+      },
+      "item_code": "ITEM_CODE_1",
+      "rating": 2.7
+    },
+    {
+      "type": "product",
+      "attributes": {
+        "primary_color_hex": "808080",
+        "weight": "100",
+        "gender": "women",
+        "material": "Neoprene",
+        "primary_color": "DarkGrey"
+      },
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Amy Kim DDS",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Amy-Kim-DDS"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "sellable": true,
+      "name": "architect granular e-business",
+      "slug": "architect-granular-e-business",
+      "uid": 10,
+      "item_type": "set",
+      "brand": {
+        "type": "brand",
+        "name": "Hess Inc",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Hess-Inc"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "architect-granular-e-business"
+          }
+        },
+        "type": "page"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/fynd_store_items/l2_category/original/2830_c5bb5fc02f414307a828c4c56483c30a.jpg"
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1499,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "is_tryout": false,
+      "promo_meta": {
+        "title": "",
+        "subtitle": ""
+      },
+      "item_code": "ITEM_CODE_2",
+      "rating": 2.7
+    },
+    {
+      "type": "product",
+      "attributes": {
+        "primary_color_hex": "808080",
+        "weight": "100",
+        "gender": "women",
+        "material": "Neoprene",
+        "primary_color": "DarkGrey"
+      },
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Amy Kim DDS",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Amy-Kim-DDS"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "sellable": true,
+      "name": "facilitate enterprise supply-chains",
+      "slug": "facilitate-enterprise-supply-chains",
+      "uid": 11,
+      "item_type": "set",
+      "brand": {
+        "type": "brand",
+        "name": "Hess Inc",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Hess-Inc"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "facilitate-enterprise-supply-chains"
+          }
+        },
+        "type": "page"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/fynd_store_items/l2_category/original/2830_c5bb5fc02f414307a828c4c56483c30a.jpg"
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1499,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "is_tryout": false,
+      "promo_meta": {
+        "title": "",
+        "subtitle": ""
+      },
+      "item_code": "ITEM_CODE_3",
+      "rating": 2.7
+    },
+    {
+      "type": "product",
+      "attributes": {
+        "primary_color_hex": "808080",
+        "weight": "100",
+        "gender": "women",
+        "material": "Neoprene",
+        "primary_color": "DarkGrey"
+      },
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Amy Kim DDS",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Amy-Kim-DDS"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "sellable": true,
+      "name": "optimize web-enabled e-tailers",
+      "slug": "optimize-web-enabled-e-tailers",
+      "uid": 12,
+      "item_type": "set",
+      "brand": {
+        "type": "brand",
+        "name": "Hess Inc",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Hess-Inc"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "optimize-web-enabled-e-tailers"
+          }
+        },
+        "type": "page"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/fynd_store_items/l2_category/original/2830_c5bb5fc02f414307a828c4c56483c30a.jpg"
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1499,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "is_tryout": false,
+      "promo_meta": {
+        "title": "",
+        "subtitle": ""
+      },
+      "item_code": "ITEM_CODE_4",
+      "rating": 2.7
+    }
+  ],
+  "sort_on": [
+    {
+      "display": "Latest Products.",
+      "name": "Latest Products.",
+      "logo": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/360x0/56_MKT02AI060CORAL/1_1567590349681.jpg",
+      "value": "latest",
+      "is_selected": true
+    }
+  ],
+  "page": {
+    "current": 1,
+    "total": 2,
+    "has_previous": false,
+    "has_next": true,
+    "item_total": 15,
+    "type": "number"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getBrands
+Get all the brands
+
+
+
+
+```kotlin
+catalog.getBrands(department: department, pageNo: pageNo, pageSize: pageSize).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| department | String? | no | The name of the department. Use this parameter to filter products by a particular department. See the list of available departments below. Also, you can get available departments from the endpoint /service/application/catalog/v1.0/departments/ |   
+| pageNo | Int? | no | The page number to navigate through the given set of results. |   
+| pageSize | Int? | no | The number of items to retrieve in each page. |  
+
+
+
+A brand is the name under which a product is sold. Use this API to list all the brands. You can also filter the brands by department.
+
+*Returned Response*
+
+
+
+
+[BrandListingResponse](#BrandListingResponse)
+
+Success. Returns a paginated list of brands. Check the example shown below or refer `BrandListingResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "uid": 1,
+      "name": "Barry, Jennings and Larson",
+      "slug": "Hess-Inc",
+      "action": {
+        "page": {
+          "type": "products",
+          "query": {
+            "brand": [
+              "Hess-Inc"
+            ]
+          }
+        },
+        "type": "page"
+      },
+      "logo": {
+        "type": "image",
+        "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+      },
+      "banners": {
+        "portrait": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/12537_9cdfc6835e814b0986ee1643d38cf6cd.png"
+        }
+      },
+      "en_name": "Barry, Jennings and Larson"
+    }
+  ],
+  "page": {
+    "current": 1,
+    "total": 1,
+    "has_previous": false,
+    "has_next": false,
+    "item_total": 1,
+    "type": "number"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getBrandDetailBySlug
+Get metadata of a brand
+
+
+
+
+```kotlin
+catalog.getBrandDetailBySlug(slug: slug).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| slug | String | yes | A short, human-readable, URL-friendly identifier of a brand. You can get slug value from the endpoint /service/application/catalog/v1.0/brands/. |  
+
+
+
+Fetch metadata of a brand such as name, information, logo, banner, etc.
+
+*Returned Response*
+
+
+
+
+[BrandDetailResponse](#BrandDetailResponse)
+
+Success. Returns a metadata object. Check the example shown below or refer `BrandDetailResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "logo": {
+    "type": "image",
+    "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+  },
+  "banners": {
+    "portrait": {
+      "type": "image",
+      "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/12537_9cdfc6835e814b0986ee1643d38cf6cd.png"
+    },
+    "landscape": {
+      "type": "image",
+      "url": "https://hdn-1.fynd.com/media/banner/brand/original/12536_e1a5cdcefc7540e68cedd8c2b0673179.png"
+    }
+  },
+  "uid": 1,
+  "name": "Hess Inc"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCategories
+List all the categories
+
+
+
+
+```kotlin
+catalog.getCategories(department: department).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| department | String? | no | The name of the department. Use this parameter to filter products by a particular department. See the list of available departments below. Also, you can get available departments from the endpoint /service/application/catalog/v1.0/departments/ |  
+
+
+
+Use this API to list all the categories. You can also filter the categories by department.
+
+*Returned Response*
+
+
+
+
+[CategoryListingResponse](#CategoryListingResponse)
+
+Success. Returns a list of categories. Check the example shown below or refer `CategoryListingResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "departments": [
+    {
+      "slug": "Cody-Doyle",
+      "uid": 1
+    }
+  ],
+  "data": [
+    {
+      "department": "Cody-Doyle",
+      "items": [
+        {
+          "name": "Janet Parker",
+          "image": {
+            "aspect_ratio": "13:20",
+            "aspect_ratio_f": 0.65,
+            "url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/banner_portrait/category/resize-w:130,h:200/12064_e69e1d8b5e934d3488f0dc8663d8a158.jpg"
+          },
+          "uid": 1,
+          "slug": "Janet-Parker",
+          "_custom_json": {},
+          "action": {
+            "type": "category",
+            "url": "https://api.addsale.com/platform/content/v1/products/?l1_category=Janet-Parker&department=Jaime-Chambers",
+            "query": {
+              "l1_category": [
+                "Janet-Parker"
+              ],
+              "department": [
+                "Jaime-Chambers"
+              ]
+            }
+          },
+          "childs": [
+            {
+              "name": "Hannah Lawson",
+              "image": {
+                "aspect_ratio": "13:20",
+                "aspect_ratio_f": 0.65,
+                "url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/banner_portrait/category/resize-w:130,h:200/12064_e69e1d8b5e934d3488f0dc8663d8a158.jpg"
+              },
+              "uid": 2,
+              "slug": "Hannah-Lawson",
+              "_custom_json": {},
+              "action": {
+                "type": "category",
+                "url": "https://api.addsale.com/platform/content/v1/products/?l2_category=Hannah-Lawson&department=Jaime-Chambers",
+                "query": {
+                  "l2_category": [
+                    "Hannah-Lawson"
+                  ],
+                  "department": [
+                    "Jaime-Chambers"
+                  ]
+                }
+              },
+              "childs": [
+                {
+                  "name": "Logan Black",
+                  "image": {
+                    "aspect_ratio": "13:20",
+                    "aspect_ratio_f": 0.65,
+                    "url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/banner_portrait/category/resize-w:130,h:200/12064_e69e1d8b5e934d3488f0dc8663d8a158.jpg"
+                  },
+                  "uid": 3,
+                  "slug": "Logan-Black",
+                  "_custom_json": {},
+                  "action": {
+                    "type": "category",
+                    "url": "https://api.addsale.com/platform/content/v1/products/?category=Logan-Black&department=Jaime-Chambers",
+                    "query": {
+                      "category": [
+                        "Logan-Black"
+                      ],
+                      "department": [
+                        "Jaime-Chambers"
+                      ]
+                    }
+                  },
+                  "childs": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getCategoryDetailBySlug
+Get metadata of a category
+
+
+
+
+```kotlin
+catalog.getCategoryDetailBySlug(slug: slug).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| slug | String | yes | A short, human-readable, URL-friendly identifier of a brand. You can get slug value from the endpoint /service/application/catalog/v1.0/brands/. |  
+
+
+
+Fetch metadata of a category such as name, information, logo, banner, etc.
+
+*Returned Response*
+
+
+
+
+[CategoryMetaResponse](#CategoryMetaResponse)
+
+Success. Returns metadata of a category. Check the example shown below or refer `CategoryMetaResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "logo": {
+    "type": "image",
+    "url": "http://cdn4.gofynd.com/media/banner/category/original/12063_a5bb91bd5cb44c3c9db98c2a0e6b3d99.jpg"
+  },
+  "uid": 1,
+  "name": "Kyle Cabrera",
+  "banners": {
+    "portrait": {
+      "type": "image",
+      "url": "http://cdn4.gofynd.com/media/banner_portrait/category/original/12064_e69e1d8b5e934d3488f0dc8663d8a158.jpg"
+    },
+    "landscape": {
+      "type": "image",
+      "url": "http://cdn4.gofynd.com/media/banner/category/original/12063_a5bb91bd5cb44c3c9db98c2a0e6b3d99.jpg"
+    }
+  },
+  "_custom_json": {}
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getHomeProducts
+List the products
+
+
+
+
+```kotlin
+catalog.getHomeProducts(sortOn: sortOn, pageId: pageId, pageSize: pageSize).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| sortOn | String? | no | The order in which the list of products should be sorted, e.g. popularity, price, latest and discount, in either ascending or descending order. |   
+| pageId | String? | no | Page ID to retrieve next set of results. |   
+| pageSize | Int? | no | The number of items to retrieve in each page. |  
+
+
+
+List all the products associated with a brand, collection or category in a random order.
+
+*Returned Response*
+
+
+
+
+[HomeListingResponse](#HomeListingResponse)
+
+Success. Returns a paginated list of products. Check the example shown below or refer `HomeListingResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "type": "product",
+      "attributes": {
+        "primary_color_hex": "808080",
+        "weight": "100",
+        "gender": "women",
+        "material": "Neoprene",
+        "primary_color": "DarkGrey"
+      },
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Amy Kim DDS",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Amy-Kim-DDS"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "sellable": true,
+      "name": "whiteboard holistic functionalities",
+      "slug": "whiteboard-holistic-functionalities",
+      "uid": 7,
+      "item_type": "set",
+      "brand": {
+        "type": "brand",
+        "name": "Hess Inc",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Hess-Inc"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "whiteboard-holistic-functionalities"
+          }
+        },
+        "type": "page"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/fynd_store_items/l2_category/original/2830_c5bb5fc02f414307a828c4c56483c30a.jpg"
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1499,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "is_tryout": false,
+      "promo_meta": {
+        "title": "",
+        "subtitle": ""
+      },
+      "rating": 2.7
+    },
+    {
+      "type": "product",
+      "attributes": {
+        "primary_color_hex": "808080",
+        "weight": "100",
+        "gender": "women",
+        "material": "Neoprene",
+        "primary_color": "DarkGrey"
+      },
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Amy Kim DDS",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Amy-Kim-DDS"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "sellable": true,
+      "name": "envisioneer user-centric technologies",
+      "slug": "envisioneer-user-centric-technologies",
+      "uid": 6,
+      "item_type": "set",
+      "brand": {
+        "type": "brand",
+        "name": "Hess Inc",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Hess-Inc"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "envisioneer-user-centric-technologies"
+          }
+        },
+        "type": "page"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/fynd_store_items/l2_category/original/2830_c5bb5fc02f414307a828c4c56483c30a.jpg"
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1499,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "is_tryout": false,
+      "promo_meta": {
+        "title": "",
+        "subtitle": ""
+      },
+      "rating": 2.7
+    },
+    {
+      "type": "product",
+      "attributes": {
+        "primary_color_hex": "808080",
+        "weight": "100",
+        "gender": "women",
+        "material": "Neoprene",
+        "primary_color": "DarkGrey"
+      },
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Amy Kim DDS",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Amy-Kim-DDS"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "sellable": true,
+      "name": "deploy viral systems",
+      "slug": "deploy-viral-systems",
+      "uid": 2,
+      "item_type": "set",
+      "brand": {
+        "type": "brand",
+        "name": "Hess Inc",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Hess-Inc"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "deploy-viral-systems"
+          }
+        },
+        "type": "page"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/fynd_store_items/l2_category/original/2830_c5bb5fc02f414307a828c4c56483c30a.jpg"
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1499,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "is_tryout": false,
+      "promo_meta": {
+        "title": "",
+        "subtitle": ""
+      },
+      "rating": 2.7
+    },
+    {
+      "type": "product",
+      "attributes": {
+        "primary_color_hex": "808080",
+        "weight": "100",
+        "gender": "women",
+        "material": "Neoprene",
+        "primary_color": "DarkGrey"
+      },
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Amy Kim DDS",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Amy-Kim-DDS"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "sellable": true,
+      "name": "syndicate compelling e-commerce",
+      "slug": "syndicate-compelling-e-commerce",
+      "uid": 8,
+      "item_type": "set",
+      "brand": {
+        "type": "brand",
+        "name": "Hess Inc",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Hess-Inc"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "syndicate-compelling-e-commerce"
+          }
+        },
+        "type": "page"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/fynd_store_items/l2_category/original/2830_c5bb5fc02f414307a828c4c56483c30a.jpg"
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1499,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "is_tryout": false,
+      "promo_meta": {
+        "title": "",
+        "subtitle": ""
+      },
+      "rating": 2.7
+    },
+    {
+      "type": "product",
+      "attributes": {
+        "primary_color_hex": "808080",
+        "weight": "100",
+        "gender": "women",
+        "material": "Neoprene",
+        "primary_color": "DarkGrey"
+      },
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Amy Kim DDS",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Amy-Kim-DDS"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "sellable": true,
+      "name": "leverage granular e-commerce",
+      "slug": "leverage-granular-e-commerce",
+      "uid": 3,
+      "item_type": "set",
+      "brand": {
+        "type": "brand",
+        "name": "Hess Inc",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Hess-Inc"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "leverage-granular-e-commerce"
+          }
+        },
+        "type": "page"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/fynd_store_items/l2_category/original/2830_c5bb5fc02f414307a828c4c56483c30a.jpg"
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1499,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "is_tryout": false,
+      "promo_meta": {
+        "title": "",
+        "subtitle": ""
+      },
+      "rating": 2.7
+    },
+    {
+      "type": "product",
+      "attributes": {
+        "primary_color_hex": "808080",
+        "weight": "100",
+        "gender": "women",
+        "material": "Neoprene",
+        "primary_color": "DarkGrey"
+      },
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Amy Kim DDS",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Amy-Kim-DDS"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "sellable": true,
+      "name": "deliver bleeding-edge systems",
+      "slug": "deliver-bleeding-edge-systems",
+      "uid": 13,
+      "item_type": "set",
+      "brand": {
+        "type": "brand",
+        "name": "Hess Inc",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Hess-Inc"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "deliver-bleeding-edge-systems"
+          }
+        },
+        "type": "page"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/fynd_store_items/l2_category/original/2830_c5bb5fc02f414307a828c4c56483c30a.jpg"
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1499,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "is_tryout": false,
+      "promo_meta": {
+        "title": "",
+        "subtitle": ""
+      },
+      "rating": 2.7
+    },
+    {
+      "type": "product",
+      "attributes": {
+        "primary_color_hex": "808080",
+        "weight": "100",
+        "gender": "women",
+        "material": "Neoprene",
+        "primary_color": "DarkGrey"
+      },
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Amy Kim DDS",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Amy-Kim-DDS"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "sellable": true,
+      "name": "optimize web-enabled e-tailers",
+      "slug": "optimize-web-enabled-e-tailers",
+      "uid": 12,
+      "item_type": "set",
+      "brand": {
+        "type": "brand",
+        "name": "Hess Inc",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Hess-Inc"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "optimize-web-enabled-e-tailers"
+          }
+        },
+        "type": "page"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/fynd_store_items/l2_category/original/2830_c5bb5fc02f414307a828c4c56483c30a.jpg"
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1499,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "is_tryout": false,
+      "promo_meta": {
+        "title": "",
+        "subtitle": ""
+      },
+      "rating": 2.7
+    },
+    {
+      "type": "product",
+      "attributes": {
+        "primary_color_hex": "808080",
+        "weight": "100",
+        "gender": "women",
+        "material": "Neoprene",
+        "primary_color": "DarkGrey"
+      },
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Amy Kim DDS",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Amy-Kim-DDS"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "sellable": true,
+      "name": "architect granular e-business",
+      "slug": "architect-granular-e-business",
+      "uid": 10,
+      "item_type": "set",
+      "brand": {
+        "type": "brand",
+        "name": "Hess Inc",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Hess-Inc"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "architect-granular-e-business"
+          }
+        },
+        "type": "page"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/fynd_store_items/l2_category/original/2830_c5bb5fc02f414307a828c4c56483c30a.jpg"
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1499,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "is_tryout": false,
+      "promo_meta": {
+        "title": "",
+        "subtitle": ""
+      },
+      "rating": 2.7
+    },
+    {
+      "type": "product",
+      "attributes": {
+        "primary_color_hex": "808080",
+        "weight": "100",
+        "gender": "women",
+        "material": "Neoprene",
+        "primary_color": "DarkGrey"
+      },
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Amy Kim DDS",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Amy-Kim-DDS"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "sellable": true,
+      "name": "drive scalable applications",
+      "slug": "drive-scalable-applications",
+      "uid": 5,
+      "item_type": "set",
+      "brand": {
+        "type": "brand",
+        "name": "Hess Inc",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Hess-Inc"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "drive-scalable-applications"
+          }
+        },
+        "type": "page"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/fynd_store_items/l2_category/original/2830_c5bb5fc02f414307a828c4c56483c30a.jpg"
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1499,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "is_tryout": false,
+      "promo_meta": {
+        "title": "",
+        "subtitle": ""
+      },
+      "rating": 2.7
+    },
+    {
+      "type": "product",
+      "attributes": {
+        "primary_color_hex": "808080",
+        "weight": "100",
+        "gender": "women",
+        "material": "Neoprene",
+        "primary_color": "DarkGrey"
+      },
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Amy Kim DDS",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Amy-Kim-DDS"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "sellable": true,
+      "name": "cultivate web-enabled e-tailers",
+      "slug": "cultivate-web-enabled-e-tailers",
+      "uid": 4,
+      "item_type": "set",
+      "brand": {
+        "type": "brand",
+        "name": "Hess Inc",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Hess-Inc"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "cultivate-web-enabled-e-tailers"
+          }
+        },
+        "type": "page"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/fynd_store_items/l2_category/original/2830_c5bb5fc02f414307a828c4c56483c30a.jpg"
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1499,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "is_tryout": false,
+      "promo_meta": {
+        "title": "",
+        "subtitle": ""
+      },
+      "rating": 2.7
+    },
+    {
+      "type": "product",
+      "attributes": {
+        "primary_color_hex": "808080",
+        "weight": "100",
+        "gender": "women",
+        "material": "Neoprene",
+        "primary_color": "DarkGrey"
+      },
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Amy Kim DDS",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Amy-Kim-DDS"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "sellable": true,
+      "name": "facilitate enterprise supply-chains",
+      "slug": "facilitate-enterprise-supply-chains",
+      "uid": 11,
+      "item_type": "set",
+      "brand": {
+        "type": "brand",
+        "name": "Hess Inc",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Hess-Inc"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "facilitate-enterprise-supply-chains"
+          }
+        },
+        "type": "page"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/fynd_store_items/l2_category/original/2830_c5bb5fc02f414307a828c4c56483c30a.jpg"
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1499,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "is_tryout": false,
+      "promo_meta": {
+        "title": "",
+        "subtitle": ""
+      },
+      "rating": 2.7
+    },
+    {
+      "type": "product",
+      "attributes": {
+        "primary_color_hex": "808080",
+        "weight": "100",
+        "gender": "women",
+        "material": "Neoprene",
+        "primary_color": "DarkGrey"
+      },
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Amy Kim DDS",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Amy-Kim-DDS"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "sellable": true,
+      "name": "benchmark collaborative paradigms",
+      "slug": "benchmark-collaborative-paradigms",
+      "uid": 1,
+      "item_type": "set",
+      "brand": {
+        "type": "brand",
+        "name": "Hess Inc",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Hess-Inc"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "benchmark-collaborative-paradigms"
+          }
+        },
+        "type": "page"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/fynd_store_items/l2_category/original/2830_c5bb5fc02f414307a828c4c56483c30a.jpg"
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1499,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "is_tryout": false,
+      "promo_meta": {
+        "title": "",
+        "subtitle": ""
+      },
+      "rating": 2.7
+    }
+  ],
+  "page": {
+    "next_id": "AoJftsmkNiEx",
+    "has_previous": false,
+    "has_next": true,
+    "item_total": 15,
+    "type": "number"
+  },
+  "sort_on": "random_36547cfbb4c54a1a992c17aa5 asc"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getDepartments
+List all the departments
+
+
+
+
+```kotlin
+catalog.getDepartments().safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+
+Departments are a way to categorise similar products. A product can lie in multiple departments. For example, a skirt can below to the 'Women's Fashion' Department while a handbag can lie in 'Women's Accessories' Department. Use this API to list all the departments. If successful, returns the list of departments specified in `DepartmentResponse`
+
+*Returned Response*
+
+
+
+
+[DepartmentResponse](#DepartmentResponse)
+
+List of Departments. See example below or refer `DepartmentResponse` for details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "uid": 1,
+      "name": "Zachary Harris",
+      "slug": "Zachary-Harris",
+      "priority_order": 7,
+      "logo": {
+        "type": "image",
+        "url": "http://cdn4.gofynd.com/media/category_tab_icons/department/Men.png"
+      }
+    },
+    {
+      "uid": 2,
+      "name": "Aaron Reilly",
+      "slug": "Aaron-Reilly",
+      "priority_order": 7,
+      "logo": {
+        "type": "image",
+        "url": "http://cdn4.gofynd.com/media/category_tab_icons/department/Men.png"
+      }
+    },
+    {
+      "uid": 3,
+      "name": "Bobby Sandoval",
+      "slug": "Bobby-Sandoval",
+      "priority_order": 7,
+      "logo": {
+        "type": "image",
+        "url": "http://cdn4.gofynd.com/media/category_tab_icons/department/Men.png"
+      }
+    },
+    {
+      "uid": 4,
+      "name": "Seth Hughes",
+      "slug": "Seth-Hughes",
+      "priority_order": 7,
+      "logo": {
+        "type": "image",
+        "url": "http://cdn4.gofynd.com/media/category_tab_icons/department/Men.png"
+      }
+    },
+    {
+      "uid": 5,
+      "name": "Michelle Moore",
+      "slug": "Michelle-Moore",
+      "priority_order": 7,
+      "logo": {
+        "type": "image",
+        "url": "http://cdn4.gofynd.com/media/category_tab_icons/department/Men.png"
+      }
+    },
+    {
+      "uid": 6,
+      "name": "Annette Baldwin",
+      "slug": "Annette-Baldwin",
+      "priority_order": 7,
+      "logo": {
+        "type": "image",
+        "url": "http://cdn4.gofynd.com/media/category_tab_icons/department/Men.png"
+      }
+    },
+    {
+      "uid": 7,
+      "name": "Chris Mata",
+      "slug": "Chris-Mata",
+      "priority_order": 7,
+      "logo": {
+        "type": "image",
+        "url": "http://cdn4.gofynd.com/media/category_tab_icons/department/Men.png"
+      }
+    },
+    {
+      "uid": 8,
+      "name": "Nicole Jacobs",
+      "slug": "Nicole-Jacobs",
+      "priority_order": 7,
+      "logo": {
+        "type": "image",
+        "url": "http://cdn4.gofynd.com/media/category_tab_icons/department/Men.png"
+      }
+    },
+    {
+      "uid": 9,
+      "name": "Pamela Smith",
+      "slug": "Pamela-Smith",
+      "priority_order": 7,
+      "logo": {
+        "type": "image",
+        "url": "http://cdn4.gofynd.com/media/category_tab_icons/department/Men.png"
+      }
+    },
+    {
+      "uid": 10,
+      "name": "Nicole Simon",
+      "slug": "Nicole-Simon",
+      "priority_order": 7,
+      "logo": {
+        "type": "image",
+        "url": "http://cdn4.gofynd.com/media/category_tab_icons/department/Men.png"
+      }
+    }
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getSearchResults
+Get relevant suggestions for a search query
+
+
+
+
+```kotlin
+catalog.getSearchResults(q: q).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| q | String | yes | The search query for entering partial or full name of a product, brand or category. For example, if the given search query `q` is _ski_, the relevant search suggestions could be _skirt_, _ski shoes_, __skin cream_ etc. |  
+
+
+
+Retrieves a list of suggestions for a given search query. Each suggestion is a valid search term that's generated on the basis of query. This is particularly useful to enhance the user experience while using the search tool.
+
+*Returned Response*
+
+
+
+
+[AutoCompleteResponse](#AutoCompleteResponse)
+
+Success. Returns a list autocomplete suggestions for the search query `q`. Check the example shown below or refer `AutoCompleteResponse` for more details.
 
 
 
@@ -206,14 +4834,14 @@ Success
 ---
 
 
-#### getInvoices
-Get invoices
+#### getCollections
+List all the collections
 
 
 
 
 ```kotlin
-client.billing.getInvoices().safeAwait{ response,error->
+catalog.getCollections(pageNo: pageNo, pageSize: pageSize, tag: tag).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -229,38 +4857,155 @@ client.billing.getInvoices().safeAwait{ response,error->
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Customer unique id. In case of company it will be company id. |  
+| pageNo | Int? | no | The page number to navigate through the given set of results. |   
+| pageSize | Int? | no | The number of items to retrieve in each page. |   
+| tag | ArrayList<String>? | no | List of tags  to filter collections |  
 
 
 
-Get invoices.
+Collections are a great way to organize your products and can improve the ability for customers to find items quickly and efficiently.
 
 *Returned Response*
 
 
 
 
-[Invoices](#Invoices)
+[GetCollectionListingResponse](#GetCollectionListingResponse)
 
-Success
-
-
+Success. Returns a list of collections. Check the example shown below or refer `GetCollectionListingResponse` for more details.
 
 
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
 
 
 <details>
-<summary><i>&nbsp; default</i></summary>
+<summary><i>&nbsp; Example:</i></summary>
 
 ```json
 {
-  "$ref": "#/components/examples/Invoices"
+  "page": {
+    "type": "number",
+    "current": 1,
+    "total": 1,
+    "has_previous": false,
+    "has_next": false,
+    "item_total": 2
+  },
+  "items": [
+    {
+      "uid": "601a4f39448327cfa83e7db2",
+      "type": "query",
+      "query": {
+        "category": [
+          "Anna-Navarro"
+        ]
+      },
+      "name": "collection with Anna-Navarro",
+      "banners": {
+        "portrait": {
+          "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1571729908/production/applications/app_000000000000000000000001/media/collection/portrait/pewrpnjrhcrca1dmtvx5.png",
+          "aspect_ratio": "13:20"
+        },
+        "landscape": {
+          "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1571729858/production/applications/app_000000000000000000000001/media/collection/landscape/tkclmj847hdvfbudeqbr.png",
+          "aspect_ratio": "27:20"
+        }
+      },
+      "logo": {
+        "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1571729838/production/applications/app_000000000000000000000001/media/collection/logo/xierjsrcwhd2fphzyjod.png",
+        "aspect_ratio": "1:1"
+      },
+      "published": true,
+      "description": "Crimsoune Club | Upto 70% Off",
+      "is_active": true,
+      "tags": [
+        "men",
+        "women"
+      ],
+      "slug": "crimsoune-club-upto-70-off-754fa043",
+      "action": {
+        "type": "collection",
+        "url": "https://api.addsale.com/platform/content/v1/collections/crimsoune-club-upto-70-off-754fa043/items/"
+      },
+      "allow_facets": true,
+      "allow_sort": true,
+      "visible_facets_keys": [],
+      "meta": {},
+      "badge": {},
+      "sort_on": "popular",
+      "_custom_json": {},
+      "_locale_language": {},
+      "_schedule": {}
+    },
+    {
+      "uid": "601a4f39448327cfa83e7db0",
+      "type": "items",
+      "query": {},
+      "name": "collection with items",
+      "banners": {
+        "portrait": {
+          "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1571729908/production/applications/app_000000000000000000000001/media/collection/portrait/pewrpnjrhcrca1dmtvx5.png",
+          "aspect_ratio": "13:20"
+        },
+        "landscape": {
+          "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1571729858/production/applications/app_000000000000000000000001/media/collection/landscape/tkclmj847hdvfbudeqbr.png",
+          "aspect_ratio": "27:20"
+        }
+      },
+      "logo": {
+        "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1571729838/production/applications/app_000000000000000000000001/media/collection/logo/xierjsrcwhd2fphzyjod.png",
+        "aspect_ratio": "1:1"
+      },
+      "published": true,
+      "description": "Crimsoune Club | Upto 70% Off",
+      "is_active": true,
+      "tags": [
+        "men",
+        "women"
+      ],
+      "slug": "crimsoune-club-upto-70-off-754fa043",
+      "action": {
+        "type": "collection",
+        "url": "https://api.addsale.com/platform/content/v1/collections/crimsoune-club-upto-70-off-754fa043/items/"
+      },
+      "allow_facets": true,
+      "allow_sort": true,
+      "visible_facets_keys": [],
+      "meta": {},
+      "badge": {},
+      "sort_on": "popular",
+      "_custom_json": {},
+      "_locale_language": {},
+      "_schedule": {}
+    }
+  ],
+  "filters": {
+    "tags": [
+      {
+        "name": "men",
+        "is_selected": false,
+        "display": "men"
+      },
+      {
+        "name": "women",
+        "is_selected": false,
+        "display": "women"
+      }
+    ],
+    "type": [
+      {
+        "name": "items",
+        "is_selected": false,
+        "display": "items"
+      },
+      {
+        "name": "query",
+        "is_selected": false,
+        "display": "query"
+      }
+    ]
+  }
 }
 ```
-</details>
-
 </details>
 
 
@@ -274,14 +5019,14 @@ Success
 ---
 
 
-#### getInvoiceById
-Get invoice by id
+#### getCollectionItemsBySlug
+Get the items in a collection
 
 
 
 
 ```kotlin
-client.billing.getInvoiceById(invoiceId: invoiceId).safeAwait{ response,error->
+catalog.getCollectionItemsBySlug(slug: slug, f: f, filters: filters, sortOn: sortOn, pageId: pageId, pageSize: pageSize).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -297,39 +5042,364 @@ client.billing.getInvoiceById(invoiceId: invoiceId).safeAwait{ response,error->
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Customer unique id. In case of company it will be company id. |   
-| invoiceId | String | yes | Invoice id |  
+| slug | String | yes | A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/. |   
+| f | String? | no | The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter paramater applied as an AND condition. |   
+| filters | Boolean? | no | This is a boolean value, True for fetching all filter parameters and False for disabling the filter parameters. |   
+| sortOn | String? | no | The order in which the list of products should be sorted, e.g. popularity, price, latest and discount, in either ascending or descending order. See the supported values below. |   
+| pageId | String? | no | Page ID to retrieve next set of results. |   
+| pageSize | Int? | no | The number of items to retrieve in each page. |  
 
 
 
-Get invoice by id.
+Get items in a collection specified by its `slug`.
 
 *Returned Response*
 
 
 
 
-[Invoice](#Invoice)
+[ProductListingResponse](#ProductListingResponse)
 
-Success
-
-
+Success. Returns a list items in a given collection. Check the example shown below or refer `ProductListingResponse` for more details.
 
 
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
 
 
 <details>
-<summary><i>&nbsp; default</i></summary>
+<summary><i>&nbsp; Example:</i></summary>
 
 ```json
 {
-  "$ref": "#/components/examples/Invoice"
+  "filters": [
+    {
+      "key": {
+        "display": "Department",
+        "name": "department",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Department.svg"
+      },
+      "values": [
+        {
+          "display": "Debra Villarreal",
+          "count": 1,
+          "is_selected": false,
+          "value": "Debra-Villarreal",
+          "logo": {
+            "type": "image",
+            "url": "http://cdn4.gofynd.com/media/category_tab_icons/department/Men.png"
+          }
+        },
+        {
+          "display": "Tracey Miller",
+          "count": 1,
+          "is_selected": false,
+          "value": "Tracey-Miller",
+          "logo": {
+            "type": "image",
+            "url": "http://cdn4.gofynd.com/media/category_tab_icons/department/Men.png"
+          }
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Category",
+        "name": "category",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Category.svg"
+      },
+      "values": [
+        {
+          "display": "Amy Kim DDS",
+          "count": 1,
+          "is_selected": false,
+          "value": "3",
+          "logo": "http://cdn4.gofynd.com/media/banner/category/original/12063_a5bb91bd5cb44c3c9db98c2a0e6b3d99.jpg"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Gender",
+        "name": "gender",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Gender.svg"
+      },
+      "values": [
+        {
+          "display": "Men",
+          "count": 1,
+          "is_selected": false,
+          "value": "men"
+        },
+        {
+          "display": "Women",
+          "count": 1,
+          "is_selected": false,
+          "value": "women"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Size",
+        "name": "sizes",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Sizes.svg"
+      },
+      "values": [
+        {
+          "display": "13",
+          "count": 1,
+          "is_selected": false,
+          "value": "13"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Brand",
+        "name": "brand",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Brand%20ID.svg"
+      },
+      "values": [
+        {
+          "display": "Barry, Jennings and Larson",
+          "count": 1,
+          "is_selected": false,
+          "value": "1",
+          "logo": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Rating",
+        "name": "rating",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Rating.svg"
+      },
+      "values": [
+        {
+          "count": 1,
+          "display": "2 - 3",
+          "value": "[2 TO 3}",
+          "is_selected": false
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Image",
+        "name": "image_nature",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/image%20Nature.svg"
+      },
+      "values": [
+        {
+          "display": "GoodQuality",
+          "count": 1,
+          "is_selected": false,
+          "value": "standard"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Monica Hampton",
+        "name": "material",
+        "kind": "multivalued",
+        "logo": ""
+      },
+      "values": [
+        {
+          "display": "Neoprene",
+          "count": 1,
+          "is_selected": false,
+          "value": "Neoprene"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "John Mendoza",
+        "name": "weight",
+        "kind": "multivalued",
+        "logo": ""
+      },
+      "values": [
+        {
+          "display": "100",
+          "count": 1,
+          "is_selected": false,
+          "value": "100"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Kimberly Mcdaniel",
+        "name": "gender",
+        "kind": "multivalued",
+        "logo": ""
+      },
+      "values": [
+        {
+          "display": "['Men', 'Women']",
+          "count": 1,
+          "is_selected": false,
+          "value": "['Men', 'Women']"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Kimberly Davidson",
+        "name": "color",
+        "kind": "multivalued",
+        "logo": ""
+      },
+      "values": [
+        {
+          "display": "Grey",
+          "count": 1,
+          "is_selected": false,
+          "value": "808080"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Available",
+        "name": "is_available",
+        "kind": "singlevalued"
+      },
+      "values": [
+        {
+          "display": "Available",
+          "count": 3,
+          "is_selected": false,
+          "value": "true"
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "type": "product",
+      "attributes": {
+        "primary_color_hex": "808080",
+        "weight": "100",
+        "gender": "women",
+        "material": "Neoprene",
+        "primary_color": "DarkGrey"
+      },
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Amy Kim DDS",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Amy-Kim-DDS"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "sellable": true,
+      "name": "benchmark collaborative paradigms",
+      "slug": "benchmark-collaborative-paradigms",
+      "uid": 1,
+      "item_type": "set",
+      "brand": {
+        "type": "brand",
+        "name": "Hess Inc",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Hess-Inc"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "benchmark-collaborative-paradigms"
+          }
+        },
+        "type": "page"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/fynd_store_items/l2_category/original/2830_c5bb5fc02f414307a828c4c56483c30a.jpg"
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1499,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "is_tryout": false,
+      "promo_meta": {
+        "title": "",
+        "subtitle": ""
+      },
+      "rating": 2.7
+    }
+  ],
+  "sort_on": [
+    {
+      "display": "Latest Products.",
+      "name": "Latest Products.",
+      "logo": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/360x0/56_MKT02AI060CORAL/1_1567590349681.jpg",
+      "value": "latest",
+      "is_selected": false
+    }
+  ],
+  "page": {
+    "type": "number",
+    "current": 1,
+    "total": 1,
+    "has_previous": false,
+    "has_next": false,
+    "item_total": 1
+  }
 }
 ```
-</details>
-
 </details>
 
 
@@ -343,14 +5413,14 @@ Success
 ---
 
 
-#### getCustomerDetail
-Get subscription customer detail
+#### getCollectionDetailBySlug
+Get a particular collection
 
 
 
 
 ```kotlin
-client.billing.getCustomerDetail().safeAwait{ response,error->
+catalog.getCollectionDetailBySlug(slug: slug).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -366,38 +5436,77 @@ client.billing.getCustomerDetail().safeAwait{ response,error->
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Customer unique id. In case of company it will be company id. |  
+| slug | String | yes | A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/. |  
 
 
 
-Get subscription customer detail.
+Get the details of a collection by its `slug`.
 
 *Returned Response*
 
 
 
 
-[SubscriptionCustomer](#SubscriptionCustomer)
+[CollectionDetailResponse](#CollectionDetailResponse)
 
-Success
-
-
+Success. Returns a Collection object. Check the example shown below or refer `CollectionDetailResponse` for more details.
 
 
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
 
 
 <details>
-<summary><i>&nbsp; default</i></summary>
+<summary><i>&nbsp; Example:</i></summary>
 
 ```json
 {
-  "$ref": "#/components/examples/SubscriptionCustomerRes"
+  "uid": "601a4f39448327cfa83e7db0",
+  "type": "items",
+  "query": {},
+  "name": "collection with items",
+  "banners": {
+    "portrait": {
+      "type": "image",
+      "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1571729908/production/applications/app_000000000000000000000001/media/collection/portrait/pewrpnjrhcrca1dmtvx5.png"
+    },
+    "landscape": {
+      "type": "image",
+      "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1571729858/production/applications/app_000000000000000000000001/media/collection/landscape/tkclmj847hdvfbudeqbr.png"
+    }
+  },
+  "logo": {
+    "type": "image",
+    "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1571729838/production/applications/app_000000000000000000000001/media/collection/logo/xierjsrcwhd2fphzyjod.png"
+  },
+  "published": true,
+  "description": "Crimsoune Club | Upto 70% Off",
+  "is_active": true,
+  "tags": [
+    "men",
+    "women"
+  ],
+  "slug": "crimsoune-club-upto-70-off-754fa043",
+  "action": {
+    "page": {
+      "type": "collection",
+      "query": {
+        "collection": [
+          "crimsoune-club-upto-70-off-754fa043"
+        ]
+      }
+    },
+    "type": "page"
+  },
+  "allow_facets": true,
+  "allow_sort": true,
+  "visible_facets_keys": [],
+  "meta": {},
+  "badge": {},
+  "sort_on": "popular",
+  "_custom_json": {},
+  "_locale_language": {},
+  "_schedule": {}
 }
 ```
-</details>
-
 </details>
 
 
@@ -411,14 +5520,14 @@ Success
 ---
 
 
-#### upsertCustomerDetail
-Upsert subscription customer detail
+#### getFollowedListing
+Get a list of followed Products, Brands, Collections
 
 
 
 
 ```kotlin
-client.billing.upsertCustomerDetail(body: body).safeAwait{ response,error->
+catalog.getFollowedListing(collectionType: collectionType, pageId: pageId, pageSize: pageSize).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -434,38 +5543,348 @@ client.billing.upsertCustomerDetail(body: body).safeAwait{ response,error->
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Customer unique id. In case of company it will be company id. |  
-| body | [SubscriptionCustomerCreate](#SubscriptionCustomerCreate) | yes | Request body |
+| collectionType | String | yes | Type of collection followed, i.e. products, brands, or collections. |   
+| pageId | String? | no | Page ID to retrieve next set of results. |   
+| pageSize | Int? | no | Page ID to retrieve next set of results. |  
 
 
-Upsert subscription customer detail.
+
+Users can follow a product they like. This API retrieves the products the user have followed.
 
 *Returned Response*
 
 
 
 
-[SubscriptionCustomer](#SubscriptionCustomer)
+[GetFollowListingResponse](#GetFollowListingResponse)
 
-Success
-
-
+Success. Returns a Followed resource object. Check the example shown below or refer `GetFollowListingResponse` for more details.
 
 
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
 
 
 <details>
-<summary><i>&nbsp; default</i></summary>
+<summary><i>&nbsp; Example:</i></summary>
 
 ```json
 {
-  "$ref": "#/components/examples/SubscriptionCustomerRes"
+  "items": [
+    {
+      "type": "product",
+      "name": "revolutionize end-to-end technologies",
+      "item_type": "set",
+      "slug": "revolutionize-end-to-end-technologies",
+      "uid": 1,
+      "brand": {
+        "type": "brand",
+        "name": "Chen PLC",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Chen-PLC"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "sellable": false,
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "revolutionize-end-to-end-technologies"
+          }
+        },
+        "type": "page"
+      },
+      "attributes": {
+        "color_hex": "808080",
+        "weight": 100,
+        "product_type": "LaptopBags",
+        "gender": [
+          "Men",
+          "Women"
+        ],
+        "material": "Neoprene",
+        "style_note": "Shape up your overall appeal with this stunning laptop bag. The amazing storage and great design will let you carry your laptop in style!",
+        "item_code": "LGLAPTOPSLEEVE5",
+        "occasion": "Casual",
+        "primary_color": "Grey",
+        "primary_material": "Others",
+        "variant": "LGLAPTOPSLEEVE5",
+        "color": "DarkGrey",
+        "product_details": "This is a Unisex Product.",
+        "primary_color_hex": "808080"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/1309_LGLAPTOPSLEEVE5/1_1564735832806.jpg"
+        }
+      ],
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Paul Palmer",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Paul-Palmer"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "rating": 2.7,
+      "rating_count": 2
+    },
+    {
+      "type": "product",
+      "name": "grow B2B experiences",
+      "item_type": "set",
+      "slug": "grow-B2B-experiences",
+      "uid": 15,
+      "brand": {
+        "type": "brand",
+        "name": "Chen PLC",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Chen-PLC"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "sellable": false,
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "grow-B2B-experiences"
+          }
+        },
+        "type": "page"
+      },
+      "attributes": {
+        "color_hex": "808080",
+        "weight": 100,
+        "product_type": "LaptopBags",
+        "gender": [
+          "Men",
+          "Women"
+        ],
+        "material": "Neoprene",
+        "style_note": "Shape up your overall appeal with this stunning laptop bag. The amazing storage and great design will let you carry your laptop in style!",
+        "item_code": "LGLAPTOPSLEEVE5",
+        "occasion": "Casual",
+        "primary_color": "Grey",
+        "primary_material": "Others",
+        "variant": "LGLAPTOPSLEEVE5",
+        "color": "DarkGrey",
+        "product_details": "This is a Unisex Product.",
+        "primary_color_hex": "808080"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/1309_LGLAPTOPSLEEVE5/1_1564735832806.jpg"
+        }
+      ],
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Paul Palmer",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Paul-Palmer"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "rating": 2.7,
+      "rating_count": 2
+    },
+    {
+      "type": "product",
+      "name": "target robust systems",
+      "item_type": "set",
+      "slug": "target-robust-systems",
+      "uid": 14,
+      "brand": {
+        "type": "brand",
+        "name": "Chen PLC",
+        "logo": {
+          "type": "image",
+          "url": "https://hdn-1.fynd.com/media/logo/brand/original/12391_0d956c6c71a4427895c15e44cba82f88.jpg"
+        },
+        "action": {
+          "page": {
+            "type": "products",
+            "query": {
+              "brand": [
+                "Chen-PLC"
+              ]
+            }
+          },
+          "type": "page"
+        },
+        "_custom_json": {}
+      },
+      "sellable": false,
+      "action": {
+        "page": {
+          "type": "product",
+          "query": {
+            "slug": "target-robust-systems"
+          }
+        },
+        "type": "page"
+      },
+      "attributes": {
+        "color_hex": "808080",
+        "weight": 100,
+        "product_type": "LaptopBags",
+        "gender": [
+          "Men",
+          "Women"
+        ],
+        "material": "Neoprene",
+        "style_note": "Shape up your overall appeal with this stunning laptop bag. The amazing storage and great design will let you carry your laptop in style!",
+        "item_code": "LGLAPTOPSLEEVE5",
+        "occasion": "Casual",
+        "primary_color": "Grey",
+        "primary_material": "Others",
+        "variant": "LGLAPTOPSLEEVE5",
+        "color": "DarkGrey",
+        "product_details": "This is a Unisex Product.",
+        "primary_color_hex": "808080"
+      },
+      "medias": [
+        {
+          "type": "image",
+          "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/1309_LGLAPTOPSLEEVE5/1_1564735832806.jpg"
+        }
+      ],
+      "categories": [
+        {
+          "id": 3,
+          "uid": 3,
+          "name": "Paul Palmer",
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/banner_portrait/brand/original/540_ecba3a1af141467da8abc20500f983db.jpg"
+          },
+          "action": {
+            "page": {
+              "type": "category",
+              "query": {
+                "category": [
+                  "Paul-Palmer"
+                ]
+              }
+            },
+            "type": "page"
+          },
+          "_custom_json": {}
+        }
+      ],
+      "discount": "14% OFF",
+      "price": {
+        "marked": {
+          "min": 1399,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        },
+        "effective": {
+          "min": 1199,
+          "max": 1399,
+          "currency_code": "INR",
+          "currency_symbol": "₹"
+        }
+      },
+      "rating": 2.7,
+      "rating_count": 2
+    }
+  ],
+  "page": {
+    "next_id": "6066fc7b3b17fd7038c46317",
+    "has_previous": false,
+    "has_next": true,
+    "item_total": 15,
+    "type": "number"
+  }
 }
 ```
-</details>
-
 </details>
 
 
@@ -479,14 +5898,14 @@ Success
 ---
 
 
-#### getSubscription
-Get current subscription detail
+#### followById
+Follow an entity (product/brand/collection)
 
 
 
 
 ```kotlin
-client.billing.getSubscription().safeAwait{ response,error->
+catalog.followById(collectionType: collectionType, collectionId: collectionId).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -502,49 +5921,34 @@ client.billing.getSubscription().safeAwait{ response,error->
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Customer unique id. In case of company it will be company id. |  
+| collectionType | String | yes | Type of collection followed, i.e. products, brands, or collections. |   
+| collectionId | String | yes | The ID of the collection type. |  
 
 
 
-If subscription is active then it will return is_enabled true and return subscription object. If subscription is not active then is_enabled false and message.
-
+Follow a particular entity such as product, brand, collection specified by its ID.
 
 *Returned Response*
 
 
 
 
-[SubscriptionStatus](#SubscriptionStatus)
+[FollowPostResponse](#FollowPostResponse)
 
-Success
-
-
+Success. Returns a response object. Check the example shown below or refer `FollowPostResponse` for more details.
 
 
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
 
 
 <details>
-<summary><i>&nbsp; Active subscription</i></summary>
+<summary><i>&nbsp; Example:</i></summary>
 
 ```json
 {
-  "$ref": "#/components/examples/SubscriptionActiveRes"
+  "message": "Brands Added To Wishlist",
+  "id": "1"
 }
 ```
-</details>
-
-<details>
-<summary><i>&nbsp; Inactive subscription</i></summary>
-
-```json
-{
-  "$ref": "#/components/examples/SubscriptionInavtiveRes"
-}
-```
-</details>
-
 </details>
 
 
@@ -558,14 +5962,14 @@ Success
 ---
 
 
-#### getFeatureLimitConfig
-Get subscription subscription limits
+#### unfollowById
+Unfollow an entity (product/brand/collection)
 
 
 
 
 ```kotlin
-client.billing.getFeatureLimitConfig().safeAwait{ response,error->
+catalog.unfollowById(collectionType: collectionType, collectionId: collectionId).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -581,38 +5985,34 @@ client.billing.getFeatureLimitConfig().safeAwait{ response,error->
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Customer unique id. In case of company it will be company id. |  
+| collectionType | String | yes | Type of collection followed, i.e. products, brands, or collections. |   
+| collectionId | String | yes | The ID of the collection type. |  
 
 
 
-Get subscription subscription limits.
+You can undo a followed product, brand or collection by its ID. This action is referred as _unfollow_.
 
 *Returned Response*
 
 
 
 
-[SubscriptionLimit](#SubscriptionLimit)
+[FollowPostResponse](#FollowPostResponse)
 
-Success
-
-
+Success. Returns a response object. Check the example shown below or refer `FollowPostResponse` for more details.
 
 
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
 
 
 <details>
-<summary><i>&nbsp; default</i></summary>
+<summary><i>&nbsp; Example:</i></summary>
 
 ```json
 {
-  "$ref": "#/components/examples/CurrentLimitRes"
+  "message": "Products Removed From Wishlist",
+  "id": "1"
 }
 ```
-</details>
-
 </details>
 
 
@@ -626,14 +6026,14 @@ Success
 ---
 
 
-#### activateSubscriptionPlan
-Activate subscription
+#### getFollowerCountById
+Get Follow Count
 
 
 
 
 ```kotlin
-client.billing.activateSubscriptionPlan(body: body).safeAwait{ response,error->
+catalog.getFollowerCountById(collectionType: collectionType, collectionId: collectionId).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -649,38 +6049,33 @@ client.billing.activateSubscriptionPlan(body: body).safeAwait{ response,error->
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Customer unique id. In case of company it will be company id. |  
-| body | [SubscriptionActivateReq](#SubscriptionActivateReq) | yes | Request body |
+| collectionType | String | yes | Type of collection, i.e. products, brands, or collections. |   
+| collectionId | String | yes | The ID of the collection type. |  
 
 
-It will activate subscription plan for customer
+
+Get the total count of followers for a given collection type and collection ID.
 
 *Returned Response*
 
 
 
 
-[SubscriptionActivateRes](#SubscriptionActivateRes)
+[FollowerCountResponse](#FollowerCountResponse)
 
-Success
-
-
+Success. Returns the number of followers for a given collection type. Check the example shown below or refer `FollowerCountResponse` for more details.
 
 
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
 
 
 <details>
-<summary><i>&nbsp; default</i></summary>
+<summary><i>&nbsp; Example:</i></summary>
 
 ```json
 {
-  "$ref": "#/components/examples/SubscriptionActivateRes"
+  "count": 0
 }
 ```
-</details>
-
 </details>
 
 
@@ -694,14 +6089,14 @@ Success
 ---
 
 
-#### cancelSubscriptionPlan
-Cancel subscription
+#### getFollowIds
+Get the IDs of followed products, brands and collections.
 
 
 
 
 ```kotlin
-client.billing.cancelSubscriptionPlan(body: body).safeAwait{ response,error->
+catalog.getFollowIds(collectionType: collectionType).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -717,38 +6112,518 @@ client.billing.cancelSubscriptionPlan(body: body).safeAwait{ response,error->
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Customer unique id. In case of company it will be company id. |  
-| body | [CancelSubscriptionReq](#CancelSubscriptionReq) | yes | Request body |
+| collectionType | String? | no | Type of collection, i.e. products, brands, collections. |  
 
 
-It will cancel current active subscription.
+
+You can get the IDs of all the followed Products, Brands and Collections. Pass collection_type as query parameter to fetch specific Ids
 
 *Returned Response*
 
 
 
 
-[CancelSubscriptionRes](#CancelSubscriptionRes)
+[FollowIdsResponse](#FollowIdsResponse)
 
-Success
-
-
+Success. Returns the IDs of all the Products, Brands and Collections which were followed. Check the example shown below or refer `FollowIdsResponse` for more details.
 
 
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
 
 
 <details>
-<summary><i>&nbsp; default</i></summary>
+<summary><i>&nbsp; Example:</i></summary>
 
 ```json
 {
-  "$ref": "#/components/examples/CancelSubscriptionRes"
+  "data": {
+    "products": [
+      1,
+      15,
+      14,
+      13,
+      12,
+      11,
+      10,
+      9,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2
+    ],
+    "brands": [
+      1
+    ],
+    "collections": []
+  }
 }
 ```
 </details>
 
+
+
+
+
+
+
+
+
+---
+
+
+#### getStores
+Get store meta information.
+
+
+
+
+```kotlin
+catalog.getStores(pageNo: pageNo, pageSize: pageSize, q: q, city: city, range: range, latitude: latitude, longitude: longitude).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pageNo | Int? | no | The page number to navigate through the given set of results. |   
+| pageSize | Int? | no | Number of items to retrieve in each page. |   
+| q | String? | no | Search a store by its name or store_code. |   
+| city | String? | no | Search stores by the city in which they are situated. |   
+| range | Int? | no | Use this to retrieve stores within a particular range in meters, e.g. 10000, to indicate a 10km range |   
+| latitude | Double? | no | Latitude of the location from where one wants to retreive the nearest stores, e.g. 72.8691788 |   
+| longitude | Double? | no | Longitude of the location from where one wants to retreive the nearest stores, e.g. 19.1174114 |  
+
+
+
+Use this API to get a list of stores in a specific application.
+
+*Returned Response*
+
+
+
+
+[StoreListingResponse](#StoreListingResponse)
+
+Success. Returns a list of selling locations. Check the example shown below or refer `StoreListingResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "page": {
+    "type": "number",
+    "current": 1,
+    "total": 1,
+    "has_previous": false,
+    "has_next": false,
+    "item_total": 1
+  },
+  "data": [
+    {
+      "pincode": 400059,
+      "city": "MUMBAI",
+      "state": "MAHARASHTRA",
+      "country": "INDIA",
+      "address": "SHOPSENSE RETAIL TECHNOLOGIES PRIVATE LIMITED 1ST FLOOR WEWORK VIJAY DIAMOND, CROSS RD B, AJIT NAGAR,",
+      "store_email": "ASHISHCHANDORKAR@FYND.COM",
+      "lat_long": {
+        "type": "Point",
+        "coordinates": [
+          72.8691788,
+          19.1174114
+        ]
+      },
+      "name": "RRL01",
+      "store_code": "WH_8513",
+      "uid": 1
+    }
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getInStockLocations
+Get store meta information.
+
+
+
+
+```kotlin
+catalog.getInStockLocations(pageNo: pageNo, pageSize: pageSize, q: q, city: city, range: range, latitude: latitude, longitude: longitude).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pageNo | Int? | no | The page number to navigate through the given set of results. |   
+| pageSize | Int? | no | Number of items to retrieve in each page. |   
+| q | String? | no | Search a store by its name or store_code. |   
+| city | String? | no | Search stores by the city in which they are situated. |   
+| range | Int? | no | Use this to retrieve stores within a particular range in meters, e.g. 10000, to indicate a 10km range |   
+| latitude | Double? | no | Latitude of the location from where one wants to retreive the nearest stores, e.g. 72.8691788 |   
+| longitude | Double? | no | Longitude of the location from where one wants to retreive the nearest stores, e.g. 19.1174114 |  
+
+
+
+Use this API to get a list of stores in a specific application.
+
+*Returned Response*
+
+
+
+
+[ApplicationStoreListing](#ApplicationStoreListing)
+
+Success. Returns a list of selling locations. Check the example shown below or refer `StoreListingResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "page": {
+    "current": 1,
+    "type": "number",
+    "total": 1,
+    "has_previous": false,
+    "has_next": false,
+    "item_total": 5
+  },
+  "items": [
+    {
+      "uid": 1,
+      "_custom_json": {},
+      "additional_contacts": [
+        {
+          "country_code": 91,
+          "number": "9594495254"
+        }
+      ],
+      "address": {
+        "lat_long": {
+          "type": "Point",
+          "coordinates": [
+            72.809786,
+            19.138787
+          ]
+        },
+        "city": "MUMBAI",
+        "pincode": 400061,
+        "state": "MAHARASHTRA",
+        "country": "INDIA",
+        "landmark": "",
+        "address2": "",
+        "address1": "YARI ROAD, ANDHERI WEST"
+      },
+      "company_id": 1,
+      "display_name": "Reliance Digital P. Ltd",
+      "manager": {
+        "mobile_no": {
+          "country_code": 91,
+          "number": "9594495254"
+        },
+        "name": "Fahim Sakri",
+        "email": "fahimsakri@gmail.com"
+      },
+      "name": "Reliance Digital P. Ltd",
+      "store_code": "HS-52b69",
+      "store_type": "high_street",
+      "company": {
+        "company_type": "mbo",
+        "business_type": "ltd/pvt ltd",
+        "name": "Reliance Digital P. Ltd1234789123",
+        "uid": 1
+      },
+      "departments": [
+        {
+          "priority_order": 7,
+          "name": "Baby Care & Kids Essentials",
+          "uid": 7,
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/category_tab_icons/department/Babycareandkidsessential.png"
+          },
+          "is_active": true,
+          "slug": "baby-care-kids-essentials"
+        },
+        {
+          "priority_order": 9,
+          "name": "Industrial Supplies",
+          "uid": 11,
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/logo/department/original/15483_a8803bf3fc244c748180588166df82da.jpg"
+          },
+          "is_active": true,
+          "slug": "industrial-supplies"
+        },
+        {
+          "priority_order": 10,
+          "name": "Electricals",
+          "uid": 14,
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/department/pictures/square-logo/original/M93qfyuh1-https:hdn-1.fynd.commedialogodepartmentoriginal17588_44516b7413fd4a4a858556857aa0c4c8.jpg.jpeg"
+          },
+          "is_active": true,
+          "slug": "electricals"
+        },
+        {
+          "priority_order": 1,
+          "name": "Fashion",
+          "uid": 21,
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/department/pictures/square-logo/original/jSt0jjI7D-https/hdn-1.fynd.com/department/pictures/square-logo/original/6ouiCBSSn-https/hdn-1.fynd.com/department/pictures/square-logo/original/o2Rti5if7-.jpeg.jpeg.jpeg"
+          },
+          "is_active": true,
+          "slug": "fashion"
+        },
+        {
+          "slug": "automobile",
+          "is_active": true,
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.addsale.com/x0/department/pictures/square-logo/original/kRhYFHWZ5-.jpeg"
+          },
+          "name": "AUTOMOBILE",
+          "uid": 24,
+          "priority_order": 1
+        }
+      ]
+    }
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+#### getLocationDetailsById
+Get store meta information.
+
+
+
+
+```kotlin
+catalog.getLocationDetailsById(locationId: locationId).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| locationId | Int | yes | Unique Location ID. |  
+
+
+
+Use this API to get meta details for a store.
+
+*Returned Response*
+
+
+
+
+[StoreDetails](#StoreDetails)
+
+Success. Returns a metadata object. Check the example shown below or refer `StoreDetails` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "uid": 1,
+  "_custom_json": {},
+  "additional_contacts": [
+    {
+      "country_code": 91,
+      "number": "9594495254"
+    }
+  ],
+  "address": {
+    "lat_long": {
+      "type": "Point",
+      "coordinates": [
+        72.809786,
+        19.138787
+      ]
+    },
+    "city": "MUMBAI",
+    "pincode": 400061,
+    "state": "MAHARASHTRA",
+    "country": "INDIA",
+    "landmark": "",
+    "address2": "",
+    "address1": "YARI ROAD, ANDHERI WEST"
+  },
+  "company_id": 1,
+  "display_name": "Reliance Digital P. Ltd",
+  "manager": {
+    "mobile_no": {
+      "country_code": 91,
+      "number": "9594495254"
+    },
+    "name": "Fahim Sakri",
+    "email": "fahimsakri@gmail.com"
+  },
+  "name": "Reliance Digital P. Ltd",
+  "store_code": "HS-52b69",
+  "store_type": "high_street",
+  "timing": [
+    {
+      "weekday": "monday",
+      "open": true,
+      "closing": {
+        "minute": 30,
+        "hour": 21
+      },
+      "opening": {
+        "minute": 0,
+        "hour": 11
+      }
+    },
+    {
+      "weekday": "tuesday",
+      "open": true,
+      "closing": {
+        "minute": 30,
+        "hour": 21
+      },
+      "opening": {
+        "minute": 0,
+        "hour": 11
+      }
+    },
+    {
+      "weekday": "wednesday",
+      "open": true,
+      "closing": {
+        "minute": 30,
+        "hour": 21
+      },
+      "opening": {
+        "minute": 0,
+        "hour": 11
+      }
+    },
+    {
+      "weekday": "thursday",
+      "open": true,
+      "closing": {
+        "minute": 30,
+        "hour": 21
+      },
+      "opening": {
+        "minute": 0,
+        "hour": 11
+      }
+    },
+    {
+      "weekday": "friday",
+      "open": true,
+      "closing": {
+        "minute": 30,
+        "hour": 21
+      },
+      "opening": {
+        "minute": 0,
+        "hour": 11
+      }
+    },
+    {
+      "weekday": "saturday",
+      "open": true,
+      "closing": {
+        "minute": 30,
+        "hour": 21
+      },
+      "opening": {
+        "minute": 0,
+        "hour": 11
+      }
+    },
+    {
+      "weekday": "sunday",
+      "open": true,
+      "closing": {
+        "minute": 30,
+        "hour": 21
+      },
+      "opening": {
+        "minute": 0,
+        "hour": 11
+      }
+    }
+  ],
+  "company": {
+    "company_type": "mbo",
+    "business_type": "ltd/pvt ltd",
+    "name": "Reliance Digital P. Ltd1234789123",
+    "uid": 1
+  }
+}
+```
 </details>
 
 
@@ -9855,15 +15730,67 @@ Success
 
  
  
+ #### [SearchKeywordResult](#SearchKeywordResult)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | query | HashMap<String,Any> |  no  |  |
+ | sortOn | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [CreateSearchKeyword](#CreateSearchKeyword)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | words | ArrayList<String>? |  yes  |  |
+ | appId | String? |  yes  |  |
+ | result | [SearchKeywordResult](#SearchKeywordResult) |  no  |  |
+ | isActive | Boolean? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [GetSearchWordsData](#GetSearchWordsData)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | String? |  yes  |  |
+ | words | ArrayList<String>? |  yes  |  |
  | appId | String? |  yes  |  |
  | result | HashMap<String,Any>? |  yes  |  |
- | words | ArrayList<String>? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | uid | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ErrorResponse](#ErrorResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | code | String? |  yes  |  |
+ | message | String? |  yes  |  |
+ | status | Int? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [DeleteResponse](#DeleteResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | message | String? |  yes  |  |
 
 ---
 
@@ -9882,58 +15809,6 @@ Success
 
  
  
- #### [ErrorResponse](#ErrorResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | message | String? |  yes  |  |
- | status | Int? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | code | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [SearchKeywordResult](#SearchKeywordResult)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | sortOn | String |  no  |  |
- | query | HashMap<String,Any> |  no  |  |
-
----
-
-
- 
- 
- #### [CreateSearchKeyword](#CreateSearchKeyword)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | appId | String? |  yes  |  |
- | result | [SearchKeywordResult](#SearchKeywordResult) |  no  |  |
- | words | ArrayList<String>? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
-
----
-
-
- 
- 
- #### [DeleteResponse](#DeleteResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | message | String? |  yes  |  |
-
----
-
-
- 
- 
  #### [GetSearchWordsResponse](#GetSearchWordsResponse)
 
  | Properties | Type | Nullable | Description |
@@ -9946,41 +15821,14 @@ Success
 
  
  
- #### [GetAutocompleteWordsData](#GetAutocompleteWordsData)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | uid | String? |  yes  |  |
- | appId | String? |  yes  |  |
- | results | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | words | ArrayList<String>? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
-
----
-
-
- 
- 
- #### [GetAutocompleteWordsResponse](#GetAutocompleteWordsResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<[GetAutocompleteWordsData](#GetAutocompleteWordsData)>? |  yes  |  |
- | page | [Page](#Page)? |  yes  |  |
-
----
-
-
- 
- 
  #### [AutocompletePageAction](#AutocompletePageAction)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | params | HashMap<String,Any>? |  yes  |  |
+ | query | HashMap<String,Any> |  no  |  |
  | type | String |  no  |  |
  | url | String? |  yes  |  |
- | query | HashMap<String,Any> |  no  |  |
+ | params | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -10015,10 +15863,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | customJson | HashMap<String,Any>? |  yes  |  |
  | action | [AutocompleteAction](#AutocompleteAction)? |  yes  |  |
- | logo | [Media](#Media)? |  yes  |  |
  | display | String? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+ | logo | [Media](#Media)? |  yes  |  |
 
 ---
 
@@ -10029,11 +15877,38 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | appId | String? |  yes  |  |
- | results | ArrayList<[AutocompleteResult](#AutocompleteResult)>? |  yes  |  |
  | words | ArrayList<String>? |  yes  |  |
+ | appId | String? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | results | ArrayList<[AutocompleteResult](#AutocompleteResult)>? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [GetAutocompleteWordsData](#GetAutocompleteWordsData)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | words | ArrayList<String>? |  yes  |  |
+ | appId | String? |  yes  |  |
+ | results | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+ | uid | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [GetAutocompleteWordsResponse](#GetAutocompleteWordsResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | items | ArrayList<[GetAutocompleteWordsData](#GetAutocompleteWordsData)>? |  yes  |  |
+ | page | [Page](#Page)? |  yes  |  |
 
 ---
 
@@ -10044,10 +15919,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | words | ArrayList<String>? |  yes  |  |
  | appId | String? |  yes  |  |
- | results | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | words | ArrayList<String>? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | results | ArrayList<HashMap<String,Any>>? |  yes  |  |
 
 ---
 
@@ -10058,12 +15933,12 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | maxQuantity | Int |  no  |  |
- | autoAddToCart | Boolean? |  yes  |  |
- | productUid | Int |  no  |  |
- | minQuantity | Int |  no  |  |
- | autoSelect | Boolean? |  yes  |  |
  | allowRemove | Boolean? |  yes  |  |
+ | maxQuantity | Int |  no  |  |
+ | autoSelect | Boolean? |  yes  |  |
+ | productUid | Int |  no  |  |
+ | autoAddToCart | Boolean? |  yes  |  |
+ | minQuantity | Int |  no  |  |
 
 ---
 
@@ -10074,21 +15949,21 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | choice | String |  no  |  |
+ | createdOn | String? |  yes  |  |
+ | companyId | Int? |  yes  |  |
+ | products | ArrayList<[ProductBundleItem](#ProductBundleItem)> |  no  |  |
  | isActive | Boolean |  no  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | pageVisibility | ArrayList<String>? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | id | String? |  yes  |  |
+ | logo | String? |  yes  |  |
  | modifiedOn | String? |  yes  |  |
  | sameStoreAssignment | Boolean? |  yes  |  |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | choice | String |  no  |  |
- | logo | String? |  yes  |  |
  | name | String |  no  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
  | slug | String |  no  |  |
- | createdOn | String? |  yes  |  |
- | products | ArrayList<[ProductBundleItem](#ProductBundleItem)> |  no  |  |
- | pageVisibility | ArrayList<String>? |  yes  |  |
- | companyId | Int? |  yes  |  |
- | id | String? |  yes  |  |
 
 ---
 
@@ -10111,19 +15986,62 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean |  no  |  |
- | modifiedOn | String? |  yes  |  |
- | sameStoreAssignment | Boolean? |  yes  |  |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
  | choice | String |  no  |  |
- | logo | String? |  yes  |  |
- | name | String |  no  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
- | slug | String |  no  |  |
  | createdOn | String? |  yes  |  |
  | products | ArrayList<[ProductBundleItem](#ProductBundleItem)> |  no  |  |
+ | isActive | Boolean |  no  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
  | pageVisibility | ArrayList<String>? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | sameStoreAssignment | Boolean? |  yes  |  |
+ | name | String |  no  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | slug | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ProductBundleUpdateRequest](#ProductBundleUpdateRequest)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | choice | String |  no  |  |
+ | products | ArrayList<[ProductBundleItem](#ProductBundleItem)> |  no  |  |
+ | isActive | Boolean |  no  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | pageVisibility | ArrayList<String>? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | sameStoreAssignment | Boolean? |  yes  |  |
+ | name | String |  no  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | slug | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [LimitedProductData](#LimitedProductData)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | identifier | HashMap<String,Any>? |  yes  |  |
+ | countryOfOrigin | String? |  yes  |  |
+ | itemCode | String? |  yes  |  |
+ | attributes | HashMap<String,Any>? |  yes  |  |
+ | price | HashMap<String,Any>? |  yes  |  |
+ | quantity | Int? |  yes  |  |
+ | sizes | ArrayList<String>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | shortDescription | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | images | ArrayList<String>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -10136,8 +16054,8 @@ Success
  | ---------- | ---- | -------- | ----------- |
  | isAvailable | Boolean? |  yes  |  |
  | quantity | Int? |  yes  |  |
- | value | String? |  yes  |  |
  | display | String? |  yes  |  |
+ | value | String? |  yes  |  |
 
 ---
 
@@ -10148,33 +16066,11 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | maxMarked | Double? |  yes  |  |
- | minMarked | Double? |  yes  |  |
- | currency | String? |  yes  |  |
- | minEffective | Double? |  yes  |  |
  | maxEffective | Double? |  yes  |  |
-
----
-
-
- 
- 
- #### [LimitedProductData](#LimitedProductData)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | quantity | Int? |  yes  |  |
- | name | String? |  yes  |  |
- | identifier | HashMap<String,Any>? |  yes  |  |
- | slug | String? |  yes  |  |
- | sizes | ArrayList<String>? |  yes  |  |
- | attributes | HashMap<String,Any>? |  yes  |  |
- | shortDescription | String? |  yes  |  |
- | images | ArrayList<String>? |  yes  |  |
- | price | HashMap<String,Any>? |  yes  |  |
- | itemCode | String? |  yes  |  |
- | countryOfOrigin | String? |  yes  |  |
+ | currency | String? |  yes  |  |
+ | maxMarked | Double? |  yes  |  |
+ | minEffective | Double? |  yes  |  |
+ | minMarked | Double? |  yes  |  |
 
 ---
 
@@ -10185,15 +16081,15 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | productDetails | [LimitedProductData](#LimitedProductData)? |  yes  |  |
+ | allowRemove | Boolean? |  yes  |  |
  | maxQuantity | Int? |  yes  |  |
+ | autoSelect | Boolean? |  yes  |  |
  | productUid | Int? |  yes  |  |
+ | sizes | ArrayList<[Size](#Size)>? |  yes  |  |
+ | price | [Price](#Price)? |  yes  |  |
  | autoAddToCart | Boolean? |  yes  |  |
  | minQuantity | Int? |  yes  |  |
- | autoSelect | Boolean? |  yes  |  |
- | sizes | ArrayList<[Size](#Size)>? |  yes  |  |
- | allowRemove | Boolean? |  yes  |  |
- | price | [Price](#Price)? |  yes  |  |
- | productDetails | [LimitedProductData](#LimitedProductData)? |  yes  |  |
 
 ---
 
@@ -10204,37 +16100,16 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | sameStoreAssignment | Boolean? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
  | choice | String? |  yes  |  |
- | logo | String? |  yes  |  |
- | name | String? |  yes  |  |
- | slug | String? |  yes  |  |
- | products | ArrayList<[GetProducts](#GetProducts)>? |  yes  |  |
- | pageVisibility | ArrayList<String>? |  yes  |  |
  | companyId | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [ProductBundleUpdateRequest](#ProductBundleUpdateRequest)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean |  no  |  |
- | modifiedOn | String? |  yes  |  |
- | sameStoreAssignment | Boolean? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | choice | String |  no  |  |
+ | products | ArrayList<[GetProducts](#GetProducts)>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
  | logo | String? |  yes  |  |
- | name | String |  no  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
- | slug | String |  no  |  |
- | products | ArrayList<[ProductBundleItem](#ProductBundleItem)> |  no  |  |
+ | sameStoreAssignment | Boolean? |  yes  |  |
+ | name | String? |  yes  |  |
  | pageVisibility | ArrayList<String>? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -10257,9 +16132,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | values | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | unit | String? |  yes  |  |
  | headers | HashMap<String,Any>? |  yes  |  |
+ | values | ArrayList<HashMap<String,Any>>? |  yes  |  |
 
 ---
 
@@ -10281,21 +16156,21 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
  | tag | String? |  yes  |  |
- | guide | [Guide](#Guide)? |  yes  |  |
- | name | String |  no  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
- | id | String? |  yes  |  |
- | image | String? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | subtitle | String? |  yes  |  |
- | brandId | Int? |  yes  |  |
- | active | Boolean? |  yes  |  |
  | companyId | Int? |  yes  |  |
  | title | String |  no  |  |
+ | guide | [Guide](#Guide)? |  yes  |  |
+ | image | String? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | brandId | Int? |  yes  |  |
  | description | String? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | subtitle | String? |  yes  |  |
+ | id | String? |  yes  |  |
+ | active | Boolean? |  yes  |  |
+ | name | String |  no  |  |
 
 ---
 
@@ -10306,8 +16181,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
  | success | Boolean? |  yes  |  |
+ | uid | Int? |  yes  |  |
 
 ---
 
@@ -10318,19 +16193,44 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | companyId | Int? |  yes  |  |
  | tag | String? |  yes  |  |
  | guide | HashMap<String,Any>? |  yes  |  |
- | name | String? |  yes  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | subtitle | String? |  yes  |  |
- | brandId | Int? |  yes  |  |
- | active | Boolean? |  yes  |  |
- | companyId | Int? |  yes  |  |
  | title | String? |  yes  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | brandId | Int? |  yes  |  |
+ | subtitle | String? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
  | id | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | active | Boolean? |  yes  |  |
+ | name | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [MetaDataListingFilterMetaResponse](#MetaDataListingFilterMetaResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | key | String? |  yes  |  |
+ | units | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | display | String? |  yes  |  |
+ | filterTypes | ArrayList<String>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [MetaDataListingFilterResponse](#MetaDataListingFilterResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | data | ArrayList<[MetaDataListingFilterMetaResponse](#MetaDataListingFilterMetaResponse)>? |  yes  |  |
 
 ---
 
@@ -10360,37 +16260,12 @@ Success
 
  
  
- #### [MetaDataListingFilterMetaResponse](#MetaDataListingFilterMetaResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | units | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | filterTypes | ArrayList<String>? |  yes  |  |
- | key | String? |  yes  |  |
- | display | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [MetaDataListingFilterResponse](#MetaDataListingFilterResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | data | ArrayList<[MetaDataListingFilterMetaResponse](#MetaDataListingFilterMetaResponse)>? |  yes  |  |
-
----
-
-
- 
- 
  #### [MetaDataListingResponse](#MetaDataListingResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | sort | [MetaDataListingSortResponse](#MetaDataListingSortResponse) |  no  |  |
  | filter | [MetaDataListingFilterResponse](#MetaDataListingFilterResponse) |  no  |  |
+ | sort | [MetaDataListingSortResponse](#MetaDataListingSortResponse) |  no  |  |
 
 ---
 
@@ -10402,9 +16277,9 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | detail | HashMap<String,Any>? |  yes  |  |
+ | variant | HashMap<String,Any>? |  yes  |  |
  | compare | HashMap<String,Any>? |  yes  |  |
  | similar | HashMap<String,Any>? |  yes  |  |
- | variant | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -10417,33 +16292,6 @@ Success
  | ---------- | ---- | -------- | ----------- |
  | listing | [MetaDataListingResponse](#MetaDataListingResponse)? |  yes  |  |
  | product | [GetCatalogConfigurationDetailsProduct](#GetCatalogConfigurationDetailsProduct)? |  yes  |  |
-
----
-
-
- 
- 
- #### [ConfigurationListingSortConfig](#ConfigurationListingSortConfig)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean |  no  |  |
- | priority | Int |  no  |  |
- | logo | String? |  yes  |  |
- | name | String? |  yes  |  |
- | key | String |  no  |  |
-
----
-
-
- 
- 
- #### [ConfigurationListingSort](#ConfigurationListingSort)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | defaultKey | String |  no  |  |
- | config | ArrayList<[ConfigurationListingSortConfig](#ConfigurationListingSortConfig)>? |  yes  |  |
 
 ---
 
@@ -10467,10 +16315,10 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | value | String? |  yes  |  |
- | sort | String? |  yes  |  |
+ | condition | String? |  yes  |  |
  | map | HashMap<String,Any>? |  yes  |  |
  | bucketPoints | ArrayList<[ConfigurationBucketPoints](#ConfigurationBucketPoints)>? |  yes  |  |
- | condition | String? |  yes  |  |
+ | sort | String? |  yes  |  |
 
 ---
 
@@ -10481,13 +16329,13 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean |  no  |  |
- | priority | Int |  no  |  |
- | logo | String? |  yes  |  |
- | name | String? |  yes  |  |
- | key | String |  no  |  |
  | type | String |  no  |  |
+ | priority | Int |  no  |  |
+ | isActive | Boolean |  no  |  |
  | valueConfig | [ConfigurationListingFilterValue](#ConfigurationListingFilterValue)? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | key | String |  no  |  |
+ | name | String? |  yes  |  |
 
 ---
 
@@ -10498,8 +16346,35 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | allowSingle | Boolean |  no  |  |
  | attributeConfig | ArrayList<[ConfigurationListingFilterConfig](#ConfigurationListingFilterConfig)>? |  yes  |  |
+ | allowSingle | Boolean |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ConfigurationListingSortConfig](#ConfigurationListingSortConfig)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | priority | Int |  no  |  |
+ | isActive | Boolean |  no  |  |
+ | logo | String? |  yes  |  |
+ | key | String |  no  |  |
+ | name | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ConfigurationListingSort](#ConfigurationListingSort)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | defaultKey | String |  no  |  |
+ | config | ArrayList<[ConfigurationListingSortConfig](#ConfigurationListingSortConfig)>? |  yes  |  |
 
 ---
 
@@ -10510,8 +16385,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | sort | [ConfigurationListingSort](#ConfigurationListingSort) |  no  |  |
  | filter | [ConfigurationListingFilter](#ConfigurationListingFilter) |  no  |  |
+ | sort | [ConfigurationListingSort](#ConfigurationListingSort) |  no  |  |
 
 ---
 
@@ -10522,36 +16397,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | max | Int |  no  |  |
  | min | Int |  no  |  |
-
----
-
-
- 
- 
- #### [ConfigurationProductConfig](#ConfigurationProductConfig)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean |  no  |  |
- | priority | Int |  no  |  |
- | logo | String? |  yes  |  |
- | size | [ProductSize](#ProductSize)? |  yes  |  |
- | key | String |  no  |  |
- | subtitle | String? |  yes  |  |
- | title | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [ConfigurationProductSimilar](#ConfigurationProductSimilar)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | config | ArrayList<[ConfigurationProductConfig](#ConfigurationProductConfig)>? |  yes  |  |
+ | max | Int |  no  |  |
 
 ---
 
@@ -10562,13 +16409,13 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean |  no  |  |
  | priority | Int |  no  |  |
- | logo | String? |  yes  |  |
- | name | String |  no  |  |
+ | isActive | Boolean |  no  |  |
  | size | [ProductSize](#ProductSize) |  no  |  |
+ | logo | String? |  yes  |  |
  | key | String |  no  |  |
  | displayType | String |  no  |  |
+ | name | String |  no  |  |
 
 ---
 
@@ -10586,12 +16433,40 @@ Success
 
  
  
+ #### [ConfigurationProductConfig](#ConfigurationProductConfig)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | title | String? |  yes  |  |
+ | priority | Int |  no  |  |
+ | isActive | Boolean |  no  |  |
+ | subtitle | String? |  yes  |  |
+ | size | [ProductSize](#ProductSize)? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | key | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ConfigurationProductSimilar](#ConfigurationProductSimilar)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | config | ArrayList<[ConfigurationProductConfig](#ConfigurationProductConfig)>? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [ConfigurationProduct](#ConfigurationProduct)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | similar | [ConfigurationProductSimilar](#ConfigurationProductSimilar) |  no  |  |
  | variant | [ConfigurationProductVariant](#ConfigurationProductVariant) |  no  |  |
+ | similar | [ConfigurationProductSimilar](#ConfigurationProductSimilar) |  no  |  |
 
 ---
 
@@ -10602,12 +16477,12 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | listing | [ConfigurationListing](#ConfigurationListing)? |  yes  |  |
- | appId | String |  no  |  |
- | product | [ConfigurationProduct](#ConfigurationProduct)? |  yes  |  |
- | configType | String |  no  |  |
- | id | String? |  yes  |  |
  | configId | String? |  yes  |  |
+ | configType | String |  no  |  |
+ | appId | String |  no  |  |
+ | listing | [ConfigurationListing](#ConfigurationListing)? |  yes  |  |
+ | product | [ConfigurationProduct](#ConfigurationProduct)? |  yes  |  |
+ | id | String? |  yes  |  |
 
 ---
 
@@ -10618,8 +16493,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | [AppCatalogConfiguration](#AppCatalogConfiguration)? |  yes  |  |
  | isDefault | Boolean? |  yes  |  |
+ | data | [AppCatalogConfiguration](#AppCatalogConfiguration)? |  yes  |  |
 
 ---
 
@@ -10630,11 +16505,11 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | listing | [ConfigurationListing](#ConfigurationListing)? |  yes  |  |
- | appId | String |  no  |  |
- | product | [ConfigurationProduct](#ConfigurationProduct)? |  yes  |  |
- | configType | String |  no  |  |
  | configId | String? |  yes  |  |
+ | configType | String |  no  |  |
+ | appId | String |  no  |  |
+ | listing | [ConfigurationListing](#ConfigurationListing)? |  yes  |  |
+ | product | [ConfigurationProduct](#ConfigurationProduct)? |  yes  |  |
 
 ---
 
@@ -10645,8 +16520,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | sort | HashMap<String,Any>? |  yes  |  |
  | filter | HashMap<String,Any>? |  yes  |  |
+ | sort | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -10657,12 +16532,12 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | listing | [GetCatalogConfigurationDetailsSchemaListing](#GetCatalogConfigurationDetailsSchemaListing)? |  yes  |  |
- | appId | String |  no  |  |
- | product | [GetCatalogConfigurationDetailsProduct](#GetCatalogConfigurationDetailsProduct)? |  yes  |  |
- | configType | String |  no  |  |
- | id | String? |  yes  |  |
  | configId | String? |  yes  |  |
+ | configType | String |  no  |  |
+ | appId | String |  no  |  |
+ | listing | [GetCatalogConfigurationDetailsSchemaListing](#GetCatalogConfigurationDetailsSchemaListing)? |  yes  |  |
+ | product | [GetCatalogConfigurationDetailsProduct](#GetCatalogConfigurationDetailsProduct)? |  yes  |  |
+ | id | String? |  yes  |  |
 
 ---
 
@@ -10673,43 +16548,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | [EntityConfiguration](#EntityConfiguration)? |  yes  |  |
  | isDefault | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [ProductSortOn](#ProductSortOn)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | value | String? |  yes  |  |
- | isSelected | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [ProductFiltersValue](#ProductFiltersValue)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | value | String |  no  |  |
- | displayFormat | String? |  yes  |  |
- | count | Int? |  yes  |  |
- | currencyCode | String? |  yes  |  |
- | isSelected | Boolean |  no  |  |
- | min | Int? |  yes  |  |
- | queryFormat | String? |  yes  |  |
- | max | Int? |  yes  |  |
- | currencySymbol | String? |  yes  |  |
- | selectedMin | Int? |  yes  |  |
- | selectedMax | Int? |  yes  |  |
- | display | String |  no  |  |
+ | data | [EntityConfiguration](#EntityConfiguration)? |  yes  |  |
 
 ---
 
@@ -10721,9 +16561,31 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | kind | String? |  yes  |  |
+ | display | String |  no  |  |
  | name | String |  no  |  |
  | logo | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ProductFiltersValue](#ProductFiltersValue)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | displayFormat | String? |  yes  |  |
+ | max | Int? |  yes  |  |
+ | value | String |  no  |  |
+ | currencyCode | String? |  yes  |  |
+ | currencySymbol | String? |  yes  |  |
+ | min | Int? |  yes  |  |
+ | queryFormat | String? |  yes  |  |
  | display | String |  no  |  |
+ | isSelected | Boolean |  no  |  |
+ | selectedMin | Int? |  yes  |  |
+ | selectedMax | Int? |  yes  |  |
+ | count | Int? |  yes  |  |
 
 ---
 
@@ -10734,8 +16596,21 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | values | ArrayList<[ProductFiltersValue](#ProductFiltersValue)> |  no  |  |
  | key | [ProductFiltersKey](#ProductFiltersKey) |  no  |  |
+ | values | ArrayList<[ProductFiltersValue](#ProductFiltersValue)> |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ProductSortOn](#ProductSortOn)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | isSelected | Boolean? |  yes  |  |
+ | name | String? |  yes  |  |
+ | value | String? |  yes  |  |
 
 ---
 
@@ -10746,8 +16621,59 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | sortOn | ArrayList<[ProductSortOn](#ProductSortOn)>? |  yes  |  |
  | filters | ArrayList<[ProductFilters](#ProductFilters)>? |  yes  |  |
+ | sortOn | ArrayList<[ProductSortOn](#ProductSortOn)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CollectionListingFilterTag](#CollectionListingFilterTag)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | display | String? |  yes  |  |
+ | name | String? |  yes  |  |
+ | isSelected | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CollectionListingFilterType](#CollectionListingFilterType)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | display | String? |  yes  |  |
+ | name | String? |  yes  |  |
+ | isSelected | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CollectionListingFilter](#CollectionListingFilter)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | tags | ArrayList<[CollectionListingFilterTag](#CollectionListingFilterTag)>? |  yes  |  |
+ | type | ArrayList<[CollectionListingFilterType](#CollectionListingFilterType)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Media1](#Media1)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | type | String? |  yes  |  |
+ | url | String |  no  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -10758,8 +16684,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | type | String? |  yes  |  |
  | query | HashMap<String,Any>? |  yes  |  |
+ | type | String? |  yes  |  |
 
 ---
 
@@ -10782,8 +16708,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | url | String? |  yes  |  |
  | aspectRatio | String? |  yes  |  |
+ | url | String? |  yes  |  |
 
 ---
 
@@ -10802,80 +16728,29 @@ Success
 
  
  
- #### [Media1](#Media1)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | type | String? |  yes  |  |
- | url | String |  no  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
-
----
-
-
- 
- 
  #### [GetCollectionDetailNest](#GetCollectionDetailNest)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | cron | HashMap<String,Any>? |  yes  |  |
- | allowSort | Boolean? |  yes  |  |
+ | tag | ArrayList<String>? |  yes  |  |
+ | logo | [Media1](#Media1)? |  yes  |  |
  | allowFacets | Boolean? |  yes  |  |
- | name | String? |  yes  |  |
- | description | String? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | slug | String? |  yes  |  |
  | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | appId | String? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | badge | HashMap<String,Any>? |  yes  |  |
- | query | HashMap<String,Any>? |  yes  |  |
- | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
  | uid | String? |  yes  |  |
- | logo | [Media1](#Media1)? |  yes  |  |
- | tag | ArrayList<String>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
+ | badge | HashMap<String,Any>? |  yes  |  |
+ | description | String? |  yes  |  |
+ | cron | HashMap<String,Any>? |  yes  |  |
  | schedule | HashMap<String,Any>? |  yes  |  |
- | slug | String? |  yes  |  |
- | type | String? |  yes  |  |
+ | query | HashMap<String,Any>? |  yes  |  |
+ | allowSort | Boolean? |  yes  |  |
  | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
-
----
-
-
- 
- 
- #### [CollectionListingFilterType](#CollectionListingFilterType)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | display | String? |  yes  |  |
- | name | String? |  yes  |  |
- | isSelected | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [CollectionListingFilterTag](#CollectionListingFilterTag)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | display | String? |  yes  |  |
- | name | String? |  yes  |  |
- | isSelected | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [CollectionListingFilter](#CollectionListingFilter)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | type | ArrayList<[CollectionListingFilterType](#CollectionListingFilterType)>? |  yes  |  |
- | tags | ArrayList<[CollectionListingFilterTag](#CollectionListingFilterTag)>? |  yes  |  |
+ | type | String? |  yes  |  |
 
 ---
 
@@ -10886,21 +16761,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | filters | [CollectionListingFilter](#CollectionListingFilter)? |  yes  |  |
  | items | ArrayList<[GetCollectionDetailNest](#GetCollectionDetailNest)>? |  yes  |  |
  | page | [Page](#Page)? |  yes  |  |
- | filters | [CollectionListingFilter](#CollectionListingFilter)? |  yes  |  |
-
----
-
-
- 
- 
- #### [SeoDetail](#SeoDetail)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | title | String? |  yes  |  |
- | description | String? |  yes  |  |
 
 ---
 
@@ -10911,22 +16774,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | String? |  yes  |  |
  | userId | String? |  yes  |  |
  | username | String? |  yes  |  |
+ | uid | String? |  yes  |  |
  | email | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [CollectionBadge](#CollectionBadge)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | text | String? |  yes  |  |
- | color | String? |  yes  |  |
 
 ---
 
@@ -10937,8 +16788,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | url | String |  no  |  |
  | aspectRatio | String |  no  |  |
+ | url | String |  no  |  |
 
 ---
 
@@ -10957,14 +16808,38 @@ Success
 
  
  
+ #### [CollectionBadge](#CollectionBadge)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | text | String? |  yes  |  |
+ | color | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [SeoDetail](#SeoDetail)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | description | String? |  yes  |  |
+ | title | String? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [Schedule](#Schedule)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | duration | Int? |  yes  |  |
- | start | String? |  yes  |  |
  | end | String? |  yes  |  |
+ | duration | Int? |  yes  |  |
  | cron | String? |  yes  |  |
+ | start | String? |  yes  |  |
 
 ---
 
@@ -10975,28 +16850,28 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | seo | [SeoDetail](#SeoDetail)? |  yes  |  |
- | allowSort | Boolean? |  yes  |  |
+ | tags | ArrayList<String>? |  yes  |  |
  | createdBy | [UserInfo](#UserInfo)? |  yes  |  |
+ | logo | [CollectionImage](#CollectionImage) |  no  |  |
  | sortOn | String? |  yes  |  |
  | allowFacets | Boolean? |  yes  |  |
- | name | String |  no  |  |
- | description | String? |  yes  |  |
- | appId | String |  no  |  |
- | badge | [CollectionBadge](#CollectionBadge)? |  yes  |  |
- | published | Boolean? |  yes  |  |
  | meta | HashMap<String,Any>? |  yes  |  |
- | localeLanguage | HashMap<String,Any>? |  yes  |  |
- | modifiedBy | [UserInfo](#UserInfo)? |  yes  |  |
- | query | HashMap<String,Any>? |  yes  |  |
- | banners | [CollectionBanner](#CollectionBanner) |  no  |  |
- | logo | [CollectionImage](#CollectionImage) |  no  |  |
- | schedule | [Schedule](#Schedule)? |  yes  |  |
  | slug | String |  no  |  |
- | type | String |  no  |  |
- | tags | ArrayList<String>? |  yes  |  |
+ | appId | String |  no  |  |
+ | isActive | Boolean? |  yes  |  |
+ | name | String |  no  |  |
+ | localeLanguage | HashMap<String,Any>? |  yes  |  |
+ | banners | [CollectionBanner](#CollectionBanner) |  no  |  |
+ | badge | [CollectionBadge](#CollectionBadge)? |  yes  |  |
+ | modifiedBy | [UserInfo](#UserInfo)? |  yes  |  |
+ | description | String? |  yes  |  |
+ | seo | [SeoDetail](#SeoDetail)? |  yes  |  |
+ | schedule | [Schedule](#Schedule)? |  yes  |  |
+ | query | HashMap<String,Any>? |  yes  |  |
+ | allowSort | Boolean? |  yes  |  |
  | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
+ | published | Boolean? |  yes  |  |
+ | type | String |  no  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
 
 ---
@@ -11008,23 +16883,23 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | appId | String? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | logo | [BannerImage](#BannerImage)? |  yes  |  |
- | tag | ArrayList<String>? |  yes  |  |
- | allowFacets | Boolean? |  yes  |  |
- | badge | HashMap<String,Any>? |  yes  |  |
- | name | String? |  yes  |  |
- | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
  | schedule | HashMap<String,Any>? |  yes  |  |
- | query | HashMap<String,Any>? |  yes  |  |
- | slug | String? |  yes  |  |
- | cron | HashMap<String,Any>? |  yes  |  |
- | type | String? |  yes  |  |
+ | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
+ | tag | ArrayList<String>? |  yes  |  |
  | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
+ | appId | String? |  yes  |  |
+ | type | String? |  yes  |  |
+ | badge | HashMap<String,Any>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | allowFacets | Boolean? |  yes  |  |
  | description | String? |  yes  |  |
+ | cron | HashMap<String,Any>? |  yes  |  |
+ | logo | [BannerImage](#BannerImage)? |  yes  |  |
+ | query | HashMap<String,Any>? |  yes  |  |
  | allowSort | Boolean? |  yes  |  |
+ | name | String? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -11035,23 +16910,23 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | appId | String? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | logo | [Media1](#Media1)? |  yes  |  |
- | tag | ArrayList<String>? |  yes  |  |
- | allowFacets | Boolean? |  yes  |  |
- | badge | HashMap<String,Any>? |  yes  |  |
- | name | String? |  yes  |  |
- | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
  | schedule | HashMap<String,Any>? |  yes  |  |
- | query | HashMap<String,Any>? |  yes  |  |
- | slug | String? |  yes  |  |
- | cron | HashMap<String,Any>? |  yes  |  |
- | type | String? |  yes  |  |
+ | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
+ | tag | ArrayList<String>? |  yes  |  |
  | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
+ | appId | String? |  yes  |  |
+ | type | String? |  yes  |  |
+ | badge | HashMap<String,Any>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | allowFacets | Boolean? |  yes  |  |
  | description | String? |  yes  |  |
+ | cron | HashMap<String,Any>? |  yes  |  |
+ | logo | [Media1](#Media1)? |  yes  |  |
+ | query | HashMap<String,Any>? |  yes  |  |
  | allowSort | Boolean? |  yes  |  |
+ | name | String? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -11062,40 +16937,26 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | seo | [SeoDetail](#SeoDetail)? |  yes  |  |
- | allowSort | Boolean? |  yes  |  |
+ | tags | ArrayList<String>? |  yes  |  |
+ | logo | [CollectionImage](#CollectionImage)? |  yes  |  |
  | sortOn | String? |  yes  |  |
  | allowFacets | Boolean? |  yes  |  |
- | name | String? |  yes  |  |
- | description | String? |  yes  |  |
- | badge | [CollectionBadge](#CollectionBadge)? |  yes  |  |
- | published | Boolean? |  yes  |  |
  | meta | HashMap<String,Any>? |  yes  |  |
- | localeLanguage | HashMap<String,Any>? |  yes  |  |
- | modifiedBy | [UserInfo](#UserInfo)? |  yes  |  |
- | query | HashMap<String,Any>? |  yes  |  |
- | banners | [CollectionBanner](#CollectionBanner)? |  yes  |  |
- | logo | [CollectionImage](#CollectionImage)? |  yes  |  |
- | schedule | [Schedule](#Schedule)? |  yes  |  |
  | slug | String? |  yes  |  |
- | tags | ArrayList<String>? |  yes  |  |
- | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
-
----
-
-
- 
- 
- #### [ProductBrand](#ProductBrand)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
  | name | String? |  yes  |  |
- | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
- | logo | [Media1](#Media1)? |  yes  |  |
+ | localeLanguage | HashMap<String,Any>? |  yes  |  |
+ | banners | [CollectionBanner](#CollectionBanner)? |  yes  |  |
+ | badge | [CollectionBadge](#CollectionBadge)? |  yes  |  |
+ | modifiedBy | [UserInfo](#UserInfo)? |  yes  |  |
+ | description | String? |  yes  |  |
+ | seo | [SeoDetail](#SeoDetail)? |  yes  |  |
+ | query | HashMap<String,Any>? |  yes  |  |
+ | schedule | [Schedule](#Schedule)? |  yes  |  |
+ | allowSort | Boolean? |  yes  |  |
+ | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
+ | published | Boolean? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -11106,10 +16967,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | currencyCode | String? |  yes  |  |
- | max | Double? |  yes  |  |
- | currencySymbol | String? |  yes  |  |
  | min | Double? |  yes  |  |
+ | currencyCode | String? |  yes  |  |
+ | currencySymbol | String? |  yes  |  |
+ | max | Double? |  yes  |  |
 
 ---
 
@@ -11132,9 +16993,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | key | String? |  yes  |  |
  | type | String? |  yes  |  |
  | value | String? |  yes  |  |
- | key | String? |  yes  |  |
 
 ---
 
@@ -11145,8 +17006,22 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | title | String? |  yes  |  |
  | details | ArrayList<[ProductDetailAttribute](#ProductDetailAttribute)>? |  yes  |  |
+ | title | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [ProductBrand](#ProductBrand)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | name | String? |  yes  |  |
+ | logo | [Media1](#Media1)? |  yes  |  |
 
 ---
 
@@ -11157,32 +17032,32 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | hasVariant | Boolean? |  yes  |  |
- | brand | [ProductBrand](#ProductBrand)? |  yes  |  |
  | itemCode | String? |  yes  |  |
- | imageNature | String? |  yes  |  |
- | promoMeta | HashMap<String,Any>? |  yes  |  |
- | name | String? |  yes  |  |
- | color | String? |  yes  |  |
- | price | [ProductListingPrice](#ProductListingPrice)? |  yes  |  |
- | description | String? |  yes  |  |
- | ratingCount | Int? |  yes  |  |
- | shortDescription | String? |  yes  |  |
- | highlights | ArrayList<String>? |  yes  |  |
- | similars | ArrayList<String>? |  yes  |  |
- | groupedAttributes | ArrayList<[ProductDetailGroupedAttribute](#ProductDetailGroupedAttribute)>? |  yes  |  |
- | teaserTag | HashMap<String,Any>? |  yes  |  |
- | uid | Int? |  yes  |  |
- | sellable | Boolean? |  yes  |  |
- | tryouts | ArrayList<String>? |  yes  |  |
- | slug | String |  no  |  |
- | discount | String? |  yes  |  |
- | type | String? |  yes  |  |
- | attributes | HashMap<String,Any>? |  yes  |  |
+ | itemType | String? |  yes  |  |
  | rating | Double? |  yes  |  |
  | productOnlineDate | String? |  yes  |  |
- | itemType | String? |  yes  |  |
+ | slug | String |  no  |  |
+ | discount | String? |  yes  |  |
+ | attributes | HashMap<String,Any>? |  yes  |  |
+ | price | [ProductListingPrice](#ProductListingPrice)? |  yes  |  |
+ | tryouts | ArrayList<String>? |  yes  |  |
  | medias | ArrayList<[Media1](#Media1)>? |  yes  |  |
+ | shortDescription | String? |  yes  |  |
+ | hasVariant | Boolean? |  yes  |  |
+ | groupedAttributes | ArrayList<[ProductDetailGroupedAttribute](#ProductDetailGroupedAttribute)>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | similars | ArrayList<String>? |  yes  |  |
+ | teaserTag | HashMap<String,Any>? |  yes  |  |
+ | promoMeta | HashMap<String,Any>? |  yes  |  |
+ | highlights | ArrayList<String>? |  yes  |  |
+ | sellable | Boolean? |  yes  |  |
+ | description | String? |  yes  |  |
+ | imageNature | String? |  yes  |  |
+ | ratingCount | Int? |  yes  |  |
+ | brand | [ProductBrand](#ProductBrand)? |  yes  |  |
+ | type | String? |  yes  |  |
+ | color | String? |  yes  |  |
 
 ---
 
@@ -11193,10 +17068,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | filters | ArrayList<[ProductFilters](#ProductFilters)>? |  yes  |  |
  | sortOn | ArrayList<[ProductSortOn](#ProductSortOn)>? |  yes  |  |
  | items | ArrayList<[ProductListingDetail](#ProductListingDetail)>? |  yes  |  |
  | page | [Page](#Page)? |  yes  |  |
- | filters | ArrayList<[ProductFilters](#ProductFilters)>? |  yes  |  |
 
 ---
 
@@ -11207,8 +17082,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | pageSize | Int |  no  |  |
  | pageNo | Int |  no  |  |
+ | pageSize | Int |  no  |  |
 
 ---
 
@@ -11226,29 +17101,29 @@ Success
 
  
  
- #### [CatalogInsightBrand](#CatalogInsightBrand)
+ #### [CatalogInsightItem](#CatalogInsightItem)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | availableArticles | Int? |  yes  |  |
- | availableSizes | Int? |  yes  |  |
- | name | String? |  yes  |  |
- | articleFreshness | Int? |  yes  |  |
- | totalArticles | Int? |  yes  |  |
- | totalSizes | Int? |  yes  |  |
+ | outOfStockCount | Int? |  yes  |  |
+ | count | Int? |  yes  |  |
+ | sellableCount | Int? |  yes  |  |
 
 ---
 
 
  
  
- #### [CatalogInsightItem](#CatalogInsightItem)
+ #### [CatalogInsightBrand](#CatalogInsightBrand)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | count | Int? |  yes  |  |
- | sellableCount | Int? |  yes  |  |
- | outOfStockCount | Int? |  yes  |  |
+ | totalArticles | Int? |  yes  |  |
+ | availableArticles | Int? |  yes  |  |
+ | totalSizes | Int? |  yes  |  |
+ | availableSizes | Int? |  yes  |  |
+ | name | String? |  yes  |  |
+ | articleFreshness | Int? |  yes  |  |
 
 ---
 
@@ -11259,8 +17134,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | brandDistribution | [CatalogInsightBrand](#CatalogInsightBrand)? |  yes  |  |
  | item | [CatalogInsightItem](#CatalogInsightItem)? |  yes  |  |
+ | brandDistribution | [CatalogInsightBrand](#CatalogInsightBrand)? |  yes  |  |
 
 ---
 
@@ -11283,8 +17158,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | brandDistribution | [CatalogInsightBrand](#CatalogInsightBrand)? |  yes  |  |
  | data | [CrossSellingData](#CrossSellingData)? |  yes  |  |
+ | brandDistribution | [CatalogInsightBrand](#CatalogInsightBrand)? |  yes  |  |
 
 ---
 
@@ -11296,9 +17171,9 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | enabled | Boolean? |  yes  |  |
+ | brandIds | ArrayList<Int>? |  yes  |  |
  | optLevel | String |  no  |  |
  | storeIds | ArrayList<Int>? |  yes  |  |
- | brandIds | ArrayList<Int>? |  yes  |  |
 
 ---
 
@@ -11309,16 +17184,16 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | modifiedOn | Int |  no  |  |
+ | platform | String |  no  |  |
+ | createdOn | Int |  no  |  |
+ | companyId | Int |  no  |  |
+ | enabled | Boolean |  no  |  |
  | optLevel | String |  no  |  |
  | modifiedBy | HashMap<String,Any>? |  yes  |  |
  | brandIds | ArrayList<Int> |  no  |  |
- | createdOn | Int |  no  |  |
- | enabled | Boolean |  no  |  |
- | companyId | Int |  no  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | modifiedOn | Int |  no  |  |
  | storeIds | ArrayList<Int> |  no  |  |
- | platform | String |  no  |  |
 
 ---
 
@@ -11341,10 +17216,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
+ | businessType | String? |  yes  |  |
  | companyType | String? |  yes  |  |
  | name | String? |  yes  |  |
- | businessType | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
 
 ---
 
@@ -11356,8 +17231,8 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | brandName | String? |  yes  |  |
- | totalArticle | Int? |  yes  |  |
  | brandId | Int? |  yes  |  |
+ | totalArticle | Int? |  yes  |  |
  | companyId | Int? |  yes  |  |
 
 ---
@@ -11381,9 +17256,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | brand | Int? |  yes  |  |
  | store | Int? |  yes  |  |
  | company | String? |  yes  |  |
+ | brand | Int? |  yes  |  |
 
 ---
 
@@ -11394,17 +17269,17 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | name | String? |  yes  |  |
- | storeCode | String? |  yes  |  |
  | createdOn | String? |  yes  |  |
  | documents | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | additionalContacts | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | storeType | String? |  yes  |  |
- | timing | HashMap<String,Any>? |  yes  |  |
  | companyId | Int? |  yes  |  |
+ | additionalContacts | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | timing | HashMap<String,Any>? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
  | displayName | String? |  yes  |  |
+ | name | String? |  yes  |  |
+ | storeCode | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
 
 ---
 
@@ -11417,6 +17292,58 @@ Success
  | ---------- | ---- | -------- | ----------- |
  | items | ArrayList<[StoreDetail](#StoreDetail)>? |  yes  |  |
  | page | [Page](#Page)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [AttributeMasterFilter](#AttributeMasterFilter)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | indexing | Boolean |  no  |  |
+ | dependsOn | ArrayList<String>? |  yes  |  |
+ | priority | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [AttributeSchemaRange](#AttributeSchemaRange)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | min | Int? |  yes  |  |
+ | max | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [AttributeMaster](#AttributeMaster)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | allowedValues | ArrayList<String>? |  yes  |  |
+ | format | String? |  yes  |  |
+ | type | String |  no  |  |
+ | range | [AttributeSchemaRange](#AttributeSchemaRange)? |  yes  |  |
+ | mandatory | Boolean? |  yes  |  |
+ | multi | Boolean? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [AttributeMasterDetails](#AttributeMasterDetails)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | displayType | String |  no  |  |
 
 ---
 
@@ -11438,60 +17365,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | enriched | Boolean? |  yes  |  |
  | mandatoryDetails | [AttributeMasterMandatoryDetails](#AttributeMasterMandatoryDetails) |  no  |  |
-
----
-
-
- 
- 
- #### [AttributeMasterFilter](#AttributeMasterFilter)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | priority | Int? |  yes  |  |
- | indexing | Boolean |  no  |  |
- | dependsOn | ArrayList<String>? |  yes  |  |
-
----
-
-
- 
- 
- #### [AttributeMasterDetails](#AttributeMasterDetails)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | displayType | String |  no  |  |
-
----
-
-
- 
- 
- #### [AttributeSchemaRange](#AttributeSchemaRange)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | max | Int? |  yes  |  |
- | min | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [AttributeMaster](#AttributeMaster)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | range | [AttributeSchemaRange](#AttributeSchemaRange)? |  yes  |  |
- | multi | Boolean? |  yes  |  |
- | mandatory | Boolean? |  yes  |  |
- | type | String |  no  |  |
- | format | String? |  yes  |  |
- | allowedValues | ArrayList<String>? |  yes  |  |
+ | enriched | Boolean? |  yes  |  |
 
 ---
 
@@ -11502,18 +17377,18 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | meta | [AttributeMasterMeta](#AttributeMasterMeta)? |  yes  |  |
- | logo | String? |  yes  |  |
- | enabledForEndConsumer | Boolean? |  yes  |  |
  | filters | [AttributeMasterFilter](#AttributeMasterFilter)? |  yes  |  |
- | name | String? |  yes  |  |
- | id | String? |  yes  |  |
- | slug | String? |  yes  |  |
- | details | [AttributeMasterDetails](#AttributeMasterDetails)? |  yes  |  |
- | departments | ArrayList<String>? |  yes  |  |
- | schema | [AttributeMaster](#AttributeMaster)? |  yes  |  |
  | isNested | Boolean? |  yes  |  |
+ | enabledForEndConsumer | Boolean? |  yes  |  |
+ | schema | [AttributeMaster](#AttributeMaster)? |  yes  |  |
+ | details | [AttributeMasterDetails](#AttributeMasterDetails)? |  yes  |  |
  | description | String? |  yes  |  |
+ | id | String? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | departments | ArrayList<String>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | meta | [AttributeMasterMeta](#AttributeMasterMeta)? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -11536,11 +17411,11 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | meta | HashMap<String,Any>? |  yes  |  |
  | code | String? |  yes  |  |
- | message | String? |  yes  |  |
  | errors | HashMap<String,Any>? |  yes  |  |
+ | message | String? |  yes  |  |
  | status | Int? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -11551,9 +17426,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | username | String? |  yes  |  |
  | userId | String? |  yes  |  |
  | contact | String? |  yes  |  |
+ | username | String? |  yes  |  |
 
 ---
 
@@ -11564,21 +17439,21 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | isActive | Boolean? |  yes  |  |
- | createdBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | logo | String? |  yes  |  |
- | search | String? |  yes  |  |
- | name | String? |  yes  |  |
- | priorityOrder | Int? |  yes  |  |
- | modifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | slug | String? |  yes  |  |
- | synonyms | ArrayList<String>? |  yes  |  |
  | createdOn | String? |  yes  |  |
- | pageSize | Int? |  yes  |  |
  | itemType | String? |  yes  |  |
  | pageNo | Int? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | modifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
+ | priorityOrder | Int? |  yes  |  |
+ | createdBy | [UserSerializer](#UserSerializer)? |  yes  |  |
+ | pageSize | Int? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | search | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | name | String? |  yes  |  |
+ | synonyms | ArrayList<String>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -11601,11 +17476,11 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | meta | HashMap<String,Any>? |  yes  |  |
  | code | String? |  yes  |  |
- | message | String? |  yes  |  |
  | errors | HashMap<String,Any>? |  yes  |  |
+ | message | String? |  yes  |  |
  | status | Int? |  yes  |  |
+ | meta | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -11616,21 +17491,21 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | categories | ArrayList<String>? |  yes  |  |
  | tag | String? |  yes  |  |
- | logo | String? |  yes  |  |
- | name | String? |  yes  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
- | slug | String |  no  |  |
- | isPhysical | Boolean |  no  |  |
- | createdOn | String? |  yes  |  |
- | departments | ArrayList<String>? |  yes  |  |
- | attributes | ArrayList<String>? |  yes  |  |
- | description | String? |  yes  |  |
  | isArchived | Boolean? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | attributes | ArrayList<String>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | isPhysical | Boolean |  no  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | description | String? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | departments | ArrayList<String>? |  yes  |  |
+ | categories | ArrayList<String>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | slug | String |  no  |  |
 
 ---
 
@@ -11653,36 +17528,36 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | HashMap<String,Any>? |  yes  |  |
- | productGroupTag | HashMap<String,Any>? |  yes  |  |
- | isDependent | HashMap<String,Any>? |  yes  |  |
- | moq | HashMap<String,Any>? |  yes  |  |
- | customOrder | HashMap<String,Any>? |  yes  |  |
- | itemCode | HashMap<String,Any>? |  yes  |  |
- | sizeGuide | HashMap<String,Any>? |  yes  |  |
- | variants | HashMap<String,Any>? |  yes  |  |
- | media | HashMap<String,Any>? |  yes  |  |
- | name | HashMap<String,Any>? |  yes  |  |
- | returnConfig | HashMap<String,Any>? |  yes  |  |
- | currency | HashMap<String,Any>? |  yes  |  |
- | productPublish | HashMap<String,Any>? |  yes  |  |
- | description | HashMap<String,Any>? |  yes  |  |
- | command | HashMap<String,Any>? |  yes  |  |
- | countryOfOrigin | HashMap<String,Any>? |  yes  |  |
- | trader | HashMap<String,Any>? |  yes  |  |
- | categorySlug | HashMap<String,Any>? |  yes  |  |
- | hsnCode | HashMap<String,Any>? |  yes  |  |
- | sizes | HashMap<String,Any>? |  yes  |  |
- | shortDescription | HashMap<String,Any>? |  yes  |  |
- | highlights | HashMap<String,Any>? |  yes  |  |
- | teaserTag | HashMap<String,Any>? |  yes  |  |
- | brandUid | HashMap<String,Any>? |  yes  |  |
- | traderType | HashMap<String,Any>? |  yes  |  |
- | slug | HashMap<String,Any>? |  yes  |  |
  | tags | HashMap<String,Any>? |  yes  |  |
- | multiSize | HashMap<String,Any>? |  yes  |  |
+ | itemCode | HashMap<String,Any>? |  yes  |  |
  | itemType | HashMap<String,Any>? |  yes  |  |
+ | customOrder | HashMap<String,Any>? |  yes  |  |
+ | multiSize | HashMap<String,Any>? |  yes  |  |
+ | slug | HashMap<String,Any>? |  yes  |  |
+ | productPublish | HashMap<String,Any>? |  yes  |  |
+ | productGroupTag | HashMap<String,Any>? |  yes  |  |
+ | returnConfig | HashMap<String,Any>? |  yes  |  |
+ | isActive | HashMap<String,Any>? |  yes  |  |
+ | currency | HashMap<String,Any>? |  yes  |  |
+ | shortDescription | HashMap<String,Any>? |  yes  |  |
  | noOfBoxes | HashMap<String,Any>? |  yes  |  |
+ | variants | HashMap<String,Any>? |  yes  |  |
+ | name | HashMap<String,Any>? |  yes  |  |
+ | traderType | HashMap<String,Any>? |  yes  |  |
+ | teaserTag | HashMap<String,Any>? |  yes  |  |
+ | highlights | HashMap<String,Any>? |  yes  |  |
+ | hsnCode | HashMap<String,Any>? |  yes  |  |
+ | moq | HashMap<String,Any>? |  yes  |  |
+ | sizeGuide | HashMap<String,Any>? |  yes  |  |
+ | media | HashMap<String,Any>? |  yes  |  |
+ | description | HashMap<String,Any>? |  yes  |  |
+ | categorySlug | HashMap<String,Any>? |  yes  |  |
+ | countryOfOrigin | HashMap<String,Any>? |  yes  |  |
+ | isDependent | HashMap<String,Any>? |  yes  |  |
+ | trader | HashMap<String,Any>? |  yes  |  |
+ | sizes | HashMap<String,Any>? |  yes  |  |
+ | command | HashMap<String,Any>? |  yes  |  |
+ | brandUid | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -11693,12 +17568,12 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | properties | [Properties](#Properties)? |  yes  |  |
- | required | ArrayList<String>? |  yes  |  |
- | type | String? |  yes  |  |
  | definitions | HashMap<String,Any>? |  yes  |  |
  | title | String? |  yes  |  |
+ | type | String? |  yes  |  |
+ | properties | [Properties](#Properties)? |  yes  |  |
  | description | String? |  yes  |  |
+ | required | ArrayList<String>? |  yes  |  |
 
 ---
 
@@ -11721,18 +17596,18 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | categories | ArrayList<String>? |  yes  |  |
  | tag | String? |  yes  |  |
- | logo | String? |  yes  |  |
- | name | String? |  yes  |  |
- | id | String? |  yes  |  |
- | slug | String |  no  |  |
- | isPhysical | Boolean |  no  |  |
- | departments | ArrayList<String>? |  yes  |  |
- | attributes | ArrayList<String>? |  yes  |  |
- | description | String? |  yes  |  |
  | isArchived | Boolean? |  yes  |  |
+ | attributes | ArrayList<String>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | isPhysical | Boolean |  no  |  |
+ | description | String? |  yes  |  |
+ | id | String? |  yes  |  |
+ | logo | String? |  yes  |  |
+ | departments | ArrayList<String>? |  yes  |  |
+ | categories | ArrayList<String>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | slug | String |  no  |  |
 
 ---
 
@@ -11791,8 +17666,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | username | String? |  yes  |  |
  | userId | String? |  yes  |  |
+ | username | String? |  yes  |  |
 
 ---
 
@@ -11803,9 +17678,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | templates | ArrayList<String>? |  yes  |  |
  | type | String? |  yes  |  |
  | brand | ArrayList<String>? |  yes  |  |
- | templates | ArrayList<String>? |  yes  |  |
 
 ---
 
@@ -11816,16 +17691,16 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | createdBy | [VerifiedBy](#VerifiedBy)? |  yes  |  |
- | url | String? |  yes  |  |
  | triggerOn | String? |  yes  |  |
- | data | [ProductDownloadItemsData](#ProductDownloadItemsData)? |  yes  |  |
  | completedOn | String? |  yes  |  |
- | id | String? |  yes  |  |
- | sellerId | Double? |  yes  |  |
- | templateTags | HashMap<String,Any>? |  yes  |  |
  | taskId | String? |  yes  |  |
+ | sellerId | Double? |  yes  |  |
  | status | String? |  yes  |  |
+ | templateTags | HashMap<String,Any>? |  yes  |  |
+ | createdBy | [VerifiedBy](#VerifiedBy)? |  yes  |  |
+ | id | String? |  yes  |  |
+ | data | [ProductDownloadItemsData](#ProductDownloadItemsData)? |  yes  |  |
+ | url | String? |  yes  |  |
 
 ---
 
@@ -11848,8 +17723,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | multivalue | Boolean? |  yes  |  |
  | data | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | multivalue | Boolean? |  yes  |  |
 
 ---
 
@@ -11860,22 +17735,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | l1 | Int |  no  |  |
  | department | Int |  no  |  |
+ | l1 | Int |  no  |  |
  | l2 | Int |  no  |  |
-
----
-
-
- 
- 
- #### [Media2](#Media2)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | portrait | String |  no  |  |
- | logo | String |  no  |  |
- | landscape | String |  no  |  |
 
 ---
 
@@ -11898,9 +17760,22 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | google | [CategoryMappingValues](#CategoryMappingValues)? |  yes  |  |
  | ajio | [CategoryMappingValues](#CategoryMappingValues)? |  yes  |  |
  | facebook | [CategoryMappingValues](#CategoryMappingValues)? |  yes  |  |
- | google | [CategoryMappingValues](#CategoryMappingValues)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Media2](#Media2)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | portrait | String |  no  |  |
+ | landscape | String |  no  |  |
+ | logo | String |  no  |  |
 
 ---
 
@@ -11911,23 +17786,23 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | level | Int |  no  |  |
- | priority | Int? |  yes  |  |
- | isActive | Boolean |  no  |  |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | hierarchy | ArrayList<[Hierarchy](#Hierarchy)>? |  yes  |  |
- | media | [Media2](#Media2)? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | id | String? |  yes  |  |
- | tryouts | ArrayList<String>? |  yes  |  |
- | name | String |  no  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
- | slug | String? |  yes  |  |
- | synonyms | ArrayList<String>? |  yes  |  |
  | createdOn | String? |  yes  |  |
- | departments | ArrayList<Int> |  no  |  |
+ | hierarchy | ArrayList<[Hierarchy](#Hierarchy)>? |  yes  |  |
  | marketplaces | [CategoryMapping](#CategoryMapping)? |  yes  |  |
+ | tryouts | ArrayList<String>? |  yes  |  |
+ | isActive | Boolean |  no  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | level | Int |  no  |  |
+ | media | [Media2](#Media2)? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | id | String? |  yes  |  |
+ | priority | Int? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | departments | ArrayList<Int> |  no  |  |
+ | uid | Int? |  yes  |  |
+ | name | String |  no  |  |
+ | synonyms | ArrayList<String>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -11950,17 +17825,17 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | level | Int |  no  |  |
- | priority | Int? |  yes  |  |
+ | hierarchy | ArrayList<[Hierarchy](#Hierarchy)>? |  yes  |  |
+ | marketplaces | [CategoryMapping](#CategoryMapping)? |  yes  |  |
+ | tryouts | ArrayList<String>? |  yes  |  |
  | isActive | Boolean |  no  |  |
  | media | [Media2](#Media2)? |  yes  |  |
- | hierarchy | ArrayList<[Hierarchy](#Hierarchy)>? |  yes  |  |
- | tryouts | ArrayList<String>? |  yes  |  |
- | name | String |  no  |  |
- | slug | String? |  yes  |  |
- | synonyms | ArrayList<String>? |  yes  |  |
+ | level | Int |  no  |  |
+ | priority | Int? |  yes  |  |
  | departments | ArrayList<Int> |  no  |  |
- | marketplaces | [CategoryMapping](#CategoryMapping)? |  yes  |  |
+ | name | String |  no  |  |
+ | synonyms | ArrayList<String>? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -11971,7 +17846,19 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | message | String? |  yes  |  |
  | uid | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CategoryUpdateResponse](#CategoryUpdateResponse)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | success | Boolean? |  yes  |  |
  | message | String? |  yes  |  |
 
 ---
@@ -11990,26 +17877,12 @@ Success
 
  
  
- #### [CategoryUpdateResponse](#CategoryUpdateResponse)
+ #### [ProductPublished](#ProductPublished)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | message | String? |  yes  |  |
- | success | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [Image](#Image)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | aspectRatioF | Double? |  yes  |  |
- | url | String? |  yes  |  |
- | secureUrl | String? |  yes  |  |
- | aspectRatio | String? |  yes  |  |
+ | isSet | Boolean? |  yes  |  |
+ | productOnlineDate | Int? |  yes  |  |
 
 ---
 
@@ -12020,10 +17893,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | aspectRatioF | Int? |  yes  |  |
- | url | String? |  yes  |  |
- | secureUrl | String? |  yes  |  |
  | aspectRatio | String? |  yes  |  |
+ | secureUrl | String? |  yes  |  |
+ | url | String? |  yes  |  |
+ | aspectRatioF | Int? |  yes  |  |
 
 ---
 
@@ -12043,12 +17916,14 @@ Success
 
  
  
- #### [ProductPublished](#ProductPublished)
+ #### [Image](#Image)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | productOnlineDate | Int? |  yes  |  |
- | isSet | Boolean? |  yes  |  |
+ | aspectRatio | String? |  yes  |  |
+ | url | String? |  yes  |  |
+ | secureUrl | String? |  yes  |  |
+ | aspectRatioF | Double? |  yes  |  |
 
 ---
 
@@ -12059,43 +17934,43 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | isDependent | Boolean? |  yes  |  |
- | moq | HashMap<String,Any>? |  yes  |  |
- | images | ArrayList<[Image](#Image)>? |  yes  |  |
- | customOrder | HashMap<String,Any>? |  yes  |  |
- | brand | [Brand](#Brand)? |  yes  |  |
- | itemCode | String? |  yes  |  |
- | categoryUid | Int? |  yes  |  |
- | id | String? |  yes  |  |
- | sizeGuide | String? |  yes  |  |
- | imageNature | String? |  yes  |  |
- | variants | HashMap<String,Any>? |  yes  |  |
- | media | ArrayList<[Media1](#Media1)>? |  yes  |  |
- | name | String? |  yes  |  |
- | currency | String? |  yes  |  |
  | isSet | Boolean? |  yes  |  |
- | allSizes | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | isPhysical | Boolean? |  yes  |  |
- | departments | ArrayList<Int>? |  yes  |  |
- | primaryColor | String? |  yes  |  |
- | productPublish | [ProductPublished](#ProductPublished)? |  yes  |  |
- | color | String? |  yes  |  |
- | description | String? |  yes  |  |
- | countryOfOrigin | String? |  yes  |  |
- | categorySlug | String? |  yes  |  |
- | hsnCode | String? |  yes  |  |
- | sizes | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | shortDescription | String? |  yes  |  |
- | templateTag | String? |  yes  |  |
- | highlights | ArrayList<String>? |  yes  |  |
- | l3Mapping | ArrayList<String>? |  yes  |  |
- | uid | Int? |  yes  |  |
- | brandUid | Int? |  yes  |  |
- | slug | String? |  yes  |  |
- | multiSize | Boolean? |  yes  |  |
+ | itemCode | String? |  yes  |  |
  | itemType | String? |  yes  |  |
+ | templateTag | String? |  yes  |  |
+ | customOrder | HashMap<String,Any>? |  yes  |  |
+ | multiSize | Boolean? |  yes  |  |
+ | slug | String? |  yes  |  |
+ | productPublish | [ProductPublished](#ProductPublished)? |  yes  |  |
+ | categoryUid | Int? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | currency | String? |  yes  |  |
+ | primaryColor | String? |  yes  |  |
+ | shortDescription | String? |  yes  |  |
+ | id | String? |  yes  |  |
+ | departments | ArrayList<Int>? |  yes  |  |
+ | variants | HashMap<String,Any>? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | name | String? |  yes  |  |
+ | highlights | ArrayList<String>? |  yes  |  |
+ | hsnCode | String? |  yes  |  |
+ | moq | HashMap<String,Any>? |  yes  |  |
+ | allSizes | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | sizeGuide | String? |  yes  |  |
+ | l3Mapping | ArrayList<String>? |  yes  |  |
+ | media | ArrayList<[Media1](#Media1)>? |  yes  |  |
+ | description | String? |  yes  |  |
+ | categorySlug | String? |  yes  |  |
+ | imageNature | String? |  yes  |  |
+ | countryOfOrigin | String? |  yes  |  |
+ | brand | [Brand](#Brand)? |  yes  |  |
+ | isDependent | Boolean? |  yes  |  |
+ | sizes | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | isPhysical | Boolean? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | brandUid | Int? |  yes  |  |
+ | images | ArrayList<[Image](#Image)>? |  yes  |  |
+ | color | String? |  yes  |  |
 
 ---
 
@@ -12114,39 +17989,13 @@ Success
 
  
  
- #### [OrderQuantity](#OrderQuantity)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | minimum | Int? |  yes  |  |
- | isSet | Boolean? |  yes  |  |
- | maximum | Int? |  yes  |  |
-
----
-
-
- 
- 
  #### [CustomOrder](#CustomOrder)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isCustomOrder | Boolean? |  yes  |  |
- | manufacturingTimeUnit | String? |  yes  |  |
  | manufacturingTime | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [ReturnConfig](#ReturnConfig)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | returnable | Boolean? |  yes  |  |
- | unit | String? |  yes  |  |
- | time | Int? |  yes  |  |
+ | manufacturingTimeUnit | String? |  yes  |  |
+ | isCustomOrder | Boolean? |  yes  |  |
 
 ---
 
@@ -12157,20 +18006,21 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | productOnlineDate | String? |  yes  |  |
  | isSet | Boolean? |  yes  |  |
+ | productOnlineDate | String? |  yes  |  |
 
 ---
 
 
  
  
- #### [Trader](#Trader)
+ #### [ReturnConfig](#ReturnConfig)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | name | String |  no  |  |
- | address | String |  no  |  |
+ | unit | String? |  yes  |  |
+ | returnable | Boolean? |  yes  |  |
+ | time | Int? |  yes  |  |
 
 ---
 
@@ -12189,47 +18039,72 @@ Success
 
  
  
+ #### [OrderQuantity](#OrderQuantity)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | isSet | Boolean? |  yes  |  |
+ | maximum | Int? |  yes  |  |
+ | minimum | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Trader](#Trader)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | name | String |  no  |  |
+ | address | String |  no  |  |
+
+---
+
+
+ 
+ 
  #### [ProductCreateUpdate](#ProductCreateUpdate)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | productGroupTag | ArrayList<String>? |  yes  |  |
- | noOfBoxes | Int? |  yes  |  |
- | isDependent | Boolean? |  yes  |  |
- | moq | [OrderQuantity](#OrderQuantity)? |  yes  |  |
- | isImageLessProduct | Boolean? |  yes  |  |
- | customOrder | [CustomOrder](#CustomOrder)? |  yes  |  |
+ | tags | ArrayList<String>? |  yes  |  |
  | companyId | Int |  no  |  |
  | itemCode | String |  no  |  |
- | sizeGuide | String? |  yes  |  |
- | variants | HashMap<String,Any>? |  yes  |  |
- | media | ArrayList<[Media1](#Media1)>? |  yes  |  |
- | name | String |  no  |  |
- | returnConfig | [ReturnConfig](#ReturnConfig)? |  yes  |  |
  | isSet | Boolean? |  yes  |  |
- | currency | String |  no  |  |
- | departments | ArrayList<Int> |  no  |  |
- | productPublish | [ProductPublish](#ProductPublish)? |  yes  |  |
- | description | String? |  yes  |  |
- | requester | String? |  yes  |  |
- | countryOfOrigin | String |  no  |  |
- | trader | [Trader](#Trader)? |  yes  |  |
- | categorySlug | String |  no  |  |
- | hsnCode | String |  no  |  |
- | shortDescription | String? |  yes  |  |
- | templateTag | String |  no  |  |
- | highlights | ArrayList<String>? |  yes  |  |
- | teaserTag | [TeaserTag](#TeaserTag)? |  yes  |  |
- | uid | Int? |  yes  |  |
- | brandUid | Int |  no  |  |
- | traderType | String? |  yes  |  |
- | slug | String |  no  |  |
- | tags | ArrayList<String>? |  yes  |  |
- | multiSize | Boolean? |  yes  |  |
- | changeRequestId | String? |  yes  |  |
  | itemType | String |  no  |  |
+ | templateTag | String |  no  |  |
+ | changeRequestId | String? |  yes  |  |
+ | customOrder | [CustomOrder](#CustomOrder)? |  yes  |  |
+ | multiSize | Boolean? |  yes  |  |
+ | slug | String |  no  |  |
+ | productPublish | [ProductPublish](#ProductPublish)? |  yes  |  |
+ | productGroupTag | ArrayList<String>? |  yes  |  |
+ | returnConfig | [ReturnConfig](#ReturnConfig)? |  yes  |  |
+ | isImageLessProduct | Boolean? |  yes  |  |
+ | currency | String |  no  |  |
+ | isActive | Boolean? |  yes  |  |
+ | shortDescription | String? |  yes  |  |
+ | noOfBoxes | Int? |  yes  |  |
+ | departments | ArrayList<Int> |  no  |  |
+ | variants | HashMap<String,Any>? |  yes  |  |
+ | name | String |  no  |  |
+ | uid | Int? |  yes  |  |
+ | traderType | String? |  yes  |  |
+ | teaserTag | [TeaserTag](#TeaserTag)? |  yes  |  |
+ | highlights | ArrayList<String>? |  yes  |  |
+ | hsnCode | String |  no  |  |
+ | moq | [OrderQuantity](#OrderQuantity)? |  yes  |  |
+ | requester | String? |  yes  |  |
+ | sizeGuide | String? |  yes  |  |
+ | media | ArrayList<[Media1](#Media1)>? |  yes  |  |
+ | description | String? |  yes  |  |
+ | categorySlug | String |  no  |  |
+ | countryOfOrigin | String |  no  |  |
+ | isDependent | Boolean? |  yes  |  |
+ | trader | [Trader](#Trader)? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | brandUid | Int |  no  |  |
 
 ---
 
@@ -12251,9 +18126,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | username | String? |  yes  |  |
- | userId | String? |  yes  |  |
  | fullName | String? |  yes  |  |
+ | userId | String? |  yes  |  |
+ | username | String? |  yes  |  |
 
 ---
 
@@ -12264,21 +18139,21 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isActive | Boolean? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | createdBy | [UserDetail](#UserDetail)? |  yes  |  |
- | succeed | Int? |  yes  |  |
- | filePath | String? |  yes  |  |
- | cancelledRecords | ArrayList<String>? |  yes  |  |
- | failedRecords | ArrayList<String>? |  yes  |  |
  | stage | String? |  yes  |  |
  | createdOn | String? |  yes  |  |
- | total | Int? |  yes  |  |
- | modifiedBy | [UserDetail](#UserDetail)? |  yes  |  |
- | templateTag | String? |  yes  |  |
+ | companyId | Int? |  yes  |  |
+ | filePath | String? |  yes  |  |
  | cancelled | Int? |  yes  |  |
  | template | [ProductTemplate](#ProductTemplate)? |  yes  |  |
- | companyId | Int? |  yes  |  |
+ | cancelledRecords | ArrayList<String>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | templateTag | String? |  yes  |  |
+ | modifiedBy | [UserDetail](#UserDetail)? |  yes  |  |
+ | total | Int? |  yes  |  |
+ | createdBy | [UserDetail](#UserDetail)? |  yes  |  |
+ | failedRecords | ArrayList<String>? |  yes  |  |
+ | succeed | Int? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
  | failed | Int? |  yes  |  |
 
 ---
@@ -12302,9 +18177,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | String? |  yes  |  |
  | userId | String? |  yes  |  |
  | username | String? |  yes  |  |
+ | uid | String? |  yes  |  |
  | email | String? |  yes  |  |
 
 ---
@@ -12316,22 +18191,22 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | stage | String? |  yes  |  |
+ | createdOn | String |  no  |  |
+ | companyId | Int |  no  |  |
+ | cancelled | Int? |  yes  |  |
+ | filePath | String? |  yes  |  |
+ | trackingUrl | String? |  yes  |  |
  | isActive | Boolean? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
+ | modifiedBy | [UserInfo1](#UserInfo1)? |  yes  |  |
+ | cancelledRecords | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | templateTag | String? |  yes  |  |
+ | total | Int |  no  |  |
  | createdBy | [UserInfo1](#UserInfo1)? |  yes  |  |
  | succeed | Int? |  yes  |  |
- | filePath | String? |  yes  |  |
- | customTemplateTag | String? |  yes  |  |
- | modifiedBy | [UserInfo1](#UserInfo1)? |  yes  |  |
- | total | Int |  no  |  |
- | createdOn | String |  no  |  |
- | cancelledRecords | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | failedRecords | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | stage | String? |  yes  |  |
- | cancelled | Int? |  yes  |  |
- | templateTag | String? |  yes  |  |
- | trackingUrl | String? |  yes  |  |
- | companyId | Int |  no  |  |
+ | modifiedOn | String? |  yes  |  |
+ | customTemplateTag | String? |  yes  |  |
  | failed | Int? |  yes  |  |
 
 ---
@@ -12343,9 +18218,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | ArrayList<HashMap<String,Any>> |  no  |  |
  | templateTag | String |  no  |  |
  | batchId | String |  no  |  |
+ | data | ArrayList<HashMap<String,Any>> |  no  |  |
  | companyId | Int |  no  |  |
 
 ---
@@ -12379,8 +18254,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | username | String? |  yes  |  |
  | userId | String? |  yes  |  |
+ | username | String? |  yes  |  |
  | companyId | Int? |  yes  |  |
 
 ---
@@ -12392,23 +18267,23 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | createdBy | [UserCommon](#UserCommon)? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | isActive | Boolean? |  yes  |  |
- | filePath | String? |  yes  |  |
- | retry | Int? |  yes  |  |
- | modifiedBy | [UserCommon](#UserCommon)? |  yes  |  |
- | cancelledRecords | ArrayList<String>? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | failedRecords | ArrayList<String>? |  yes  |  |
  | stage | String? |  yes  |  |
- | total | Int? |  yes  |  |
+ | retry | Int? |  yes  |  |
+ | filePath | String? |  yes  |  |
+ | createdOn | String? |  yes  |  |
  | companyId | Int? |  yes  |  |
  | cancelled | Int? |  yes  |  |
  | trackingUrl | String? |  yes  |  |
+ | cancelledRecords | ArrayList<String>? |  yes  |  |
+ | modifiedBy | [UserCommon](#UserCommon)? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | total | Int? |  yes  |  |
+ | createdBy | [UserCommon](#UserCommon)? |  yes  |  |
  | succeed | Int? |  yes  |  |
- | failed | Int? |  yes  |  |
+ | failedRecords | ArrayList<String>? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
  | id | String? |  yes  |  |
+ | failed | Int? |  yes  |  |
 
 ---
 
@@ -12431,8 +18306,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | url | String |  no  |  |
  | user | HashMap<String,Any> |  no  |  |
+ | url | String |  no  |  |
  | companyId | Int? |  yes  |  |
 
 ---
@@ -12445,8 +18320,8 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | itemId | Int? |  yes  |  |
- | size | String? |  yes  |  |
  | companyId | Int? |  yes  |  |
+ | size | String? |  yes  |  |
 
 ---
 
@@ -12457,8 +18332,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | [ProductSizeDeleteDataResponse](#ProductSizeDeleteDataResponse)? |  yes  |  |
  | success | Boolean? |  yes  |  |
+ | data | [ProductSizeDeleteDataResponse](#ProductSizeDeleteDataResponse)? |  yes  |  |
 
 ---
 
@@ -12469,19 +18344,19 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | String? |  yes  |  |
- | quantity | Int? |  yes  |  |
  | priceTransfer | Int? |  yes  |  |
- | sellableQuantity | Int? |  yes  |  |
  | priceEffective | Int? |  yes  |  |
- | currency | String? |  yes  |  |
- | size | String? |  yes  |  |
- | itemId | Int? |  yes  |  |
- | store | HashMap<String,Any>? |  yes  |  |
  | price | Int? |  yes  |  |
+ | quantity | Int? |  yes  |  |
+ | store | HashMap<String,Any>? |  yes  |  |
+ | currency | String? |  yes  |  |
  | identifiers | HashMap<String,Any>? |  yes  |  |
+ | itemId | Int? |  yes  |  |
+ | size | String? |  yes  |  |
  | sellerIdentifier | Int? |  yes  |  |
+ | sellableQuantity | Int? |  yes  |  |
  | inventoryUpdatedOn | String? |  yes  |  |
+ | uid | String? |  yes  |  |
 
 ---
 
@@ -12492,9 +18367,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | brandUid | Int? |  yes  |  |
  | itemCode | String? |  yes  |  |
+ | brandUid | Int? |  yes  |  |
+ | uid | Int? |  yes  |  |
 
 ---
 
@@ -12505,8 +18380,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | size | String |  no  |  |
  | pieces | Int |  no  |  |
+ | size | String |  no  |  |
 
 ---
 
@@ -12540,9 +18415,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | gtinValue | String |  no  |  |
- | gtinType | String |  no  |  |
  | primary | Boolean? |  yes  |  |
+ | gtinType | String |  no  |  |
+ | gtinValue | String |  no  |  |
 
 ---
 
@@ -12553,22 +18428,22 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | itemLength | Double? |  yes  |  |
- | quantity | Int |  no  |  |
- | priceTransfer | Double? |  yes  |  |
- | itemWeightUnitOfMeasure | String? |  yes  |  |
- | storeCode | String |  no  |  |
- | priceEffective | Double |  no  |  |
- | size | String |  no  |  |
- | isSet | Boolean? |  yes  |  |
  | itemHeight | Double? |  yes  |  |
- | currency | String |  no  |  |
- | set | [InventorySet](#InventorySet)? |  yes  |  |
- | itemDimensionsUnitOfMeasure | String? |  yes  |  |
- | price | Double |  no  |  |
+ | priceTransfer | Double? |  yes  |  |
  | itemWidth | Double? |  yes  |  |
+ | itemDimensionsUnitOfMeasure | String? |  yes  |  |
+ | isSet | Boolean? |  yes  |  |
+ | priceEffective | Double |  no  |  |
+ | price | Double |  no  |  |
+ | itemWeightUnitOfMeasure | String? |  yes  |  |
+ | quantity | Int |  no  |  |
+ | itemLength | Double? |  yes  |  |
+ | set | [InventorySet](#InventorySet)? |  yes  |  |
  | itemWeight | Double? |  yes  |  |
  | identifiers | ArrayList<[GTIN](#GTIN)> |  no  |  |
+ | currency | String |  no  |  |
+ | size | String |  no  |  |
+ | storeCode | String |  no  |  |
 
 ---
 
@@ -12593,8 +18468,8 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | itemId | Int? |  yes  |  |
- | size | String? |  yes  |  |
  | locationId | Int? |  yes  |  |
+ | size | String? |  yes  |  |
 
 ---
 
@@ -12605,8 +18480,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | [InventoryDeleteData](#InventoryDeleteData)? |  yes  |  |
  | success | Boolean? |  yes  |  |
+ | data | [InventoryDeleteData](#InventoryDeleteData)? |  yes  |  |
 
 ---
 
@@ -12617,21 +18492,21 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | createdBy | HashMap<String,Any>? |  yes  |  |
- | isActive | Boolean? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | succeed | Int? |  yes  |  |
- | filePath | String? |  yes  |  |
- | cancelledRecords | ArrayList<String>? |  yes  |  |
- | failedRecords | ArrayList<String>? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | modifiedBy | HashMap<String,Any>? |  yes  |  |
  | stage | String? |  yes  |  |
- | total | Int? |  yes  |  |
+ | createdOn | String? |  yes  |  |
  | cancelled | Int? |  yes  |  |
  | companyId | Int? |  yes  |  |
- | failed | Int? |  yes  |  |
+ | filePath | String? |  yes  |  |
+ | cancelledRecords | ArrayList<String>? |  yes  |  |
+ | isActive | Boolean? |  yes  |  |
+ | modifiedBy | HashMap<String,Any>? |  yes  |  |
+ | total | Int? |  yes  |  |
+ | createdBy | HashMap<String,Any>? |  yes  |  |
+ | failedRecords | ArrayList<String>? |  yes  |  |
  | id | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | succeed | Int? |  yes  |  |
+ | failed | Int? |  yes  |  |
 
 ---
 
@@ -12665,23 +18540,23 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | itemLength | Double? |  yes  |  |
- | quantity | Int |  no  |  |
- | priceTransfer | Double? |  yes  |  |
- | itemWeightUnitOfMeasure | String? |  yes  |  |
- | storeCode | String |  no  |  |
- | priceEffective | Double |  no  |  |
- | size | String? |  yes  |  |
- | isSet | Boolean? |  yes  |  |
  | itemHeight | Double? |  yes  |  |
- | currency | String |  no  |  |
- | set | [InventorySet](#InventorySet)? |  yes  |  |
- | itemDimensionsUnitOfMeasure | String? |  yes  |  |
- | price | Double |  no  |  |
+ | priceTransfer | Double? |  yes  |  |
  | itemWidth | Double? |  yes  |  |
+ | itemDimensionsUnitOfMeasure | String? |  yes  |  |
+ | isSet | Boolean? |  yes  |  |
+ | priceEffective | Double |  no  |  |
+ | price | Double |  no  |  |
+ | itemWeightUnitOfMeasure | String? |  yes  |  |
+ | quantity | Int |  no  |  |
+ | itemLength | Double? |  yes  |  |
+ | set | [InventorySet](#InventorySet)? |  yes  |  |
  | itemWeight | Double? |  yes  |  |
  | identifiers | ArrayList<HashMap<String,Any>>? |  yes  |  |
+ | currency | String |  no  |  |
+ | size | String? |  yes  |  |
  | sellerIdentifier | String |  no  |  |
+ | storeCode | String |  no  |  |
 
 ---
 
@@ -12692,10 +18567,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | batchId | String |  no  |  |
  | user | HashMap<String,Any>? |  yes  |  |
  | sizes | ArrayList<[Size1](#Size1)> |  no  |  |
  | companyId | Int |  no  |  |
+ | batchId | String |  no  |  |
 
 ---
 
@@ -12706,13 +18581,13 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | url | String? |  yes  |  |
  | triggerOn | String? |  yes  |  |
  | completedOn | String? |  yes  |  |
- | requestParams | HashMap<String,Any>? |  yes  |  |
- | sellerId | Int |  no  |  |
  | taskId | String |  no  |  |
+ | sellerId | Int |  no  |  |
  | status | String? |  yes  |  |
+ | requestParams | HashMap<String,Any>? |  yes  |  |
+ | url | String? |  yes  |  |
 
 ---
 
@@ -12724,8 +18599,8 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | type | String? |  yes  |  |
- | brand | ArrayList<Int>? |  yes  |  |
  | store | ArrayList<Int>? |  yes  |  |
+ | brand | ArrayList<Int>? |  yes  |  |
 
 ---
 
@@ -12736,8 +18611,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | value | String? |  yes  |  |
  | display | String? |  yes  |  |
+ | value | String? |  yes  |  |
 
 ---
 
@@ -12748,8 +18623,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | data | ArrayList<[FilerList](#FilerList)>? |  yes  |  |
  | multivalues | Boolean? |  yes  |  |
+ | data | ArrayList<[FilerList](#FilerList)>? |  yes  |  |
 
 ---
 
@@ -12760,17 +18635,17 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | threshold1 | Double? |  yes  |  |
- | taxOnEsp | Boolean? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | hs2Code | String? |  yes  |  |
  | tax1 | Double? |  yes  |  |
- | hsnCode | String? |  yes  |  |
- | taxOnMrp | Boolean? |  yes  |  |
- | id | String? |  yes  |  |
- | tax2 | Double? |  yes  |  |
  | companyId | Int? |  yes  |  |
  | threshold2 | Double? |  yes  |  |
+ | threshold1 | Double? |  yes  |  |
+ | hsnCode | String? |  yes  |  |
+ | taxOnMrp | Boolean? |  yes  |  |
+ | hs2Code | String? |  yes  |  |
+ | taxOnEsp | Boolean? |  yes  |  |
+ | id | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | tax2 | Double? |  yes  |  |
 
 ---
 
@@ -12781,9 +18656,9 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | itemTotal | Int? |  yes  |  |
  | hasNext | Boolean? |  yes  |  |
  | size | Int? |  yes  |  |
- | itemTotal | Int? |  yes  |  |
  | hasPrevious | Boolean? |  yes  |  |
  | current | String? |  yes  |  |
 
@@ -12808,16 +18683,16 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | threshold1 | Double |  no  |  |
- | taxOnEsp | Boolean? |  yes  |  |
- | uid | Int? |  yes  |  |
- | hs2Code | String |  no  |  |
  | tax1 | Double |  no  |  |
- | hsnCode | String |  no  |  |
- | taxOnMrp | Boolean |  no  |  |
- | tax2 | Double? |  yes  |  |
  | companyId | Int |  no  |  |
  | threshold2 | Double? |  yes  |  |
+ | threshold1 | Double |  no  |  |
+ | hsnCode | String |  no  |  |
+ | taxOnMrp | Boolean |  no  |  |
+ | hs2Code | String |  no  |  |
+ | taxOnEsp | Boolean? |  yes  |  |
+ | tax2 | Double? |  yes  |  |
+ | uid | Int? |  yes  |  |
 
 ---
 
@@ -12861,14 +18736,14 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
+ | discount | String? |  yes  |  |
+ | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
+ | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
  | logo | [Media](#Media)? |  yes  |  |
+ | departments | ArrayList<String>? |  yes  |  |
+ | uid | Int? |  yes  |  |
  | name | String? |  yes  |  |
  | slug | String? |  yes  |  |
- | discount | String? |  yes  |  |
- | departments | ArrayList<String>? |  yes  |  |
- | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
- | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
 
 ---
 
@@ -12891,10 +18766,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | logo | [Media](#Media)? |  yes  |  |
- | name | String? |  yes  |  |
  | priorityOrder | Int? |  yes  |  |
+ | logo | [Media](#Media)? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | name | String? |  yes  |  |
  | slug | String? |  yes  |  |
 
 ---
@@ -12929,13 +18804,13 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | name | String? |  yes  |  |
- | slug | String? |  yes  |  |
+ | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | childs | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
- | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -12946,13 +18821,13 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | name | String? |  yes  |  |
- | slug | String? |  yes  |  |
+ | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | childs | ArrayList<[ThirdLevelChild](#ThirdLevelChild)>? |  yes  |  |
  | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
- | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -12963,13 +18838,13 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | name | String? |  yes  |  |
- | slug | String? |  yes  |  |
+ | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | childs | ArrayList<[SecondLevelChild](#SecondLevelChild)>? |  yes  |  |
  | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
- | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -12980,12 +18855,12 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | uid | Int? |  yes  |  |
- | name | String? |  yes  |  |
- | slug | String? |  yes  |  |
+ | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
  | childs | ArrayList<[Child](#Child)>? |  yes  |  |
  | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
- | action | [ProductListingAction](#ProductListingAction)? |  yes  |  |
+ | name | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | slug | String? |  yes  |  |
 
 ---
 
@@ -13020,10 +18895,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | filters | ArrayList<[ProductFilters](#ProductFilters)>? |  yes  |  |
  | sortOn | ArrayList<[ProductSortOn](#ProductSortOn)>? |  yes  |  |
  | items | ArrayList<[ProductListingDetail](#ProductListingDetail)>? |  yes  |  |
  | page | [Page](#Page) |  no  |  |
- | filters | ArrayList<[ProductFilters](#ProductFilters)>? |  yes  |  |
 
 ---
 
@@ -13034,33 +18909,105 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | hasVariant | Boolean? |  yes  |  |
- | brand | [ProductBrand](#ProductBrand)? |  yes  |  |
  | itemCode | String? |  yes  |  |
- | imageNature | String? |  yes  |  |
- | promoMeta | HashMap<String,Any>? |  yes  |  |
- | name | String? |  yes  |  |
- | color | String? |  yes  |  |
- | description | String? |  yes  |  |
- | ratingCount | Int? |  yes  |  |
- | shortDescription | String? |  yes  |  |
- | highlights | ArrayList<String>? |  yes  |  |
- | similars | ArrayList<String>? |  yes  |  |
- | groupedAttributes | ArrayList<[ProductDetailGroupedAttribute](#ProductDetailGroupedAttribute)>? |  yes  |  |
- | teaserTag | HashMap<String,Any>? |  yes  |  |
- | uid | Int? |  yes  |  |
- | tryouts | ArrayList<String>? |  yes  |  |
- | slug | String |  no  |  |
- | type | String? |  yes  |  |
- | attributes | HashMap<String,Any>? |  yes  |  |
+ | itemType | String? |  yes  |  |
  | rating | Double? |  yes  |  |
  | productOnlineDate | String? |  yes  |  |
- | itemType | String? |  yes  |  |
+ | slug | String |  no  |  |
+ | attributes | HashMap<String,Any>? |  yes  |  |
+ | tryouts | ArrayList<String>? |  yes  |  |
  | medias | ArrayList<[Media1](#Media1)>? |  yes  |  |
+ | shortDescription | String? |  yes  |  |
+ | hasVariant | Boolean? |  yes  |  |
+ | groupedAttributes | ArrayList<[ProductDetailGroupedAttribute](#ProductDetailGroupedAttribute)>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | similars | ArrayList<String>? |  yes  |  |
+ | teaserTag | HashMap<String,Any>? |  yes  |  |
+ | promoMeta | HashMap<String,Any>? |  yes  |  |
+ | highlights | ArrayList<String>? |  yes  |  |
+ | description | String? |  yes  |  |
+ | imageNature | String? |  yes  |  |
+ | ratingCount | Int? |  yes  |  |
+ | brand | [ProductBrand](#ProductBrand)? |  yes  |  |
+ | type | String? |  yes  |  |
+ | color | String? |  yes  |  |
 
 ---
 
 
+
+
+ 
+ 
+ #### [BusinessCountryInfo](#BusinessCountryInfo)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | country | String? |  yes  |  |
+ | countryCode | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Document](#Document)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | value | String |  no  |  |
+ | verified | Boolean? |  yes  |  |
+ | legalName | String? |  yes  |  |
+ | type | String |  no  |  |
+ | url | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [SellerPhoneNumber](#SellerPhoneNumber)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | countryCode | Int |  no  |  |
+ | number | String |  no  |  |
+
+---
+
+
+ 
+ 
+ #### [ContactDetails](#ContactDetails)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | phone | ArrayList<[SellerPhoneNumber](#SellerPhoneNumber)>? |  yes  |  |
+ | emails | ArrayList<String>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [GetAddressSerializer](#GetAddressSerializer)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | countryCode | String? |  yes  |  |
+ | longitude | Double? |  yes  |  |
+ | addressType | String? |  yes  |  |
+ | state | String? |  yes  |  |
+ | pincode | Int? |  yes  |  |
+ | landmark | String? |  yes  |  |
+ | latitude | Double? |  yes  |  |
+ | address1 | String? |  yes  |  |
+ | address2 | String? |  yes  |  |
+ | country | String? |  yes  |  |
+ | city | String? |  yes  |  |
+
+---
 
 
  
@@ -13087,103 +19034,31 @@ Success
 
  
  
- #### [BusinessCountryInfo](#BusinessCountryInfo)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | country | String? |  yes  |  |
- | countryCode | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [SellerPhoneNumber](#SellerPhoneNumber)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | number | String |  no  |  |
- | countryCode | Int |  no  |  |
-
----
-
-
- 
- 
- #### [ContactDetails](#ContactDetails)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | phone | ArrayList<[SellerPhoneNumber](#SellerPhoneNumber)>? |  yes  |  |
- | emails | ArrayList<String>? |  yes  |  |
-
----
-
-
- 
- 
- #### [Document](#Document)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | type | String |  no  |  |
- | url | String? |  yes  |  |
- | legalName | String? |  yes  |  |
- | verified | Boolean? |  yes  |  |
- | value | String |  no  |  |
-
----
-
-
- 
- 
- #### [GetAddressSerializer](#GetAddressSerializer)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | address1 | String? |  yes  |  |
- | state | String? |  yes  |  |
- | landmark | String? |  yes  |  |
- | addressType | String? |  yes  |  |
- | countryCode | String? |  yes  |  |
- | address2 | String? |  yes  |  |
- | country | String? |  yes  |  |
- | pincode | Int? |  yes  |  |
- | city | String? |  yes  |  |
- | latitude | Double? |  yes  |  |
- | longitude | Double? |  yes  |  |
-
----
-
-
- 
- 
  #### [GetCompanyProfileSerializerResponse](#GetCompanyProfileSerializerResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | businessDetails | [BusinessDetails](#BusinessDetails)? |  yes  |  |
- | warnings | HashMap<String,Any>? |  yes  |  |
- | mode | String? |  yes  |  |
- | notificationEmails | ArrayList<String>? |  yes  |  |
- | businessInfo | String? |  yes  |  |
- | companyType | String |  no  |  |
- | createdBy | [UserSerializer](#UserSerializer)? |  yes  |  |
  | businessCountryInfo | [BusinessCountryInfo](#BusinessCountryInfo)? |  yes  |  |
- | contactDetails | [ContactDetails](#ContactDetails)? |  yes  |  |
- | verifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | businessType | String |  no  |  |
- | name | String? |  yes  |  |
- | uid | Int |  no  |  |
- | modifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | franchiseEnabled | Boolean? |  yes  |  |
+ | notificationEmails | ArrayList<String>? |  yes  |  |
  | stage | String? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
+ | warnings | HashMap<String,Any>? |  yes  |  |
+ | verifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
+ | modifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
+ | uid | Int |  no  |  |
+ | name | String? |  yes  |  |
  | documents | ArrayList<[Document](#Document)>? |  yes  |  |
+ | businessType | String |  no  |  |
  | createdOn | String? |  yes  |  |
+ | contactDetails | [ContactDetails](#ContactDetails)? |  yes  |  |
+ | franchiseEnabled | Boolean? |  yes  |  |
  | verifiedOn | String? |  yes  |  |
+ | mode | String? |  yes  |  |
+ | businessInfo | String? |  yes  |  |
  | addresses | ArrayList<[GetAddressSerializer](#GetAddressSerializer)>? |  yes  |  |
+ | createdBy | [UserSerializer](#UserSerializer)? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | businessDetails | [BusinessDetails](#BusinessDetails)? |  yes  |  |
+ | companyType | String |  no  |  |
 
 ---
 
@@ -13194,17 +19069,17 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | address1 | String |  no  |  |
- | state | String |  no  |  |
- | landmark | String? |  yes  |  |
- | addressType | String |  no  |  |
  | countryCode | String? |  yes  |  |
- | country | String |  no  |  |
- | address2 | String? |  yes  |  |
- | pincode | Int |  no  |  |
- | city | String |  no  |  |
- | latitude | Double |  no  |  |
  | longitude | Double |  no  |  |
+ | addressType | String |  no  |  |
+ | state | String |  no  |  |
+ | pincode | Int |  no  |  |
+ | landmark | String? |  yes  |  |
+ | latitude | Double |  no  |  |
+ | address1 | String |  no  |  |
+ | address2 | String? |  yes  |  |
+ | country | String |  no  |  |
+ | city | String |  no  |  |
 
 ---
 
@@ -13215,18 +19090,18 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | companyType | String? |  yes  |  |
- | businessInfo | String? |  yes  |  |
- | franchiseEnabled | Boolean? |  yes  |  |
- | rejectReason | String? |  yes  |  |
- | warnings | HashMap<String,Any>? |  yes  |  |
- | businessDetails | [BusinessDetails](#BusinessDetails)? |  yes  |  |
  | documents | ArrayList<[Document](#Document)>? |  yes  |  |
- | contactDetails | [ContactDetails](#ContactDetails)? |  yes  |  |
- | name | String? |  yes  |  |
- | addresses | ArrayList<[CreateUpdateAddressSerializer](#CreateUpdateAddressSerializer)>? |  yes  |  |
- | businessType | String? |  yes  |  |
  | notificationEmails | ArrayList<String>? |  yes  |  |
+ | businessInfo | String? |  yes  |  |
+ | addresses | ArrayList<[CreateUpdateAddressSerializer](#CreateUpdateAddressSerializer)>? |  yes  |  |
+ | contactDetails | [ContactDetails](#ContactDetails)? |  yes  |  |
+ | warnings | HashMap<String,Any>? |  yes  |  |
+ | name | String? |  yes  |  |
+ | franchiseEnabled | Boolean? |  yes  |  |
+ | businessType | String? |  yes  |  |
+ | rejectReason | String? |  yes  |  |
+ | businessDetails | [BusinessDetails](#BusinessDetails)? |  yes  |  |
+ | companyType | String? |  yes  |  |
 
 ---
 
@@ -13237,8 +19112,8 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | pending | Int? |  yes  |  |
  | verified | Int? |  yes  |  |
+ | pending | Int? |  yes  |  |
 
 ---
 
@@ -13249,13 +19124,45 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | stage | String? |  yes  |  |
- | store | [DocumentsObj](#DocumentsObj)? |  yes  |  |
- | brand | [DocumentsObj](#DocumentsObj)? |  yes  |  |
  | storeDocuments | [DocumentsObj](#DocumentsObj)? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | stage | String? |  yes  |  |
+ | brand | [DocumentsObj](#DocumentsObj)? |  yes  |  |
  | product | [DocumentsObj](#DocumentsObj)? |  yes  |  |
  | companyDocuments | [DocumentsObj](#DocumentsObj)? |  yes  |  |
+ | store | [DocumentsObj](#DocumentsObj)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [BrandBannerSerializer](#BrandBannerSerializer)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | portrait | String? |  yes  |  |
+ | landscape | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [CreateUpdateBrandRequestSerializer](#CreateUpdateBrandRequestSerializer)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | companyId | Int? |  yes  |  |
+ | brandTier | String? |  yes  |  |
+ | logo | String |  no  |  |
  | uid | Int? |  yes  |  |
+ | description | String? |  yes  |  |
+ | banner | [BrandBannerSerializer](#BrandBannerSerializer)? |  yes  |  |
+ | localeLanguage | HashMap<String,Any>? |  yes  |  |
+ | name | String |  no  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+ | synonyms | ArrayList<String>? |  yes  |  |
 
 ---
 
@@ -13275,60 +19182,41 @@ Success
 
  
  
- #### [BrandBannerSerializer](#BrandBannerSerializer)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | landscape | String? |  yes  |  |
- | portrait | String? |  yes  |  |
-
----
-
-
- 
- 
  #### [GetBrandResponseSerializer](#GetBrandResponseSerializer)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | slugKey | String? |  yes  |  |
  | modifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | synonyms | ArrayList<String>? |  yes  |  |
- | logo | String? |  yes  |  |
- | createdBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | stage | String? |  yes  |  |
- | rejectReason | String? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | warnings | HashMap<String,Any>? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
  | createdOn | String? |  yes  |  |
- | localeLanguage | HashMap<String,Any>? |  yes  |  |
- | verifiedOn | String? |  yes  |  |
- | banner | [BrandBannerSerializer](#BrandBannerSerializer)? |  yes  |  |
- | verifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | name | String |  no  |  |
+ | logo | String? |  yes  |  |
  | uid | Int? |  yes  |  |
  | description | String? |  yes  |  |
+ | banner | [BrandBannerSerializer](#BrandBannerSerializer)? |  yes  |  |
+ | createdBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
+ | slugKey | String? |  yes  |  |
+ | stage | String? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+ | name | String |  no  |  |
+ | warnings | HashMap<String,Any>? |  yes  |  |
+ | localeLanguage | HashMap<String,Any>? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | rejectReason | String? |  yes  |  |
+ | verifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
+ | verifiedOn | String? |  yes  |  |
+ | synonyms | ArrayList<String>? |  yes  |  |
 
 ---
 
 
  
  
- #### [CreateUpdateBrandRequestSerializer](#CreateUpdateBrandRequestSerializer)
+ #### [CompanyBrandPostRequestSerializer](#CompanyBrandPostRequestSerializer)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | synonyms | ArrayList<String>? |  yes  |  |
- | logo | String |  no  |  |
- | companyId | Int? |  yes  |  |
- | localeLanguage | HashMap<String,Any>? |  yes  |  |
- | banner | [BrandBannerSerializer](#BrandBannerSerializer)? |  yes  |  |
- | brandTier | String? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
- | name | String |  no  |  |
+ | company | Int |  no  |  |
+ | brands | ArrayList<Int> |  no  |  |
  | uid | Int? |  yes  |  |
- | description | String? |  yes  |  |
 
 ---
 
@@ -13340,18 +19228,18 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | modifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | companyType | String? |  yes  |  |
- | createdBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | stage | String? |  yes  |  |
  | rejectReason | String? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | addresses | ArrayList<[GetAddressSerializer](#GetAddressSerializer)>? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | stage | String? |  yes  |  |
+ | createdBy | [UserSerializer](#UserSerializer)? |  yes  |  |
+ | name | String? |  yes  |  |
  | modifiedOn | String? |  yes  |  |
  | businessType | String? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | verifiedOn | String? |  yes  |  |
- | addresses | ArrayList<[GetAddressSerializer](#GetAddressSerializer)>? |  yes  |  |
  | verifiedBy | [UserSerializer](#UserSerializer)? |  yes  |  |
- | name | String? |  yes  |  |
- | uid | Int? |  yes  |  |
+ | verifiedOn | String? |  yes  |  |
+ | companyType | String? |  yes  |  |
 
 ---
 
@@ -13363,17 +19251,17 @@ Success
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | modifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | company | [GetCompanySerializer](#GetCompanySerializer)? |  yes  |  |
- | createdBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | uid | Int? |  yes  |  |
  | stage | String? |  yes  |  |
- | rejectReason | String? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
+ | createdBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
  | warnings | HashMap<String,Any>? |  yes  |  |
  | brand | [GetBrandResponseSerializer](#GetBrandResponseSerializer)? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | verifiedOn | String? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | company | [GetCompanySerializer](#GetCompanySerializer)? |  yes  |  |
+ | rejectReason | String? |  yes  |  |
  | verifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | uid | Int? |  yes  |  |
+ | verifiedOn | String? |  yes  |  |
 
 ---
 
@@ -13384,70 +19272,29 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | page | [Page](#Page)? |  yes  |  |
  | items | ArrayList<[CompanyBrandSerializer](#CompanyBrandSerializer)>? |  yes  |  |
+ | page | [Page](#Page)? |  yes  |  |
 
 ---
 
 
  
  
- #### [CompanyBrandPostRequestSerializer](#CompanyBrandPostRequestSerializer)
+ #### [GetAddressSerializer1](#GetAddressSerializer1)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | brands | ArrayList<Int> |  no  |  |
- | uid | Int? |  yes  |  |
- | company | Int |  no  |  |
-
----
-
-
- 
- 
- #### [InvoiceCredSerializer](#InvoiceCredSerializer)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | username | String? |  yes  |  |
- | password | String? |  yes  |  |
- | enabled | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [InvoiceDetailsSerializer](#InvoiceDetailsSerializer)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | eInvoice | [InvoiceCredSerializer](#InvoiceCredSerializer)? |  yes  |  |
- | eWaybill | [InvoiceCredSerializer](#InvoiceCredSerializer)? |  yes  |  |
-
----
-
-
- 
- 
- #### [LocationIntegrationType](#LocationIntegrationType)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | order | String? |  yes  |  |
- | inventory | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | onSameStore | Boolean? |  yes  |  |
- | storeUid | Int? |  yes  |  |
+ | countryCode | String? |  yes  |  |
+ | longitude | Double? |  yes  |  |
+ | addressType | String? |  yes  |  |
+ | state | String? |  yes  |  |
+ | pincode | Int? |  yes  |  |
+ | landmark | String? |  yes  |  |
+ | latitude | Double? |  yes  |  |
+ | address1 | String? |  yes  |  |
+ | address2 | String? |  yes  |  |
+ | country | String? |  yes  |  |
+ | city | String? |  yes  |  |
 
 ---
 
@@ -13470,10 +19317,10 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | closing | [LocationTimingSerializer](#LocationTimingSerializer)? |  yes  |  |
- | weekday | String |  no  |  |
- | open | Boolean |  no  |  |
  | opening | [LocationTimingSerializer](#LocationTimingSerializer)? |  yes  |  |
+ | closing | [LocationTimingSerializer](#LocationTimingSerializer)? |  yes  |  |
+ | open | Boolean |  no  |  |
+ | weekday | String |  no  |  |
 
 ---
 
@@ -13484,77 +19331,46 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
  | email | String? |  yes  |  |
  | mobileNo | [SellerPhoneNumber](#SellerPhoneNumber) |  no  |  |
+ | name | String? |  yes  |  |
 
 ---
 
 
  
  
- #### [GetLocationSerializer](#GetLocationSerializer)
+ #### [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | company | [GetCompanySerializer](#GetCompanySerializer)? |  yes  |  |
- | gstCredentials | [InvoiceDetailsSerializer](#InvoiceDetailsSerializer)? |  yes  |  |
- | integrationType | [LocationIntegrationType](#LocationIntegrationType)? |  yes  |  |
- | displayName | String |  no  |  |
- | code | String |  no  |  |
- | contactNumbers | ArrayList<[SellerPhoneNumber](#SellerPhoneNumber)>? |  yes  |  |
- | productReturnConfig | [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)? |  yes  |  |
- | address | [GetAddressSerializer](#GetAddressSerializer) |  no  |  |
- | warnings | HashMap<String,Any>? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
- | notificationEmails | ArrayList<String>? |  yes  |  |
- | timing | ArrayList<[LocationDayWiseSerializer](#LocationDayWiseSerializer)>? |  yes  |  |
- | createdBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | phoneNumber | String |  no  |  |
- | verifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | name | String |  no  |  |
- | storeType | String? |  yes  |  |
- | uid | Int? |  yes  |  |
- | modifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
- | stage | String? |  yes  |  |
- | modifiedOn | String? |  yes  |  |
- | documents | ArrayList<[Document](#Document)>? |  yes  |  |
- | createdOn | String? |  yes  |  |
- | verifiedOn | String? |  yes  |  |
- | manager | [LocationManagerSerializer](#LocationManagerSerializer)? |  yes  |  |
+ | storeUid | Int? |  yes  |  |
+ | onSameStore | Boolean? |  yes  |  |
 
 ---
 
 
  
  
- #### [LocationListSerializer](#LocationListSerializer)
+ #### [InvoiceCredSerializer](#InvoiceCredSerializer)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | page | [Page](#Page)? |  yes  |  |
- | items | ArrayList<[GetLocationSerializer](#GetLocationSerializer)>? |  yes  |  |
+ | username | String? |  yes  |  |
+ | enabled | Boolean? |  yes  |  |
+ | password | String? |  yes  |  |
 
 ---
 
 
  
  
- #### [GetAddressSerializer1](#GetAddressSerializer1)
+ #### [InvoiceDetailsSerializer](#InvoiceDetailsSerializer)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | address1 | String? |  yes  |  |
- | state | String? |  yes  |  |
- | landmark | String? |  yes  |  |
- | addressType | String? |  yes  |  |
- | countryCode | String? |  yes  |  |
- | address2 | String? |  yes  |  |
- | country | String? |  yes  |  |
- | pincode | Int? |  yes  |  |
- | city | String? |  yes  |  |
- | latitude | Double? |  yes  |  |
- | longitude | Double? |  yes  |  |
+ | eInvoice | [InvoiceCredSerializer](#InvoiceCredSerializer)? |  yes  |  |
+ | eWaybill | [InvoiceCredSerializer](#InvoiceCredSerializer)? |  yes  |  |
 
 ---
 
@@ -13565,23 +19381,82 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | timing | ArrayList<[LocationDayWiseSerializer](#LocationDayWiseSerializer)>? |  yes  |  |
- | code | String |  no  |  |
- | contactNumbers | ArrayList<[SellerPhoneNumber](#SellerPhoneNumber)>? |  yes  |  |
- | company | Int |  no  |  |
- | notificationEmails | ArrayList<String>? |  yes  |  |
- | stage | String? |  yes  |  |
- | productReturnConfig | [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)? |  yes  |  |
- | gstCredentials | [InvoiceDetailsSerializer](#InvoiceDetailsSerializer)? |  yes  |  |
- | address | [GetAddressSerializer1](#GetAddressSerializer1) |  no  |  |
  | documents | ArrayList<[Document](#Document)>? |  yes  |  |
- | warnings | HashMap<String,Any>? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
- | displayName | String |  no  |  |
- | name | String |  no  |  |
+ | code | String |  no  |  |
+ | address | [GetAddressSerializer1](#GetAddressSerializer1) |  no  |  |
+ | timing | ArrayList<[LocationDayWiseSerializer](#LocationDayWiseSerializer)>? |  yes  |  |
+ | notificationEmails | ArrayList<String>? |  yes  |  |
  | manager | [LocationManagerSerializer](#LocationManagerSerializer)? |  yes  |  |
+ | productReturnConfig | [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)? |  yes  |  |
  | uid | Int? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+ | stage | String? |  yes  |  |
+ | warnings | HashMap<String,Any>? |  yes  |  |
+ | gstCredentials | [InvoiceDetailsSerializer](#InvoiceDetailsSerializer)? |  yes  |  |
+ | name | String |  no  |  |
+ | displayName | String |  no  |  |
  | storeType | String? |  yes  |  |
+ | company | Int |  no  |  |
+ | contactNumbers | ArrayList<[SellerPhoneNumber](#SellerPhoneNumber)>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [LocationIntegrationType](#LocationIntegrationType)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | order | String? |  yes  |  |
+ | inventory | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [GetLocationSerializer](#GetLocationSerializer)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | address | [GetAddressSerializer](#GetAddressSerializer) |  no  |  |
+ | notificationEmails | ArrayList<String>? |  yes  |  |
+ | manager | [LocationManagerSerializer](#LocationManagerSerializer)? |  yes  |  |
+ | stage | String? |  yes  |  |
+ | warnings | HashMap<String,Any>? |  yes  |  |
+ | gstCredentials | [InvoiceDetailsSerializer](#InvoiceDetailsSerializer)? |  yes  |  |
+ | verifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
+ | phoneNumber | String |  no  |  |
+ | modifiedBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
+ | productReturnConfig | [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)? |  yes  |  |
+ | uid | Int? |  yes  |  |
+ | name | String |  no  |  |
+ | documents | ArrayList<[Document](#Document)>? |  yes  |  |
+ | storeType | String? |  yes  |  |
+ | code | String |  no  |  |
+ | timing | ArrayList<[LocationDayWiseSerializer](#LocationDayWiseSerializer)>? |  yes  |  |
+ | createdOn | String? |  yes  |  |
+ | integrationType | [LocationIntegrationType](#LocationIntegrationType)? |  yes  |  |
+ | displayName | String |  no  |  |
+ | contactNumbers | ArrayList<[SellerPhoneNumber](#SellerPhoneNumber)>? |  yes  |  |
+ | verifiedOn | String? |  yes  |  |
+ | createdBy | [UserSerializer1](#UserSerializer1)? |  yes  |  |
+ | modifiedOn | String? |  yes  |  |
+ | company | [GetCompanySerializer](#GetCompanySerializer)? |  yes  |  |
+ | customJson | HashMap<String,Any>? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [LocationListSerializer](#LocationListSerializer)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | items | ArrayList<[GetLocationSerializer](#GetLocationSerializer)>? |  yes  |  |
+ | page | [Page](#Page)? |  yes  |  |
 
 ---
 
