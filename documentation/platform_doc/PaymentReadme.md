@@ -3216,12 +3216,3 @@ Success. Returns the status of payment. Check the example shown below or refer `
 
 
 
-
-### Enums
-
-
-
-
-
-
-
