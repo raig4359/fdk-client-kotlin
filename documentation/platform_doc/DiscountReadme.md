@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Platform docs](./README.md)
+
 ## Discount Methods
 Discount
 * [getDiscounts](#getdiscounts)
@@ -58,7 +60,7 @@ client.discount.getDiscounts(view: view, q: q, pageNo: pageNo, pageSize: pageSiz
 
 Fetch discount list.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -118,7 +120,7 @@ client.discount.createDiscount(body: body).safeAwait{ response,error->
 
 Create Discount.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -179,7 +181,7 @@ client.discount.getDiscount(id: id).safeAwait{ response,error->
 
 Fetch discount.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -240,7 +242,7 @@ client.discount.updateDiscount(id: id, body: body).safeAwait{ response,error->
 
 Create Discount.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -301,7 +303,7 @@ client.discount.validateDiscountFile(discount: discount, body: body).safeAwait{ 
 
 Validate File.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -362,7 +364,7 @@ client.discount.downloadDiscountFile(type: type, body: body).safeAwait{ response
 
 Validate File.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -423,7 +425,7 @@ client.discount.getValidationJob(id: id).safeAwait{ response,error->
 
 Validate File Job.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -484,7 +486,7 @@ client.discount.cancelValidationJob(id: id).safeAwait{ response,error->
 
 Cancel Validation Job.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -545,7 +547,7 @@ client.discount.getDownloadJob(id: id).safeAwait{ response,error->
 
 Download File Job.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -606,7 +608,7 @@ client.discount.cancelDownloadJob(id: id).safeAwait{ response,error->
 
 Cancel Download Job.
 
-*Returned Response*
+*Returned Response:*
 
 
 

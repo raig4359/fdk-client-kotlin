@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Application docs](./README.md)
+
 ## Feedback Methods
 User Reviews and Rating System
 * [createAbuseReport](#createabusereport)
@@ -64,7 +66,7 @@ feedback.createAbuseReport(body: body).safeAwait{ response,error->
 
 Use this API to report a specific entity (question/review/comment) for abuse.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -123,7 +125,7 @@ feedback.updateAbuseReport(body: body).safeAwait{ response,error->
 
 Use this API to update the abuse details, i.e. status and description.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -187,7 +189,7 @@ feedback.getAbuseReports(entityId: entityId, entityType: entityType, id: id, pag
 
 Use this API to retrieve a list of abuse data from entity type and entity ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -248,7 +250,7 @@ feedback.getAttributes(pageNo: pageNo, pageSize: pageSize).safeAwait{ response,e
 
 Use this API to retrieve a list of all attribute data, e.g. quality, material, product fitting, packaging, etc.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -307,7 +309,7 @@ feedback.createAttribute(body: body).safeAwait{ response,error->
 
 Use this API to add a new attribute (e.g. product quality/material/value for money) with its name, slug and description.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -367,7 +369,7 @@ feedback.getAttribute(slug: slug).safeAwait{ response,error->
 
 Use this API to retrieve a single attribute data from a given slug.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -427,7 +429,7 @@ feedback.updateAttribute(slug: slug, body: body).safeAwait{ response,error->
 
 Use this API update the attribute's name and description.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -486,7 +488,7 @@ feedback.createComment(body: body).safeAwait{ response,error->
 
 Use this API to add a new comment for a specific entity.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -545,7 +547,7 @@ feedback.updateComment(body: body).safeAwait{ response,error->
 
 Use this API to update the comment status (active or approve) along with new comment if any.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -610,7 +612,7 @@ feedback.getComments(entityType: entityType, id: id, entityId: entityId, userId:
 
 Use this API to retrieve a list of comments for a specific entity type, e.g. products.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -671,7 +673,7 @@ feedback.checkEligibility(entityType: entityType, entityId: entityId).safeAwait{
 
 Use this API to check whether an entity is eligible to be rated and reviewed. Moreover, it shows the cloud media configuration too.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -731,7 +733,7 @@ feedback.deleteMedia(ids: ids).safeAwait{ response,error->
 
 Use this API to delete media for an entity ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -790,7 +792,7 @@ feedback.createMedia(body: body).safeAwait{ response,error->
 
 Use this API to add media to an entity, e.g. review.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -849,7 +851,7 @@ feedback.updateMedia(body: body).safeAwait{ response,error->
 
 Use this API to update media (archive/approve) for an entity.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -914,7 +916,7 @@ feedback.getMedias(entityType: entityType, entityId: entityId, id: id, type: typ
 
 Use this API to retrieve all media from an entity.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -978,7 +980,7 @@ feedback.getReviewSummaries(entityType: entityType, entityId: entityId, id: id, 
 
 Review summary gives ratings and attribute metrics of a review per entity. Use this API to retrieve the following response data: review count, rating average. 'review metrics'/'attribute rating metrics' which contains name, type, average and count.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1037,7 +1039,7 @@ feedback.createReview(body: body).safeAwait{ response,error->
 
 Use this API to add customer reviews for a specific entity along with the following data: attributes rating, entity rating, title, description, media resources and template ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1096,7 +1098,7 @@ feedback.updateReview(body: body).safeAwait{ response,error->
 
 Use this API to update customer reviews for a specific entity along with following data: attributes rating, entity rating, title, description, media resources and template ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1168,7 +1170,7 @@ feedback.getReviews(entityType: entityType, entityId: entityId, id: id, userId: 
 
 Use this API to retrieve a list of customer reviews based on entity and filters provided.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1230,7 +1232,7 @@ feedback.getTemplates(templateId: templateId, entityId: entityId, entityType: en
 
 Use this API to retrieve the details of the following feedback template. order, delivered, application, seller, order, placed, product
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1289,7 +1291,7 @@ feedback.createQuestion(body: body).safeAwait{ response,error->
 
 Use this API to create a new question with following data- tags, text, type, choices for MCQ type questions, maximum length of answer.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1348,7 +1350,7 @@ feedback.updateQuestion(body: body).safeAwait{ response,error->
 
 Use this API to update the status of a question, its tags and its choices.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1414,7 +1416,7 @@ feedback.getQuestionAndAnswers(entityType: entityType, entityId: entityId, id: i
 
 Use this API to retrieve a list of questions and answers for a given entity.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1477,7 +1479,7 @@ feedback.getVotes(id: id, refType: refType, pageNo: pageNo, pageSize: pageSize).
 
 Use this API to retrieve a list of votes of a current logged in user. Votes can be filtered using `ref_type`, i.e. review | comment.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1536,7 +1538,7 @@ feedback.createVote(body: body).safeAwait{ response,error->
 
 Use this API to create a new vote, where the action could be an upvote or a downvote. This is useful when you want to give a vote (say upvote) to a review (ref_type) of a product (entity_type).
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1595,7 +1597,7 @@ feedback.updateVote(body: body).safeAwait{ response,error->
 
 Use this API to update a vote with a new action, i.e. either an upvote or a downvote.
 
-*Returned Response*
+*Returned Response:*
 
 
 

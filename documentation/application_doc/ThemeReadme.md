@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Application docs](./README.md)
+
 ## Theme Methods
 Responsible for themes
 * [getAllPages](#getallpages)
@@ -43,7 +45,7 @@ theme.getAllPages(themeId: themeId).safeAwait{ response,error->
 
 Use this API to retrieve all the available pages of a theme by its ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -112,7 +114,7 @@ theme.getPage(themeId: themeId, pageValue: pageValue).safeAwait{ response,error-
 
 Use this API to retrieve a page of a theme.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -175,7 +177,7 @@ theme.getAppliedTheme().safeAwait{ response,error->
 
 An application has multiple themes, but only one theme can be applied at a time. Use this API to retrieve the theme currently applied to the application.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -243,7 +245,7 @@ theme.getThemeForPreview(themeId: themeId).safeAwait{ response,error->
 
 A theme can be previewed before applying it. Use this API to retrieve the preview of a theme by its ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 

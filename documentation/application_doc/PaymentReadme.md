@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Application docs](./README.md)
+
 ## Payment Methods
 Collect payment through many payment gateway i.e Stripe, Razorpay, Juspay etc.into Fynd or Self account
 * [getAggregatorsConfig](#getaggregatorsconfig)
@@ -62,7 +64,7 @@ payment.getAggregatorsConfig(xApiToken: xApiToken, refresh: refresh).safeAwait{ 
 
 Use this API to retrieve the payment gateway key, secrets, merchant, SDK/API details to complete a payment at front-end.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -157,7 +159,7 @@ payment.attachCardToCustomer(body: body).safeAwait{ response,error->
 
 Use this API to attach a customer's saved card at the payment gateway, such as Stripe, Juspay.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -246,7 +248,7 @@ payment.getActiveCardAggregator(refresh: refresh).safeAwait{ response,error->
 
 Use this API to retrieve an active payment aggregator along with the Customer ID. This is applicable for cards payments only.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -314,7 +316,7 @@ payment.getActiveUserCards(forceRefresh: forceRefresh).safeAwait{ response,error
 
 Use this API to retrieve a list of cards stored by user from an active payment gateway.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -396,7 +398,7 @@ payment.deleteUserCard(body: body).safeAwait{ response,error->
 
 Use this API to delete a card added by a user on the payment gateway and clear the cache.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -457,7 +459,7 @@ payment.verifyCustomerForPayment(body: body).safeAwait{ response,error->
 
 Use this API to check if the customer is eligible to use credit-line facilities such as Simpl Pay Later and Rupifi.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -528,7 +530,7 @@ payment.verifyAndChargePayment(body: body).safeAwait{ response,error->
 
 Use this API to verify and check the status of a payment transaction (server-to-server) made through aggregators like Simpl and Mswipe.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -595,7 +597,7 @@ payment.initialisePayment(body: body).safeAwait{ response,error->
 
 PUse this API to inititate payment using UPI, BharatQR, wherein the UPI requests are send to the app and QR code is displayed on the screen.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -666,7 +668,7 @@ payment.checkAndUpdatePaymentStatus(body: body).safeAwait{ response,error->
 
 Use this API to perform continuous polling at intervals to check the status of payment until timeout.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -736,7 +738,7 @@ payment.getPaymentModeRoutes(amount: amount, cartId: cartId, pincode: pincode, c
 
 Use this API to get all valid payment options for doing a payment.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1173,7 +1175,7 @@ payment.getPosPaymentModeRoutes(amount: amount, cartId: cartId, pincode: pincode
 
 Use this API to get all valid payment options for doing a payment in POS.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1383,7 +1385,7 @@ payment.getRupifiBannerDetails().safeAwait{ response,error->
 
 Get CreditLine Offer if user is tentatively approved by rupifi
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1444,7 +1446,7 @@ payment.getActiveRefundTransferModes().safeAwait{ response,error->
 
 Use this API to retrieve eligible refund modes (such as Netbanking) and add the beneficiary details.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1518,7 +1520,7 @@ payment.enableOrDisableRefundTransferMode(body: body).safeAwait{ response,error-
 
 Activate or Deactivate Transfer Mode to collect Beneficiary Details for Refund
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1580,7 +1582,7 @@ payment.getUserBeneficiariesDetail(orderId: orderId).safeAwait{ response,error->
 
 Use this API to get the details of all active beneficiary added by a user for refund.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1665,7 +1667,7 @@ payment.verifyIfscCode(ifscCode: ifscCode).safeAwait{ response,error->
 
 Use this API to check whether the 11-digit IFSC code is valid and to fetch the bank details for refund.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1745,7 +1747,7 @@ payment.getOrderBeneficiariesDetail(orderId: orderId).safeAwait{ response,error-
 
 Use this API to get the details of all active beneficiary added by a user for refund.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1828,7 +1830,7 @@ payment.verifyOtpAndAddBeneficiaryForBank(body: body).safeAwait{ response,error-
 
 Use this API to perform an OTP validation before saving the beneficiary details added for a refund.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1891,7 +1893,7 @@ payment.addBeneficiaryDetails(body: body).safeAwait{ response,error->
 
 Use this API to save the bank details for a returned or cancelled order to refund the amount.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1954,7 +1956,7 @@ payment.addRefundBankAccountUsingOTP(body: body).safeAwait{ response,error->
 
 Use this API to save bank details for returned/cancelled order to refund amount in his account.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2017,7 +2019,7 @@ payment.verifyOtpAndAddBeneficiaryForWallet(body: body).safeAwait{ response,erro
 
 Use this API to send an OTP while adding a wallet beneficiary by mobile no. verification.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2080,7 +2082,7 @@ payment.updateDefaultBeneficiary(body: body).safeAwait{ response,error->
 
 Use this API to set a default beneficiary for getting a refund.
 
-*Returned Response*
+*Returned Response:*
 
 
 

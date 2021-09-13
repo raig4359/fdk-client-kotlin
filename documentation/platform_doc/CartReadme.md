@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Platform docs](./README.md)
+
 ## Cart Methods
 Cart APIs
 * [getCoupons](#getcoupons)
@@ -56,7 +58,7 @@ client.application("<APPLICATION_ID>").cart.getCoupons(pageNo: pageNo, pageSize:
 
 Get coupon list with pagination
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -169,7 +171,7 @@ client.application("<APPLICATION_ID>").cart.createCoupon(body: body).safeAwait{ 
 
 Create new coupon
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -234,7 +236,7 @@ client.application("<APPLICATION_ID>").cart.getCouponById(id: id).safeAwait{ res
 
 Get single coupon details with `id` in path param
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -436,7 +438,7 @@ client.application("<APPLICATION_ID>").cart.updateCoupon(id: id, body: body).saf
 
 Update coupon with id sent in `id`
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -501,7 +503,7 @@ client.application("<APPLICATION_ID>").cart.updateCouponPartially(id: id, body: 
 
 Update archive/unarchive and change schedule for coupon
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -586,7 +588,7 @@ client.application("<APPLICATION_ID>").cart.fetchAndvalidateCartItems(body: body
 
 Get all the details of cart for a list of provided `cart_items`
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -921,7 +923,7 @@ client.application("<APPLICATION_ID>").cart.checkCartServiceability(body: body).
 
 Check Pincode serviceability for cart items provided in `cart_items` and address pincode in `shipping_address`
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1512,7 +1514,7 @@ client.application("<APPLICATION_ID>").cart.checkoutCart(body: body).safeAwait{ 
 
 Generate Fynd order for cart details send with provided `cart_items`
 
-*Returned Response*
+*Returned Response:*
 
 
 

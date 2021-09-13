@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Platform docs](./README.md)
+
 ## Lead Methods
 Handles communication between Administrator <-> Staff and Staff <-> Users
 * [getTickets](#gettickets)
@@ -70,7 +72,7 @@ client.lead.getTickets(items: items, filters: filters, q: q, status: status, pri
 
 Gets the list of company level tickets and/or ticket filters
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -504,7 +506,7 @@ client.lead.createTicket(body: body).safeAwait{ response,error->
 
 Creates a company level ticket
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -769,7 +771,7 @@ client.application("<APPLICATION_ID>").lead.getTickets(items: items, filters: fi
 
 Gets the list of Application level Tickets and/or ticket filters
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1204,7 +1206,7 @@ client.lead.getTicket(id: id).safeAwait{ response,error->
 
 Retreives ticket details of a company level ticket
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1463,7 +1465,7 @@ client.lead.editTicket(id: id, body: body).safeAwait{ response,error->
 
 Edits ticket details of a company level ticket such as status, priority, category, tags, attachments, assigne & ticket content changes
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1723,7 +1725,7 @@ client.application("<APPLICATION_ID>").lead.getTicket(id: id).safeAwait{ respons
 
 Retreives ticket details of a application level ticket with ticket ID
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1984,7 +1986,7 @@ client.application("<APPLICATION_ID>").lead.editTicket(id: id, body: body).safeA
 
 Edits ticket details of a application level ticket such as status, priority, category, tags, attachments, assigne & ticket content changes
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2244,7 +2246,7 @@ client.lead.createHistory(id: id, body: body).safeAwait{ response,error->
 
 Create history for specific company level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2347,7 +2349,7 @@ client.lead.getTicketHistory(id: id).safeAwait{ response,error->
 
 Gets history list for specific company level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2554,7 +2556,7 @@ client.lead.getFeedbacks(id: id).safeAwait{ response,error->
 
 Gets a list of feedback submitted against that ticket
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2644,7 +2646,7 @@ client.lead.submitFeedback(id: id, body: body).safeAwait{ response,error->
 
 Submit a response for feeback form against that ticket
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2731,7 +2733,7 @@ client.application("<APPLICATION_ID>").lead.createHistory(id: id, body: body).sa
 
 Create history for specific application level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2835,7 +2837,7 @@ client.application("<APPLICATION_ID>").lead.getTicketHistory(id: id).safeAwait{ 
 
 Gets history list for specific application level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3043,7 +3045,7 @@ client.application("<APPLICATION_ID>").lead.getCustomForm(slug: slug).safeAwait{
 
 Get specific custom form using it's slug, this is used to view the form.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3157,7 +3159,7 @@ client.application("<APPLICATION_ID>").lead.editCustomForm(slug: slug, body: bod
 
 Edit the given custom form field such as adding or deleting input, assignee, title, decription, notification and polling information.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3280,7 +3282,7 @@ client.application("<APPLICATION_ID>").lead.getCustomForms().safeAwait{ response
 
 Get list of custom form for given application
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3482,7 +3484,7 @@ client.application("<APPLICATION_ID>").lead.createCustomForm(body: body).safeAwa
 
 Creates a new custom form for given application
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3605,7 +3607,7 @@ client.lead.getTokenForVideoRoom(uniqueName: uniqueName).safeAwait{ response,err
 
 Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3677,7 +3679,7 @@ client.application("<APPLICATION_ID>").lead.getTokenForVideoRoom(uniqueName: uni
 
 Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3748,7 +3750,7 @@ client.lead.getVideoParticipants(uniqueName: uniqueName).safeAwait{ response,err
 
 Get participants of a specific Video Room using it's unique name, this can be used to check if people are already there in the room and also to show their names.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3820,7 +3822,7 @@ client.application("<APPLICATION_ID>").lead.getVideoParticipants(uniqueName: uni
 
 Get participants of a specific Video Room using it's unique name, this can be used to check if people are already there in the room and also to show their names.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3891,7 +3893,7 @@ client.application("<APPLICATION_ID>").lead.openVideoRoom(body: body).safeAwait{
 
 Open a video room.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3963,7 +3965,7 @@ client.application("<APPLICATION_ID>").lead.closeVideoRoom(uniqueName: uniqueNam
 
 Close the video room and force all participants to leave.
 
-*Returned Response*
+*Returned Response:*
 
 
 

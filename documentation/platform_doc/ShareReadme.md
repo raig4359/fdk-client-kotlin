@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Platform docs](./README.md)
+
 ## Share Methods
 Short link and QR Code
 * [createShortLink](#createshortlink)
@@ -44,7 +46,7 @@ client.application("<APPLICATION_ID>").share.createShortLink(body: body).safeAwa
 
 Create short link
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -148,7 +150,7 @@ client.application("<APPLICATION_ID>").share.getShortLinks(pageNo: pageNo, pageS
 
 Get short links
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -259,7 +261,7 @@ client.application("<APPLICATION_ID>").share.getShortLinkByHash(hash: hash).safe
 
 Get short link by hash
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -359,7 +361,7 @@ client.application("<APPLICATION_ID>").share.updateShortLinkById(id: id, body: b
 
 Update short link by id
 
-*Returned Response*
+*Returned Response:*
 
 
 

@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Application docs](./README.md)
+
 ## Rewards Methods
 Earn and redeem reward points
 * [getPointsOnProduct](#getpointsonproduct)
@@ -45,7 +47,7 @@ rewards.getPointsOnProduct(body: body).safeAwait{ response,error->
 
 Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -105,7 +107,7 @@ rewards.getOfferByName(name: name).safeAwait{ response,error->
 
 Use this API to get the offer details and configuration by entering the name of the offer.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -164,7 +166,7 @@ rewards.getOrderDiscount(body: body).safeAwait{ response,error->
 
 Use this API to calculate the discount on order-amount based on all the amount range configured in order_discount.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -219,7 +221,7 @@ rewards.getUserPoints().safeAwait{ response,error->
 
 Use this API to retrieve total available points of a user for current application
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -280,7 +282,7 @@ rewards.getUserPointsHistory(pageId: pageId, pageSize: pageSize).safeAwait{ resp
 
 Use this API to get a list of points transactions. The list of points history is paginated.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -335,7 +337,7 @@ rewards.getUserReferralDetails().safeAwait{ response,error->
 
 Use this API to retrieve the referral details a user has configured in the application.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -394,7 +396,7 @@ rewards.redeemReferralCode(body: body).safeAwait{ response,error->
 
 Use this API to enter a referral code following which, the configured points would be credited to a user's reward points account.
 
-*Returned Response*
+*Returned Response:*
 
 
 

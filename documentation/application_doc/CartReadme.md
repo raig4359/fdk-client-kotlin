@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Application docs](./README.md)
+
 ## Cart Methods
 Cart APIs
 * [getCart](#getcart)
@@ -66,7 +68,7 @@ cart.getCart(id: id, i: i, b: b, assignCardId: assignCardId).safeAwait{ response
 
 Use this API to get details of all the items added to a cart.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -292,7 +294,7 @@ cart.getCartLastModified(id: id).safeAwait{ response,error->
 
 Use this API to fetch Last-Modified timestamp in header metadata.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -334,7 +336,7 @@ cart.addItems(i: i, b: b, body: body).safeAwait{ response,error->
 
 Use this API to add items to the cart.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1029,7 +1031,7 @@ cart.updateCart(id: id, i: i, b: b, body: body).safeAwait{ response,error->
 
 Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs</p> <ul> <li><font color="monochrome">operation</font> Operation for current api call. <b>update_item</b> for update items. <b>remove_item</b> for removing items.</li> <li> <font color="monochrome">item_id</font>  "/platform/content/v1/products/"</li> <li> <font color="monochrome">item_size</font>   "/platform/content/v1/products/{slug}/sizes/"</li> <li> <font color="monochrome">quantity</font>  item quantity (must be greater than or equal to 1)</li> <li> <font color="monochrome">article_id</font>   "/content​/v1​/products​/{identifier}​/sizes​/price​/"</li> <li> <font color="monochrome">item_index</font>  item position in the cart (must be greater than or equal to 0)</li> </ul>
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1451,7 +1453,7 @@ cart.getItemCount(id: id).safeAwait{ response,error->
 
 Use this API to get the total number of items present in cart.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1513,7 +1515,7 @@ cart.getCoupons(id: id).safeAwait{ response,error->
 
 Use this API to get a list of available coupons along with their details.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1612,7 +1614,7 @@ cart.applyCoupon(i: i, b: b, p: p, id: id, body: body).safeAwait{ response,error
 
 Use this API to apply coupons on items in the cart.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2208,7 +2210,7 @@ cart.removeCoupon(id: id).safeAwait{ response,error->
 
 Remove Coupon applied on the cart by passing uid in request body.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2428,7 +2430,7 @@ cart.getBulkDiscountOffers(itemId: itemId, articleId: articleId, uid: uid, slug:
 
 Use this API to get a list of applicable offers along with current, next and best offer for given product. Either one of uid, item_id, slug should be present.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2561,7 +2563,7 @@ cart.applyRewardPoints(id: id, i: i, b: b, body: body).safeAwait{ response,error
 
 Use this API to redeem a fixed no. of reward points by applying it to the cart.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2791,7 +2793,7 @@ cart.getAddresses(cartId: cartId, mobileNo: mobileNo, checkoutMode: checkoutMode
 
 Use this API to get all the addresses associated with an account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional <ul> <li> <font color="monochrome">uid</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2880,7 +2882,7 @@ cart.addAddress(body: body).safeAwait{ response,error->
 
 Use this API to add an address to an account.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2949,7 +2951,7 @@ cart.getAddressById(id: id, cartId: cartId, mobileNo: mobileNo, checkoutMode: ch
 
 Use this API to get an addresses using its ID. If successful, returns a Address resource in the response body specified in `Address`. Attibutes listed below are optional <ul> <li> <font color="monochrome">mobile_no</font></li> <li> <font color="monochrome">checkout_mode</font></li> <li> <font color="monochrome">tags</font></li> <li> <font color="monochrome">default</font></li> </ul>
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3036,7 +3038,7 @@ cart.updateAddress(id: id, body: body).safeAwait{ response,error->
 
 Use this API to update an existing address in the account. Request object should contain attributes mentioned in  <font color="blue">Address </font> can be updated. These attributes are:</p> <ul> <li> <font color="monochrome">is_default_address</font></li> <li> <font color="monochrome">landmark</font></li> <li> <font color="monochrome">area</font></li> <li> <font color="monochrome">pincode</font></li> <li> <font color="monochrome">email</font></li> <li> <font color="monochrome">address_type</font></li> <li> <font color="monochrome">name</font></li> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">address</font></li> </ul>
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3101,7 +3103,7 @@ cart.removeAddress(id: id).safeAwait{ response,error->
 
 Use this API to delete an address by its ID. This will returns an object that will indicate whether the address was deleted successfully or not.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3166,7 +3168,7 @@ cart.selectAddress(cartId: cartId, i: i, b: b, body: body).safeAwait{ response,e
 
 <p>Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `SelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. <ul> <li> <font color="monochrome">address_id</font></li> <li> <font color="monochrome">billing_address_id</font></li> <li> <font color="monochrome">uid</font></li> </ul>
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3481,7 +3483,7 @@ cart.selectPaymentMode(id: id, body: body).safeAwait{ response,error->
 
 Use this API to update cart payment.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3813,7 +3815,7 @@ cart.validateCouponForPayment(id: id, addressId: addressId, paymentMode: payment
 
 Use this API to validate a coupon against the payment mode such as NetBanking, Wallet, UPI etc.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3886,7 +3888,7 @@ cart.getShipments(p: p, id: id, addressId: addressId, areaCode: areaCode).safeAw
 
 Use this API to get shipment details, expected delivery date, items and price breakup of the shipment.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -4585,7 +4587,7 @@ cart.checkoutCart(body: body).safeAwait{ response,error->
 
 Use this API to checkout all items in the cart for payment and order generation. For COD, order will be directly generated, whereas for other checkout modes, user will be redirected to a payment gateway.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -5025,7 +5027,7 @@ cart.updateCartMeta(id: id, body: body).safeAwait{ response,error->
 
 Use this API to update cart meta like checkout_mode and gstin.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -5086,7 +5088,7 @@ cart.getCartShareLink(body: body).safeAwait{ response,error->
 
 Use this API to generate a shared cart snapshot and return a shortlink token. The link can be shared with other users for getting the same items in their cart.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -5157,7 +5159,7 @@ cart.getCartSharedItems(token: token).safeAwait{ response,error->
 
 Use this API to get the shared cart details as per the token generated using the share-cart API.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -5494,7 +5496,7 @@ cart.updateCartWithSharedItems(token: token, action: action).safeAwait{ response
 
 Use this API to merge the shared cart with existing cart, or replace the existing cart with the shared cart. The `action` parameter is used to indicate the operation Merge or Replace.
 
-*Returned Response*
+*Returned Response:*
 
 
 

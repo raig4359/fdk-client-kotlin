@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Platform docs](./README.md)
+
 ## User Methods
 Authentication Service
 * [getCustomers](#getcustomers)
@@ -50,7 +52,7 @@ client.application("<APPLICATION_ID>").user.getCustomers(q: q, pageSize: pageSiz
 
 Use this API to retrieve a list of customers who have registered in the application.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -120,7 +122,7 @@ client.application("<APPLICATION_ID>").user.searchUsers(q: q).safeAwait{ respons
 
 Use this API to retrieve an existing user from a list.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -224,7 +226,7 @@ client.application("<APPLICATION_ID>").user.createUser(body: body).safeAwait{ re
 
 Create user
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -328,7 +330,7 @@ client.application("<APPLICATION_ID>").user.updateUser(userId: userId, body: bod
 
 Update user
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -431,7 +433,7 @@ client.application("<APPLICATION_ID>").user.createUserSession(body: body).safeAw
 
 Create user session
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -500,7 +502,7 @@ client.application("<APPLICATION_ID>").user.getPlatformConfig().safeAwait{ respo
 
 Use this API to get all the platform configurations such as mobile image, desktop image, social logins, and all other text.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -626,7 +628,7 @@ client.application("<APPLICATION_ID>").user.updatePlatformConfig(body: body).saf
 
 Use this API to edit the existing platform configurations such as mobile image, desktop image, social logins, and all other text.
 
-*Returned Response*
+*Returned Response:*
 
 
 

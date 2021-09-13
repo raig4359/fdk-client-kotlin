@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Platform docs](./README.md)
+
 ## Billing Methods
 Handle platform subscription
 * [createSubscriptionCharge](#createsubscriptioncharge)
@@ -51,7 +53,7 @@ client.billing.createSubscriptionCharge(extensionId: extensionId, body: body).sa
 
 Register subscription charge for a seller of your extension.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -113,7 +115,7 @@ client.billing.getSubscriptionCharge(extensionId: extensionId, subscriptionId: s
 
 Get created subscription charge details
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -175,7 +177,7 @@ client.billing.cancelSubscriptionCharge(extensionId: extensionId, subscriptionId
 
 Cancel subscription and attached charges.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -235,7 +237,7 @@ client.billing.getInvoices().safeAwait{ response,error->
 
 Get invoices.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -304,7 +306,7 @@ client.billing.getInvoiceById(invoiceId: invoiceId).safeAwait{ response,error->
 
 Get invoice by id.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -372,7 +374,7 @@ client.billing.getCustomerDetail().safeAwait{ response,error->
 
 Get subscription customer detail.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -440,7 +442,7 @@ client.billing.upsertCustomerDetail(body: body).safeAwait{ response,error->
 
 Upsert subscription customer detail.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -509,7 +511,7 @@ client.billing.getSubscription().safeAwait{ response,error->
 If subscription is active then it will return is_enabled true and return subscription object. If subscription is not active then is_enabled false and message.
 
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -587,7 +589,7 @@ client.billing.getFeatureLimitConfig().safeAwait{ response,error->
 
 Get subscription subscription limits.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -655,7 +657,7 @@ client.billing.activateSubscriptionPlan(body: body).safeAwait{ response,error->
 
 It will activate subscription plan for customer
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -723,7 +725,7 @@ client.billing.cancelSubscriptionPlan(body: body).safeAwait{ response,error->
 
 It will cancel current active subscription.
 
-*Returned Response*
+*Returned Response:*
 
 
 

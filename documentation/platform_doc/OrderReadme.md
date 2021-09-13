@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Platform docs](./README.md)
+
 ## Order Methods
 Handles Platform websites OMS
 * [shipmentStatusUpdate](#shipmentstatusupdate)
@@ -59,7 +61,7 @@ client.order.shipmentStatusUpdate(body: body).safeAwait{ response,error->
 
 Update Shipment Status
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -120,7 +122,7 @@ client.order.activityStatus(bagId: bagId).safeAwait{ response,error->
 
 Get Activity Status
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -180,7 +182,7 @@ client.order.storeProcessShipmentUpdate(body: body).safeAwait{ response,error->
 
 Update Store Process-Shipment
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -241,7 +243,7 @@ client.order.checkRefund(shipmentId: shipmentId).safeAwait{ response,error->
 
 Check Refund is available or not
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -313,7 +315,7 @@ client.order.getOrdersByCompanyId(pageNo: pageNo, pageSize: pageSize, fromDate: 
 
 Get Orders
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -385,7 +387,7 @@ client.order.getOrderLanesCountByCompanyId(pageNo: pageNo, pageSize: pageSize, f
 
 Get Orders Seperate Lane Count
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -448,7 +450,7 @@ client.order.getOrderDetails(orderId: orderId, next: next, previous: previous).s
 
 Get Orders
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -520,7 +522,7 @@ client.order.getPicklistOrdersByCompanyId(pageNo: pageNo, pageSize: pageSize, fr
 
 Get Orders
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -582,7 +584,7 @@ client.application("<APPLICATION_ID>").order.trackShipmentPlatform(shipmentId: s
 
 Shipment Track
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -644,7 +646,7 @@ client.application("<APPLICATION_ID>").order.trackOrder(orderId: orderId).safeAw
 
 Order Track
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -705,7 +707,7 @@ client.application("<APPLICATION_ID>").order.failedOrders().safeAwait{ response,
 
 Failed Orders
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -767,7 +769,7 @@ client.application("<APPLICATION_ID>").order.reprocessOrder(orderId: orderId).sa
 
 Order Reprocess
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -829,7 +831,7 @@ client.application("<APPLICATION_ID>").order.updateShipment(shipmentId: shipment
 
 Update the shipment
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -891,7 +893,7 @@ client.application("<APPLICATION_ID>").order.getPlatformShipmentReasons(action: 
 
 Get reasons behind full or partial cancellation of a shipment
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -954,7 +956,7 @@ client.application("<APPLICATION_ID>").order.getShipmentTrackDetails(orderId: or
 
 Track shipment
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1016,7 +1018,7 @@ client.order.getShipmentAddress(shipmentId: shipmentId, addressCategory: address
 
 Get Shipment Address
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1078,7 +1080,7 @@ client.order.updateShipmentAddress(shipmentId: shipmentId, addressCategory: addr
 
 Update Shipment Address
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1138,7 +1140,7 @@ client.order.getPing().safeAwait{ response,error->
 
 Get Ping
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1198,7 +1200,7 @@ client.order.voiceCallback().safeAwait{ response,error->
 
 Voice Callback
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1260,7 +1262,7 @@ client.order.voiceClickToCall(caller: caller, receiver: receiver).safeAwait{ res
 
 Voice Click to Call
 
-*Returned Response*
+*Returned Response:*
 
 
 

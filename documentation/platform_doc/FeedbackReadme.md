@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Platform docs](./README.md)
+
 ## Feedback Methods
 User Reviews and Rating System
 * [getAttributes](#getattributes)
@@ -51,7 +53,7 @@ client.application("<APPLICATION_ID>").feedback.getAttributes(pageNo: pageNo, pa
 
 Provides a list of all attribute data.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -127,7 +129,7 @@ client.application("<APPLICATION_ID>").feedback.getCustomerReviews(id: id, entit
 
 The endpoint provides a list of customer reviews based on entity and provided filters
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -189,7 +191,7 @@ client.application("<APPLICATION_ID>").feedback.updateApprove(reviewId: reviewId
 
 The is used to update approve details like status and description text
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -251,7 +253,7 @@ client.application("<APPLICATION_ID>").feedback.getHistory(reviewId: reviewId).s
 
 The is used to get the history details like status and description text
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -314,7 +316,7 @@ client.application("<APPLICATION_ID>").feedback.getApplicationTemplates(pageId: 
 
 Get all templates of application
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -378,7 +380,7 @@ Create a new template for review with following data:
 - Rating - active/inactive/selected rate choices, attributes, text on rate, comment for each rate, type
 - Review - header, title, description, image and video meta, enable votes
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -440,7 +442,7 @@ client.application("<APPLICATION_ID>").feedback.getTemplateById(id: id).safeAwai
 
 Get the template for product or l3 type by ID
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -502,7 +504,7 @@ client.application("<APPLICATION_ID>").feedback.updateTemplate(id: id, body: bod
 
 Update existing template status, active/archive
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -564,7 +566,7 @@ client.application("<APPLICATION_ID>").feedback.updateTemplateStatus(id: id, bod
 
 Update existing template status, active/archive
 
-*Returned Response*
+*Returned Response:*
 
 
 

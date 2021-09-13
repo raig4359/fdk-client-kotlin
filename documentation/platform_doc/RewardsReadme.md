@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Platform docs](./README.md)
+
 ## Rewards Methods
 Rewards
 * [getGiveaways](#getgiveaways)
@@ -52,7 +54,7 @@ client.application("<APPLICATION_ID>").rewards.getGiveaways(pageId: pageId, page
 
 List of giveaways of the current application.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -113,7 +115,7 @@ client.application("<APPLICATION_ID>").rewards.createGiveaway(body: body).safeAw
 
 Adds a new giveaway.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -175,7 +177,7 @@ client.application("<APPLICATION_ID>").rewards.getGiveawayByID(id: id).safeAwait
 
 Get giveaway by ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -237,7 +239,7 @@ client.application("<APPLICATION_ID>").rewards.updateGiveaway(id: id, body: body
 
 Updates the giveaway by it's ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -298,7 +300,7 @@ client.application("<APPLICATION_ID>").rewards.getOffers().safeAwait{ response,e
 
 List of offer of the current application.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -361,7 +363,7 @@ client.application("<APPLICATION_ID>").rewards.getOfferByName(cookie: cookie, na
 
 Get offer by name.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -423,7 +425,7 @@ client.application("<APPLICATION_ID>").rewards.updateOfferByName(name: name, bod
 
 Updates the offer by name.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -485,7 +487,7 @@ client.application("<APPLICATION_ID>").rewards.getUserAvailablePoints(userId: us
 
 User's reward details.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -547,7 +549,7 @@ client.application("<APPLICATION_ID>").rewards.updateUserStatus(userId: userId, 
 
 Update user status, active/archive
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -613,7 +615,7 @@ client.application("<APPLICATION_ID>").rewards.getUserPointsHistory(userId: user
 Get list of points transactions.
 The list of points history is paginated.
 
-*Returned Response*
+*Returned Response:*
 
 
 

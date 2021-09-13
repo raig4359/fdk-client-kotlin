@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Application docs](./README.md)
+
 ## Common Methods
 Application configuration apis
 * [getLocations](#getlocations)
@@ -41,7 +43,7 @@ common.getLocations(locationType: locationType, id: id).safeAwait{ response,erro
 
 
 
-*Returned Response*
+*Returned Response:*
 
 
 

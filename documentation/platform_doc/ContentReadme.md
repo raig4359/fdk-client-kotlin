@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Platform docs](./README.md)
+
 ## Content Methods
 Content System
 * [getAnnouncementsList](#getannouncementslist)
@@ -99,7 +101,7 @@ client.application("<APPLICATION_ID>").content.getAnnouncementsList(pageNo: page
 
 Announcements are useful to highlight a message or information on top of a webpage. Use this API to retrieve a list of announcements.	
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -168,7 +170,7 @@ client.application("<APPLICATION_ID>").content.createAnnouncement(body: body).sa
 
 Announcements are useful to highlight a message or information on top of a webpage. Use this API to create an announcement.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -238,7 +240,7 @@ client.application("<APPLICATION_ID>").content.getAnnouncementById(announcementI
 
 Use this API to retrieve an announcement and its details such as the target platform and pages on which it's applicable
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -308,7 +310,7 @@ client.application("<APPLICATION_ID>").content.updateAnnouncement(announcementId
 
 Use this API to edit an existing announcement and its details such as the target platform and pages on which it's applicable
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -378,7 +380,7 @@ client.application("<APPLICATION_ID>").content.updateAnnouncementSchedule(announ
 
 Use this API to edit the duration, i.e. start date-time and end date-time of an announcement. Moreover, you can enable/disable an announcement using this API.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -448,7 +450,7 @@ client.application("<APPLICATION_ID>").content.deleteAnnouncement(announcementId
 
 Use this API to delete an existing announcement.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -517,7 +519,7 @@ client.application("<APPLICATION_ID>").content.createBlog(body: body).safeAwait{
 
 Use this API to create a blog.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -588,7 +590,7 @@ client.application("<APPLICATION_ID>").content.getBlogs(pageNo: pageNo, pageSize
 
 Use this API to get a list of blogs along with their details, such as the title, reading time, publish status, feature image, tags, author, etc.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -658,7 +660,7 @@ client.application("<APPLICATION_ID>").content.updateBlog(id: id, body: body).sa
 
 Use this API to update the details of an existing blog which includes title, feature image, content, SEO details, expiry, etc.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -728,7 +730,7 @@ client.application("<APPLICATION_ID>").content.deleteBlog(id: id).safeAwait{ res
 
 Use this API to delete a blog.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -798,7 +800,7 @@ client.application("<APPLICATION_ID>").content.getComponentById(slug: slug).safe
 
 Use this API to retrieve the components of a blog, such as title, slug, feature image, content, schedule, publish status, author, etc.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -867,7 +869,7 @@ client.application("<APPLICATION_ID>").content.getFaqCategories().safeAwait{ res
 
 FAQs can be divided into categories. Use this API to get a list of FAQ categories.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -942,7 +944,7 @@ client.application("<APPLICATION_ID>").content.getFaqCategoryBySlugOrId(idOrSlug
 
 FAQs can be divided into categories. Use this API to get an FAQ categories using its slug or ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1020,7 +1022,7 @@ client.application("<APPLICATION_ID>").content.createFaqCategory(body: body).saf
 
 FAQs help users to solve an issue or know more about a process. FAQs can be categorized separately, for e.g. some questions can be related to payment, some could be related to purchase, shipping, navigating, etc. Use this API to create an FAQ category.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1091,7 +1093,7 @@ client.application("<APPLICATION_ID>").content.updateFaqCategory(id: id, body: b
 
 Use this API to edit an existing FAQ category.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1162,7 +1164,7 @@ client.application("<APPLICATION_ID>").content.deleteFaqCategory(id: id).safeAwa
 
 Use this API to delete an FAQ category.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1234,7 +1236,7 @@ client.application("<APPLICATION_ID>").content.getFaqsByCategoryIdOrSlug(idOrSlu
 
 Use this API to retrieve all the commonly asked question and answers belonging to an FAQ category.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1306,7 +1308,7 @@ client.application("<APPLICATION_ID>").content.addFaq(categoryId: categoryId, bo
 
 FAQs help users to solve an issue or know more about a process. Use this API to create an FAQ for a given FAQ category.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1377,7 +1379,7 @@ client.application("<APPLICATION_ID>").content.updateFaq(categoryId: categoryId,
 
 Use this API to edit an existing FAQ.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1448,7 +1450,7 @@ client.application("<APPLICATION_ID>").content.deleteFaq(categoryId: categoryId,
 
 Use this API to delete an existing FAQ.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1518,7 +1520,7 @@ client.application("<APPLICATION_ID>").content.getFaqByIdOrSlug(idOrSlug: idOrSl
 
 Use this API to retrieve a specific FAQ. You will get the question and answer of that FAQ.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1589,7 +1591,7 @@ client.application("<APPLICATION_ID>").content.getLandingPages(pageNo: pageNo, p
 
 Landing page is the first page that a prospect lands upon while visiting a website. Use this API to fetch a list of landing pages.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1658,7 +1660,7 @@ client.application("<APPLICATION_ID>").content.createLandingPage(body: body).saf
 
 Landing page is the first page that a prospect lands upon while visiting a website. Use this API to create a landing page.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1728,7 +1730,7 @@ client.application("<APPLICATION_ID>").content.updateLandingPage(id: id, body: b
 
 Use this API to edit the details of an existing landing page.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1798,7 +1800,7 @@ client.application("<APPLICATION_ID>").content.deleteLandingPage(id: id).safeAwa
 
 Use this API to delete an existing landing page.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1890,7 +1892,7 @@ client.application("<APPLICATION_ID>").content.getLegalInformation().safeAwait{ 
 
 Use this API to get the legal information of an application, which includes Policy, Terms and Conditions, Shipping Policy and FAQ regarding the application.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1959,7 +1961,7 @@ client.application("<APPLICATION_ID>").content.updateLegalInformation(body: body
 
 Use this API to edit, update and save the legal information of an application, which includes Policy, Terms and Conditions, Shipping Policy and FAQ regarding the application.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2032,7 +2034,7 @@ client.application("<APPLICATION_ID>").content.getNavigations(devicePlatform: de
 
 Use this API to fetch the navigations details which includes the items of the navigation pane. It also shows the orientation, links, sub-navigations, etc.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2101,7 +2103,7 @@ client.application("<APPLICATION_ID>").content.createNavigation(body: body).safe
 
 Navigation is the arrangement of navigational items to ease the accessibility of resources for users on a website. Use this API to create a navigation.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2170,7 +2172,7 @@ client.application("<APPLICATION_ID>").content.getDefaultNavigations().safeAwait
 
 On any website (application), there are navigations that are present by default. Use this API to retrieve those default navigations.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2241,7 +2243,7 @@ client.application("<APPLICATION_ID>").content.getNavigationBySlug(slug: slug, d
 
 Use this API to retrieve a navigation by its slug.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2311,7 +2313,7 @@ client.application("<APPLICATION_ID>").content.updateNavigation(id: id, body: bo
 
 Use this API to edit the details of an existing navigation.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2381,7 +2383,7 @@ client.application("<APPLICATION_ID>").content.deleteNavigation(id: id).safeAwai
 
 Use this API to delete an existing navigation.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2630,7 +2632,7 @@ client.application("<APPLICATION_ID>").content.getPageMeta().safeAwait{ response
 
 Use this API to get the meta of custom pages (blog, page) and default system pages (e.g. home/brand/category/collection).
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2699,7 +2701,7 @@ client.application("<APPLICATION_ID>").content.getPageSpec().safeAwait{ response
 
 Use this API to get the specifications of a page, such as page type, display name, params and query.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2794,7 +2796,7 @@ client.application("<APPLICATION_ID>").content.createPage(body: body).safeAwait{
 
 Use this API to create a custom page using a title, seo, publish status, feature image, tags, meta, etc.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2865,7 +2867,7 @@ client.application("<APPLICATION_ID>").content.getPages(pageNo: pageNo, pageSize
 
 Use this API to retrieve a list of pages.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2934,7 +2936,7 @@ client.application("<APPLICATION_ID>").content.createPagePreview(body: body).saf
 
 Use this API to create a page preview to check the appearance of a custom page.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3004,7 +3006,7 @@ client.application("<APPLICATION_ID>").content.updatePagePreview(slug: slug, bod
 
 Use this API to change the publish status of an existing page. Allows you to publish and unpublish the page.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3074,7 +3076,7 @@ client.application("<APPLICATION_ID>").content.updatePage(id: id, body: body).sa
 
 Use this API to edit the details of an existing page, such as its title, seo, publish status, feature image, tags, schedule, etc.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3144,7 +3146,7 @@ client.application("<APPLICATION_ID>").content.deletePage(id: id).safeAwait{ res
 
 Use this API to delete an existing page.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3214,7 +3216,7 @@ client.application("<APPLICATION_ID>").content.getPageBySlug(slug: slug).safeAwa
 
 Use this API to retrieve the components of a page, such as its title, seo, publish status, feature image, tags, schedule, etc.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3283,7 +3285,7 @@ client.application("<APPLICATION_ID>").content.getSEOConfiguration().safeAwait{ 
 
 Use this API to know how the SEO is configured in the application. This includes the sitemap, robot.txt, custom meta tags, etc.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3352,7 +3354,7 @@ client.application("<APPLICATION_ID>").content.updateSEOConfiguration(body: body
 
 Use this API to edit the SEO details of an application. This includes the sitemap, robot.txt, custom meta tags, etc.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3447,7 +3449,7 @@ client.application("<APPLICATION_ID>").content.getSlideshows(devicePlatform: dev
 
 A slideshow is a group of images, videos or a combination of both that are shown on the website in the form of slides. Use this API to fetch a list of slideshows.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3516,7 +3518,7 @@ client.application("<APPLICATION_ID>").content.createSlideshow(body: body).safeA
 
 A slideshow is a group of images, videos or a combination of both that are shown on the website in the form of slides. Use this API to create a slideshow.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3587,7 +3589,7 @@ client.application("<APPLICATION_ID>").content.getSlideshowBySlug(slug: slug, de
 
 Use this API to retrieve the details of a slideshow by its slug.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3657,7 +3659,7 @@ client.application("<APPLICATION_ID>").content.updateSlideshow(id: id, body: bod
 
 Use this API to edit the details of an existing slideshow.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3727,7 +3729,7 @@ client.application("<APPLICATION_ID>").content.deleteSlideshow(id: id).safeAwait
 
 Use this API to delete an existing slideshow.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3835,7 +3837,7 @@ client.application("<APPLICATION_ID>").content.getSupportInformation().safeAwait
 
 Use this API to get the contact details for customer support, including emails and phone numbers.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3904,7 +3906,7 @@ client.application("<APPLICATION_ID>").content.updateSupportInformation(body: bo
 
 Use this API to edit the existing contact details for customer support, including emails and phone numbers.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3973,7 +3975,7 @@ client.application("<APPLICATION_ID>").content.updateInjectableTag(body: body).s
 
 Use this API to edit the details of an existing tag. This includes the tag name, tag type (css/js), url and position of the tag.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -4056,7 +4058,7 @@ client.application("<APPLICATION_ID>").content.deleteAllInjectableTags().safeAwa
 
 Use this API to delete all the existing tags at once.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -4139,7 +4141,7 @@ client.application("<APPLICATION_ID>").content.getInjectableTags().safeAwait{ re
 
 Use this API to get all the CSS and JS injected in the application in the form of tags.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -4222,7 +4224,7 @@ client.application("<APPLICATION_ID>").content.addInjectableTag(body: body).safe
 
 CSS and JS can be injected in the application (website) with the help of tags. Use this API to create such tags by entering the tag name, tag type (css/js), url and position of the tag.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -4297,7 +4299,7 @@ client.application("<APPLICATION_ID>").content.removeInjectableTag(body: body).s
 
 Use this API to delete an existing tag.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -4361,7 +4363,7 @@ client.application("<APPLICATION_ID>").content.editInjectableTag(tagId: tagId, b
 
 Use this API to edit the details of an existing tag by its ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 

@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Platform docs](./README.md)
+
 ## Configuration Methods
 Application configuration apis
 * [getBuildConfig](#getbuildconfig)
@@ -83,7 +85,7 @@ client.application("<APPLICATION_ID>").configuration.getBuildConfig(platformType
 
 Get latest build config
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -163,7 +165,7 @@ client.application("<APPLICATION_ID>").configuration.updateBuildConfig(platformT
 
 Update build config for next build
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -243,7 +245,7 @@ client.application("<APPLICATION_ID>").configuration.getPreviousVersions(platfor
 
 Get previous build versions
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -319,7 +321,7 @@ client.application("<APPLICATION_ID>").configuration.getAppFeatures().safeAwait{
 
 Get features of application
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -476,7 +478,7 @@ client.application("<APPLICATION_ID>").configuration.updateAppFeatures(body: bod
 
 Update features of application
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -621,7 +623,7 @@ client.application("<APPLICATION_ID>").configuration.getAppBasicDetails().safeAw
 
 Get basic application details like name
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -722,7 +724,7 @@ client.application("<APPLICATION_ID>").configuration.updateAppBasicDetails(body:
 
 Add or update application's basic details
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -821,7 +823,7 @@ client.application("<APPLICATION_ID>").configuration.getAppContactInfo().safeAwa
 
 Get Application Current Information. This includes information about social links, address and contact information of company/seller/brand of the application.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -997,7 +999,7 @@ client.application("<APPLICATION_ID>").configuration.updateAppContactInfo(body: 
 
 Save Application Current Information. This includes information about social links, address and contact information of an application.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1166,7 +1168,7 @@ client.application("<APPLICATION_ID>").configuration.getAppApiTokens().safeAwait
 
 Get social tokens.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1305,7 +1307,7 @@ client.application("<APPLICATION_ID>").configuration.updateAppApiTokens(body: bo
 
 Add social tokens.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1446,7 +1448,7 @@ client.application("<APPLICATION_ID>").configuration.getAppCompanies(pageNo: pag
 
 Application inventory enabled companies.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1534,7 +1536,7 @@ client.application("<APPLICATION_ID>").configuration.getAppStores(pageNo: pageNo
 
 Application inventory enabled stores.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1633,7 +1635,7 @@ client.application("<APPLICATION_ID>").configuration.getInventoryConfig().safeAw
 
 Get application configuration for various features and data
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1878,7 +1880,7 @@ client.application("<APPLICATION_ID>").configuration.updateInventoryConfig(body:
 
 Update application configuration for various features and data
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2123,7 +2125,7 @@ client.application("<APPLICATION_ID>").configuration.partiallyUpdateInventoryCon
 
 Partially update application configuration for various features and data
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2368,7 +2370,7 @@ client.application("<APPLICATION_ID>").configuration.getAppCurrencyConfig().safe
 
 Get application enabled currency list
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2445,7 +2447,7 @@ client.application("<APPLICATION_ID>").configuration.updateAppCurrencyConfig(bod
 
 Add initial application supported currency for various features and data. Default INR will be enabled.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2524,7 +2526,7 @@ client.application("<APPLICATION_ID>").configuration.getOrderingStoresByFilter(p
 
 Get ordering store by filter
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2669,7 +2671,7 @@ client.application("<APPLICATION_ID>").configuration.updateOrderingStoreConfig(b
 
 Add/Update ordering store config.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2741,7 +2743,7 @@ client.application("<APPLICATION_ID>").configuration.getDomains().safeAwait{ res
 
 Get attached domain list.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2826,7 +2828,7 @@ client.application("<APPLICATION_ID>").configuration.addDomain(body: body).safeA
 
 Add new domain to application.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2896,7 +2898,7 @@ client.application("<APPLICATION_ID>").configuration.removeDomainById(id: id).sa
 
 Remove attached domain.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2959,7 +2961,7 @@ client.application("<APPLICATION_ID>").configuration.changeDomainType(body: body
 
 Change a domain to Primary or Shortlink domain
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3044,7 +3046,7 @@ client.application("<APPLICATION_ID>").configuration.getDomainStatus(body: body)
 
 Get domain connected status. Check if domain is live and mapped to appropriate IP to fynd servers.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3120,7 +3122,7 @@ client.configuration.createApplication(body: body).safeAwait{ response,error->
 
 Create new application
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3183,7 +3185,7 @@ client.configuration.getApplications(pageNo: pageNo, pageSize: pageSize, q: q).s
 
 Get list of application under company
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3244,7 +3246,7 @@ client.application("<APPLICATION_ID>").configuration.getApplicationById().safeAw
 
 Get application data from id
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3304,7 +3306,7 @@ client.configuration.getCurrencies().safeAwait{ response,error->
 
 Get all currencies
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3377,7 +3379,7 @@ client.configuration.getDomainAvailibility(body: body).safeAwait{ response,error
 
 Check domain availibility before linking to application. Also sends domain suggestions with similar to queried domain. \ Custom domain search is currently powered by GoDaddy provider.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3482,7 +3484,7 @@ client.configuration.getIntegrationById(id: id).safeAwait{ response,error->
 
 Get integration data
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3631,7 +3633,7 @@ client.configuration.getAvailableOptIns(pageNo: pageNo, pageSize: pageSize).safe
 
 Get all available integration opt-ins
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3802,7 +3804,7 @@ client.configuration.getSelectedOptIns(level: level, uid: uid, pageNo: pageNo, p
 
 Get company/store level integration opt-ins
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -3973,7 +3975,7 @@ client.configuration.getIntegrationLevelConfig(id: id, level: level, opted: opte
 
 Get integration/integration-opt-in level config
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -4057,7 +4059,7 @@ client.configuration.getIntegrationByLevelId(id: id, level: level, uid: uid).saf
 
 Get level data for integration
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -4137,7 +4139,7 @@ client.configuration.getLevelActiveIntegrations(id: id, level: level, uid: uid).
 
 API checks if a store is already opted in any other integrations
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -4215,7 +4217,7 @@ client.configuration.getBrandsByCompany(q: q).safeAwait{ response,error->
 
 Get brands by company
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -4294,7 +4296,7 @@ client.configuration.getCompanyByBrands(pageNo: pageNo, pageSize: pageSize, body
 
 Get company by brand uids
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -4378,7 +4380,7 @@ client.configuration.getStoreByBrands(pageNo: pageNo, pageSize: pageSize, body: 
 
 Get stores by brand uids
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -4501,7 +4503,7 @@ client.configuration.getOtherSellerApplications(pageNo: pageNo, pageSize: pageSi
 
 Get other seller applications who has opted current company as inventory
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -4605,7 +4607,7 @@ client.configuration.getOtherSellerApplicationById(id: id).safeAwait{ response,e
 
 Get other seller application
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -4713,7 +4715,7 @@ client.configuration.optOutFromApplication(id: id, body: body).safeAwait{ respon
 
 Opt out company or store from other seller application
 
-*Returned Response*
+*Returned Response:*
 
 
 

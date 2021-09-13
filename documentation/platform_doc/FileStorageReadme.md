@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Platform docs](./README.md)
+
 ## FileStorage Methods
 File Storage
 * [startUpload](#startupload)
@@ -68,7 +70,7 @@ After successfully upload, call `completeUpload` api to complete the upload proc
 This operation will return the url for the uploaded file.
 
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -147,7 +149,7 @@ After successfully upload, call `completeUpload` api to complete the upload proc
 This operation will return the url for the uploaded file.
 
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -227,7 +229,7 @@ After successfully upload, call `appCompleteUpload` api to complete the upload p
 This operation will return the url for the uploaded file.
 
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -307,7 +309,7 @@ After successfully upload, call `appCompleteUpload` api to complete the upload p
 This operation will return the url for the uploaded file.
 
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -367,7 +369,7 @@ client.filestorage.getSignUrls(body: body).safeAwait{ response,error->
 
 Describe here
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -428,7 +430,7 @@ client.filestorage.copyFiles(sync: sync, body: body).safeAwait{ response,error->
 
 Copy Files
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -517,7 +519,7 @@ client.application("<APPLICATION_ID>").filestorage.appCopyFiles(sync: sync, body
 
 Copy Files
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -606,7 +608,7 @@ client.filestorage.browse(namespace: namespace, pageNo: pageNo).safeAwait{ respo
 
 Browse Files
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -669,7 +671,7 @@ client.application("<APPLICATION_ID>").filestorage.browse(namespace: namespace, 
 
 Browse Files
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -730,7 +732,7 @@ client.filestorage.proxy(url: url).safeAwait{ response,error->
 
 Proxy
 
-*Returned Response*
+*Returned Response:*
 
 
 

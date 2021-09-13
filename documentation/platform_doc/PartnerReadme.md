@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Platform docs](./README.md)
+
 ## Partner Methods
 Partner configuration apis
 * [addProxyPath](#addproxypath)
@@ -43,7 +45,7 @@ client.application("<APPLICATION_ID>").partner.addProxyPath(extensionId: extensi
 
 Add proxy path for external url
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -115,7 +117,7 @@ client.application("<APPLICATION_ID>").partner.removeProxyPath(extensionId: exte
 
 Remove proxy path for external url
 
-*Returned Response*
+*Returned Response:*
 
 
 

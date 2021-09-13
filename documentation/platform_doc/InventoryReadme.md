@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Platform docs](./README.md)
+
 ## Inventory Methods
 
 * [getJobsByCompany](#getjobsbycompany)
@@ -49,7 +51,7 @@ client.inventory.getJobsByCompany(pageNo: pageNo, pageSize: pageSize).safeAwait{
 
 REST Endpoint that returns all job configs for a company
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -109,7 +111,7 @@ client.inventory.updateJob(body: body).safeAwait{ response,error->
 
 REST Endpoint that updates a job config
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -169,7 +171,7 @@ client.inventory.createJob(body: body).safeAwait{ response,error->
 
 REST Endpoint that creates a new job config
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -232,7 +234,7 @@ client.inventory.getJobByCompanyAndIntegration(integrationId: integrationId, pag
 
 REST Endpoint that returns all job configs by company And integration
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -292,7 +294,7 @@ client.inventory.getJobConfigDefaults().safeAwait{ response,error->
 
 REST Endpoint that returns default fields job configs by company And integration
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -353,7 +355,7 @@ client.inventory.getJobByCode(code: code).safeAwait{ response,error->
 
 REST Endpoint that returns job config by code
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -416,7 +418,7 @@ client.inventory.getJobCodeMetrics(code: code, pageNo: pageNo, pageSize: pageSiz
 
 REST Endpoint that returns Inventory Run History For A Job Code
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -479,7 +481,7 @@ client.inventory.getJobCodesByCompanyAndIntegration(integrationId: integrationId
 
 REST Endpoint that returns all job codes by company And integration
 
-*Returned Response*
+*Returned Response:*
 
 
 

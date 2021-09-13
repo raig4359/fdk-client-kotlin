@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Application docs](./README.md)
+
 ## Content Methods
 Content System
 * [getAnnouncements](#getannouncements)
@@ -52,7 +54,7 @@ content.getAnnouncements().safeAwait{ response,error->
 
 Announcements are useful to highlight a message or information on top of a webpage. Use this API to retrieve live announcements. Get announcements on individual pages or for all pages.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -135,7 +137,7 @@ content.getBlog(slug: slug, rootId: rootId).safeAwait{ response,error->
 
 Use this API to get the details of a blog using its slug. Details include the title, reading time, publish status, feature image, tags, author, etc.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -204,7 +206,7 @@ content.getBlogs(pageNo: pageNo, pageSize: pageSize).safeAwait{ response,error->
 
 Use this API to get all the blogs.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -267,7 +269,7 @@ content.getFaqs().safeAwait{ response,error->
 
 Use this API to get a list of frequently asked questions. Users will benefit from it when facing any issue with the website.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -330,7 +332,7 @@ content.getFaqCategories().safeAwait{ response,error->
 
 FAQs can be divided into categories. Use this API to get a list of FAQ categories.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -403,7 +405,7 @@ content.getFaqBySlug(slug: slug).safeAwait{ response,error->
 
 Use this API to get a particular FAQ by its slug.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -469,7 +471,7 @@ content.getFaqCategoryBySlug(slug: slug).safeAwait{ response,error->
 
 FAQs can be divided into categories. Use this API to get the category to which an FAQ belongs.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -546,7 +548,7 @@ content.getFaqsByCategorySlug(slug: slug).safeAwait{ response,error->
 
 FAQs can be divided into categories. Use this API to get all the FAQs belonging to a category by using the category slug.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -611,7 +613,7 @@ content.getLandingPage().safeAwait{ response,error->
 
 Landing page is the first page that a prospect lands upon while visiting a website. Use this API to fetch the details of a landing page.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -674,7 +676,7 @@ content.getLegalInformation().safeAwait{ response,error->
 
 Use this API to get the legal information of an application, which includes Privacy Policy, Terms and Conditions, Shipping Policy and FAQs regarding the usage of the application.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -743,7 +745,7 @@ content.getNavigations(pageNo: pageNo, pageSize: pageSize).safeAwait{ response,e
 
 Use this API to fetch the navigations details which includes the items of the navigation pane. It also shows the links and sub-navigations.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -812,7 +814,7 @@ content.getPage(slug: slug, rootId: rootId).safeAwait{ response,error->
 
 Use this API to get the details of a page using its slug. Details include the title, seo, publish status, feature image, tags, meta, etc.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -881,7 +883,7 @@ content.getPages(pageNo: pageNo, pageSize: pageSize).safeAwait{ response,error->
 
 Use this API to get a list of pages.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -944,7 +946,7 @@ content.getSEOConfiguration().safeAwait{ response,error->
 
 Use this API to get the SEO details of an application, which includes a robot.txt, meta-tags and sitemap.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1013,7 +1015,7 @@ content.getSlideshows(pageNo: pageNo, pageSize: pageSize).safeAwait{ response,er
 
 Use this API to get a list of slideshows along with their details.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1081,7 +1083,7 @@ content.getSlideshow(slug: slug).safeAwait{ response,error->
 
 A slideshow is a group of images, videos or a combination of both that are shown on the website in the form of slides. Use this API to fetch a slideshow using its `slug`.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1144,7 +1146,7 @@ content.getSupportInformation().safeAwait{ response,error->
 
 Use this API to get contact details for customer support including emails and phone numbers.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1207,7 +1209,7 @@ content.getTags().safeAwait{ response,error->
 
 Use this API to get all the CSS and JS injected in the application in the form of tags.
 
-*Returned Response*
+*Returned Response:*
 
 
 

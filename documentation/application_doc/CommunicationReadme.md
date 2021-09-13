@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Application docs](./README.md)
+
 ## Communication Methods
 Manages email, sms, push notifications sent to users
 * [getCommunicationConsent](#getcommunicationconsent)
@@ -37,7 +39,7 @@ communication.getCommunicationConsent().safeAwait{ response,error->
 
 Use this API to retrieve the consent provided by the user for receiving communication messages over Email/SMS/WhatsApp.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -104,7 +106,7 @@ communication.upsertCommunicationConsent(body: body).safeAwait{ response,error->
 
 Use this API to update and insert the consent provided by the user for receiving communication messages over Email/SMS/WhatsApp.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -171,7 +173,7 @@ communication.upsertAppPushtoken(body: body).safeAwait{ response,error->
 
 Use this API to update and insert the push token of the user.
 
-*Returned Response*
+*Returned Response:*
 
 
 

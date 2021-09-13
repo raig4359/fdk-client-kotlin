@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Application docs](./README.md)
+
 ## Logistic Methods
 Handles Platform websites OMS
 * [getTatProduct](#gettatproduct)
@@ -40,7 +42,7 @@ logistic.getTatProduct(body: body).safeAwait{ response,error->
 
 Use this API to know the delivery turnaround time (TAT) by entering the product details along with the PIN Code of the location.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -100,7 +102,7 @@ logistic.getPincodeCity(pincode: pincode).safeAwait{ response,error->
 
 Use this API to retrieve a city by its PIN Code.
 
-*Returned Response*
+*Returned Response:*
 
 
 

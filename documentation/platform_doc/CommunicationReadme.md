@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Platform docs](./README.md)
+
 ## Communication Methods
 Manages email, sms, push notifications sent to users
 * [getCampaigns](#getcampaigns)
@@ -80,7 +82,7 @@ client.application("<APPLICATION_ID>").communication.getCampaigns(pageNo: pageNo
 
 Get campaigns
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -149,7 +151,7 @@ client.application("<APPLICATION_ID>").communication.createCampaign(body: body).
 
 Create campaign
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -219,7 +221,7 @@ client.application("<APPLICATION_ID>").communication.getCampaignById(id: id).saf
 
 Get campaign by id
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -289,7 +291,7 @@ client.application("<APPLICATION_ID>").communication.updateCampaignById(id: id, 
 
 Update campaign by id
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -359,7 +361,7 @@ client.application("<APPLICATION_ID>").communication.getStatsOfCampaignById(id: 
 
 Get stats of campaign by id
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -431,7 +433,7 @@ client.application("<APPLICATION_ID>").communication.getAudiences(pageNo: pageNo
 
 Get audiences
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -500,7 +502,7 @@ client.application("<APPLICATION_ID>").communication.createAudience(body: body).
 
 Create audience
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -569,7 +571,7 @@ client.application("<APPLICATION_ID>").communication.getBigqueryHeaders(body: bo
 
 Get bigquery headers
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -639,7 +641,7 @@ client.application("<APPLICATION_ID>").communication.getAudienceById(id: id).saf
 
 Get audience by id
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -709,7 +711,7 @@ client.application("<APPLICATION_ID>").communication.updateAudienceById(id: id, 
 
 Update audience by id
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -778,7 +780,7 @@ client.application("<APPLICATION_ID>").communication.getNSampleRecordsFromCsv(bo
 
 Get n sample records from csv
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -850,7 +852,7 @@ client.application("<APPLICATION_ID>").communication.getEmailProviders(pageNo: p
 
 Get email providers
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -919,7 +921,7 @@ client.application("<APPLICATION_ID>").communication.createEmailProvider(body: b
 
 Create email provider
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -989,7 +991,7 @@ client.application("<APPLICATION_ID>").communication.getEmailProviderById(id: id
 
 Get email provider by id
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1059,7 +1061,7 @@ client.application("<APPLICATION_ID>").communication.updateEmailProviderById(id:
 
 Update email provider by id
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1131,7 +1133,7 @@ client.application("<APPLICATION_ID>").communication.getEmailTemplates(pageNo: p
 
 Get email templates
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1200,7 +1202,7 @@ client.application("<APPLICATION_ID>").communication.createEmailTemplate(body: b
 
 Create email template
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1272,7 +1274,7 @@ client.application("<APPLICATION_ID>").communication.getSystemEmailTemplates(pag
 
 Get system email templates
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1342,7 +1344,7 @@ client.application("<APPLICATION_ID>").communication.getEmailTemplateById(id: id
 
 Get email template by id
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1412,7 +1414,7 @@ client.application("<APPLICATION_ID>").communication.updateEmailTemplateById(id:
 
 Update email template by id
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1482,7 +1484,7 @@ client.application("<APPLICATION_ID>").communication.deleteEmailTemplateById(id:
 
 Delete email template by id
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1554,7 +1556,7 @@ client.application("<APPLICATION_ID>").communication.getEventSubscriptions(pageN
 
 Get event subscriptions
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1626,7 +1628,7 @@ client.application("<APPLICATION_ID>").communication.getJobs(pageNo: pageNo, pag
 
 Get jobs
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1695,7 +1697,7 @@ client.application("<APPLICATION_ID>").communication.triggerCampaignJob(body: bo
 
 Trigger campaign job
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1767,7 +1769,7 @@ client.application("<APPLICATION_ID>").communication.getJobLogs(pageNo: pageNo, 
 
 Get job logs
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1840,7 +1842,7 @@ client.application("<APPLICATION_ID>").communication.getCommunicationLogs(pageId
 
 Get communication logs
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1910,7 +1912,7 @@ client.communication.getSystemNotifications(pageNo: pageNo, pageSize: pageSize).
 
 Get system notifications
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1982,7 +1984,7 @@ client.application("<APPLICATION_ID>").communication.getSmsProviders(pageNo: pag
 
 Get sms providers
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2051,7 +2053,7 @@ client.application("<APPLICATION_ID>").communication.createSmsProvider(body: bod
 
 Create sms provider
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2121,7 +2123,7 @@ client.application("<APPLICATION_ID>").communication.getSmsProviderById(id: id).
 
 Get sms provider by id
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2191,7 +2193,7 @@ client.application("<APPLICATION_ID>").communication.updateSmsProviderById(id: i
 
 Update sms provider by id
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2263,7 +2265,7 @@ client.application("<APPLICATION_ID>").communication.getSmsTemplates(pageNo: pag
 
 Get sms templates
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2332,7 +2334,7 @@ client.application("<APPLICATION_ID>").communication.createSmsTemplate(body: bod
 
 Create sms template
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2402,7 +2404,7 @@ client.application("<APPLICATION_ID>").communication.getSmsTemplateById(id: id).
 
 Get sms template by id
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2472,7 +2474,7 @@ client.application("<APPLICATION_ID>").communication.updateSmsTemplateById(id: i
 
 Update sms template by id
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2542,7 +2544,7 @@ client.application("<APPLICATION_ID>").communication.deleteSmsTemplateById(id: i
 
 Delete sms template by id
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2614,7 +2616,7 @@ client.application("<APPLICATION_ID>").communication.getSystemSystemTemplates(pa
 
 Get system sms templates
 
-*Returned Response*
+*Returned Response:*
 
 
 

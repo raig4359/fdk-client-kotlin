@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Platform docs](./README.md)
+
 ## Webhook Methods
 Webhook dispatcher with retry and one event to many subscriber vice versa
 * [getSubscribersByCompany](#getsubscribersbycompany)
@@ -48,7 +50,7 @@ client.webhook.getSubscribersByCompany(pageNo: pageNo, pageSize: pageSize, exten
 
 Get Subscribers By CompanyId
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -108,7 +110,7 @@ client.webhook.registerSubscriberToEvent(body: body).safeAwait{ response,error->
 
 Register Subscriber
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -168,7 +170,7 @@ client.webhook.updateSubscriberConfig(body: body).safeAwait{ response,error->
 
 Update Subscriber
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -231,7 +233,7 @@ client.webhook.getSubscribersByExtensionId(pageNo: pageNo, pageSize: pageSize, e
 
 Get Subscribers By ExtensionID
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -292,7 +294,7 @@ client.webhook.getSubscriberById(subscriberId: subscriberId).safeAwait{ response
 
 Get Subscriber By Subscriber ID
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -352,7 +354,7 @@ client.webhook.fetchAllEventConfigurations().safeAwait{ response,error->
 
 Get All Webhook Events
 
-*Returned Response*
+*Returned Response:*
 
 
 

@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Application docs](./README.md)
+
 ## Configuration Methods
 Application configuration apis
 * [getApplication](#getapplication)
@@ -49,7 +51,7 @@ configuration.getApplication().safeAwait{ response,error->
 
 Use this API to get the current application details which includes configurations that indicate the status of the website, domain, ID, tokens, images, etc.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -167,7 +169,7 @@ configuration.getOwnerInfo().safeAwait{ response,error->
 
 Use this API to get the current application details which includes channel name, description, banner, logo, favicon, domain details, etc. This API also retrieves the seller and owner information such as address, email address, and phone number.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -323,7 +325,7 @@ configuration.getBasicDetails().safeAwait{ response,error->
 
 Use this API to retrieve only the basic details of the application which includes channel name, description, banner, logo, favicon, domain details, etc.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -418,7 +420,7 @@ configuration.getIntegrationTokens().safeAwait{ response,error->
 
 Use this API to retrieve the tokens used while integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map and Facebook. **Note** - Token values are encrypted with AES encryption using a secret key. Kindly reach out to the developers for obtaining the secret key.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -549,7 +551,7 @@ configuration.getOrderingStores(pageNo: pageNo, pageSize: pageSize, q: q).safeAw
 
 Use this API to retrieve the details of all the deployment stores (the selling locations where the application will be utilized for placing orders).
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -609,7 +611,7 @@ configuration.getStoreDetailById(storeId: storeId).safeAwait{ response,error->
 
 Use this API to retrieve the details of given stores uid (the selling locations where the application will be utilized for placing orders).
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -672,7 +674,7 @@ configuration.getFeatures().safeAwait{ response,error->
 
 Use this API to retrieve the configuration of features such as product detail, landing page, options in the login/registration screen, communication opt-in, cart options and many more.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -823,7 +825,7 @@ configuration.getContactInfo().safeAwait{ response,error->
 
 Use this API to retrieve information about the social links, address and contact information of the company/seller/brand operating the application.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -993,7 +995,7 @@ configuration.getCurrencies().safeAwait{ response,error->
 
 Use this API to get a list of currencies available. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1066,7 +1068,7 @@ configuration.getCurrencyById(id: id).safeAwait{ response,error->
 
 Use this API to retrieve a currency using its ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1130,7 +1132,7 @@ configuration.getAppCurrencies().safeAwait{ response,error->
 
 Use this API to get a list of currencies allowed in the current application. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1203,7 +1205,7 @@ configuration.getLanguages().safeAwait{ response,error->
 
 Use this API to get a list of languages supported in the application.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1277,7 +1279,7 @@ configuration.getOrderingStoreCookie(body: body).safeAwait{ response,error->
 
 Use this API to get an Ordering Store signed cookie upon selecting an ordering store. This will be used by the cart service to verify a coupon against the selected ordering store in cart.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1332,7 +1334,7 @@ configuration.removeOrderingStoreCookie().safeAwait{ response,error->
 
 Use this API to unset the Ordering Store cookie upon changing the sales channel, by its domain URL, in the Universal Fynd Store app.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1394,7 +1396,7 @@ configuration.getAppStaffs(orderIncent: orderIncent, orderingStore: orderingStor
 
 Use this API to get a list of staff including the names, employee code, incentive status, assigned ordering stores, and title of each staff added to the application.
 
-*Returned Response*
+*Returned Response:*
 
 
 

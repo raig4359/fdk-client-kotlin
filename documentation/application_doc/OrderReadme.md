@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Application docs](./README.md)
+
 ## Order Methods
 Handles Platform websites OMS
 * [getOrders](#getorders)
@@ -53,7 +55,7 @@ order.getOrders(pageNo: pageNo, pageSize: pageSize, fromDate: fromDate, toDate: 
 
 Use this API to retrieve all the orders.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -113,7 +115,7 @@ order.getOrderById(orderId: orderId).safeAwait{ response,error->
 
 Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -173,7 +175,7 @@ order.getShipmentById(shipmentId: shipmentId).safeAwait{ response,error->
 
 Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -233,7 +235,7 @@ order.getShipmentReasons(shipmentId: shipmentId).safeAwait{ response,error->
 
 Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -293,7 +295,7 @@ order.updateShipmentStatus(shipmentId: shipmentId, body: body).safeAwait{ respon
 
 Use this API to update the status of a shipment using its shipment ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -353,7 +355,7 @@ order.trackShipment(shipmentId: shipmentId).safeAwait{ response,error->
 
 Use this API to track a shipment using its shipment ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -413,7 +415,7 @@ order.getPosOrderById(orderId: orderId).safeAwait{ response,error->
 
 Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -474,7 +476,7 @@ order.getCustomerDetailsByShipmentId(orderId: orderId, shipmentId: shipmentId).s
 
 Use this API to retrieve customer details such as mobileno using Shipment ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -535,7 +537,7 @@ order.sendOtpToShipmentCustomer(orderId: orderId, shipmentId: shipmentId).safeAw
 
 Use this API to send OTP to the customer of the mapped Shipment.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -596,7 +598,7 @@ order.verifyOtpShipmentCustomer(orderId: orderId, shipmentId: shipmentId, body: 
 
 Use this API to verify OTP and create a session token with custom payload.
 
-*Returned Response*
+*Returned Response:*
 
 
 

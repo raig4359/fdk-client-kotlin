@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Application docs](./README.md)
+
 ## User Methods
 Authentication Service
 * [loginWithFacebook](#loginwithfacebook)
@@ -71,7 +73,7 @@ user.loginWithFacebook(platform: platform, body: body).safeAwait{ response,error
 
 Use this API to login or register using Facebook credentials.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -139,7 +141,7 @@ user.loginWithGoogle(platform: platform, body: body).safeAwait{ response,error->
 
 Use this API to login or register using Google Account credentials.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -207,7 +209,7 @@ user.loginWithGoogleAndroid(platform: platform, body: body).safeAwait{ response,
 
 Use this API to login or register in Android app using Google Account credentials.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -275,7 +277,7 @@ user.loginWithGoogleIOS(platform: platform, body: body).safeAwait{ response,erro
 
 Use this API to login or register in iOS app using Google Account credentials.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -343,7 +345,7 @@ user.loginWithOTP(platform: platform, body: body).safeAwait{ response,error->
 
 Use this API to login or register with a One-time Password (OTP) sent via Email or SMS.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -410,7 +412,7 @@ user.loginWithEmailAndPassword(body: body).safeAwait{ response,error->
 
 Use this API to login or register using an email address and password.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -478,7 +480,7 @@ user.sendResetPasswordEmail(platform: platform, body: body).safeAwait{ response,
 
 Use this API to reset a password using the link sent on email.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -539,7 +541,7 @@ user.forgotPassword(body: body).safeAwait{ response,error->
 
 Use this API to reset a password using the code sent on email or SMS.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -606,7 +608,7 @@ user.sendResetToken(body: body).safeAwait{ response,error->
 
 Use this API to send code to reset password.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -667,7 +669,7 @@ user.loginWithToken(body: body).safeAwait{ response,error->
 
 Use this API to login or register using a token for authentication.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -735,7 +737,7 @@ user.registerWithForm(platform: platform, body: body).safeAwait{ response,error-
 
 Use this API to perform user registration by sending form data in the request body.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -805,7 +807,7 @@ user.verifyEmail(body: body).safeAwait{ response,error->
 
 Use this API to send a verification code to verify an email.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -866,7 +868,7 @@ user.verifyMobile(body: body).safeAwait{ response,error->
 
 Use this API to send a verification code to verify a mobile number.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -923,7 +925,7 @@ user.hasPassword().safeAwait{ response,error->
 
 Use this API to check if user has created a password for login.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -982,7 +984,7 @@ user.updatePassword(body: body).safeAwait{ response,error->
 
 Use this API to update the password.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1039,7 +1041,7 @@ user.logout().safeAwait{ response,error->
 
 Use this API to check to logout a user from the app.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1099,7 +1101,7 @@ user.sendOTPOnMobile(platform: platform, body: body).safeAwait{ response,error->
 
 Use this API to send an OTP to a mobile number.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1167,7 +1169,7 @@ user.verifyMobileOTP(platform: platform, body: body).safeAwait{ response,error->
 
 Use this API to verify the OTP received on a mobile number.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1235,7 +1237,7 @@ user.sendOTPOnEmail(platform: platform, body: body).safeAwait{ response,error->
 
 Use this API to send an OTP to an email ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1297,7 +1299,7 @@ user.verifyEmailOTP(platform: platform, body: body).safeAwait{ response,error->
 
 Use this API to verify the OTP received on an email ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1360,7 +1362,7 @@ user.getLoggedInUser().safeAwait{ response,error->
 
 Use this API  to get the details of a logged in user.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1423,7 +1425,7 @@ user.getListOfActiveSessions().safeAwait{ response,error->
 
 Use this API to retrieve all active sessions of a user.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1488,7 +1490,7 @@ user.getPlatformConfig(name: name).safeAwait{ response,error->
 
 Use this API to get all the platform configurations such as mobile image, desktop image, social logins, and all other text.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1613,7 +1615,7 @@ user.updateProfile(platform: platform, body: body).safeAwait{ response,error->
 
 Use this API to update details in the user profile. Details can be first name, last name, gender, email, phone number, or profile picture.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1681,7 +1683,7 @@ user.addMobileNumber(platform: platform, body: body).safeAwait{ response,error->
 
 Use this API to add a new mobile number to a profile.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1754,7 +1756,7 @@ user.deleteMobileNumber(platform: platform, active: active, primary: primary, ve
 
 Use this API to delete a mobile number from a profile.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1821,7 +1823,7 @@ user.setMobileNumberAsPrimary(body: body).safeAwait{ response,error->
 
 Use this API to set a mobile number as primary. Primary number is a verified number used for all future communications.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1889,7 +1891,7 @@ user.sendVerificationLinkToMobile(platform: platform, body: body).safeAwait{ res
 
 Use this API to send a verification link to a mobile number
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1957,7 +1959,7 @@ user.addEmail(platform: platform, body: body).safeAwait{ response,error->
 
 Use this API to add a new email address to a profile
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2029,7 +2031,7 @@ user.deleteEmail(platform: platform, active: active, primary: primary, verified:
 
 Use this API to delete an email address from a profile
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2096,7 +2098,7 @@ user.setEmailAsPrimary(body: body).safeAwait{ response,error->
 
 Use this API to set an email address as primary. Primary email ID is a email address used for all future communications.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2164,7 +2166,7 @@ user.sendVerificationLinkToEmail(platform: platform, body: body).safeAwait{ resp
 
 Use this API to send verification link to an email address.
 
-*Returned Response*
+*Returned Response:*
 
 
 

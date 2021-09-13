@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Platform docs](./README.md)
+
 ## Theme Methods
 Responsible for themes
 * [getAllPages](#getallpages)
@@ -64,7 +66,7 @@ client.application("<APPLICATION_ID>").theme.getAllPages(themeId: themeId).safeA
 
 Use this API to retrieve all the available pages of a theme by its ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -134,7 +136,7 @@ client.application("<APPLICATION_ID>").theme.createPage(themeId: themeId, body: 
 
 Use this API to create a page for a theme by its ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -204,7 +206,7 @@ client.application("<APPLICATION_ID>").theme.updateMultiplePages(themeId: themeI
 
 Use this API to update multiple pages of a theme by its ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -275,7 +277,7 @@ client.application("<APPLICATION_ID>").theme.getPage(themeId: themeId, pageValue
 
 Use this API to retrieve a page of a theme.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -346,7 +348,7 @@ client.application("<APPLICATION_ID>").theme.updatePage(themeId: themeId, pageVa
 
 Use this API to update a page for a theme by its ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -417,7 +419,7 @@ client.application("<APPLICATION_ID>").theme.deletePage(themeId: themeId, pageVa
 
 Use this API to delete a page for a theme by its ID and page_value.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -488,7 +490,7 @@ client.application("<APPLICATION_ID>").theme.getThemeLibrary(pageSize: pageSize,
 
 Theme library is a personalized collection of themes that are chosen and added from the available themes. Use this API to fetch a list of themes from the library along with their configuration details. 
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -557,7 +559,7 @@ client.application("<APPLICATION_ID>").theme.addToThemeLibrary(body: body).safeA
 
 Theme library is a personalized collection of themes that are chosen and added from the available themes. Use this API to choose a theme and add it to the theme library.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -626,7 +628,7 @@ client.application("<APPLICATION_ID>").theme.applyTheme(body: body).safeAwait{ r
 
 Use this API to apply a theme to the website.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -696,7 +698,7 @@ client.application("<APPLICATION_ID>").theme.isUpgradable(themeId: themeId).safe
 
 There's always a possibility that new features get added to a theme. Use this API to check if the applied theme has an upgrade available.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -766,7 +768,7 @@ client.application("<APPLICATION_ID>").theme.upgradeTheme(themeId: themeId).safe
 
 Use this API to upgrade the current theme to its latest version.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -837,7 +839,7 @@ client.application("<APPLICATION_ID>").theme.getPublicThemes(pageSize: pageSize,
 
 Use this API to get a list of free themes that you can apply to your website.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -906,7 +908,7 @@ client.application("<APPLICATION_ID>").theme.createTheme(body: body).safeAwait{ 
 
 Themes improve the look and appearance of a website. Use this API to create a theme.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -975,7 +977,7 @@ client.application("<APPLICATION_ID>").theme.getAppliedTheme().safeAwait{ respon
 
 Use this API to retrieve the theme that is currently applied to the website along with its details.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1044,7 +1046,7 @@ client.application("<APPLICATION_ID>").theme.getFonts().safeAwait{ response,erro
 
 Font is a collection of characters with a similar design. Use this API to retrieve a list of website fonts.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1114,7 +1116,7 @@ client.application("<APPLICATION_ID>").theme.getThemeById(themeId: themeId).safe
 
 Use this API to retrieve the details of a specific theme by using its ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1184,7 +1186,7 @@ client.application("<APPLICATION_ID>").theme.updateTheme(themeId: themeId, body:
 
 Use this API to edit an existing theme. You can customize the website font, sections, images, styles, and many more.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1254,7 +1256,7 @@ client.application("<APPLICATION_ID>").theme.deleteTheme(themeId: themeId).safeA
 
 Use this API to delete a theme from the theme library.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1324,7 +1326,7 @@ client.application("<APPLICATION_ID>").theme.getThemeForPreview(themeId: themeId
 
 A theme can be previewed before applying it. Use this API to retrieve the theme preview by using its ID.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1394,7 +1396,7 @@ client.application("<APPLICATION_ID>").theme.publishTheme(themeId: themeId).safe
 
 Use this API to publish a theme that is either newly created or edited.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1464,7 +1466,7 @@ client.application("<APPLICATION_ID>").theme.unpublishTheme(themeId: themeId).sa
 
 Use this API to remove an existing theme from the list of available themes.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1534,7 +1536,7 @@ client.application("<APPLICATION_ID>").theme.archiveTheme(themeId: themeId).safe
 
 Use this API to store an existing theme but not delete it so that it can be used in future if required. 
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1604,7 +1606,7 @@ client.application("<APPLICATION_ID>").theme.unarchiveTheme(themeId: themeId).sa
 
 Use this API to restore an archived theme and bring it back for editing or publishing. 
 
-*Returned Response*
+*Returned Response:*
 
 
 

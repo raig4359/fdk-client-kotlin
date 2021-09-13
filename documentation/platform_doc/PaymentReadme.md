@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Platform docs](./README.md)
+
 ## Payment Methods
 Collect payment through many payment gateway i.e Stripe, Razorpay, Juspay etc.into Fynd or Self account
 * [getBrandPaymentGatewayConfig](#getbrandpaymentgatewayconfig)
@@ -58,7 +60,7 @@ client.application("<APPLICATION_ID>").payment.getBrandPaymentGatewayConfig().sa
 
 Get All Brand Payment Gateway Config Secret
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -236,7 +238,7 @@ client.application("<APPLICATION_ID>").payment.saveBrandPaymentGatewayConfig(bod
 
 Save Config Secret For Brand Payment Gateway
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -302,7 +304,7 @@ client.application("<APPLICATION_ID>").payment.updateBrandPaymentGatewayConfig(b
 
 Save Config Secret For Brand Payment Gateway
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -370,7 +372,7 @@ client.application("<APPLICATION_ID>").payment.getPaymentModeRoutes(refresh: ref
 
 Use this API to get Get All Valid Payment Options for making payment
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1558,7 +1560,7 @@ client.payment.getAllPayouts(uniqueExternalId: uniqueExternalId).safeAwait{ resp
 
 Get All Payouts
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1681,7 +1683,7 @@ client.payment.savePayout(body: body).safeAwait{ response,error->
 
 Save Payout
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1770,7 +1772,7 @@ client.payment.updatePayout(uniqueTransferNo: uniqueTransferNo, body: body).safe
 
 Update Payout
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1835,7 +1837,7 @@ client.payment.activateAndDectivatePayout(uniqueTransferNo: uniqueTransferNo, bo
 
 Partial Update Payout
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1900,7 +1902,7 @@ client.payment.deletePayout(uniqueTransferNo: uniqueTransferNo).safeAwait{ respo
 
 Delete Payout
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1962,7 +1964,7 @@ client.payment.getSubscriptionPaymentMethod().safeAwait{ response,error->
 
 Get all  Subscription  Payment Method
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2152,7 +2154,7 @@ client.payment.deleteSubscriptionPaymentMethod(uniqueExternalId: uniqueExternalI
 
 Uses this api to Delete Subscription Payment Method
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2214,7 +2216,7 @@ client.payment.getSubscriptionConfig().safeAwait{ response,error->
 
 Get all  Subscription Config details
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2280,7 +2282,7 @@ client.payment.saveSubscriptionSetupIntent(body: body).safeAwait{ response,error
 
 Uses this api to Save Subscription Setup Intent
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2350,7 +2352,7 @@ client.application("<APPLICATION_ID>").payment.addBeneficiaryDetails(body: body)
 
 Use this API to save bank details for returned/cancelled order to refund amount in his account.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2415,7 +2417,7 @@ client.payment.verifyIfscCode(ifscCode: ifscCode).safeAwait{ response,error->
 
 Get True/False for correct IFSC Code for adding bank details for refund
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2497,7 +2499,7 @@ client.application("<APPLICATION_ID>").payment.getUserOrderBeneficiaries(orderId
 
 Get all active  beneficiary details added by the user for refund
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2583,7 +2585,7 @@ client.application("<APPLICATION_ID>").payment.getUserBeneficiaries(orderId: ord
 
 Get all active  beneficiary details added by the user for refund
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -2669,7 +2671,7 @@ client.application("<APPLICATION_ID>").payment.confirmPayment(body: body).safeAw
 
 Use this API to confirm payment after payment gateway accepted payment.
 
-*Returned Response*
+*Returned Response:*
 
 
 

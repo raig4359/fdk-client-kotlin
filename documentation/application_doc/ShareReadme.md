@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Application docs](./README.md)
+
 ## Share Methods
 Short link and QR Code
 * [getApplicationQRCode](#getapplicationqrcode)
@@ -41,7 +43,7 @@ share.getApplicationQRCode().safeAwait{ response,error->
 
 Use this API to create a QR code of an app for sharing it with users who want to use the app.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -104,7 +106,7 @@ share.getProductQRCodeBySlug(slug: slug).safeAwait{ response,error->
 
 Use this API to create a QR code of a product for sharing it with users who want to view/purchase the product.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -167,7 +169,7 @@ share.getCollectionQRCodeBySlug(slug: slug).safeAwait{ response,error->
 
 Use this API to create a QR code of a collection of products for sharing it with users who want to view/purchase the collection.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -230,7 +232,7 @@ share.getUrlQRCode(url: url).safeAwait{ response,error->
 
 Use this API to create a QR code of a URL for sharing it with users who want to visit the link.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -292,7 +294,7 @@ share.createShortLink(body: body).safeAwait{ response,error->
 
 Use this API to create a short link that is easy to write/share/read as compared to long URLs.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -390,7 +392,7 @@ share.getShortLinkByHash(hash: hash).safeAwait{ response,error->
 
 Use this API to get a short link by using a hash value.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -488,7 +490,7 @@ share.getOriginalShortLinkByHash(hash: hash).safeAwait{ response,error->
 
 Use this API to retrieve the original link from a short-link by using a hash value.
 
-*Returned Response*
+*Returned Response:*
 
 
 

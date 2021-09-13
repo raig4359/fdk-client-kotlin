@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Application docs](./README.md)
+
 ## FileStorage Methods
 File Storage
 * [startUpload](#startupload)
@@ -59,7 +61,7 @@ After successfully upload, call the `completeUpload` API to finish the upload pr
 This operation will return the URL of the uploaded file.
 
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -137,7 +139,7 @@ After successfully upload, call the `completeUpload` API to finish the upload pr
 This operation will return the URL of the uploaded file.
 
 
-*Returned Response*
+*Returned Response:*
 
 
 

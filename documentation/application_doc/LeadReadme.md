@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Application docs](./README.md)
+
 ## Lead Methods
 Handles communication between Staff and Users
 * [getTicket](#getticket)
@@ -46,7 +48,7 @@ lead.getTicket(id: id).safeAwait{ response,error->
 
 Get Ticket with the specific id, this is used to view the ticket details
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -305,7 +307,7 @@ lead.createHistory(id: id, body: body).safeAwait{ response,error->
 
 Create history for specific Ticket, this history is seen on ticket detail page, this can be comment, log or rating.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -406,7 +408,7 @@ lead.createTicket(body: body).safeAwait{ response,error->
 
 This is used to Create Ticket.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -665,7 +667,7 @@ lead.getCustomForm(slug: slug).safeAwait{ response,error->
 
 Get specific Custom Form using it's slug, this is used to view the form.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -777,7 +779,7 @@ lead.submitCustomForm(slug: slug, body: body).safeAwait{ response,error->
 
 Submit Response for a specific Custom Form using it's slug, this response is then used to create a ticket on behalf of the user.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1038,7 +1040,7 @@ lead.getParticipantsInsideVideoRoom(uniqueName: uniqueName).safeAwait{ response,
 
 Get participants of a specific Video Room using it's unique name, this can be used to check if people are already there in the room and also to show their names.
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -1108,7 +1110,7 @@ lead.getTokenForVideoRoom(uniqueName: uniqueName).safeAwait{ response,error->
 
 Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
 
-*Returned Response*
+*Returned Response:*
 
 
 

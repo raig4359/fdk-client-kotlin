@@ -2,6 +2,8 @@
 
 
 
+##### [Back to Platform docs](./README.md)
+
 ## Analytics Methods
 Perceptor analytics
 * [getStatiscticsGroups](#getstatiscticsgroups)
@@ -52,7 +54,7 @@ client.application("<APPLICATION_ID>").analytics.getStatiscticsGroups().safeAwai
 
 Get statistics groups
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -122,7 +124,7 @@ client.application("<APPLICATION_ID>").analytics.getStatiscticsGroupComponents(g
 
 Get statistics group components
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -195,7 +197,7 @@ client.application("<APPLICATION_ID>").analytics.getComponentStatsCSV(componentN
 
 Get component statistics csv
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -257,7 +259,7 @@ client.application("<APPLICATION_ID>").analytics.getComponentStatsPDF(componentN
 
 Get component statistics pdf
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -319,7 +321,7 @@ client.application("<APPLICATION_ID>").analytics.getComponentStats(componentName
 
 Get component statistics
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -431,7 +433,7 @@ client.application("<APPLICATION_ID>").analytics.getAbandonCartList(fromDate: fr
 
 Get abandon carts list
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -514,7 +516,7 @@ client.application("<APPLICATION_ID>").analytics.getAbandonCartsCSV(fromDate: fr
 
 Get abandon carts csv
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -576,7 +578,7 @@ client.application("<APPLICATION_ID>").analytics.getAbandonCartDetail(cartId: ca
 
 Get abandon cart details
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -637,7 +639,7 @@ client.analytics.createExportJob(exportType: exportType, body: body).safeAwait{ 
 
 Create data export job in required format
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -702,7 +704,7 @@ client.analytics.getExportJobStatus(exportType: exportType, jobId: jobId).safeAw
 
 Get data export job status
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -769,7 +771,7 @@ client.analytics.getLogsList(logType: logType, pageNo: pageNo, pageSize: pageSiz
 
 Get logs list
 
-*Returned Response*
+*Returned Response:*
 
 
 
@@ -850,7 +852,7 @@ client.analytics.searchLogs(pageNo: pageNo, pageSize: pageSize, logType: logType
 
 Search logs
 
-*Returned Response*
+*Returned Response:*
 
 
 
