@@ -925,6 +925,17 @@ Success
 
  
  
+ #### [ErrorRes](#ErrorRes)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | message | String? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [StatsGroups](#StatsGroups)
 
  | Properties | Type | Nullable | Description |
@@ -1000,6 +1011,23 @@ Success
  | contextAppApplicationId | String? |  yes  |  |
  | propertiesBreakupValuesRawTotal | String? |  yes  |  |
  | receivedAt | [ReceivedAt](#ReceivedAt)? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Page](#Page)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | itemTotal | Int? |  yes  |  |
+ | nextId | String? |  yes  |  |
+ | hasPrevious | Boolean? |  yes  |  |
+ | hasNext | Boolean? |  yes  |  |
+ | current | Int? |  yes  |  |
+ | type | String |  no  |  |
+ | size | Int? |  yes  |  |
 
 ---
 

@@ -387,6 +387,23 @@ Success
 
  
  
+ #### [Page](#Page)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | itemTotal | Int? |  yes  |  |
+ | nextId | String? |  yes  |  |
+ | hasPrevious | Boolean? |  yes  |  |
+ | hasNext | Boolean? |  yes  |  |
+ | current | Int? |  yes  |  |
+ | type | Int |  no  |  |
+ | size | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [DbRecord](#DbRecord)
 
  | Properties | Type | Nullable | Description |

@@ -4263,6 +4263,31 @@ Success
 
  
  
+ #### [UserSchema](#UserSchema)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | firstName | String? |  yes  | First name |
+ | lastName | String? |  yes  | Last name |
+ | phoneNumbers | ArrayList<[PhoneNumber](#PhoneNumber)>? |  yes  | List of phone numbers |
+ | emails | ArrayList<[Email](#Email)>? |  yes  | List of email addresses |
+ | gender | String? |  yes  | Gender of user |
+ | active | Boolean? |  yes  | Is account active |
+ | profilePicUrl | String? |  yes  | URL for profile pic |
+ | username | String? |  yes  | username of user |
+ | accountType | String? |  yes  | Type of account |
+ | uid | String? |  yes  | Unique identifier of user |
+ | debug | [Debug](#Debug)? |  yes  | Used for debugging |
+ | hasOldPasswordHash | Boolean? |  yes  | Denotes if user has old password hash |
+ | id | String? |  yes  | Unique identifier of user |
+ | createdAt | String? |  yes  | Time of user creation |
+ | updatedAt | String? |  yes  | Last time of user details update |
+
+---
+
+
+ 
+ 
  #### [PhoneNumber](#PhoneNumber)
 
  | Properties | Type | Nullable | Description |

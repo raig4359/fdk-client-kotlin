@@ -2059,6 +2059,23 @@ Success. Returns a JSON object containing all the tags injected in the applicati
 
  
  
+ #### [Page](#Page)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | itemTotal | Int? |  yes  |  |
+ | nextId | String? |  yes  |  |
+ | hasPrevious | Boolean? |  yes  |  |
+ | hasNext | Boolean? |  yes  |  |
+ | current | Int? |  yes  |  |
+ | type | String |  no  |  |
+ | size | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [LandingPageGetResponse](#LandingPageGetResponse)
 
  | Properties | Type | Nullable | Description |

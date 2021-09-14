@@ -2,28 +2,89 @@
 
 
 
-##### [Back to Platform docs](./README.md)
+##### [Back to Application docs](./README.md)
 
 ## Share Methods
 Short link and QR Code
+* [getApplicationQRCode](#getapplicationqrcode)
+* [getProductQRCodeBySlug](#getproductqrcodebyslug)
+* [getCollectionQRCodeBySlug](#getcollectionqrcodebyslug)
+* [getUrlQRCode](#geturlqrcode)
 * [createShortLink](#createshortlink)
-* [getShortLinks](#getshortlinks)
 * [getShortLinkByHash](#getshortlinkbyhash)
-* [updateShortLinkById](#updateshortlinkbyid)
+* [getOriginalShortLinkByHash](#getoriginalshortlinkbyhash)
 
 
 
 ## Methods with example and description
 
 
-### createShortLink
-Create short link
+### getApplicationQRCode
+Create QR Code of an app
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").share.createShortLink(body: body).safeAwait{ response,error->
+share.getApplicationQRCode().safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+
+Use this API to create a QR code of an app for sharing it with users who want to use the app.
+
+*Returned Response:*
+
+
+
+
+[QRCodeResp](#QRCodeResp)
+
+Success. Check the example shown below or refer `QRCodeResp` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "link": "https://fynd.com",
+  "svg": "<svg xmlns=\\\"http://www.w3.org/2000/svg\\\" viewBox=\\\"0 0 29 29\\\" shape-rendering=\\\"crispEdges\\\"></svg>"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getProductQRCodeBySlug
+Create QR Code of a product
+
+
+
+
+```kotlin
+share.getProductQRCodeBySlug(slug: slug).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -39,12 +100,199 @@ client.application("<APPLICATION_ID>").share.createShortLink(body: body).safeAwa
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company Id |   
-| applicationId | String | yes | Application Id |  
+| slug | String | yes | A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint. |  
+
+
+
+Use this API to create a QR code of a product for sharing it with users who want to view/purchase the product.
+
+*Returned Response:*
+
+
+
+
+[QRCodeResp](#QRCodeResp)
+
+Success. Check the example shown below or refer `QRCodeResp` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "link": "https://fynd.com/products/shirt-small-blue",
+  "svg": "<svg xmlns=\\\"http://www.w3.org/2000/svg\\\" viewBox=\\\"0 0 29 29\\\" shape-rendering=\\\"crispEdges\\\"></svg>"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getCollectionQRCodeBySlug
+Create QR Code of a collection
+
+
+
+
+```kotlin
+share.getCollectionQRCodeBySlug(slug: slug).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| slug | String | yes | A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint. |  
+
+
+
+Use this API to create a QR code of a collection of products for sharing it with users who want to view/purchase the collection.
+
+*Returned Response:*
+
+
+
+
+[QRCodeResp](#QRCodeResp)
+
+Success. Check the example shown below or refer `QRCodeResp` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "link": "https://fynd.com/collection/flat-50-off",
+  "svg": "<svg xmlns=\\\"http://www.w3.org/2000/svg\\\" viewBox=\\\"0 0 29 29\\\" shape-rendering=\\\"crispEdges\\\"></svg>"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getUrlQRCode
+Create QR Code of a URL
+
+
+
+
+```kotlin
+share.getUrlQRCode(url: url).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| url | String | yes | A link or a web address |  
+
+
+
+Use this API to create a QR code of a URL for sharing it with users who want to visit the link.
+
+*Returned Response:*
+
+
+
+
+[QRCodeResp](#QRCodeResp)
+
+Success. Check the example shown below or refer `QRCodeResp` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "link": "https://fynd.com",
+  "svg": "<svg xmlns=\\\"http://www.w3.org/2000/svg\\\" viewBox=\\\"0 0 29 29\\\" shape-rendering=\\\"crispEdges\\\"></svg>"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createShortLink
+Create a short link
+
+
+
+
+```kotlin
+share.createShortLink(body: body).safeAwait{ response,error->
+    
+    response?.let{
+      // Use response
+    } ->
+     
+    error?.let{
+      
+    } 
+}
+```
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
 | body | [ShortLinkReq](#ShortLinkReq) | yes | Request body |
 
 
-Create short link
+Use this API to create a short link that is easy to write/share/read as compared to long URLs.
 
 *Returned Response:*
 
@@ -53,7 +301,7 @@ Create short link
 
 [ShortLinkRes](#ShortLinkRes)
 
-Success
+Success. Check the example shown below or refer `ShortLinkRes` for more details.
 
 
 
@@ -100,121 +348,6 @@ Success
   "user_id": "5e4d01e2c39837ab66144f6d",
   "created_at": "2021-02-03T07:43:01.342Z",
   "updated_at": "2021-02-03T07:43:01.342Z"
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getShortLinks
-Get short links
-
-
-
-
-```kotlin
-client.application("<APPLICATION_ID>").share.getShortLinks(pageNo: pageNo, pageSize: pageSize, createdBy: createdBy, active: active, q: q).safeAwait{ response,error->
-    
-    response?.let{
-      // Use response
-    } ->
-     
-    error?.let{
-      
-    } 
-}
-```
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company Id |   
-| applicationId | String | yes | Application Id |   
-| pageNo | Int? | no | Current page number |   
-| pageSize | Int? | no | Current page size |   
-| createdBy | String? | no | Short link creator |   
-| active | String? | no | Short link active status |   
-| q | String? | no | Search text for original and short url |  
-
-
-
-Get short links
-
-*Returned Response:*
-
-
-
-
-[ShortLinkList](#ShortLinkList)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "url": {
-        "original": "https://0icof6vvsf.hostx0.de/products/?brand=ruosh",
-        "short": "https://0icof6vvsf.hostx0.de/l/3qKlnsq-x",
-        "hash": "3qKlnsq-x"
-      },
-      "redirects": {
-        "ios": {
-          "type": "web",
-          "link": "https://0icof6vvsf.hostx0.de/products/?brand=ruosh"
-        },
-        "android": {
-          "type": "web",
-          "link": "https://0icof6vvsf.hostx0.de/products/?brand=ruosh"
-        },
-        "web": {
-          "type": "web",
-          "link": "https://0icof6vvsf.hostx0.de/products/?brand=ruosh"
-        },
-        "force_web": false
-      },
-      "created_by": "team",
-      "personalized": false,
-      "app_redirect": false,
-      "fallback": "web",
-      "enable_tracking": false,
-      "active": true,
-      "count": 0,
-      "_id": "601a54054c0349592e76c8f3",
-      "title": "new ",
-      "meta": {
-        "type": "brand"
-      },
-      "expire_at": null,
-      "application": "5eda528b97457fe43a733ace",
-      "user_id": "5e4d01e2c39837ab66144f6d",
-      "created_at": "2021-02-03T07:43:01.342Z",
-      "updated_at": "2021-02-03T07:43:01.342Z"
-    }
-  ],
-  "page": {
-    "size": 10,
-    "type": "number",
-    "page": 1,
-    "item_total": 30,
-    "has_next": true
-  }
 }
 ```
 </details>
@@ -237,7 +370,7 @@ Get short link by hash
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").share.getShortLinkByHash(hash: hash).safeAwait{ response,error->
+share.getShortLinkByHash(hash: hash).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -253,13 +386,11 @@ client.application("<APPLICATION_ID>").share.getShortLinkByHash(hash: hash).safe
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company Id |   
-| applicationId | String | yes | Application Id |   
-| hash | String | yes | Hash of short url |  
+| hash | String | yes | A string value used for converting long URL to short URL and vice-versa. |  
 
 
 
-Get short link by hash
+Use this API to get a short link by using a hash value.
 
 *Returned Response:*
 
@@ -268,7 +399,7 @@ Get short link by hash
 
 [ShortLinkRes](#ShortLinkRes)
 
-Success
+Success. Check the example shown below or refer `ShortLinkRes` for more details.
 
 
 
@@ -330,14 +461,14 @@ Success
 ---
 
 
-### updateShortLinkById
-Update short link by id
+### getOriginalShortLinkByHash
+Get original link by hash
 
 
 
 
 ```kotlin
-client.application("<APPLICATION_ID>").share.updateShortLinkById(id: id, body: body).safeAwait{ response,error->
+share.getOriginalShortLinkByHash(hash: hash).safeAwait{ response,error->
     
     response?.let{
       // Use response
@@ -353,13 +484,11 @@ client.application("<APPLICATION_ID>").share.updateShortLinkById(id: id, body: b
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| companyId | String | yes | Company Id |   
-| applicationId | String | yes | Application Id |   
-| id | String | yes | Short link document identifier |  
-| body | [ShortLinkReq](#ShortLinkReq) | yes | Request body |
+| hash | String | yes | A string value used for converting long URL to short URL and vice-versa. |  
 
 
-Update short link by id
+
+Use this API to retrieve the original link from a short-link by using a hash value.
 
 *Returned Response:*
 
@@ -368,7 +497,7 @@ Update short link by id
 
 [ShortLinkRes](#ShortLinkRes)
 
-Success
+Success. Check the example shown below or refer `ShortLinkRes` for more details.
 
 
 
@@ -432,6 +561,18 @@ Success
 
 
 ### Schemas
+
+ 
+ 
+ #### [QRCodeResp](#QRCodeResp)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | link | String? |  yes  |  |
+ | svg | String? |  yes  |  |
+
+---
+
 
  
  
@@ -568,6 +709,23 @@ Success
  | attribution | [Attribution](#Attribution)? |  yes  |  |
  | socialMediaTags | [SocialMediaTags](#SocialMediaTags)? |  yes  |  |
  | count | Int? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Page](#Page)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | itemTotal | Int? |  yes  |  |
+ | nextId | String? |  yes  |  |
+ | hasPrevious | Boolean? |  yes  |  |
+ | hasNext | Boolean? |  yes  |  |
+ | current | Int? |  yes  |  |
+ | type | String |  no  |  |
+ | size | Int? |  yes  |  |
 
 ---
 

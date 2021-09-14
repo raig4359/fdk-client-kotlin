@@ -350,4 +350,15 @@ Success. Returns a JSON object containing the city name, state and country ident
 ---
 
 
+ 
+ 
+ #### [ApefaceApiError](#ApefaceApiError)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | message | String? |  yes  |  |
+
+---
+
+
 
